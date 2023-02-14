@@ -12,6 +12,7 @@ object formPrincipal: TformPrincipal
   Font.Style = []
   OldCreateOrder = False
   WindowState = wsMaximized
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -34,14 +35,14 @@ object formPrincipal: TformPrincipal
         Left = 0
         Top = 0
         Width = 241
-        Height = 73
+        Height = 217
         Align = alTop
         TabOrder = 0
         object Label1: TLabel
           Left = 1
           Top = 1
           Width = 239
-          Height = 46
+          Height = 69
           Align = alClient
           Alignment = taCenter
           Caption = 'Problemas'
@@ -57,47 +58,112 @@ object formPrincipal: TformPrincipal
         end
         object pnlBotoesProblemas: TPanel
           Left = 1
-          Top = 47
+          Top = 70
           Width = 239
           Height = 25
           Align = alBottom
           TabOrder = 0
-          object SpeedButton1: TSpeedButton
+          ExplicitTop = 47
+          object btnNovoProblema: TSpeedButton
             Left = 1
             Top = 1
             Width = 48
             Height = 23
             Align = alLeft
             Caption = 'Novo'
-            OnClick = SpeedButton1Click
+            Enabled = False
+            OnClick = btnNovoProblemaClick
           end
-          object SpeedButton2: TSpeedButton
+          object btnSalvarProblema: TSpeedButton
+            Left = 49
+            Top = 1
+            Width = 48
+            Height = 23
+            Align = alLeft
+            Caption = 'Salvar'
+            Enabled = False
+            OnClick = btnSalvarProblemaClick
+            ExplicitLeft = 46
+            ExplicitTop = -2
+          end
+          object btnExcluirProblema: TSpeedButton
             Left = 190
             Top = 1
             Width = 48
             Height = 23
             Align = alRight
-            Caption = 'Salvar'
-            OnClick = SpeedButton2Click
-            ExplicitLeft = 198
+            Caption = 'Excluir'
+            Enabled = False
+            OnClick = btnExcluirProblemaClick
+            ExplicitLeft = 136
             ExplicitTop = -2
+          end
+          object btnCancelarProblema: TSpeedButton
+            Left = 142
+            Top = 1
+            Width = 48
+            Height = 23
+            Align = alRight
+            Caption = 'Cancelar'
+            Enabled = False
+            OnClick = btnCancelarProblemaClick
+            ExplicitLeft = 136
+            ExplicitTop = -2
+          end
+        end
+        object Panel10: TPanel
+          Left = 1
+          Top = 95
+          Width = 239
+          Height = 121
+          Align = alBottom
+          TabOrder = 1
+          object Label4: TLabel
+            Left = 17
+            Top = 6
+            Width = 42
+            Height = 13
+            Caption = 'Pesquisa'
+          end
+          object edtPesquisaProblema: TEdit
+            Left = 17
+            Top = 25
+            Width = 200
+            Height = 21
+            TabOrder = 0
+            OnChange = edtPesquisaProblemaChange
+          end
+          object rdbtnFiltroPesquisaProblemas: TRadioGroup
+            Left = 21
+            Top = 52
+            Width = 185
+            Height = 61
+            Caption = 'Filtro da pesquisa'
+            ItemIndex = 0
+            Items.Strings = (
+              'Geral'
+              'Somente do m'#243'dulo')
+            TabOrder = 1
           end
         end
       end
       object Panel4: TPanel
         Left = 0
-        Top = 73
+        Top = 217
         Width = 241
-        Height = 627
+        Height = 483
         Align = alClient
         Color = clWhite
         ParentBackground = False
         TabOrder = 1
+        ExplicitTop = 73
+        ExplicitHeight = 627
         object gridModulos: TDBGrid
           Left = 1
           Top = 1
           Width = 239
-          Height = 625
+          Height = 481
+          TabStop = False
           Align = alClient
           BorderStyle = bsNone
           DataSource = dmQuerys.dsProblemas
@@ -114,11 +180,6 @@ object formPrincipal: TformPrincipal
             item
               Expanded = False
               FieldName = 'pr_titulo'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Tahoma'
-              Font.Style = []
               Title.Alignment = taCenter
               Title.Caption = 'T'#237'tulo'
               Title.Font.Charset = DEFAULT_CHARSET
@@ -138,15 +199,50 @@ object formPrincipal: TformPrincipal
       Height = 700
       Align = alClient
       TabOrder = 1
-      ExplicitLeft = 245
+      object lblModuloProblema: TLabel
+        Left = 33
+        Top = 76
+        Width = 96
+        Height = 13
+        Caption = 'Modulo do problema'
+      end
+      object lblDetalhesProblema: TLabel
+        Left = 33
+        Top = 142
+        Width = 104
+        Height = 13
+        Caption = 'Detalhes do problema'
+      end
+      object lblSolucaoProblema: TLabel
+        Left = 33
+        Top = 321
+        Width = 37
+        Height = 13
+        Caption = 'Solu'#231#227'o'
+      end
       object Panel8: TPanel
         Left = 1
         Top = 1
         Width = 680
         Height = 72
         Align = alTop
-        TabOrder = 0
-        ExplicitLeft = 4
+        TabOrder = 3
+        ExplicitLeft = 33
+        ExplicitTop = -31
+        object lblTituloProblema: TLabel
+          Left = 32
+          Top = 7
+          Width = 26
+          Height = 13
+          Caption = 'T'#237'tulo'
+        end
+        object lblDataProblema: TLabel
+          Left = 536
+          Top = 7
+          Width = 23
+          Height = 13
+          Caption = 'Data'
+        end
         object edtTituloProblema: TDBEdit
           Left = 32
           Top = 26
@@ -156,30 +252,33 @@ object formPrincipal: TformPrincipal
           DataSource = dmQuerys.dsProblemas
           TabOrder = 0
         end
-        object DBEdit1: TDBEdit
-          Left = 568
+        object edtHoraProblema: TDBEdit
+          Left = 536
           Top = 26
           Width = 121
           Height = 21
+          TabStop = False
+          BorderStyle = bsNone
           DataField = 'pr_data'
+          DataSource = dmQuerys.dsProblemas
           ReadOnly = True
           TabOrder = 1
         end
       end
       object DBMemo1: TDBMemo
         Left = 33
-        Top = 136
+        Top = 161
         Width = 624
-        Height = 161
+        Height = 137
         DataField = 'pr_problema'
         DataSource = dmQuerys.dsProblemas
         TabOrder = 1
       end
       object DBMemo2: TDBMemo
         Left = 33
-        Top = 312
+        Top = 340
         Width = 624
-        Height = 201
+        Height = 337
         DataField = 'pr_solucao'
         DataSource = dmQuerys.dsProblemas
         ParentShowHint = False
@@ -188,12 +287,12 @@ object formPrincipal: TformPrincipal
       end
       object cbModulos: TDBComboBox
         Left = 33
-        Top = 79
+        Top = 95
         Width = 145
         Height = 21
         DataField = 'pr_modulo'
         DataSource = dmQuerys.dsProblemas
-        TabOrder = 3
+        TabOrder = 0
       end
     end
   end
@@ -209,14 +308,14 @@ object formPrincipal: TformPrincipal
       Left = 0
       Top = 0
       Width = 241
-      Height = 73
+      Height = 177
       Align = alTop
       TabOrder = 0
       object Label2: TLabel
         Left = 1
         Top = 1
         Width = 239
-        Height = 46
+        Height = 69
         Align = alClient
         Alignment = taCenter
         Caption = 'M'#243'dulos'
@@ -227,34 +326,107 @@ object formPrincipal: TformPrincipal
         Font.Style = [fsBold]
         ParentFont = False
         Layout = tlCenter
-        ExplicitWidth = 62
-        ExplicitHeight = 18
+        ExplicitLeft = -3
+        ExplicitTop = -4
+        ExplicitHeight = 46
       end
-      object DBNavigator1: TDBNavigator
+      object Panel9: TPanel
         Left = 1
-        Top = 47
+        Top = 70
         Width = 239
         Height = 25
-        DataSource = dmQuerys.dsModulos
-        VisibleButtons = [nbInsert, nbDelete, nbPost, nbCancel, nbRefresh]
         Align = alBottom
         TabOrder = 0
+        ExplicitLeft = 2
+        ExplicitTop = 48
+        object btnNovoModulo: TSpeedButton
+          Left = 1
+          Top = 1
+          Width = 48
+          Height = 23
+          Align = alLeft
+          Caption = 'Novo'
+          OnClick = btnNovoModuloClick
+          ExplicitLeft = -5
+          ExplicitTop = -2
+        end
+        object btnSalvarModulo: TSpeedButton
+          Left = 49
+          Top = 1
+          Width = 48
+          Height = 23
+          Align = alLeft
+          Caption = 'Salvar'
+          OnClick = btnSalvarModuloClick
+          ExplicitLeft = 55
+          ExplicitTop = -2
+        end
+        object btnExcluirModulo: TSpeedButton
+          Left = 190
+          Top = 1
+          Width = 48
+          Height = 23
+          Align = alRight
+          Caption = 'Excluir'
+          OnClick = btnExcluirModuloClick
+          ExplicitLeft = 188
+          ExplicitTop = -2
+        end
+        object btnCancelarModulo: TSpeedButton
+          Left = 142
+          Top = 1
+          Width = 48
+          Height = 23
+          Align = alRight
+          Caption = 'Cancelar'
+          OnClick = btnCancelarModuloClick
+          ExplicitLeft = 136
+          ExplicitTop = -2
+        end
+      end
+      object Panel11: TPanel
+        Left = 1
+        Top = 95
+        Width = 239
+        Height = 81
+        Align = alBottom
+        TabOrder = 1
+        ExplicitLeft = -2
+        ExplicitTop = 91
+        object Label3: TLabel
+          Left = 17
+          Top = 16
+          Width = 42
+          Height = 13
+          Caption = 'Pesquisa'
+        end
+        object edtPesquisaModulo: TEdit
+          Left = 17
+          Top = 35
+          Width = 200
+          Height = 21
+          TabOrder = 0
+          OnChange = edtPesquisaModuloChange
+        end
       end
     end
     object Panel7: TPanel
       Left = 0
-      Top = 73
+      Top = 177
       Width = 241
-      Height = 627
+      Height = 523
       Align = alClient
       Color = clWhite
       ParentBackground = False
       TabOrder = 1
+      ExplicitTop = 73
+      ExplicitHeight = 627
       object DBGrid1: TDBGrid
         Left = 1
         Top = 1
         Width = 239
-        Height = 625
+        Height = 521
+        TabStop = False
         Align = alClient
         BorderStyle = bsNone
         DataSource = dmQuerys.dsModulos
@@ -267,6 +439,7 @@ object formPrincipal: TformPrincipal
         TitleFont.Name = 'Tahoma'
         TitleFont.Style = []
         OnCellClick = DBGrid1CellClick
+        OnMouseWheel = DBGrid1MouseWheel
         Columns = <
           item
             Expanded = False

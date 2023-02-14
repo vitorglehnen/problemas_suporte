@@ -34,10 +34,9 @@ object dmQuerys: TdmQuerys
     Top = 216
   end
   object qProblemas: TFDQuery
-    Active = True
     Connection = conDBSuporte
     SQL.Strings = (
-      'select * from problema')
+      '')
     Left = 328
     Top = 128
     object qProblemasid: TFDAutoIncField
