@@ -11,7 +11,7 @@ object dmQuerys: TdmQuerys
     Active = True
     Connection = conDBSuporte
     SQL.Strings = (
-      'select * from modulos')
+      'select * from modulos_problemas')
     Left = 328
     Top = 8
   end
@@ -24,12 +24,20 @@ object dmQuerys: TdmQuerys
     Left = 256
     Top = 8
   end
+  object qComboModulos: TFDQuery
+    Connection = conDBSuporte
+    SQL.Strings = (
+      'select * from problema where pr_titulo = '#39#39
+      ''
+      '')
+    Left = 328
+    Top = 216
+  end
   object qProblemas: TFDQuery
     Active = True
     Connection = conDBSuporte
     SQL.Strings = (
-      'select * from problemas'
-      '')
+      'select * from problema')
     Left = 328
     Top = 128
     object qProblemasid: TFDAutoIncField
@@ -38,16 +46,17 @@ object dmQuerys: TdmQuerys
       ProviderFlags = [pfInWhere, pfInKey]
       ReadOnly = True
     end
-    object qProblemasid_modulo: TIntegerField
-      FieldName = 'id_modulo'
-      Origin = 'id_modulo'
+    object qProblemaspr_modulo: TStringField
+      FieldName = 'pr_modulo'
+      Origin = 'pr_modulo'
       Required = True
+      Size = 35
     end
     object qProblemaspr_titulo: TStringField
       FieldName = 'pr_titulo'
       Origin = 'pr_titulo'
       Required = True
-      Size = 50
+      Size = 75
     end
     object qProblemaspr_problema: TMemoField
       FieldName = 'pr_problema'
@@ -69,50 +78,7 @@ object dmQuerys: TdmQuerys
   end
   object dsProblemas: TDataSource
     DataSet = qProblemas
-    Left = 408
+    Left = 416
     Top = 128
-  end
-  object qComboModulos: TFDQuery
-    Active = True
-    Connection = conDBSuporte
-    SQL.Strings = (
-      'select * from problemas'
-      '')
-    Left = 328
-    Top = 208
-    object FDAutoIncField1: TFDAutoIncField
-      FieldName = 'id'
-      Origin = 'id'
-      ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
-    end
-    object IntegerField1: TIntegerField
-      FieldName = 'id_modulo'
-      Origin = 'id_modulo'
-      Required = True
-    end
-    object StringField1: TStringField
-      FieldName = 'pr_titulo'
-      Origin = 'pr_titulo'
-      Required = True
-      Size = 50
-    end
-    object MemoField1: TMemoField
-      FieldName = 'pr_problema'
-      Origin = 'pr_problema'
-      Required = True
-      BlobType = ftMemo
-    end
-    object MemoField2: TMemoField
-      FieldName = 'pr_solucao'
-      Origin = 'pr_solucao'
-      Required = True
-      BlobType = ftMemo
-    end
-    object DateTimeField1: TDateTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'pr_data'
-      Origin = 'pr_data'
-    end
   end
 end

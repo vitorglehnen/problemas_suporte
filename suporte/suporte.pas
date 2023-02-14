@@ -1,7 +1,5 @@
 unit suporte;
-
 interface
-
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
@@ -11,7 +9,6 @@ uses
   FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Buttons, Vcl.Mask;
-
 type
   TformPrincipal = class(TForm)
     Panel1: TPanel;
@@ -27,8 +24,6 @@ type
     Panel7: TPanel;
     DBGrid1: TDBGrid;
     pnlBotoesProblemas: TPanel;
-    btnNovoProblema: TSpeedButton;
-    btnExcluirProblema: TSpeedButton;
     pnlProblemas: TPanel;
     Panel8: TPanel;
     edtTituloProblema: TDBEdit;
@@ -36,40 +31,64 @@ type
     DBMemo1: TDBMemo;
     DBMemo2: TDBMemo;
     cbModulos: TDBComboBox;
-    DBNavigator2: TDBNavigator;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
     procedure PreencheCBModulos;
-    procedure FormCreate(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure DBGrid1CellClick(Column: TColumn);
   private
     { Private declarations }
   public
     { Public declarations }
   end;
-
 var
   formPrincipal: TformPrincipal;
 
 implementation
-
 {$R *.dfm}
 
 uses dm;
 
-procedure TformPrincipal.FormCreate(Sender: TObject);
+procedure TformPrincipal.DBGrid1CellClick(Column: TColumn);
 begin
-  PreencheCBModulos;
+  with dmQuerys.qProblemas do
+  begin
+    close;
+    sql.Clear;
+    Sql.Add('select * from problema where pr_modulo = :ParamModulo');
+    ParamByName('ParamModulo').AsString := DBGrid1.Columns[0].Field.Value;
+    Open;
+  end;
 end;
 
 procedure TformPrincipal.PreencheCBModulos;
 begin
-  with dmquerys.qComboModulos do
+  cbModulos.Clear;
+  with dmQuerys.qComboModulos do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.ADD('Select * from modulos_problemas');
+    Open;
+    First;
+    while not dmQuerys.qComboModulos.Eof do
     begin
-      Active := True;
-      SQL.Clear;
-      SQL.ADD('Select nome from modulos');
-      Open;
-      //cbModulos.items.add(dmquerys.qModulos['nome']);
+      cbModulos.items.add(dmquerys.qComboModulos['mo_nome']);
+      Next;
     end;
+  end;
+end;
+procedure TformPrincipal.SpeedButton1Click(Sender: TObject);
+begin
+  dmQuerys.qProblemas.Insert;
+  edtTituloProblema.SetFocus;
+  PreencheCBModulos;
+end;
 
+procedure TformPrincipal.SpeedButton2Click(Sender: TObject);
+begin
+  dmQuerys.qProblemas.Post;
 end;
 
 end.

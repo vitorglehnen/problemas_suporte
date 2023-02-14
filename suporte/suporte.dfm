@@ -12,7 +12,6 @@ object formPrincipal: TformPrincipal
   Font.Style = []
   OldCreateOrder = False
   WindowState = wsMaximized
-  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -63,25 +62,25 @@ object formPrincipal: TformPrincipal
           Height = 25
           Align = alBottom
           TabOrder = 0
-          object btnNovoProblema: TSpeedButton
+          object SpeedButton1: TSpeedButton
             Left = 1
             Top = 1
-            Width = 40
+            Width = 48
             Height = 23
             Align = alLeft
             Caption = 'Novo'
-            ExplicitLeft = 4
-            ExplicitTop = -2
+            OnClick = SpeedButton1Click
           end
-          object btnExcluirProblema: TSpeedButton
-            Left = 198
+          object SpeedButton2: TSpeedButton
+            Left = 190
             Top = 1
-            Width = 40
+            Width = 48
             Height = 23
             Align = alRight
-            Caption = 'Excluir'
-            ExplicitLeft = 97
-            ExplicitTop = 6
+            Caption = 'Salvar'
+            OnClick = SpeedButton2Click
+            ExplicitLeft = 198
+            ExplicitTop = -2
           end
         end
       end
@@ -103,7 +102,8 @@ object formPrincipal: TformPrincipal
           BorderStyle = bsNone
           DataSource = dmQuerys.dsProblemas
           DrawingStyle = gdsGradient
-          Options = [dgEditing, dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+          Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+          ReadOnly = True
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
           TitleFont.Color = clWindowText
@@ -113,15 +113,19 @@ object formPrincipal: TformPrincipal
           Columns = <
             item
               Expanded = False
-              FieldName = 'titulo'
+              FieldName = 'pr_titulo'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
               Title.Alignment = taCenter
-              Title.Caption = 'Titulo'
+              Title.Caption = 'T'#237'tulo'
               Title.Font.Charset = DEFAULT_CHARSET
               Title.Font.Color = clWindowText
-              Title.Font.Height = -13
+              Title.Font.Height = -14
               Title.Font.Name = 'Tahoma'
               Title.Font.Style = [fsBold]
-              Width = 621
               Visible = True
             end>
         end
@@ -134,6 +138,7 @@ object formPrincipal: TformPrincipal
       Height = 700
       Align = alClient
       TabOrder = 1
+      ExplicitLeft = 245
       object Panel8: TPanel
         Left = 1
         Top = 1
@@ -141,6 +146,7 @@ object formPrincipal: TformPrincipal
         Height = 72
         Align = alTop
         TabOrder = 0
+        ExplicitLeft = 4
         object edtTituloProblema: TDBEdit
           Left = 32
           Top = 26
@@ -156,7 +162,6 @@ object formPrincipal: TformPrincipal
           Width = 121
           Height = 21
           DataField = 'pr_data'
-          DataSource = dmQuerys.dsProblemas
           ReadOnly = True
           TabOrder = 1
         end
@@ -183,19 +188,12 @@ object formPrincipal: TformPrincipal
       end
       object cbModulos: TDBComboBox
         Left = 33
-        Top = 88
+        Top = 79
         Width = 145
         Height = 21
-        TabOrder = 3
-      end
-      object DBNavigator2: TDBNavigator
-        Left = 33
-        Top = 519
-        Width = 222
-        Height = 25
+        DataField = 'pr_modulo'
         DataSource = dmQuerys.dsProblemas
-        VisibleButtons = [nbPost, nbCancel]
-        TabOrder = 4
+        TabOrder = 3
       end
     end
   end
@@ -268,6 +266,7 @@ object formPrincipal: TformPrincipal
         TitleFont.Height = -11
         TitleFont.Name = 'Tahoma'
         TitleFont.Style = []
+        OnCellClick = DBGrid1CellClick
         Columns = <
           item
             Expanded = False

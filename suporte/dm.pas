@@ -15,21 +15,15 @@ type
     dsModulos: TDataSource;
     qModulos: TFDQuery;
     conDBSuporte: TFDConnection;
+    qComboModulos: TFDQuery;
     qProblemas: TFDQuery;
     dsProblemas: TDataSource;
     qProblemasid: TFDAutoIncField;
-    qProblemasid_modulo: TIntegerField;
+    qProblemaspr_modulo: TStringField;
     qProblemaspr_titulo: TStringField;
     qProblemaspr_problema: TMemoField;
     qProblemaspr_solucao: TMemoField;
     qProblemaspr_data: TDateTimeField;
-    qComboModulos: TFDQuery;
-    FDAutoIncField1: TFDAutoIncField;
-    IntegerField1: TIntegerField;
-    StringField1: TStringField;
-    MemoField1: TMemoField;
-    MemoField2: TMemoField;
-    DateTimeField1: TDateTimeField;
   private
     { Private declarations }
   public
@@ -45,4 +39,8 @@ implementation
 
 {$R *.dfm}
 
+
 end.
+
+
+
