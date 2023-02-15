@@ -43,6 +43,7 @@ object dmQuerys: TdmQuerys
       FieldName = 'id'
       Origin = 'id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object qProblemaspr_modulo: TStringField
       FieldName = 'pr_modulo'

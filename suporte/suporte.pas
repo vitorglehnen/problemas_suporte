@@ -8,56 +8,65 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
   FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Buttons, Vcl.Mask;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Buttons, Vcl.Mask,
+  Vcl.WinXPanels;
 type
   TformPrincipal = class(TForm)
-    pnlCadastroProblema: TPanel;
-    Panel2: TPanel;
-    Panel3: TPanel;
-    Panel4: TPanel;
+    pnlBodyProblemas: TPanel;
+    pnlTopProblemas: TPanel;
+    pnlGridProblemas: TPanel;
+    gridProblemas: TDBGrid;
+    lblTituloProblemas: TLabel;
+    pnlBodyModulos: TPanel;
+    pnlTopModulos: TPanel;
+    lblTituloModulos: TLabel;
+    pnlGridModulos: TPanel;
     gridModulos: TDBGrid;
-    Label1: TLabel;
-    Panel5: TPanel;
-    Panel6: TPanel;
-    Label2: TLabel;
-    Panel7: TPanel;
-    DBGrid1: TDBGrid;
     pnlBotoesProblemas: TPanel;
-    pnlProblemas: TPanel;
-    Panel8: TPanel;
-    edtTituloProblema: TDBEdit;
-    edtHoraProblema: TDBEdit;
-    DBMemo1: TDBMemo;
-    DBMemo2: TDBMemo;
-    cbModulos: TDBComboBox;
     btnNovoProblema: TSpeedButton;
     btnSalvarProblema: TSpeedButton;
     btnExcluirProblema: TSpeedButton;
-    lblTituloProblema: TLabel;
-    lblModuloProblema: TLabel;
-    lblDataProblema: TLabel;
-    lblDetalhesProblema: TLabel;
-    lblSolucaoProblema: TLabel;
     btnCancelarProblema: TSpeedButton;
-    Panel9: TPanel;
+    pnlBotoesModulos: TPanel;
     btnNovoModulo: TSpeedButton;
     btnSalvarModulo: TSpeedButton;
     btnExcluirModulo: TSpeedButton;
     btnCancelarModulo: TSpeedButton;
-    Panel10: TPanel;
-    Panel11: TPanel;
+    pnlPesquisaProblemas: TPanel;
+    pnlPesquisaModulos: TPanel;
     edtPesquisaModulo: TEdit;
-    Label3: TLabel;
+    lblPesquisaModulos: TLabel;
     edtPesquisaProblema: TEdit;
     Label4: TLabel;
     rdbtnFiltroPesquisaProblemas: TRadioGroup;
     pnlPrincipal: TPanel;
     pnlBodyModulosProblemas: TPanel;
+    OpenDialog1: TOpenDialog;
+    CardPanel1: TCardPanel;
+    pnlCadastroProblema: TCard;
+    pnlImagensProblema: TCard;
+    pnlProblemas: TPanel;
+    lblModuloProblema: TLabel;
+    lblDetalhesProblema: TLabel;
+    lblSolucaoProblema: TLabel;
+    pnlTituloProblema: TPanel;
+    lblTituloProblema: TLabel;
+    lblDataProblema: TLabel;
+    edtTituloProblema: TDBEdit;
+    edtHoraProblema: TDBEdit;
+    mmDetalhesProblema: TDBMemo;
+    mmSolucao: TDBMemo;
+    cbModulos: TDBComboBox;
+    btAddImagemProblema: TButton;
+    btnAddImagemSolucao: TButton;
+    imgProblema: TDBImage;
+    imgSolucao: TDBImage;
+    btnVerImagens: TButton;
+    Button4: TButton;
+    btnRemoverImagemProblema: TButton;
+    btnRemoverImagemSolucao: TButton;
     procedure btnNovoProblemaClick(Sender: TObject);
     procedure btnSalvarProblemaClick(Sender: TObject);
-    procedure DBGrid1MouseWheel(Sender: TObject; Shift: TShiftState;
-      WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
-    procedure DBGrid1CellClick(Column: TColumn);
     procedure FormShow(Sender: TObject);
     procedure btnExcluirProblemaClick(Sender: TObject);
     procedure btnCancelarProblemaClick(Sender: TObject);
@@ -67,8 +76,18 @@ type
     procedure btnExcluirModuloClick(Sender: TObject);
     procedure edtPesquisaModuloChange(Sender: TObject);
     procedure edtPesquisaProblemaChange(Sender: TObject);
-    procedure pnlCadastroProblemaClick(Sender: TObject);
-    procedure Panel2Click(Sender: TObject);
+    procedure btnVerImagensClick(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btAddImagemProblemaClick(Sender: TObject);
+    procedure btnAddImagemSolucaoClick(Sender: TObject);
+    procedure gridModulosCellClick(Column: TColumn);
+    procedure gridModulosMouseWheelDown(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure gridModulosMouseWheelUp(Sender: TObject; Shift: TShiftState;
+      MousePos: TPoint; var Handled: Boolean);
+    procedure btnRemoverImagemProblemaClick(Sender: TObject);
+    procedure btnRemoverImagemSolucaoClick(Sender: TObject);
   private
     procedure PreencheCBModulos;
     procedure AtivaBotoesProblema;
@@ -83,15 +102,25 @@ var
 implementation
 {$R *.dfm}
 
-uses dm;
+uses
+  dm,
+  jpeg,
+  pngimage;
 
-procedure TformPrincipal.DBGrid1CellClick(Column: TColumn);
+procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
+begin
+  CardPanel1.ActiveCard := pnlCadastroProblema;
+  AtualizaGridProblemas;
+end;
+
+procedure TformPrincipal.gridModulosMouseWheelDown(Sender: TObject;
+  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
 begin
   AtualizaGridProblemas;
 end;
 
-procedure TformPrincipal.DBGrid1MouseWheel(Sender: TObject; Shift: TShiftState;
-  WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+procedure TformPrincipal.gridModulosMouseWheelUp(Sender: TObject;
+  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
 begin
   AtualizaGridProblemas;
 end;
@@ -116,7 +145,7 @@ begin
     begin
       close;
       sql.Clear;
-      Sql.Add('select * from problema where pr_problema like :ParamProblema');
+      Sql.Add('select * from problemas where pr_problema like :ParamProblema');
       ParamByName('ParamProblema').AsString := '%' + edtPesquisaProblema.Text + '%';
       Open;
     end;
@@ -128,12 +157,17 @@ begin
     begin
       close;
       sql.Clear;
-      Sql.Add('select * from problema where pr_problema like :ParamProblema and pr_modulo = :ParamProblema1');
+      Sql.Add('select * from problemas where pr_problema like :ParamProblema and pr_modulo = :ParamProblema1');
       ParamByName('ParamProblema').AsString := '%' + edtPesquisaProblema.Text + '%';
-      ParamByName('ParamProblema1').AsString := DBGrid1.Columns[0].Field.Value;
+      ParamByName('ParamProblema1').AsString := gridModulos.Columns[0].Field.Value;
       Open;
     end;
   end;
+end;
+
+procedure TformPrincipal.FormCreate(Sender: TObject);
+begin
+  CardPanel1.ActiveCard := pnlCadastroProblema;
 end;
 
 procedure TformPrincipal.FormShow(Sender: TObject);
@@ -141,12 +175,7 @@ begin
   PreencheCBModulos;
 end;
 
-pprocedure TformPrincipal.Panel2Click(Sender: TObject);
-begin
-
-end;
-
-rocedure TformPrincipal.AtivaBotoesProblema;
+procedure TformPrincipal.AtivaBotoesProblema;
 begin
   btnNovoProblema.Enabled := True;
   btnSalvarProblema.Enabled := True;
@@ -160,20 +189,15 @@ begin
   begin
     close;
     sql.Clear;
-    Sql.Add('select * from problema where pr_modulo = :ParamModulo');
-    ParamByName('ParamModulo').AsString := DBGrid1.Columns[0].Field.Value;
+    Sql.Add('select * from problemas where pr_modulo = :ParamModulo');
+    ParamByName('ParamModulo').AsString := gridModulos.Columns[0].Field.Value;
     Open;
   end;
 
   AtivaBotoesProblema;
 end;
 
-pprocedure TformPrincipal.Panel1Click(Sender: TObject);
-begin
-
-end;
-
-rocedure TformPrincipal.PreencheCBModulos;
+procedure TformPrincipal.PreencheCBModulos;
 begin
   cbModulos.Clear;
 
@@ -191,6 +215,26 @@ begin
     end;
   end;
 end;
+procedure TformPrincipal.btAddImagemProblemaClick(Sender: TObject);
+begin
+  dmQuerys.qProblemas.Edit;
+
+  if OpenDialog1.Execute then
+  begin
+    imgProblema.Picture.LoadFromFile(OpenDialog1.FileName);
+  end;
+end;
+
+procedure TformPrincipal.btnAddImagemSolucaoClick(Sender: TObject);
+begin
+  dmQuerys.qProblemas.Edit;
+
+  if OpenDialog1.Execute then
+  begin
+    imgSolucao.Picture.LoadFromFile(OpenDialog1.FileName);
+  end;
+end;
+
 procedure TformPrincipal.btnCancelarModuloClick(Sender: TObject);
 begin
   dmQuerys.qModulos.Cancel;
@@ -231,6 +275,20 @@ begin
   edtTituloProblema.SetFocus;
 end;
 
+procedure TformPrincipal.btnRemoverImagemProblemaClick(Sender: TObject);
+begin
+  dmQuerys.qProblemas.Edit;
+
+  imgProblema.Picture := nil;
+end;
+
+procedure TformPrincipal.btnRemoverImagemSolucaoClick(Sender: TObject);
+begin
+  dmQuerys.qProblemas.Edit;
+
+  imgSolucao.Picture := nil;
+end;
+
 procedure TformPrincipal.btnSalvarModuloClick(Sender: TObject);
 begin
   dmQuerys.qModulos.Post;
@@ -239,6 +297,16 @@ end;
 procedure TformPrincipal.btnSalvarProblemaClick(Sender: TObject);
 begin
   dmQuerys.qProblemas.Post;
+end;
+
+procedure TformPrincipal.btnVerImagensClick(Sender: TObject);
+begin
+  CardPanel1.ActiveCard := pnlImagensProblema;
+end;
+
+procedure TformPrincipal.Button4Click(Sender: TObject);
+begin
+  CardPanel1.ActiveCard := pnlCadastroProblema;
 end;
 
 end.
