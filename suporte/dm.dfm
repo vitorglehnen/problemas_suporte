@@ -43,7 +43,6 @@ object dmQuerys: TdmQuerys
       FieldName = 'id'
       Origin = 'id'
       ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
     end
     object qProblemaspr_modulo: TStringField
       FieldName = 'pr_modulo'
@@ -73,6 +72,16 @@ object dmQuerys: TdmQuerys
       AutoGenerateValue = arDefault
       FieldName = 'pr_data'
       Origin = 'pr_data'
+    end
+    object qProblemaspr_primg: TBlobField
+      AutoGenerateValue = arDefault
+      FieldName = 'pr_primg'
+      Origin = 'pr_primg'
+    end
+    object qProblemaspr_solucaoimg: TBlobField
+      AutoGenerateValue = arDefault
+      FieldName = 'pr_solucaoimg'
+      Origin = 'pr_solucaoimg'
     end
   end
   object dsProblemas: TDataSource

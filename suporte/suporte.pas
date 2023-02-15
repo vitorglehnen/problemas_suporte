@@ -11,7 +11,7 @@ uses
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Buttons, Vcl.Mask;
 type
   TformPrincipal = class(TForm)
-    Panel1: TPanel;
+    pnlCadastroProblema: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
@@ -51,6 +51,8 @@ type
     edtPesquisaProblema: TEdit;
     Label4: TLabel;
     rdbtnFiltroPesquisaProblemas: TRadioGroup;
+    pnlPrincipal: TPanel;
+    pnlBodyModulosProblemas: TPanel;
     procedure btnNovoProblemaClick(Sender: TObject);
     procedure btnSalvarProblemaClick(Sender: TObject);
     procedure DBGrid1MouseWheel(Sender: TObject; Shift: TShiftState;
@@ -65,6 +67,8 @@ type
     procedure btnExcluirModuloClick(Sender: TObject);
     procedure edtPesquisaModuloChange(Sender: TObject);
     procedure edtPesquisaProblemaChange(Sender: TObject);
+    procedure pnlCadastroProblemaClick(Sender: TObject);
+    procedure Panel2Click(Sender: TObject);
   private
     procedure PreencheCBModulos;
     procedure AtivaBotoesProblema;
@@ -137,7 +141,12 @@ begin
   PreencheCBModulos;
 end;
 
-procedure TformPrincipal.AtivaBotoesProblema;
+pprocedure TformPrincipal.Panel2Click(Sender: TObject);
+begin
+
+end;
+
+rocedure TformPrincipal.AtivaBotoesProblema;
 begin
   btnNovoProblema.Enabled := True;
   btnSalvarProblema.Enabled := True;
@@ -159,7 +168,12 @@ begin
   AtivaBotoesProblema;
 end;
 
-procedure TformPrincipal.PreencheCBModulos;
+pprocedure TformPrincipal.Panel1Click(Sender: TObject);
+begin
+
+end;
+
+rocedure TformPrincipal.PreencheCBModulos;
 begin
   cbModulos.Clear;
 

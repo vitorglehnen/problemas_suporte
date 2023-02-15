@@ -24,6 +24,8 @@ type
     qProblemaspr_problema: TMemoField;
     qProblemaspr_solucao: TMemoField;
     qProblemaspr_data: TDateTimeField;
+    qProblemaspr_primg: TBlobField;
+    qProblemaspr_solucaoimg: TBlobField;
   private
     { Private declarations }
   public
