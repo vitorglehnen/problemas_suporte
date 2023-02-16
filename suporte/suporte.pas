@@ -90,9 +90,10 @@ type
       WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
     procedure AtualizaGridProblemas;
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure gridModulosKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     procedure PreencheCBModulos;
-    procedure AtivaBotoesProblema;
     { Private declarations }
   public
     { Public declarations }
@@ -112,6 +113,14 @@ procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
 begin
   CardPanel1.ActiveCard := pnlCadastroProblema;
   AtualizaGridProblemas;
+end;
+
+procedure TformPrincipal.gridModulosKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if key = VK_RETURN then
+    if dmQuerys.qModulos.State = dsEdit then
+      dmQuerys.qModulos.Post;
 end;
 
 procedure TformPrincipal.gridModulosMouseWheel(Sender: TObject;
@@ -184,11 +193,6 @@ begin
   PreencheCBModulos;
 end;
 
-procedure TformPrincipal.AtivaBotoesProblema;
-begin
-  
-end;
-
 procedure TformPrincipal.AtualizaGridProblemas;
 begin
   with dmQuerys.qProblemas do
@@ -199,8 +203,6 @@ begin
     ParamByName('ParamModulo').AsString := gridModulos.Columns[0].Field.Value;
     Open;
   end;
-
-  AtivaBotoesProblema;
 end;
 
 procedure TformPrincipal.PreencheCBModulos;

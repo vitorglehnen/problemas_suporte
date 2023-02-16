@@ -1,7 +1,7 @@
 object dmQuerys: TdmQuerys
   OldCreateOrder = False
-  Height = 456
-  Width = 578
+  Height = 483
+  Width = 785
   object dsModulos: TDataSource
     DataSet = qModulos
     Left = 400

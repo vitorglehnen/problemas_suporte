@@ -34,6 +34,7 @@ type
     procedure qProblemasBeforeEdit(DataSet: TDataSet);
   private
     { Private declarations }
+    procedure InverteBotoesCrudProblemas;
   public
     { Public declarations }
   end;
@@ -50,6 +51,14 @@ uses suporte;
 {$R *.dfm}
 
 
+procedure TdmQuerys.InverteBotoesCrudProblemas;
+begin
+  formPrincipal.btnNovoProblema.Enabled := not formPrincipal.btnNovoProblema.Enabled;
+  formPrincipal.btnExcluirProblema.Enabled := not formPrincipal.btnExcluirProblema.Enabled;
+  formPrincipal.btnSalvarProblema.Enabled := not formPrincipal.btnSalvarProblema.Enabled;
+  formPrincipal.btnCancelarProblema.Enabled := not formPrincipal.btnCancelarProblema.Enabled;
+end;
+
 procedure TdmQuerys.qModulosAfterScroll(DataSet: TDataSet);
 begin
   formPrincipal.AtualizaGridProblemas;
@@ -57,34 +66,22 @@ end;
 
 procedure TdmQuerys.qProblemasAfterInsert(DataSet: TDataSet);
 begin
-  formPrincipal.btnNovoProblema.Enabled := not formPrincipal.btnNovoProblema.Enabled;
-  formPrincipal.btnExcluirProblema.Enabled := not formPrincipal.btnExcluirProblema.Enabled;
-  formPrincipal.btnSalvarProblema.Enabled := not formPrincipal.btnSalvarProblema.Enabled;
-  formPrincipal.btnCancelarProblema.Enabled := not formPrincipal.btnCancelarProblema.Enabled;
+  InverteBotoesCrudProblemas;
 end;
 
 procedure TdmQuerys.qProblemasBeforeCancel(DataSet: TDataSet);
 begin
-  formPrincipal.btnNovoProblema.Enabled :=  not formPrincipal.btnNovoProblema.Enabled;
-  formPrincipal.btnExcluirProblema.Enabled := not formPrincipal.btnExcluirProblema.Enabled;
-  formPrincipal.btnSalvarProblema.Enabled := not formPrincipal.btnSalvarProblema.Enabled;
-  formPrincipal.btnCancelarProblema.Enabled := not formPrincipal.btnCancelarProblema.Enabled;
+  InverteBotoesCrudProblemas;
 end;
 
 procedure TdmQuerys.qProblemasBeforeEdit(DataSet: TDataSet);
 begin
-  formPrincipal.btnNovoProblema.Enabled := not formPrincipal.btnNovoProblema.Enabled;
-  formPrincipal.btnExcluirProblema.Enabled := not formPrincipal.btnExcluirProblema.Enabled;
-  formPrincipal.btnSalvarProblema.Enabled := not formPrincipal.btnSalvarProblema.Enabled;
-  formPrincipal.btnCancelarProblema.Enabled := not formPrincipal.btnCancelarProblema.Enabled;
+  InverteBotoesCrudProblemas;
 end;
 
 procedure TdmQuerys.qProblemasBeforePost(DataSet: TDataSet);
 begin
-  formPrincipal.btnNovoProblema.Enabled := not formPrincipal.btnNovoProblema.Enabled;
-  formPrincipal.btnExcluirProblema.Enabled := not formPrincipal.btnExcluirProblema.Enabled;
-  formPrincipal.btnSalvarProblema.Enabled := not formPrincipal.btnSalvarProblema.Enabled;
-  formPrincipal.btnCancelarProblema.Enabled := not formPrincipal.btnCancelarProblema.Enabled;
+  InverteBotoesCrudProblemas;
 end;
 
 end.

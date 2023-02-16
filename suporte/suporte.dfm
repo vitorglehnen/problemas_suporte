@@ -25,11 +25,10 @@ object formPrincipal: TformPrincipal
     Height = 749
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 1296
     object pnlBodyModulosProblemas: TPanel
       Left = 1
       Top = 1
-      Width = 483
+      Width = 512
       Height = 747
       Align = alLeft
       Caption = 'pnlBodyModulosProblemas'
@@ -37,7 +36,7 @@ object formPrincipal: TformPrincipal
       object pnlBodyProblemas: TPanel
         Left = 242
         Top = 1
-        Width = 241
+        Width = 269
         Height = 745
         Align = alLeft
         BevelOuter = bvNone
@@ -45,14 +44,15 @@ object formPrincipal: TformPrincipal
         object pnlTopProblemas: TPanel
           Left = 0
           Top = 0
-          Width = 241
+          Width = 269
           Height = 217
           Align = alTop
           TabOrder = 0
+          ExplicitWidth = 241
           object lblTituloProblemas: TLabel
             Left = 1
             Top = 1
-            Width = 239
+            Width = 267
             Height = 67
             Align = alClient
             Alignment = taCenter
@@ -64,17 +64,16 @@ object formPrincipal: TformPrincipal
             Font.Style = [fsBold]
             ParentFont = False
             Layout = tlCenter
-            ExplicitWidth = 79
-            ExplicitHeight = 18
+            ExplicitWidth = 236
           end
           object pnlBotoesProblemas: TPanel
             Left = 1
             Top = 68
-            Width = 239
+            Width = 267
             Height = 25
             Align = alBottom
             TabOrder = 0
-            ExplicitTop = 70
+            ExplicitWidth = 239
             object btnNovoProblema: TSpeedButton
               Left = 1
               Top = 1
@@ -97,7 +96,7 @@ object formPrincipal: TformPrincipal
               ExplicitTop = 2
             end
             object btnExcluirProblema: TSpeedButton
-              Left = 190
+              Left = 218
               Top = 1
               Width = 48
               Height = 23
@@ -108,7 +107,7 @@ object formPrincipal: TformPrincipal
               ExplicitTop = -2
             end
             object btnCancelarProblema: TSpeedButton
-              Left = 142
+              Left = 170
               Top = 1
               Width = 48
               Height = 23
@@ -123,10 +122,11 @@ object formPrincipal: TformPrincipal
           object pnlPesquisaProblemas: TPanel
             Left = 1
             Top = 93
-            Width = 239
+            Width = 267
             Height = 123
             Align = alBottom
             TabOrder = 1
+            ExplicitWidth = 239
             object Label4: TLabel
               Left = 17
               Top = 6
@@ -160,18 +160,18 @@ object formPrincipal: TformPrincipal
         object pnlGridProblemas: TPanel
           Left = 0
           Top = 217
-          Width = 241
+          Width = 269
           Height = 528
           Align = alClient
           Color = clWhite
           ParentBackground = False
           TabOrder = 1
+          ExplicitWidth = 241
           object gridProblemas: TDBGrid
             Left = 1
             Top = 1
-            Width = 239
+            Width = 267
             Height = 526
-            TabStop = False
             Align = alClient
             BorderStyle = bsNone
             DataSource = dmQuerys.dsProblemas
@@ -246,7 +246,6 @@ object formPrincipal: TformPrincipal
             Height = 25
             Align = alBottom
             TabOrder = 0
-            ExplicitTop = 109
             object btnNovoModulo: TSpeedButton
               Left = 1
               Top = 1
@@ -330,7 +329,6 @@ object formPrincipal: TformPrincipal
             Top = 1
             Width = 239
             Height = 526
-            TabStop = False
             Align = alClient
             BorderStyle = bsNone
             DataSource = dmQuerys.dsModulos
@@ -349,6 +347,7 @@ object formPrincipal: TformPrincipal
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
             OnCellClick = gridModulosCellClick
+            OnKeyDown = gridModulosKeyDown
             OnMouseWheel = gridModulosMouseWheel
             Columns = <
               item
@@ -369,32 +368,34 @@ object formPrincipal: TformPrincipal
       end
     end
     object CardPanel1: TCardPanel
-      Left = 484
+      Left = 513
       Top = 1
-      Width = 1007
+      Width = 978
       Height = 747
       Align = alClient
       ActiveCard = pnlCadastroProblema
       TabOrder = 1
-      ExplicitWidth = 811
+      ExplicitLeft = 484
+      ExplicitWidth = 1007
       object pnlCadastroProblema: TCard
         Left = 1
         Top = 1
-        Width = 1005
+        Width = 976
         Height = 745
         Caption = 'pnlCadastroProblema'
         CardIndex = 0
         TabOrder = 0
-        ExplicitWidth = 809
+        ExplicitWidth = 1005
         object pnlProblemas: TPanel
           Left = 0
           Top = 0
-          Width = 1005
+          Width = 976
           Height = 745
           Align = alClient
+          BevelOuter = bvNone
           TabOrder = 0
           TabStop = True
-          ExplicitLeft = 3
+          ExplicitWidth = 973
           object lblModuloProblema: TLabel
             Left = 33
             Top = 76
@@ -435,15 +436,17 @@ object formPrincipal: TformPrincipal
             ParentFont = False
           end
           object pnlTituloProblema: TPanel
-            Left = 1
-            Top = 1
-            Width = 1003
+            Left = 0
+            Top = 0
+            Width = 976
             Height = 72
             Align = alTop
+            BevelOuter = bvNone
             TabOrder = 0
             TabStop = True
-            ExplicitLeft = 3
-            ExplicitTop = -2
+            ExplicitLeft = 2
+            ExplicitTop = 1
+            ExplicitWidth = 973
             object lblTituloProblema: TLabel
               Left = 32
               Top = 3
@@ -458,7 +461,7 @@ object formPrincipal: TformPrincipal
               ParentFont = False
             end
             object lblDataProblema: TLabel
-              Left = 800
+              Left = 683
               Top = 0
               Width = 31
               Height = 19
@@ -471,7 +474,7 @@ object formPrincipal: TformPrincipal
               ParentFont = False
             end
             object Label1: TLabel
-              Left = 560
+              Left = 528
               Top = 0
               Width = 105
               Height = 19
@@ -499,8 +502,8 @@ object formPrincipal: TformPrincipal
               TabOrder = 0
             end
             object edtHoraProblema: TDBEdit
-              Left = 800
-              Top = 23
+              Left = 680
+              Top = 25
               Width = 193
               Height = 21
               TabStop = False
@@ -518,8 +521,8 @@ object formPrincipal: TformPrincipal
               TabOrder = 2
             end
             object edtNumeroChamado: TDBEdit
-              Left = 560
-              Top = 23
+              Left = 528
+              Top = 25
               Width = 105
               Height = 24
               BiDiMode = bdLeftToRight
@@ -551,10 +554,10 @@ object formPrincipal: TformPrincipal
             TabOrder = 2
           end
           object mmSolucao: TDBMemo
-            Left = 33
+            Left = 32
             Top = 375
             Width = 624
-            Height = 337
+            Height = 274
             DataField = 'pr_solucao'
             DataSource = dmQuerys.dsProblemas
             Font.Charset = DEFAULT_CHARSET
@@ -633,11 +636,12 @@ object formPrincipal: TformPrincipal
       object pnlImagensProblema: TCard
         Left = 1
         Top = 1
-        Width = 1005
+        Width = 976
         Height = 745
         Caption = 'pnlImagensProblema'
         CardIndex = 1
         TabOrder = 1
+        ExplicitWidth = 1005
         object imgProblema: TDBImage
           Left = 64
           Top = 56
