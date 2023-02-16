@@ -9,7 +9,7 @@ uses
   FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Buttons, Vcl.Mask,
-  Vcl.WinXPanels;
+  Vcl.WinXPanels, Vcl.FileCtrl;
 type
   TformPrincipal = class(TForm)
     pnlBodyProblemas: TPanel;
@@ -65,6 +65,8 @@ type
     Button4: TButton;
     btnRemoverImagemProblema: TButton;
     btnRemoverImagemSolucao: TButton;
+    edtNumeroChamado: TDBEdit;
+    Label1: TLabel;
     procedure btnNovoProblemaClick(Sender: TObject);
     procedure btnSalvarProblemaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -82,16 +84,15 @@ type
     procedure btAddImagemProblemaClick(Sender: TObject);
     procedure btnAddImagemSolucaoClick(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
-    procedure gridModulosMouseWheelDown(Sender: TObject; Shift: TShiftState;
-      MousePos: TPoint; var Handled: Boolean);
-    procedure gridModulosMouseWheelUp(Sender: TObject; Shift: TShiftState;
-      MousePos: TPoint; var Handled: Boolean);
     procedure btnRemoverImagemProblemaClick(Sender: TObject);
     procedure btnRemoverImagemSolucaoClick(Sender: TObject);
+    procedure gridModulosMouseWheel(Sender: TObject; Shift: TShiftState;
+      WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+    procedure AtualizaGridProblemas;
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     procedure PreencheCBModulos;
     procedure AtivaBotoesProblema;
-    procedure AtualizaGridProblemas;
     { Private declarations }
   public
     { Public declarations }
@@ -113,14 +114,9 @@ begin
   AtualizaGridProblemas;
 end;
 
-procedure TformPrincipal.gridModulosMouseWheelDown(Sender: TObject;
-  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
-begin
-  AtualizaGridProblemas;
-end;
-
-procedure TformPrincipal.gridModulosMouseWheelUp(Sender: TObject;
-  Shift: TShiftState; MousePos: TPoint; var Handled: Boolean);
+procedure TformPrincipal.gridModulosMouseWheel(Sender: TObject;
+  Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint;
+  var Handled: Boolean);
 begin
   AtualizaGridProblemas;
 end;
@@ -170,6 +166,19 @@ begin
   CardPanel1.ActiveCard := pnlCadastroProblema;
 end;
 
+procedure TformPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if key = VK_F4 then
+    dmQuerys.qProblemas.Post;
+
+  if key = VK_F3 then
+  begin
+    dmQuerys.qProblemas.Insert;
+    edtTituloProblema.SetFocus;
+  end;
+end;
+
 procedure TformPrincipal.FormShow(Sender: TObject);
 begin
   PreencheCBModulos;
@@ -177,10 +186,7 @@ end;
 
 procedure TformPrincipal.AtivaBotoesProblema;
 begin
-  btnNovoProblema.Enabled := True;
-  btnSalvarProblema.Enabled := True;
-  btnCancelarProblema.Enabled := True;
-  btnExcluirProblema.Enabled := True;
+  
 end;
 
 procedure TformPrincipal.AtualizaGridProblemas;

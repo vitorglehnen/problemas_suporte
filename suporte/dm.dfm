@@ -9,6 +9,7 @@ object dmQuerys: TdmQuerys
   end
   object qModulos: TFDQuery
     Active = True
+    AfterScroll = qModulosAfterScroll
     Connection = conDBSuporte
     SQL.Strings = (
       'select * from modulos_problemas')
@@ -34,9 +35,11 @@ object dmQuerys: TdmQuerys
     Top = 216
   end
   object qProblemas: TFDQuery
+    AfterInsert = qProblemasAfterInsert
+    BeforeEdit = qProblemasBeforeEdit
+    BeforePost = qProblemasBeforePost
+    BeforeCancel = qProblemasBeforeCancel
     Connection = conDBSuporte
-    SQL.Strings = (
-      '')
     Left = 328
     Top = 128
     object qProblemasid: TFDAutoIncField
@@ -83,6 +86,11 @@ object dmQuerys: TdmQuerys
       AutoGenerateValue = arDefault
       FieldName = 'pr_solucaoimg'
       Origin = 'pr_solucaoimg'
+    end
+    object qProblemaspr_numerochamado: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'pr_numerochamado'
+      Origin = 'pr_numerochamado'
     end
   end
   object dsProblemas: TDataSource
