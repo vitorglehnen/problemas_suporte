@@ -1,14 +1,14 @@
 program ProblemasSuporte;
 uses
   Vcl.Forms,
-  suporte in 'suporte.pas' {formPrincipal},
-  dm in 'dm.pas' {dmQuerys: TDataModule};
+  Suporte.View.Pages.Form.Main in 'src\view\pages\Suporte.View.Pages.Form.Main.pas' {formPrincipal},
+  Suporte.Connection.Connection in 'src\connection\Suporte.Connection.Connection.pas' {dmConnection: TDataModule};
 
 {$R *.res}
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TformPrincipal, formPrincipal);
-  Application.CreateForm(TdmQuerys, dmQuerys);
+  Application.CreateForm(TdmConnection, dmConnection);
   Application.Run;
 end.

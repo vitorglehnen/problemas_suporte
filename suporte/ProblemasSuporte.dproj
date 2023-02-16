@@ -101,12 +101,12 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="suporte.pas">
+        <DCCReference Include="src\view\pages\Suporte.View.Pages.Form.Main.pas">
             <Form>formPrincipal</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="dm.pas">
-            <Form>dmQuerys</Form>
+        <DCCReference Include="src\connection\Suporte.Connection.Connection.pas">
+            <Form>dmConnection</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
