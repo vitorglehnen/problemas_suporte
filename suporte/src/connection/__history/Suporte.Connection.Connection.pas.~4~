@@ -1,0 +1,51 @@
+unit Suporte.Connection.Connection;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.UI.Intf,
+  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys, FireDAC.Phys.MySQL,
+  FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
+  FireDAC.Comp.DataSet, FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.Phys.IBBase;
+
+type
+  TdmConnection = class(TDataModule)
+    dsModulos: TDataSource;
+    qModulos: TFDQuery;
+    conDBSuporte: TFDConnection;
+    qComboModulos: TFDQuery;
+    qProblemas: TFDQuery;
+    dsProblemas: TDataSource;
+    FDPhysFBDriverLink1: TFDPhysFBDriverLink;
+    qProblemasID: TIntegerField;
+    qProblemasPR_MODULO: TStringField;
+    qProblemasPR_TITULO: TStringField;
+    qProblemasPR_PROBLEMA: TStringField;
+    qProblemasPR_SOLUCAO: TStringField;
+    qProblemasPR_CHAMADO: TIntegerField;
+    qProblemasPR_DATA: TDateField;
+    qProblemasPR_PRIMG: TBlobField;
+    qProblemasPR_SOLUCAOIMG: TBlobField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  connection : TdmConnection;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+{ TdmConnection }
+
+end.
+
+
+

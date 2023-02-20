@@ -102,8 +102,8 @@ object formPrincipal: TformPrincipal
               Align = alRight
               Caption = 'Excluir'
               OnClick = btnExcluirProblemaClick
-              ExplicitLeft = 136
-              ExplicitTop = -2
+              ExplicitLeft = 216
+              ExplicitTop = -4
             end
             object btnCancelarProblema: TSpeedButton
               Left = 170
@@ -114,8 +114,8 @@ object formPrincipal: TformPrincipal
               Caption = 'Cancelar'
               Enabled = False
               OnClick = btnCancelarProblemaClick
-              ExplicitLeft = 136
-              ExplicitTop = -2
+              ExplicitLeft = 164
+              ExplicitTop = -4
             end
           end
           object pnlPesquisaProblemas: TPanel
@@ -171,7 +171,7 @@ object formPrincipal: TformPrincipal
             Height = 526
             Align = alClient
             BorderStyle = bsNone
-            DataSource = dmQuerys.dsProblemas
+            DataSource = dmConnection.dsProblemas
             DrawingStyle = gdsGradient
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -190,7 +190,7 @@ object formPrincipal: TformPrincipal
             Columns = <
               item
                 Expanded = False
-                FieldName = 'pr_titulo'
+                FieldName = 'PR_TITULO'
                 Title.Alignment = taCenter
                 Title.Caption = 'T'#237'tulo'
                 Title.Font.Charset = DEFAULT_CHARSET
@@ -328,7 +328,7 @@ object formPrincipal: TformPrincipal
             Height = 526
             Align = alClient
             BorderStyle = bsNone
-            DataSource = dmQuerys.dsModulos
+            DataSource = dmConnection.dsModulos
             DrawingStyle = gdsGradient
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -349,7 +349,7 @@ object formPrincipal: TformPrincipal
             Columns = <
               item
                 Expanded = False
-                FieldName = 'mo_nome'
+                FieldName = 'MO_NOME'
                 Title.Alignment = taCenter
                 Title.Caption = 'Nome'
                 Title.Font.Charset = DEFAULT_CHARSET
@@ -478,11 +478,11 @@ object formPrincipal: TformPrincipal
             end
             object edtTituloProblema: TDBEdit
               Left = 32
-              Top = 26
+              Top = 28
               Width = 401
               Height = 24
-              DataField = 'pr_titulo'
-              DataSource = dmQuerys.dsProblemas
+              DataField = 'PR_TITULO'
+              DataSource = dmConnection.dsProblemas
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -13
@@ -499,8 +499,8 @@ object formPrincipal: TformPrincipal
               TabStop = False
               BorderStyle = bsNone
               Color = clBtnFace
-              DataField = 'pr_data'
-              DataSource = dmQuerys.dsProblemas
+              DataField = 'PR_DATA'
+              DataSource = dmConnection.dsProblemas
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -13
@@ -516,8 +516,8 @@ object formPrincipal: TformPrincipal
               Width = 105
               Height = 24
               BiDiMode = bdLeftToRight
-              DataField = 'pr_numerochamado'
-              DataSource = dmQuerys.dsProblemas
+              DataField = 'PR_CHAMADO'
+              DataSource = dmConnection.dsProblemas
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -13
@@ -533,8 +533,8 @@ object formPrincipal: TformPrincipal
             Top = 188
             Width = 624
             Height = 137
-            DataField = 'pr_problema'
-            DataSource = dmQuerys.dsProblemas
+            DataField = 'PR_PROBLEMA'
+            DataSource = dmConnection.dsProblemas
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -14
@@ -548,8 +548,8 @@ object formPrincipal: TformPrincipal
             Top = 375
             Width = 624
             Height = 274
-            DataField = 'pr_solucao'
-            DataSource = dmQuerys.dsProblemas
+            DataField = 'PR_SOLUCAO'
+            DataSource = dmConnection.dsProblemas
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -14
@@ -566,8 +566,8 @@ object formPrincipal: TformPrincipal
             Width = 145
             Height = 24
             Style = csDropDownList
-            DataField = 'pr_modulo'
-            DataSource = dmQuerys.dsProblemas
+            DataField = 'PR_MODULO'
+            DataSource = dmConnection.dsProblemas
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -13
@@ -631,15 +631,14 @@ object formPrincipal: TformPrincipal
         Caption = 'pnlImagensProblema'
         CardIndex = 1
         TabOrder = 1
-        ExplicitWidth = 1005
         object imgProblema: TDBImage
           Left = 64
-          Top = 56
+          Top = 69
           Width = 665
           Height = 297
           Color = clBtnFace
-          DataField = 'pr_primg'
-          DataSource = dmQuerys.dsProblemas
+          DataField = 'PR_PRIMG'
+          DataSource = dmConnection.dsProblemas
           Proportional = True
           Stretch = True
           TabOrder = 0
@@ -650,8 +649,8 @@ object formPrincipal: TformPrincipal
           Width = 665
           Height = 297
           Color = clBtnFace
-          DataField = 'pr_solucaoimg'
-          DataSource = dmQuerys.dsProblemas
+          DataField = 'PR_SOLUCAOIMG'
+          DataSource = dmConnection.dsProblemas
           Proportional = True
           Stretch = True
           TabOrder = 1

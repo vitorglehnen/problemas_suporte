@@ -9,6 +9,7 @@ object dmConnection: TdmConnection
   end
   object qModulos: TFDQuery
     Active = True
+    AfterScroll = qModulosAfterScroll
     Connection = conDBSuporte
     SQL.Strings = (
       'select * from modulos_problemas')
@@ -17,11 +18,19 @@ object dmConnection: TdmConnection
   end
   object conDBSuporte: TFDConnection
     Params.Strings = (
-      'Database=suporte'
-      'User_Name=root'
-      'DriverID=MySQL')
+      'User_Name=SYSDBA'
+      'Password=masterkey'
+      'Protocol=TCPIP'
+      'Server=127.0.0.1'
+      'Port=3050'
+      'CharacterSet=WIN1252'
+      
+        'Database=C:\Users\vitor.lehnen\Desktop\problemas_suporte\data\DB' +
+        'SUPORTE.FDB'
+      'DriverID=FB')
     Connected = True
-    Left = 256
+    LoginPrompt = False
+    Left = 24
     Top = 8
   end
   object qComboModulos: TFDQuery
@@ -31,66 +40,65 @@ object dmConnection: TdmConnection
       ''
       '')
     Left = 328
-    Top = 216
+    Top = 128
   end
   object qProblemas: TFDQuery
+    AfterInsert = qProblemasAfterInsert
+    BeforeEdit = qProblemasBeforeEdit
+    BeforePost = qProblemasBeforePost
+    BeforeCancel = qProblemasBeforeCancel
     Connection = conDBSuporte
     Left = 328
-    Top = 128
-    object qProblemasid: TFDAutoIncField
-      FieldName = 'id'
-      Origin = 'id'
-      ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
+    Top = 72
+    object qProblemasID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'ID'
     end
-    object qProblemaspr_modulo: TStringField
-      FieldName = 'pr_modulo'
-      Origin = 'pr_modulo'
-      Required = True
+    object qProblemasPR_MODULO: TStringField
+      FieldName = 'PR_MODULO'
+      Origin = 'PR_MODULO'
       Size = 35
     end
-    object qProblemaspr_titulo: TStringField
-      FieldName = 'pr_titulo'
-      Origin = 'pr_titulo'
-      Required = True
+    object qProblemasPR_TITULO: TStringField
+      FieldName = 'PR_TITULO'
+      Origin = 'PR_TITULO'
       Size = 75
     end
-    object qProblemaspr_problema: TMemoField
-      FieldName = 'pr_problema'
-      Origin = 'pr_problema'
-      Required = True
-      BlobType = ftMemo
+    object qProblemasPR_PROBLEMA: TStringField
+      FieldName = 'PR_PROBLEMA'
+      Origin = 'PR_PROBLEMA'
+      Size = 2000
     end
-    object qProblemaspr_solucao: TMemoField
-      FieldName = 'pr_solucao'
-      Origin = 'pr_solucao'
-      Required = True
-      BlobType = ftMemo
+    object qProblemasPR_SOLUCAO: TStringField
+      FieldName = 'PR_SOLUCAO'
+      Origin = 'PR_SOLUCAO'
+      Size = 2000
     end
-    object qProblemaspr_data: TDateTimeField
-      AutoGenerateValue = arDefault
-      FieldName = 'pr_data'
-      Origin = 'pr_data'
+    object qProblemasPR_CHAMADO: TIntegerField
+      FieldName = 'PR_CHAMADO'
+      Origin = 'PR_CHAMADO'
     end
-    object qProblemaspr_primg: TBlobField
-      AutoGenerateValue = arDefault
-      FieldName = 'pr_primg'
-      Origin = 'pr_primg'
+    object qProblemasPR_DATA: TDateField
+      FieldName = 'PR_DATA'
+      Origin = 'PR_DATA'
     end
-    object qProblemaspr_solucaoimg: TBlobField
-      AutoGenerateValue = arDefault
-      FieldName = 'pr_solucaoimg'
-      Origin = 'pr_solucaoimg'
+    object qProblemasPR_PRIMG: TBlobField
+      FieldName = 'PR_PRIMG'
+      Origin = 'PR_PRIMG'
     end
-    object qProblemaspr_numerochamado: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'pr_numerochamado'
-      Origin = 'pr_numerochamado'
+    object qProblemasPR_SOLUCAOIMG: TBlobField
+      FieldName = 'PR_SOLUCAOIMG'
+      Origin = 'PR_SOLUCAOIMG'
     end
   end
   object dsProblemas: TDataSource
     DataSet = qProblemas
-    Left = 416
-    Top = 128
+    Left = 400
+    Top = 72
+  end
+  object FDPhysFBDriverLink1: TFDPhysFBDriverLink
+    VendorLib = 'C:\Program Files (x86)\Firebird\Firebird_2_5\bin\fbclient.dll'
+    Left = 24
+    Top = 80
   end
 end

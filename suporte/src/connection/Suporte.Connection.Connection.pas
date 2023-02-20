@@ -8,7 +8,7 @@ uses
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.UI.Intf,
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys, FireDAC.Phys.MySQL,
   FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
-  FireDAC.Comp.DataSet;
+  FireDAC.Comp.DataSet, FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.Phys.IBBase;
 
 type
   TdmConnection = class(TDataModule)
@@ -18,29 +18,74 @@ type
     qComboModulos: TFDQuery;
     qProblemas: TFDQuery;
     dsProblemas: TDataSource;
-    qProblemasid: TFDAutoIncField;
-    qProblemaspr_modulo: TStringField;
-    qProblemaspr_titulo: TStringField;
-    qProblemaspr_problema: TMemoField;
-    qProblemaspr_solucao: TMemoField;
-    qProblemaspr_data: TDateTimeField;
-    qProblemaspr_primg: TBlobField;
-    qProblemaspr_solucaoimg: TBlobField;
-    qProblemaspr_numerochamado: TIntegerField;
+    FDPhysFBDriverLink1: TFDPhysFBDriverLink;
+    qProblemasID: TIntegerField;
+    qProblemasPR_MODULO: TStringField;
+    qProblemasPR_TITULO: TStringField;
+    qProblemasPR_PROBLEMA: TStringField;
+    qProblemasPR_SOLUCAO: TStringField;
+    qProblemasPR_CHAMADO: TIntegerField;
+    qProblemasPR_DATA: TDateField;
+    qProblemasPR_PRIMG: TBlobField;
+    qProblemasPR_SOLUCAOIMG: TBlobField;
+    procedure qModulosAfterScroll(DataSet: TDataSet);
+    procedure qProblemasAfterInsert(DataSet: TDataSet);
+    procedure qProblemasBeforeCancel(DataSet: TDataSet);
+    procedure qProblemasBeforeEdit(DataSet: TDataSet);
+    procedure qProblemasBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
+    procedure InverteBotoesCrudProblemas;
   public
     { Public declarations }
   end;
 
+var
+  connection : TdmConnection;
+
 implementation
 
-{%CLASSGROUP 'Vcl.Controls.TControl'}
+uses
+  Suporte.View.Pages.Form.Main;
 
+{%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
 
 { TdmConnection }
+
+procedure TdmConnection.InverteBotoesCrudProblemas;
+begin
+  formPrincipal.btnNovoProblema.Enabled := not formPrincipal.btnNovoProblema.Enabled;
+  formPrincipal.btnExcluirProblema.Enabled := not formPrincipal.btnExcluirProblema.Enabled;
+  formPrincipal.btnSalvarProblema.Enabled := not formPrincipal.btnSalvarProblema.Enabled;
+  formPrincipal.btnCancelarProblema.Enabled := not formPrincipal.btnCancelarProblema.Enabled;
+end;
+
+procedure TdmConnection.qModulosAfterScroll(DataSet: TDataSet);
+begin
+  formPrincipal.AtualizaGridProblemas;
+end;
+
+procedure TdmConnection.qProblemasAfterInsert(DataSet: TDataSet);
+begin
+  InverteBotoesCrudProblemas;
+end;
+
+procedure TdmConnection.qProblemasBeforeCancel(DataSet: TDataSet);
+begin
+  InverteBotoesCrudProblemas;
+end;
+
+procedure TdmConnection.qProblemasBeforeEdit(DataSet: TDataSet);
+begin
+  InverteBotoesCrudProblemas;
+end;
+
+procedure TdmConnection.qProblemasBeforePost(DataSet: TDataSet);
+begin
+  InverteBotoesCrudProblemas;
+end;
 
 end.
 

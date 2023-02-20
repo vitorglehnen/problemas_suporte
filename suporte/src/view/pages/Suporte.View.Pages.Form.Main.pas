@@ -1,5 +1,7 @@
 unit Suporte.View.Pages.Form.Main;
+
 interface
+
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
@@ -10,6 +12,7 @@ uses
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Buttons, Vcl.Mask,
   Vcl.WinXPanels, Vcl.FileCtrl;
+
 type
   TformPrincipal = class(TForm)
     pnlBodyProblemas: TPanel;
@@ -98,6 +101,7 @@ type
   public
     { Public declarations }
   end;
+
 var
   formPrincipal: TformPrincipal;
 
@@ -105,9 +109,9 @@ implementation
 {$R *.dfm}
 
 uses
-  connection,
   jpeg,
-  pngimage;
+  pngimage,
+  Suporte.Connection.Connection;
 
 procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
 begin
@@ -119,8 +123,8 @@ procedure TformPrincipal.gridModulosKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if key = VK_RETURN then
-    if dmQuerys.qModulos.State = dsEdit then
-      dmQuerys.qModulos.Post;
+    if connection.qModulos.State = dsEdit then
+      connection.qModulos.Post;
 end;
 
 procedure TformPrincipal.gridModulosMouseWheel(Sender: TObject;
@@ -132,7 +136,7 @@ end;
 
 procedure TformPrincipal.edtPesquisaModuloChange(Sender: TObject);
 begin
-  with dmQuerys.qModulos do
+  with connection.qModulos do
   begin
     close;
     sql.Clear;
@@ -146,7 +150,7 @@ procedure TformPrincipal.edtPesquisaProblemaChange(Sender: TObject);
 begin
   if rdbtnFiltroPesquisaProblemas.ItemIndex = 0 then
   begin
-    with dmQuerys.qProblemas do
+    with connection.qProblemas do
     begin
       close;
       sql.Clear;
@@ -158,7 +162,7 @@ begin
 
   if rdbtnFiltroPesquisaProblemas.ItemIndex = 1 then
   begin
-    with dmQuerys.qProblemas do
+    with connection.qProblemas do
     begin
       close;
       sql.Clear;
@@ -179,11 +183,11 @@ procedure TformPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if key = VK_F4 then
-    dmQuerys.qProblemas.Post;
+    connection.qProblemas.Post;
 
   if key = VK_F3 then
   begin
-    dmQuerys.qProblemas.Insert;
+    connection.qProblemas.Insert;
     edtTituloProblema.SetFocus;
   end;
 end;
@@ -195,7 +199,7 @@ end;
 
 procedure TformPrincipal.AtualizaGridProblemas;
 begin
-  with dmQuerys.qProblemas do
+  with connection.qProblemas do
   begin
     close;
     sql.Clear;
@@ -209,23 +213,25 @@ procedure TformPrincipal.PreencheCBModulos;
 begin
   cbModulos.Clear;
 
-  with dmQuerys.qComboModulos do
+  with connection.qComboModulos do
   begin
     Close;
     SQL.Clear;
     SQL.ADD('Select * from modulos_problemas');
     Open;
     First;
-    while not dmQuerys.qComboModulos.Eof do
+
+    while not Suporte.Connection.Connection.connection.qComboModulos.Eof do
     begin
-      cbModulos.items.add(dmquerys.qComboModulos['mo_nome']);
+      cbModulos.items.add(Suporte.Connection.Connection.connection.qComboModulos['mo_nome']);
       Next;
     end;
   end;
 end;
+
 procedure TformPrincipal.btAddImagemProblemaClick(Sender: TObject);
 begin
-  dmQuerys.qProblemas.Edit;
+  connection.qProblemas.Edit;
 
   if OpenDialog1.Execute then
   begin
@@ -235,7 +241,7 @@ end;
 
 procedure TformPrincipal.btnAddImagemSolucaoClick(Sender: TObject);
 begin
-  dmQuerys.qProblemas.Edit;
+  connection.qProblemas.Edit;
 
   if OpenDialog1.Execute then
   begin
@@ -245,12 +251,12 @@ end;
 
 procedure TformPrincipal.btnCancelarModuloClick(Sender: TObject);
 begin
-  dmQuerys.qModulos.Cancel;
+  Suporte.Connection.Connection.connection.qModulos.Cancel;
 end;
 
 procedure TformPrincipal.btnCancelarProblemaClick(Sender: TObject);
 begin
-  dmQuerys.qProblemas.Cancel;
+  Suporte.Connection.Connection.connection.qProblemas.Cancel;
 end;
 
 procedure TformPrincipal.btnExcluirModuloClick(Sender: TObject);
@@ -258,7 +264,7 @@ begin
   if Application.MessageBox('Deseja excluir este módulo?', 'Excluir',
     + MB_ICONQUESTION + MB_YESNO) = MrYes then
     begin
-      dmQuerys.qModulos.Delete;
+      Suporte.Connection.Connection.connection.qModulos.Delete;
     end;
 end;
 
@@ -267,44 +273,44 @@ begin
    if Application.MessageBox('Deseja excluir este problema?', 'Excluir',
     + MB_ICONQUESTION + MB_YESNO) = MrYes then
     begin
-      dmQuerys.qProblemas.Delete;
+      Suporte.Connection.Connection.connection.qProblemas.Delete;
     end;
 end;
 
 procedure TformPrincipal.btnNovoModuloClick(Sender: TObject);
 begin
-  dmQuerys.qModulos.Insert;
+  Suporte.Connection.Connection.connection.qModulos.Insert;
 end;
 
 procedure TformPrincipal.btnNovoProblemaClick(Sender: TObject);
 begin
-  dmQuerys.qProblemas.Insert;
+  Suporte.Connection.Connection.Connection.qProblemas.Insert;
   PreencheCBModulos;
   edtTituloProblema.SetFocus;
 end;
 
 procedure TformPrincipal.btnRemoverImagemProblemaClick(Sender: TObject);
 begin
-  dmQuerys.qProblemas.Edit;
+  connection.qProblemas.Edit;
 
   imgProblema.Picture := nil;
 end;
 
 procedure TformPrincipal.btnRemoverImagemSolucaoClick(Sender: TObject);
 begin
-  dmQuerys.qProblemas.Edit;
+  connection.qProblemas.Edit;
 
   imgSolucao.Picture := nil;
 end;
 
 procedure TformPrincipal.btnSalvarModuloClick(Sender: TObject);
 begin
-  dmQuerys.qModulos.Post;
+  Suporte.Connection.Connection.connection.qModulos.Post;
 end;
 
 procedure TformPrincipal.btnSalvarProblemaClick(Sender: TObject);
 begin
-  dmQuerys.qProblemas.Post;
+  Suporte.Connection.Connection.Connection.qProblemas.Post;
 end;
 
 procedure TformPrincipal.btnVerImagensClick(Sender: TObject);
