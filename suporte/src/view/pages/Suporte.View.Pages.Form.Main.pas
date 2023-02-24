@@ -89,8 +89,6 @@ type
     procedure gridModulosCellClick(Column: TColumn);
     procedure btnRemoverImagemProblemaClick(Sender: TObject);
     procedure btnRemoverImagemSolucaoClick(Sender: TObject);
-    procedure gridModulosMouseWheel(Sender: TObject; Shift: TShiftState;
-      WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
     procedure AtualizaGridProblemas;
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure gridModulosKeyDown(Sender: TObject; var Key: Word;
@@ -123,20 +121,13 @@ procedure TformPrincipal.gridModulosKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if key = VK_RETURN then
-    if connection.qModulos.State = dsEdit then
-      connection.qModulos.Post;
-end;
-
-procedure TformPrincipal.gridModulosMouseWheel(Sender: TObject;
-  Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint;
-  var Handled: Boolean);
-begin
-  AtualizaGridProblemas;
+    if Suporte.Connection.Connection.connection.qModulos.State = dsEdit then
+      Suporte.Connection.Connection.connection.qModulos.Post;
 end;
 
 procedure TformPrincipal.edtPesquisaModuloChange(Sender: TObject);
 begin
-  with connection.qModulos do
+  with Suporte.Connection.Connection.connection.qModulos do
   begin
     close;
     sql.Clear;
@@ -150,7 +141,7 @@ procedure TformPrincipal.edtPesquisaProblemaChange(Sender: TObject);
 begin
   if rdbtnFiltroPesquisaProblemas.ItemIndex = 0 then
   begin
-    with connection.qProblemas do
+    with Suporte.Connection.Connection.connection.qProblemas do
     begin
       close;
       sql.Clear;
@@ -162,7 +153,7 @@ begin
 
   if rdbtnFiltroPesquisaProblemas.ItemIndex = 1 then
   begin
-    with connection.qProblemas do
+    with Suporte.Connection.Connection.connection.qProblemas do
     begin
       close;
       sql.Clear;
@@ -183,11 +174,11 @@ procedure TformPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if key = VK_F4 then
-    connection.qProblemas.Post;
+    Suporte.Connection.Connection.connection.qProblemas.Post;
 
   if key = VK_F3 then
   begin
-    connection.qProblemas.Insert;
+    Suporte.Connection.Connection.connection.qProblemas.Insert;
     edtTituloProblema.SetFocus;
   end;
 end;
@@ -199,13 +190,16 @@ end;
 
 procedure TformPrincipal.AtualizaGridProblemas;
 begin
-  with connection.qProblemas do
+  if Suporte.Connection.Connection.connection.qModulos.State in [dsBrowse] then
   begin
-    close;
-    sql.Clear;
-    Sql.Add('select * from problemas where pr_modulo = :ParamModulo');
-    ParamByName('ParamModulo').AsString := gridModulos.Columns[0].Field.Value;
-    Open;
+    with Suporte.Connection.Connection.connection.qProblemas do
+    begin
+      close;
+      sql.Clear;
+      Sql.Add('select * from problemas where pr_modulo = :ParamModulo');
+      ParamByName('ParamModulo').AsString := gridModulos.Columns[0].Field.Value;
+      Open;
+    end;
   end;
 end;
 
@@ -213,7 +207,7 @@ procedure TformPrincipal.PreencheCBModulos;
 begin
   cbModulos.Clear;
 
-  with connection.qComboModulos do
+  with Suporte.Connection.Connection.connection.qComboModulos do
   begin
     Close;
     SQL.Clear;
@@ -231,7 +225,7 @@ end;
 
 procedure TformPrincipal.btAddImagemProblemaClick(Sender: TObject);
 begin
-  connection.qProblemas.Edit;
+  Suporte.Connection.Connection.connection.qProblemas.Edit;
 
   if OpenDialog1.Execute then
   begin
@@ -241,7 +235,7 @@ end;
 
 procedure TformPrincipal.btnAddImagemSolucaoClick(Sender: TObject);
 begin
-  connection.qProblemas.Edit;
+  Suporte.Connection.Connection.connection.qProblemas.Edit;
 
   if OpenDialog1.Execute then
   begin
@@ -291,14 +285,14 @@ end;
 
 procedure TformPrincipal.btnRemoverImagemProblemaClick(Sender: TObject);
 begin
-  connection.qProblemas.Edit;
+  Suporte.Connection.Connection.connection.qProblemas.Edit;
 
   imgProblema.Picture := nil;
 end;
 
 procedure TformPrincipal.btnRemoverImagemSolucaoClick(Sender: TObject);
 begin
-  connection.qProblemas.Edit;
+  Suporte.Connection.Connection.connection.qProblemas.Edit;
 
   imgSolucao.Picture := nil;
 end;

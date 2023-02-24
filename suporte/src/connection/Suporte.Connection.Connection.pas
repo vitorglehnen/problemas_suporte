@@ -28,11 +28,11 @@ type
     qProblemasPR_DATA: TDateField;
     qProblemasPR_PRIMG: TBlobField;
     qProblemasPR_SOLUCAOIMG: TBlobField;
-    procedure qModulosAfterScroll(DataSet: TDataSet);
     procedure qProblemasAfterInsert(DataSet: TDataSet);
     procedure qProblemasBeforeCancel(DataSet: TDataSet);
     procedure qProblemasBeforeEdit(DataSet: TDataSet);
     procedure qProblemasBeforePost(DataSet: TDataSet);
+    procedure qModulosAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
     procedure InverteBotoesCrudProblemas;
@@ -70,6 +70,7 @@ end;
 procedure TdmConnection.qProblemasAfterInsert(DataSet: TDataSet);
 begin
   InverteBotoesCrudProblemas;
+  formPrincipal.edtHoraProblema.Text := DateToStr(date);
 end;
 
 procedure TdmConnection.qProblemasBeforeCancel(DataSet: TDataSet);

@@ -345,7 +345,6 @@ object formPrincipal: TformPrincipal
             TitleFont.Style = []
             OnCellClick = gridModulosCellClick
             OnKeyDown = gridModulosKeyDown
-            OnMouseWheel = gridModulosMouseWheel
             Columns = <
               item
                 Expanded = False
