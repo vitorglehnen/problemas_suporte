@@ -19,7 +19,6 @@ type
     qProblemas: TFDQuery;
     dsProblemas: TDataSource;
     FDPhysFBDriverLink1: TFDPhysFBDriverLink;
-    qProblemasID: TIntegerField;
     qProblemasPR_MODULO: TStringField;
     qProblemasPR_TITULO: TStringField;
     qProblemasPR_PROBLEMA: TStringField;
@@ -33,6 +32,7 @@ type
     procedure qProblemasBeforeEdit(DataSet: TDataSet);
     procedure qProblemasBeforePost(DataSet: TDataSet);
     procedure qModulosAfterScroll(DataSet: TDataSet);
+    procedure qProblemasAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
     procedure InverteBotoesCrudProblemas;
@@ -65,12 +65,18 @@ end;
 procedure TdmConnection.qModulosAfterScroll(DataSet: TDataSet);
 begin
   formPrincipal.AtualizaGridProblemas;
+  formPrincipal.cardPanelProblemas.ActiveCard := formPrincipal.pnlCadastroProblema;
 end;
 
 procedure TdmConnection.qProblemasAfterInsert(DataSet: TDataSet);
 begin
   InverteBotoesCrudProblemas;
   formPrincipal.edtHoraProblema.Text := DateToStr(date);
+end;
+
+procedure TdmConnection.qProblemasAfterScroll(DataSet: TDataSet);
+begin
+  formPrincipal.cardPanelProblemas.ActiveCard := formPrincipal.pnlCadastroProblema;
 end;
 
 procedure TdmConnection.qProblemasBeforeCancel(DataSet: TDataSet);

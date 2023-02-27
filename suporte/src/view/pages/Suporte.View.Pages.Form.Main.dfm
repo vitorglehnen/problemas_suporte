@@ -363,13 +363,13 @@ object formPrincipal: TformPrincipal
         end
       end
     end
-    object CardPanel1: TCardPanel
+    object cardPanelProblemas: TCardPanel
       Left = 513
       Top = 1
       Width = 978
       Height = 747
       Align = alClient
-      ActiveCard = pnlCadastroProblema
+      ActiveCard = pnlImagensProblema
       TabOrder = 1
       object pnlCadastroProblema: TCard
         Left = 1
@@ -606,8 +606,8 @@ object formPrincipal: TformPrincipal
             OnClick = btnAddImagemSolucaoClick
           end
           object btnVerImagens: TButton
-            Left = 312
-            Top = 93
+            Left = 424
+            Top = 143
             Width = 97
             Height = 25
             Caption = 'Ver imagens'
@@ -620,6 +620,21 @@ object formPrincipal: TformPrincipal
             TabOrder = 4
             OnClick = btnVerImagensClick
           end
+          object btnVerImagensSolucao: TButton
+            Left = 424
+            Top = 331
+            Width = 97
+            Height = 25
+            Caption = 'Ver imagens'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 7
+            OnClick = btnVerImagensSolucaoClick
+          end
         end
       end
       object pnlImagensProblema: TCard
@@ -630,56 +645,167 @@ object formPrincipal: TformPrincipal
         Caption = 'pnlImagensProblema'
         CardIndex = 1
         TabOrder = 1
-        object imgProblema: TDBImage
-          Left = 64
-          Top = 69
-          Width = 665
-          Height = 297
-          Color = clBtnFace
-          DataField = 'PR_PRIMG'
-          DataSource = dmConnection.dsProblemas
-          Proportional = True
-          Stretch = True
+        object pnlMainImagemProblema: TPanel
+          Left = 0
+          Top = 0
+          Width = 976
+          Height = 745
+          Align = alClient
+          BevelOuter = bvNone
+          Padding.Left = 30
+          Padding.Top = 30
+          Padding.Right = 30
+          Padding.Bottom = 30
           TabOrder = 0
+          ExplicitLeft = 208
+          ExplicitTop = 160
+          ExplicitWidth = 185
+          ExplicitHeight = 41
+          object pnlTopImagensProblemas: TPanel
+            Left = 30
+            Top = 30
+            Width = 916
+            Height = 41
+            Align = alTop
+            BevelOuter = bvNone
+            TabOrder = 0
+            object btnVoltarImagemProblema: TButton
+              Left = 0
+              Top = 0
+              Width = 81
+              Height = 41
+              Align = alLeft
+              Caption = 'Voltar'
+              TabOrder = 0
+              OnClick = btnVoltarImagemProblemaClick
+            end
+            object btnRemoverImagemProblema: TButton
+              Left = 817
+              Top = 0
+              Width = 99
+              Height = 41
+              Align = alRight
+              Caption = 'Remover imagem'
+              TabOrder = 1
+              OnClick = btnRemoverImagemProblemaClick
+            end
+          end
+          object pnlCenterImagemProblema: TPanel
+            Left = 30
+            Top = 71
+            Width = 916
+            Height = 644
+            Align = alClient
+            BevelOuter = bvNone
+            Padding.Top = 20
+            TabOrder = 1
+            object imgProblema: TDBImage
+              Left = 0
+              Top = 20
+              Width = 916
+              Height = 624
+              Align = alClient
+              Color = clBtnFace
+              DataField = 'PR_PRIMG'
+              DataSource = dmConnection.dsProblemas
+              Proportional = True
+              Stretch = True
+              TabOrder = 0
+            end
+          end
         end
-        object imgSolucao: TDBImage
-          Left = 64
-          Top = 390
-          Width = 665
-          Height = 297
-          Color = clBtnFace
-          DataField = 'PR_SOLUCAOIMG'
-          DataSource = dmConnection.dsProblemas
-          Proportional = True
-          Stretch = True
-          TabOrder = 1
-        end
-        object Button4: TButton
-          Left = 64
-          Top = 13
-          Width = 75
-          Height = 25
-          Caption = 'Voltar'
-          TabOrder = 2
-          OnClick = Button4Click
-        end
-        object btnRemoverImagemProblema: TButton
-          Left = 632
-          Top = 25
-          Width = 99
-          Height = 25
-          Caption = 'Remover imagem'
-          TabOrder = 3
-          OnClick = btnRemoverImagemProblemaClick
-        end
-        object btnRemoverImagemSolucao: TButton
-          Left = 632
-          Top = 359
-          Width = 99
-          Height = 25
-          Caption = 'Remover imagem'
-          TabOrder = 4
-          OnClick = btnRemoverImagemSolucaoClick
+      end
+      object pnlImagensSolucao: TCard
+        Left = 1
+        Top = 1
+        Width = 976
+        Height = 745
+        Caption = 'pnlImagensSolucao'
+        CardIndex = 2
+        TabOrder = 2
+        OnClick = pnlImagensSolucaoClick
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 185
+        ExplicitHeight = 41
+        object pnlMainImagemSolucao: TPanel
+          Left = 0
+          Top = 0
+          Width = 976
+          Height = 745
+          Align = alClient
+          BevelOuter = bvNone
+          Padding.Left = 30
+          Padding.Top = 30
+          Padding.Right = 30
+          Padding.Bottom = 30
+          TabOrder = 0
+          ExplicitLeft = 208
+          ExplicitTop = 160
+          ExplicitWidth = 185
+          ExplicitHeight = 41
+          object pnlTopImagemSolucao: TPanel
+            Left = 30
+            Top = 30
+            Width = 916
+            Height = 41
+            Align = alTop
+            BevelOuter = bvNone
+            TabOrder = 0
+            object btnRemoverImagemSolucao: TButton
+              Left = 817
+              Top = 0
+              Width = 99
+              Height = 41
+              Align = alRight
+              Caption = 'Remover imagem'
+              TabOrder = 0
+              OnClick = btnRemoverImagemSolucaoClick
+              ExplicitLeft = 656
+              ExplicitTop = 16
+              ExplicitHeight = 25
+            end
+            object btnVoltarImagemSolucao: TButton
+              Left = 0
+              Top = 0
+              Width = 75
+              Height = 41
+              Align = alLeft
+              Caption = 'Voltar'
+              TabOrder = 1
+              OnClick = btnVoltarImagemSolucaoClick
+              ExplicitLeft = 80
+              ExplicitTop = 16
+              ExplicitHeight = 25
+            end
+          end
+          object pnlCenterImagemSolucao: TPanel
+            Left = 30
+            Top = 71
+            Width = 916
+            Height = 644
+            Align = alClient
+            BevelOuter = bvNone
+            Padding.Top = 20
+            TabOrder = 1
+            object imgSolucao: TDBImage
+              Left = 0
+              Top = 20
+              Width = 916
+              Height = 624
+              Align = alClient
+              Color = clBtnFace
+              DataField = 'PR_SOLUCAOIMG'
+              DataSource = dmConnection.dsProblemas
+              Proportional = True
+              Stretch = True
+              TabOrder = 0
+              ExplicitLeft = 88
+              ExplicitTop = 145
+              ExplicitWidth = 665
+              ExplicitHeight = 297
+            end
+          end
         end
       end
     end

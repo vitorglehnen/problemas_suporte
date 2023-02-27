@@ -45,7 +45,7 @@ type
     pnlPrincipal: TPanel;
     pnlBodyModulosProblemas: TPanel;
     OpenDialog1: TOpenDialog;
-    CardPanel1: TCardPanel;
+    cardPanelProblemas: TCardPanel;
     pnlCadastroProblema: TCard;
     pnlImagensProblema: TCard;
     pnlProblemas: TPanel;
@@ -62,14 +62,23 @@ type
     cbModulos: TDBComboBox;
     btAddImagemProblema: TButton;
     btnAddImagemSolucao: TButton;
-    imgProblema: TDBImage;
-    imgSolucao: TDBImage;
     btnVerImagens: TButton;
-    Button4: TButton;
-    btnRemoverImagemProblema: TButton;
-    btnRemoverImagemSolucao: TButton;
     edtNumeroChamado: TDBEdit;
     Label1: TLabel;
+    pnlImagensSolucao: TCard;
+    btnVerImagensSolucao: TButton;
+    pnlMainImagemProblema: TPanel;
+    pnlTopImagensProblemas: TPanel;
+    btnVoltarImagemProblema: TButton;
+    btnRemoverImagemProblema: TButton;
+    pnlCenterImagemProblema: TPanel;
+    imgProblema: TDBImage;
+    pnlMainImagemSolucao: TPanel;
+    pnlTopImagemSolucao: TPanel;
+    pnlCenterImagemSolucao: TPanel;
+    imgSolucao: TDBImage;
+    btnRemoverImagemSolucao: TButton;
+    btnVoltarImagemSolucao: TButton;
     procedure btnNovoProblemaClick(Sender: TObject);
     procedure btnSalvarProblemaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -82,7 +91,7 @@ type
     procedure edtPesquisaModuloChange(Sender: TObject);
     procedure edtPesquisaProblemaChange(Sender: TObject);
     procedure btnVerImagensClick(Sender: TObject);
-    procedure Button4Click(Sender: TObject);
+    procedure btnVoltarImagemProblemaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btAddImagemProblemaClick(Sender: TObject);
     procedure btnAddImagemSolucaoClick(Sender: TObject);
@@ -93,6 +102,9 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure gridModulosKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure btnVoltarImagemSolucaoClick(Sender: TObject);
+    procedure pnlImagensSolucaoClick(Sender: TObject);
+    procedure btnVerImagensSolucaoClick(Sender: TObject);
   private
     procedure PreencheCBModulos;
     { Private declarations }
@@ -113,7 +125,7 @@ uses
 
 procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
 begin
-  CardPanel1.ActiveCard := pnlCadastroProblema;
+  cardPanelProblemas.ActiveCard := pnlCadastroProblema;
   AtualizaGridProblemas;
 end;
 
@@ -123,6 +135,11 @@ begin
   if key = VK_RETURN then
     if Suporte.Connection.Connection.connection.qModulos.State = dsEdit then
       Suporte.Connection.Connection.connection.qModulos.Post;
+end;
+
+procedure TformPrincipal.pnlImagensSolucaoClick(Sender: TObject);
+begin
+  cardPanelProblemas.ActiveCard := pnlImagensSolucao;
 end;
 
 procedure TformPrincipal.edtPesquisaModuloChange(Sender: TObject);
@@ -163,11 +180,16 @@ begin
       Open;
     end;
   end;
+
+  if edtPesquisaProblema.Text = '' then
+  begin
+    AtualizaGridProblemas;
+  end;
 end;
 
 procedure TformPrincipal.FormCreate(Sender: TObject);
 begin
-  CardPanel1.ActiveCard := pnlCadastroProblema;
+  cardPanelProblemas.ActiveCard := pnlCadastroProblema;
 end;
 
 procedure TformPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
@@ -309,12 +331,22 @@ end;
 
 procedure TformPrincipal.btnVerImagensClick(Sender: TObject);
 begin
-  CardPanel1.ActiveCard := pnlImagensProblema;
+  cardPanelProblemas.ActiveCard := pnlImagensProblema;
 end;
 
-procedure TformPrincipal.Button4Click(Sender: TObject);
+procedure TformPrincipal.btnVoltarImagemSolucaoClick(Sender: TObject);
 begin
-  CardPanel1.ActiveCard := pnlCadastroProblema;
+  cardPanelProblemas.ActiveCard := pnlCadastroProblema;
+end;
+
+procedure TformPrincipal.btnVerImagensSolucaoClick(Sender: TObject);
+begin
+  cardPanelProblemas.ActiveCard := pnlImagensSolucao;
+end;
+
+procedure TformPrincipal.btnVoltarImagemProblemaClick(Sender: TObject);
+begin
+  cardPanelProblemas.ActiveCard := pnlCadastroProblema;
 end;
 
 end.

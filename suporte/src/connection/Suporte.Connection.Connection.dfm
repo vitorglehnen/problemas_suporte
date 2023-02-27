@@ -47,13 +47,10 @@ object dmConnection: TdmConnection
     BeforeEdit = qProblemasBeforeEdit
     BeforePost = qProblemasBeforePost
     BeforeCancel = qProblemasBeforeCancel
+    AfterScroll = qProblemasAfterScroll
     Connection = conDBSuporte
     Left = 328
     Top = 72
-    object qProblemasID: TIntegerField
-      FieldName = 'ID'
-      Origin = 'ID'
-    end
     object qProblemasPR_MODULO: TStringField
       FieldName = 'PR_MODULO'
       Origin = 'PR_MODULO'
