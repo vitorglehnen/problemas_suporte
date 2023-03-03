@@ -147,11 +147,12 @@ object formPrincipal: TformPrincipal
               Width = 185
               Height = 61
               Caption = 'Filtro da pesquisa'
-              ItemIndex = 0
+              ItemIndex = 1
               Items.Strings = (
                 'Geral'
                 'Somente do m'#243'dulo')
               TabOrder = 1
+              OnClick = rdbtnFiltroPesquisaProblemasClick
             end
           end
         end
@@ -657,10 +658,6 @@ object formPrincipal: TformPrincipal
           Padding.Right = 30
           Padding.Bottom = 30
           TabOrder = 0
-          ExplicitLeft = 208
-          ExplicitTop = 160
-          ExplicitWidth = 185
-          ExplicitHeight = 41
           object pnlTopImagensProblemas: TPanel
             Left = 30
             Top = 30
@@ -724,10 +721,6 @@ object formPrincipal: TformPrincipal
         CardIndex = 2
         TabOrder = 2
         OnClick = pnlImagensSolucaoClick
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 185
-        ExplicitHeight = 41
         object pnlMainImagemSolucao: TPanel
           Left = 0
           Top = 0
@@ -740,10 +733,6 @@ object formPrincipal: TformPrincipal
           Padding.Right = 30
           Padding.Bottom = 30
           TabOrder = 0
-          ExplicitLeft = 208
-          ExplicitTop = 160
-          ExplicitWidth = 185
-          ExplicitHeight = 41
           object pnlTopImagemSolucao: TPanel
             Left = 30
             Top = 30
@@ -761,9 +750,6 @@ object formPrincipal: TformPrincipal
               Caption = 'Remover imagem'
               TabOrder = 0
               OnClick = btnRemoverImagemSolucaoClick
-              ExplicitLeft = 656
-              ExplicitTop = 16
-              ExplicitHeight = 25
             end
             object btnVoltarImagemSolucao: TButton
               Left = 0
@@ -774,9 +760,6 @@ object formPrincipal: TformPrincipal
               Caption = 'Voltar'
               TabOrder = 1
               OnClick = btnVoltarImagemSolucaoClick
-              ExplicitLeft = 80
-              ExplicitTop = 16
-              ExplicitHeight = 25
             end
           end
           object pnlCenterImagemSolucao: TPanel
@@ -800,10 +783,6 @@ object formPrincipal: TformPrincipal
               Proportional = True
               Stretch = True
               TabOrder = 0
-              ExplicitLeft = 88
-              ExplicitTop = 145
-              ExplicitWidth = 665
-              ExplicitHeight = 297
             end
           end
         end

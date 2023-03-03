@@ -105,6 +105,7 @@ type
     procedure btnVoltarImagemSolucaoClick(Sender: TObject);
     procedure pnlImagensSolucaoClick(Sender: TObject);
     procedure btnVerImagensSolucaoClick(Sender: TObject);
+    procedure rdbtnFiltroPesquisaProblemasClick(Sender: TObject);
   private
     procedure PreencheCBModulos;
     { Private declarations }
@@ -157,34 +158,29 @@ end;
 procedure TformPrincipal.edtPesquisaProblemaChange(Sender: TObject);
 begin
   if rdbtnFiltroPesquisaProblemas.ItemIndex = 0 then
-  begin
-    with Suporte.Connection.Connection.connection.qProblemas do
     begin
-      close;
-      sql.Clear;
-      Sql.Add('select * from problemas where pr_problema like :ParamProblema');
-      ParamByName('ParamProblema').AsString := '%' + edtPesquisaProblema.Text + '%';
-      Open;
+      with Suporte.Connection.Connection.connection.qProblemas do
+      begin
+        close;
+        sql.Clear;
+        Sql.Add('select * from problemas where pr_problema like :ParamProblema');
+        ParamByName('ParamProblema').AsString := '%' + edtPesquisaProblema.Text + '%';
+        Open;
+      end;
     end;
-  end;
 
   if rdbtnFiltroPesquisaProblemas.ItemIndex = 1 then
-  begin
-    with Suporte.Connection.Connection.connection.qProblemas do
     begin
-      close;
-      sql.Clear;
-      Sql.Add('select * from problemas where pr_problema like :ParamProblema and pr_modulo = :ParamProblema1');
-      ParamByName('ParamProblema').AsString := '%' + edtPesquisaProblema.Text + '%';
-      ParamByName('ParamProblema1').AsString := gridModulos.Columns[0].Field.Value;
-      Open;
+      with Suporte.Connection.Connection.connection.qProblemas do
+      begin
+        close;
+        sql.Clear;
+        Sql.Add('select * from problemas where pr_problema like :ParamProblema and pr_modulo = :ParamProblema1');
+        ParamByName('ParamProblema').AsString := '%' + edtPesquisaProblema.Text + '%';
+        ParamByName('ParamProblema1').AsString := gridModulos.Columns[0].Field.Value;
+        Open;
+      end;
     end;
-  end;
-
-  if edtPesquisaProblema.Text = '' then
-  begin
-    AtualizaGridProblemas;
-  end;
 end;
 
 procedure TformPrincipal.FormCreate(Sender: TObject);
@@ -213,16 +209,27 @@ end;
 procedure TformPrincipal.AtualizaGridProblemas;
 begin
   if Suporte.Connection.Connection.connection.qModulos.State in [dsBrowse] then
-  begin
-    with Suporte.Connection.Connection.connection.qProblemas do
-    begin
-      close;
-      sql.Clear;
-      Sql.Add('select * from problemas where pr_modulo = :ParamModulo');
-      ParamByName('ParamModulo').AsString := gridModulos.Columns[0].Field.Value;
-      Open;
-    end;
-  end;
+    if rdbtnFiltroPesquisaProblemas.ItemIndex = 1 then
+      begin
+        with Suporte.Connection.Connection.connection.qProblemas do
+        begin
+          close;
+          sql.Clear;
+          Sql.Add('select * from problemas where pr_modulo = :ParamModulo');
+          ParamByName('ParamModulo').AsString := gridModulos.Columns[0].Field.Value;
+          Open;
+        end;
+      end
+    else
+      begin
+        with Suporte.Connection.Connection.connection.qProblemas do
+        begin
+          close;
+          sql.Clear;
+          Sql.Add('select * from problemas');
+          Open;
+        end;
+      end;
 end;
 
 procedure TformPrincipal.PreencheCBModulos;
@@ -241,6 +248,34 @@ begin
     begin
       cbModulos.items.add(Suporte.Connection.Connection.connection.qComboModulos['mo_nome']);
       Next;
+    end;
+  end;
+end;
+
+procedure TformPrincipal.rdbtnFiltroPesquisaProblemasClick(Sender: TObject);
+begin
+  if rdbtnFiltroPesquisaProblemas.ItemIndex = 0 then
+  begin
+    with Suporte.Connection.Connection.connection.qProblemas do
+    begin
+      close;
+      sql.Clear;
+      Sql.Add('select * from problemas');
+      Open;
+      pnlBodyModulos.Enabled := False;
+    end;
+  end;
+
+  if rdbtnFiltroPesquisaProblemas.ItemIndex = 1 then
+  begin
+    pnlBodyModulos.Enabled := True;
+    with Suporte.Connection.Connection.connection.qProblemas do
+    begin
+      close;
+      sql.Clear;
+      Sql.Add('select * from problemas where pr_modulo = :ParamModulo');
+      ParamByName('ParamModulo').AsString := gridModulos.Columns[0].Field.Value;
+      Open;
     end;
   end;
 end;

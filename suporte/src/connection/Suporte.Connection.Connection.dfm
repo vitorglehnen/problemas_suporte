@@ -24,7 +24,9 @@ object dmConnection: TdmConnection
       'Server=127.0.0.1'
       'Port=3050'
       'CharacterSet=WIN1252'
-      'Database=C:\Problemas Suporte\data\DBSUPORTE.FDB'
+      
+        'Database=C:\Users\vitor.lehnen\Desktop\problemas_suporte\data\DB' +
+        'SUPORTE.FDB'
       'DriverID=FB')
     Connected = True
     LoginPrompt = False
