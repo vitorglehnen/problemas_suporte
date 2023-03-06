@@ -46,7 +46,9 @@ object dmConnection: TdmConnection
     AfterInsert = qProblemasAfterInsert
     BeforeEdit = qProblemasBeforeEdit
     BeforePost = qProblemasBeforePost
+    AfterPost = qProblemasAfterPost
     BeforeCancel = qProblemasBeforeCancel
+    AfterDelete = qProblemasAfterDelete
     AfterScroll = qProblemasAfterScroll
     Connection = conDBSuporte
     Left = 328
@@ -97,5 +99,53 @@ object dmConnection: TdmConnection
     VendorLib = 'C:\Program Files (x86)\Firebird\Firebird_2_5\bin\fbclient.dll'
     Left = 24
     Top = 80
+  end
+  object qContaRegistros: TFDQuery
+    Active = True
+    Connection = conDBSuporte
+    SQL.Strings = (
+      'select * from problemas')
+    Left = 328
+    Top = 192
+    object qContaRegistrosPR_TITULO: TStringField
+      FieldName = 'PR_TITULO'
+      Origin = 'PR_TITULO'
+      Required = True
+      Size = 75
+    end
+    object qContaRegistrosPR_MODULO: TStringField
+      FieldName = 'PR_MODULO'
+      Origin = 'PR_MODULO'
+      Required = True
+      Size = 35
+    end
+    object qContaRegistrosPR_PROBLEMA: TStringField
+      FieldName = 'PR_PROBLEMA'
+      Origin = 'PR_PROBLEMA'
+      Required = True
+      Size = 1500
+    end
+    object qContaRegistrosPR_SOLUCAO: TStringField
+      FieldName = 'PR_SOLUCAO'
+      Origin = 'PR_SOLUCAO'
+      Required = True
+      Size = 1500
+    end
+    object qContaRegistrosPR_CHAMADO: TIntegerField
+      FieldName = 'PR_CHAMADO'
+      Origin = 'PR_CHAMADO'
+    end
+    object qContaRegistrosPR_DATA: TDateField
+      FieldName = 'PR_DATA'
+      Origin = 'PR_DATA'
+    end
+    object qContaRegistrosPR_PRIMG: TBlobField
+      FieldName = 'PR_PRIMG'
+      Origin = 'PR_PRIMG'
+    end
+    object qContaRegistrosPR_SOLUCAOIMG: TBlobField
+      FieldName = 'PR_SOLUCAOIMG'
+      Origin = 'PR_SOLUCAOIMG'
+    end
   end
 end

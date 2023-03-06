@@ -63,8 +63,23 @@ object formPrincipal: TformPrincipal
             Font.Style = [fsBold]
             ParentFont = False
             Layout = tlCenter
-            ExplicitWidth = 79
-            ExplicitHeight = 18
+            ExplicitLeft = -2
+            ExplicitTop = -4
+          end
+          object lblTotalDeProblemas: TLabel
+            Left = 6
+            Top = 6
+            Width = 95
+            Height = 12
+            Caption = 'Total de problemas: '
+            Color = clMedGray
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBtnText
+            Font.Height = -9
+            Font.Name = 'Segoe UI Light'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
           end
           object pnlBotoesProblemas: TPanel
             Left = 1
@@ -125,7 +140,9 @@ object formPrincipal: TformPrincipal
             Height = 123
             Align = alBottom
             TabOrder = 1
-            object Label4: TLabel
+            ExplicitLeft = 4
+            ExplicitTop = 98
+            object lblPesquisa: TLabel
               Left = 17
               Top = 6
               Width = 42
@@ -138,6 +155,7 @@ object formPrincipal: TformPrincipal
               Width = 200
               Height = 21
               TabStop = False
+              CharCase = ecUpperCase
               TabOrder = 0
               OnChange = edtPesquisaProblemaChange
             end
@@ -173,10 +191,9 @@ object formPrincipal: TformPrincipal
             Align = alClient
             BorderStyle = bsNone
             DataSource = dmConnection.dsProblemas
-            DrawingStyle = gdsGradient
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -14
+            Font.Height = -12
             Font.Name = 'Tahoma'
             Font.Style = []
             Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -192,7 +209,6 @@ object formPrincipal: TformPrincipal
               item
                 Expanded = False
                 FieldName = 'PR_TITULO'
-                Title.Alignment = taCenter
                 Title.Caption = 'T'#237'tulo'
                 Title.Font.Charset = DEFAULT_CHARSET
                 Title.Font.Color = clWindowText
@@ -298,14 +314,14 @@ object formPrincipal: TformPrincipal
             TabOrder = 1
             object lblPesquisaModulos: TLabel
               Left = 17
-              Top = 16
+              Top = 6
               Width = 42
               Height = 13
               Caption = 'Pesquisa'
             end
             object edtPesquisaModulo: TEdit
               Left = 17
-              Top = 35
+              Top = 25
               Width = 200
               Height = 21
               TabOrder = 0
@@ -329,13 +345,16 @@ object formPrincipal: TformPrincipal
             Height = 526
             Align = alClient
             BorderStyle = bsNone
+            Color = clWhite
             DataSource = dmConnection.dsModulos
-            DrawingStyle = gdsGradient
+            FixedColor = clSkyBlue
+            GradientEndColor = clWhite
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -14
             Font.Name = 'Tahoma'
             Font.Style = []
+            ImeMode = imSAlpha
             Options = [dgEditing, dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
             TabOrder = 0
@@ -350,7 +369,6 @@ object formPrincipal: TformPrincipal
               item
                 Expanded = False
                 FieldName = 'MO_NOME'
-                Title.Alignment = taCenter
                 Title.Caption = 'Nome'
                 Title.Font.Charset = DEFAULT_CHARSET
                 Title.Font.Color = clWindowText
@@ -370,7 +388,7 @@ object formPrincipal: TformPrincipal
       Width = 978
       Height = 747
       Align = alClient
-      ActiveCard = pnlImagensProblema
+      ActiveCard = pnlCadastroProblema
       TabOrder = 1
       object pnlCadastroProblema: TCard
         Left = 1
@@ -389,6 +407,8 @@ object formPrincipal: TformPrincipal
           BevelOuter = bvNone
           TabOrder = 0
           TabStop = True
+          ExplicitLeft = 2
+          ExplicitTop = 16
           object lblModuloProblema: TLabel
             Left = 33
             Top = 76
@@ -463,7 +483,7 @@ object formPrincipal: TformPrincipal
               Font.Style = [fsBold]
               ParentFont = False
             end
-            object Label1: TLabel
+            object lblNumeroChamado: TLabel
               Left = 528
               Top = 0
               Width = 105
@@ -481,6 +501,7 @@ object formPrincipal: TformPrincipal
               Top = 28
               Width = 401
               Height = 24
+              CharCase = ecUpperCase
               DataField = 'PR_TITULO'
               DataSource = dmConnection.dsProblemas
               Font.Charset = DEFAULT_CHARSET
@@ -576,7 +597,7 @@ object formPrincipal: TformPrincipal
             ParentFont = False
             TabOrder = 1
           end
-          object btAddImagemProblema: TButton
+          object btnAddImagemProblema: TButton
             Left = 536
             Top = 143
             Width = 123
@@ -589,7 +610,7 @@ object formPrincipal: TformPrincipal
             Font.Style = []
             ParentFont = False
             TabOrder = 5
-            OnClick = btAddImagemProblemaClick
+            OnClick = btnAddImagemProblemaClick
           end
           object btnAddImagemSolucao: TButton
             Left = 536
@@ -790,7 +811,7 @@ object formPrincipal: TformPrincipal
     end
   end
   object OpenDialog1: TOpenDialog
-    Left = 444
-    Top = 9
+    Left = 268
+    Top = 25
   end
 end

@@ -3,82 +3,113 @@ unit Suporte.View.Pages.Form.Main;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
-  Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.DBCtrls, FireDAC.Stan.Intf,
-  FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf,
-  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
-  FireDAC.Phys.MySQL, FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait,
-  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Buttons, Vcl.Mask,
-  Vcl.WinXPanels, Vcl.FileCtrl;
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Data.DB,
+  Vcl.Grids,
+  Vcl.DBGrids,
+  Vcl.ExtCtrls,
+  Vcl.StdCtrls,
+  Vcl.DBCtrls,
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Error,
+  FireDAC.UI.Intf,
+  FireDAC.Phys.Intf,
+  FireDAC.Stan.Def,
+  FireDAC.Stan.Pool,
+  FireDAC.Stan.Async,
+  FireDAC.Phys,
+  FireDAC.Phys.MySQL,
+  FireDAC.Phys.MySQLDef,
+  FireDAC.VCLUI.Wait,
+  FireDAC.Stan.Param,
+  FireDAC.DatS,
+  FireDAC.DApt.Intf,
+  FireDAC.DApt,
+  FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client,
+  Vcl.Buttons,
+  Vcl.Mask,
+  Vcl.WinXPanels,
+  Vcl.FileCtrl;
 
 type
   TformPrincipal = class(TForm)
-    pnlBodyProblemas: TPanel;
-    pnlTopProblemas: TPanel;
-    pnlGridProblemas: TPanel;
+
     gridProblemas: TDBGrid;
-    lblTituloProblemas: TLabel;
-    pnlBodyModulos: TPanel;
-    pnlTopModulos: TPanel;
-    lblTituloModulos: TLabel;
-    pnlGridModulos: TPanel;
     gridModulos: TDBGrid;
-    pnlBotoesProblemas: TPanel;
+    OpenDialog1: TOpenDialog;
+    mmDetalhesProblema: TDBMemo;
+    mmSolucao: TDBMemo;
+    cbModulos: TDBComboBox;
+    imgSolucao: TDBImage;
+    imgProblema: TDBImage;
     btnNovoProblema: TSpeedButton;
     btnSalvarProblema: TSpeedButton;
     btnExcluirProblema: TSpeedButton;
     btnCancelarProblema: TSpeedButton;
-    pnlBotoesModulos: TPanel;
     btnNovoModulo: TSpeedButton;
     btnSalvarModulo: TSpeedButton;
     btnExcluirModulo: TSpeedButton;
     btnCancelarModulo: TSpeedButton;
-    pnlPesquisaProblemas: TPanel;
-    pnlPesquisaModulos: TPanel;
-    edtPesquisaModulo: TEdit;
-    lblPesquisaModulos: TLabel;
-    edtPesquisaProblema: TEdit;
-    Label4: TLabel;
-    rdbtnFiltroPesquisaProblemas: TRadioGroup;
-    pnlPrincipal: TPanel;
-    pnlBodyModulosProblemas: TPanel;
-    OpenDialog1: TOpenDialog;
-    cardPanelProblemas: TCardPanel;
-    pnlCadastroProblema: TCard;
-    pnlImagensProblema: TCard;
-    pnlProblemas: TPanel;
+    lblTituloProblemas: TLabel;
+    lblTituloModulos: TLabel;
+    lblPesquisa: TLabel;
     lblModuloProblema: TLabel;
     lblDetalhesProblema: TLabel;
     lblSolucaoProblema: TLabel;
-    pnlTituloProblema: TPanel;
+    lblPesquisaModulos: TLabel;
     lblTituloProblema: TLabel;
     lblDataProblema: TLabel;
+    lblTotalDeProblemas: TLabel;
+    lblNumeroChamado: TLabel;
     edtTituloProblema: TDBEdit;
     edtHoraProblema: TDBEdit;
-    mmDetalhesProblema: TDBMemo;
-    mmSolucao: TDBMemo;
-    cbModulos: TDBComboBox;
-    btAddImagemProblema: TButton;
+    edtNumeroChamado: TDBEdit;
+    edtPesquisaModulo: TEdit;
+    edtPesquisaProblema: TEdit;
+    btnAddImagemProblema: TButton;
     btnAddImagemSolucao: TButton;
     btnVerImagens: TButton;
-    edtNumeroChamado: TDBEdit;
-    Label1: TLabel;
-    pnlImagensSolucao: TCard;
     btnVerImagensSolucao: TButton;
-    pnlMainImagemProblema: TPanel;
-    pnlTopImagensProblemas: TPanel;
     btnVoltarImagemProblema: TButton;
     btnRemoverImagemProblema: TButton;
+    btnRemoverImagemSolucao: TButton;
+    btnVoltarImagemSolucao: TButton;
+    rdbtnFiltroPesquisaProblemas: TRadioGroup;
+    pnlPrincipal: TPanel;
+    pnlBodyModulosProblemas: TPanel;
+    pnlCadastroProblema: TCard;
+    pnlImagensProblema: TCard;
+    pnlProblemas: TPanel;
+    pnlMainImagemProblema: TPanel;
+    pnlTopImagensProblemas: TPanel;
     pnlCenterImagemProblema: TPanel;
-    imgProblema: TDBImage;
     pnlMainImagemSolucao: TPanel;
     pnlTopImagemSolucao: TPanel;
     pnlCenterImagemSolucao: TPanel;
-    imgSolucao: TDBImage;
-    btnRemoverImagemSolucao: TButton;
-    btnVoltarImagemSolucao: TButton;
+    pnlBodyProblemas: TPanel;
+    pnlTopProblemas: TPanel;
+    pnlGridProblemas: TPanel;
+    pnlPesquisaProblemas: TPanel;
+    pnlPesquisaModulos: TPanel;
+    pnlImagensSolucao: TCard;
+    pnlBodyModulos: TPanel;
+    pnlTopModulos: TPanel;
+    pnlBotoesModulos: TPanel;
+    pnlBotoesProblemas: TPanel;
+    pnlGridModulos: TPanel;
+    pnlTituloProblema: TPanel;
+    cardPanelProblemas: TCardPanel;
+
     procedure btnNovoProblemaClick(Sender: TObject);
     procedure btnSalvarProblemaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -93,7 +124,7 @@ type
     procedure btnVerImagensClick(Sender: TObject);
     procedure btnVoltarImagemProblemaClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure btAddImagemProblemaClick(Sender: TObject);
+    procedure btnAddImagemProblemaClick(Sender: TObject);
     procedure btnAddImagemSolucaoClick(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
     procedure btnRemoverImagemProblemaClick(Sender: TObject);
@@ -106,8 +137,12 @@ type
     procedure pnlImagensSolucaoClick(Sender: TObject);
     procedure btnVerImagensSolucaoClick(Sender: TObject);
     procedure rdbtnFiltroPesquisaProblemasClick(Sender: TObject);
-  private
+    procedure ContaRegistrosProblemas;
+    procedure ConsultaProblemas;
     procedure PreencheCBModulos;
+    procedure ConsultaProblemasPorModulo;
+    procedure ConsultaModulos;
+  private
     { Private declarations }
   public
     { Public declarations }
@@ -123,6 +158,66 @@ uses
   jpeg,
   pngimage,
   Suporte.Connection.Connection;
+
+procedure TformPrincipal.ConsultaProblemas;
+begin
+  with Suporte.Connection.Connection.connection.qProblemas do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Add('select * from problemas where pr_titulo like :ParamProblema order by pr_titulo');
+    ParamByName('ParamProblema').AsString := '%' + edtPesquisaProblema.Text + '%';
+    Open;
+  end;
+end;
+
+procedure TformPrincipal.ConsultaProblemasPorModulo;
+begin
+  with Suporte.Connection.Connection.connection.qProblemas do
+  begin
+    close;
+    SQL.Clear;
+    SQL.Add('select * from problemas where pr_modulo = :ParamModulo and pr_titulo like :ParamPesquisa');
+    ParamByName('ParamModulo').AsString := gridModulos.Columns[0].Field.Value;
+    ParamByName('ParamPesquisa').AsString := '%' + edtPesquisaProblema.Text + '%';
+    Open;
+  end;
+end;
+
+procedure TformPrincipal.ConsultaModulos;
+begin
+  with Suporte.Connection.Connection.connection.qModulos do
+  begin
+    close;
+    sql.Clear;
+    Sql.Add('select * from modulos_problemas where mo_nome like :ParamModulo');
+    ParamByName('ParamModulo').AsString := '%' + edtPesquisaModulo.Text + '%';
+    Open;
+  end;
+end;
+
+procedure TformPrincipal.ContaRegistrosProblemas;
+var
+  registros : integer;
+begin
+  registros := 0;
+
+  with Suporte.Connection.Connection.connection.qContaRegistros do
+  begin
+    close;
+    Sql.Clear;
+    Sql.Add('Select * from problemas');
+    Open;
+
+    while not Suporte.Connection.Connection.connection.qContaRegistros.Eof  do
+    begin
+      registros := registros + 1;
+      next;
+    end;
+
+    lblTotalDeProblemas.Caption := 'Total de problemas: ' + IntToStr(registros);
+  end;
+end;
 
 procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
 begin
@@ -145,41 +240,19 @@ end;
 
 procedure TformPrincipal.edtPesquisaModuloChange(Sender: TObject);
 begin
-  with Suporte.Connection.Connection.connection.qModulos do
-  begin
-    close;
-    sql.Clear;
-    Sql.Add('select * from modulos_problemas where mo_nome like :ParamModulo');
-    ParamByName('ParamModulo').AsString := '%' + edtPesquisaModulo.Text + '%';
-    Open;
-  end;
+  ConsultaModulos;
 end;
 
 procedure TformPrincipal.edtPesquisaProblemaChange(Sender: TObject);
 begin
   if rdbtnFiltroPesquisaProblemas.ItemIndex = 0 then
     begin
-      with Suporte.Connection.Connection.connection.qProblemas do
-      begin
-        close;
-        sql.Clear;
-        Sql.Add('select * from problemas where pr_problema like :ParamProblema');
-        ParamByName('ParamProblema').AsString := '%' + edtPesquisaProblema.Text + '%';
-        Open;
-      end;
+      ConsultaProblemas;
     end;
 
   if rdbtnFiltroPesquisaProblemas.ItemIndex = 1 then
     begin
-      with Suporte.Connection.Connection.connection.qProblemas do
-      begin
-        close;
-        sql.Clear;
-        Sql.Add('select * from problemas where pr_problema like :ParamProblema and pr_modulo = :ParamProblema1');
-        ParamByName('ParamProblema').AsString := '%' + edtPesquisaProblema.Text + '%';
-        ParamByName('ParamProblema1').AsString := gridModulos.Columns[0].Field.Value;
-        Open;
-      end;
+      ConsultaProblemasPorModulo;
     end;
 end;
 
@@ -204,32 +277,15 @@ end;
 procedure TformPrincipal.FormShow(Sender: TObject);
 begin
   PreencheCBModulos;
+  ContaRegistrosProblemas;
 end;
 
 procedure TformPrincipal.AtualizaGridProblemas;
 begin
   if Suporte.Connection.Connection.connection.qModulos.State in [dsBrowse] then
-    if rdbtnFiltroPesquisaProblemas.ItemIndex = 1 then
-      begin
-        with Suporte.Connection.Connection.connection.qProblemas do
-        begin
-          close;
-          sql.Clear;
-          Sql.Add('select * from problemas where pr_modulo = :ParamModulo');
-          ParamByName('ParamModulo').AsString := gridModulos.Columns[0].Field.Value;
-          Open;
-        end;
-      end
-    else
-      begin
-        with Suporte.Connection.Connection.connection.qProblemas do
-        begin
-          close;
-          sql.Clear;
-          Sql.Add('select * from problemas');
-          Open;
-        end;
-      end;
+    begin
+      ConsultaProblemasPorModulo;
+    end;
 end;
 
 procedure TformPrincipal.PreencheCBModulos;
@@ -256,31 +312,22 @@ procedure TformPrincipal.rdbtnFiltroPesquisaProblemasClick(Sender: TObject);
 begin
   if rdbtnFiltroPesquisaProblemas.ItemIndex = 0 then
   begin
-    with Suporte.Connection.Connection.connection.qProblemas do
-    begin
-      close;
-      sql.Clear;
-      Sql.Add('select * from problemas');
-      Open;
-      pnlBodyModulos.Enabled := False;
-    end;
+    ConsultaProblemas;
+
+    pnlBodyModulos.Visible := False;
+    pnlBodyProblemas.Align := alClient;
   end;
 
   if rdbtnFiltroPesquisaProblemas.ItemIndex = 1 then
   begin
-    pnlBodyModulos.Enabled := True;
-    with Suporte.Connection.Connection.connection.qProblemas do
-    begin
-      close;
-      sql.Clear;
-      Sql.Add('select * from problemas where pr_modulo = :ParamModulo');
-      ParamByName('ParamModulo').AsString := gridModulos.Columns[0].Field.Value;
-      Open;
-    end;
+    ConsultaProblemasPorModulo;
+
+    pnlBodyModulos.Visible := True;
+    gridProblemas.Align := alLeft;
   end;
 end;
 
-procedure TformPrincipal.btAddImagemProblemaClick(Sender: TObject);
+procedure TformPrincipal.btnAddImagemProblemaClick(Sender: TObject);
 begin
   Suporte.Connection.Connection.connection.qProblemas.Edit;
 

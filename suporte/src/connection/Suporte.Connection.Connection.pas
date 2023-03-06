@@ -27,12 +27,23 @@ type
     qProblemasPR_DATA: TDateField;
     qProblemasPR_PRIMG: TBlobField;
     qProblemasPR_SOLUCAOIMG: TBlobField;
+    qContaRegistros: TFDQuery;
+    qContaRegistrosPR_TITULO: TStringField;
+    qContaRegistrosPR_MODULO: TStringField;
+    qContaRegistrosPR_PROBLEMA: TStringField;
+    qContaRegistrosPR_SOLUCAO: TStringField;
+    qContaRegistrosPR_CHAMADO: TIntegerField;
+    qContaRegistrosPR_DATA: TDateField;
+    qContaRegistrosPR_PRIMG: TBlobField;
+    qContaRegistrosPR_SOLUCAOIMG: TBlobField;
     procedure qProblemasAfterInsert(DataSet: TDataSet);
     procedure qProblemasBeforeCancel(DataSet: TDataSet);
     procedure qProblemasBeforeEdit(DataSet: TDataSet);
     procedure qProblemasBeforePost(DataSet: TDataSet);
     procedure qModulosAfterScroll(DataSet: TDataSet);
     procedure qProblemasAfterScroll(DataSet: TDataSet);
+    procedure qProblemasAfterPost(DataSet: TDataSet);
+    procedure qProblemasAfterDelete(DataSet: TDataSet);
   private
     { Private declarations }
     procedure InverteBotoesCrudProblemas;
@@ -68,10 +79,20 @@ begin
   formPrincipal.cardPanelProblemas.ActiveCard := formPrincipal.pnlCadastroProblema;
 end;
 
+procedure TdmConnection.qProblemasAfterDelete(DataSet: TDataSet);
+begin
+  formPrincipal.ContaRegistrosProblemas;
+end;
+
 procedure TdmConnection.qProblemasAfterInsert(DataSet: TDataSet);
 begin
   InverteBotoesCrudProblemas;
   formPrincipal.edtHoraProblema.Text := DateToStr(date);
+end;
+
+procedure TdmConnection.qProblemasAfterPost(DataSet: TDataSet);
+begin
+  formPrincipal.ContaRegistrosProblemas;
 end;
 
 procedure TdmConnection.qProblemasAfterScroll(DataSet: TDataSet);
