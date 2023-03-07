@@ -168,7 +168,7 @@ begin
     SQL.Add('select * from problemas where pr_titulo like :ParamProblema order by pr_titulo');
     ParamByName('ParamProblema').AsString := '%' + edtPesquisaProblema.Text + '%';
     Open;
-  end;
+    end;
 end;
 
 procedure TformPrincipal.ConsultaProblemasPorModulo;
@@ -316,6 +316,7 @@ begin
 
     pnlBodyModulos.Visible := False;
     pnlBodyProblemas.Align := alClient;
+    gridProblemas.Align := alClient;
   end;
 
   if rdbtnFiltroPesquisaProblemas.ItemIndex = 1 then

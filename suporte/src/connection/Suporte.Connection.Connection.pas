@@ -44,6 +44,7 @@ type
     procedure qProblemasAfterScroll(DataSet: TDataSet);
     procedure qProblemasAfterPost(DataSet: TDataSet);
     procedure qProblemasAfterDelete(DataSet: TDataSet);
+    procedure qModulosBeforeInsert(DataSet: TDataSet);
   private
     { Private declarations }
     procedure InverteBotoesCrudProblemas;
@@ -77,6 +78,11 @@ procedure TdmConnection.qModulosAfterScroll(DataSet: TDataSet);
 begin
   formPrincipal.AtualizaGridProblemas;
   formPrincipal.cardPanelProblemas.ActiveCard := formPrincipal.pnlCadastroProblema;
+end;
+
+procedure TdmConnection.qModulosBeforeInsert(DataSet: TDataSet);
+begin
+  formPrincipal.gridModulos.SetFocus;
 end;
 
 procedure TdmConnection.qProblemasAfterDelete(DataSet: TDataSet);

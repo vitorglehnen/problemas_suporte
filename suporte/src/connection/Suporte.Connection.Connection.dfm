@@ -9,6 +9,7 @@ object dmConnection: TdmConnection
   end
   object qModulos: TFDQuery
     Active = True
+    BeforeInsert = qModulosBeforeInsert
     AfterScroll = qModulosAfterScroll
     Connection = conDBSuporte
     SQL.Strings = (

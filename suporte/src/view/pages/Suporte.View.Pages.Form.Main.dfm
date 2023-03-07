@@ -63,8 +63,8 @@ object formPrincipal: TformPrincipal
             Font.Style = [fsBold]
             ParentFont = False
             Layout = tlCenter
-            ExplicitLeft = -2
-            ExplicitTop = -4
+            ExplicitWidth = 79
+            ExplicitHeight = 18
           end
           object lblTotalDeProblemas: TLabel
             Left = 6
@@ -140,8 +140,6 @@ object formPrincipal: TformPrincipal
             Height = 123
             Align = alBottom
             TabOrder = 1
-            ExplicitLeft = 4
-            ExplicitTop = 98
             object lblPesquisa: TLabel
               Left = 17
               Top = 6
@@ -407,8 +405,6 @@ object formPrincipal: TformPrincipal
           BevelOuter = bvNone
           TabOrder = 0
           TabStop = True
-          ExplicitLeft = 2
-          ExplicitTop = 16
           object lblModuloProblema: TLabel
             Left = 33
             Top = 76
@@ -562,6 +558,7 @@ object formPrincipal: TformPrincipal
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentFont = False
+            ScrollBars = ssVertical
             TabOrder = 2
           end
           object mmSolucao: TDBMemo
@@ -578,6 +575,7 @@ object formPrincipal: TformPrincipal
             Font.Style = []
             ParentFont = False
             ParentShowHint = False
+            ScrollBars = ssVertical
             ShowHint = False
             TabOrder = 3
           end
