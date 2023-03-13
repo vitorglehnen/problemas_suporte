@@ -188,10 +188,7 @@ object formPrincipal: TformPrincipal
             Height = 526
             Align = alClient
             BorderStyle = bsNone
-            Color = clWhite
             DataSource = dmConnection.dsProblemas
-            DrawingStyle = gdsGradient
-            GradientEndColor = clBtnFace
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -12
@@ -349,7 +346,7 @@ object formPrincipal: TformPrincipal
             Color = clWhite
             DataSource = dmConnection.dsModulos
             FixedColor = clSkyBlue
-            GradientEndColor = clBtnFace
+            GradientEndColor = clWhite
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -14
@@ -389,7 +386,7 @@ object formPrincipal: TformPrincipal
       Width = 978
       Height = 747
       Align = alClient
-      ActiveCard = pnlImagensSolucao
+      ActiveCard = pnlCadastroProblema
       TabOrder = 1
       object pnlCadastroProblema: TCard
         Left = 1
@@ -708,27 +705,6 @@ object formPrincipal: TformPrincipal
               TabOrder = 1
               OnClick = btnRemoverImagemProblemaClick
             end
-            object Panel1: TPanel
-              Left = 81
-              Top = 0
-              Width = 736
-              Height = 41
-              Align = alClient
-              BevelOuter = bvNone
-              Padding.Left = 150
-              Padding.Right = 150
-              TabOrder = 2
-              object btnImagemSolucao: TButton
-                Left = 150
-                Top = 0
-                Width = 436
-                Height = 41
-                Align = alClient
-                Caption = 'Imagem da solu'#231#227'o'
-                TabOrder = 0
-                OnClick = btnImagemSolucaoClick
-              end
-            end
           end
           object pnlCenterImagemProblema: TPanel
             Left = 30
@@ -748,8 +724,9 @@ object formPrincipal: TformPrincipal
               Color = clBtnFace
               DataField = 'PR_PRIMG'
               DataSource = dmConnection.dsProblemas
+              Proportional = True
+              Stretch = True
               TabOrder = 0
-              OnKeyPress = imgProblemaKeyPress
             end
           end
         end
@@ -796,33 +773,12 @@ object formPrincipal: TformPrincipal
             object btnVoltarImagemSolucao: TButton
               Left = 0
               Top = 0
-              Width = 81
+              Width = 75
               Height = 41
               Align = alLeft
               Caption = 'Voltar'
               TabOrder = 1
               OnClick = btnVoltarImagemSolucaoClick
-            end
-            object pnlTopCenterImagemSolucao: TPanel
-              Left = 81
-              Top = 0
-              Width = 736
-              Height = 41
-              Align = alClient
-              BevelOuter = bvNone
-              Padding.Left = 150
-              Padding.Right = 150
-              TabOrder = 2
-              object btnImagemProblema: TButton
-                Left = 150
-                Top = 0
-                Width = 436
-                Height = 41
-                Align = alClient
-                Caption = 'Imagem do problema'
-                TabOrder = 0
-                OnClick = btnImagemProblemaClick
-              end
             end
           end
           object pnlCenterImagemSolucao: TPanel
@@ -843,8 +799,9 @@ object formPrincipal: TformPrincipal
               Color = clBtnFace
               DataField = 'PR_SOLUCAOIMG'
               DataSource = dmConnection.dsProblemas
+              Proportional = True
+              Stretch = True
               TabOrder = 0
-              OnKeyPress = imgSolucaoKeyPress
             end
           end
         end

@@ -39,8 +39,7 @@ uses
   Vcl.Buttons,
   Vcl.Mask,
   Vcl.WinXPanels,
-  Vcl.FileCtrl,
-  Vcl.Clipbrd;
+  Vcl.FileCtrl;
 
 type
   TformPrincipal = class(TForm)
@@ -110,10 +109,6 @@ type
     pnlGridModulos: TPanel;
     pnlTituloProblema: TPanel;
     cardPanelProblemas: TCardPanel;
-    pnlTopCenterImagemSolucao: TPanel;
-    btnImagemProblema: TButton;
-    Panel1: TPanel;
-    btnImagemSolucao: TButton;
 
     procedure btnNovoProblemaClick(Sender: TObject);
     procedure btnSalvarProblemaClick(Sender: TObject);
@@ -147,10 +142,6 @@ type
     procedure PreencheCBModulos;
     procedure ConsultaProblemasPorModulo;
     procedure ConsultaModulos;
-    procedure btnImagemProblemaClick(Sender: TObject);
-    procedure btnImagemSolucaoClick(Sender: TObject);
-    procedure imgProblemaKeyPress(Sender: TObject; var Key: Char);
-    procedure imgSolucaoKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -240,20 +231,6 @@ begin
   if key = VK_RETURN then
     if Suporte.Connection.Connection.connection.qModulos.State = dsEdit then
       Suporte.Connection.Connection.connection.qModulos.Post;
-end;
-
-procedure TformPrincipal.imgProblemaKeyPress(Sender: TObject; var Key: Char);
-begin
-  if Key = ^V then
-    if Clipboard.HasFormat(cf_bitmap) then
-      imgProblema.Picture.Assign(Clipboard);
-end;
-
-procedure TformPrincipal.imgSolucaoKeyPress(Sender: TObject; var Key: Char);
-begin
-  if Key = ^V then
-    if Clipboard.HasFormat(cf_bitmap) then
-      imgSolucao.Picture.Assign(Clipboard);
 end;
 
 procedure TformPrincipal.pnlImagensSolucaoClick(Sender: TObject);
@@ -397,16 +374,6 @@ begin
     begin
       Suporte.Connection.Connection.connection.qProblemas.Delete;
     end;
-end;
-
-procedure TformPrincipal.btnImagemProblemaClick(Sender: TObject);
-begin
-  cardPanelProblemas.ActiveCard := pnlImagensProblema;
-end;
-
-procedure TformPrincipal.btnImagemSolucaoClick(Sender: TObject);
-begin
-  cardPanelProblemas.ActiveCard := pnlImagensSolucao;
 end;
 
 procedure TformPrincipal.btnNovoModuloClick(Sender: TObject);
