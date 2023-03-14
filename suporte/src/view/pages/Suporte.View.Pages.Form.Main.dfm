@@ -206,6 +206,7 @@ object formPrincipal: TformPrincipal
             TitleFont.Height = -11
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
+            OnDrawColumnCell = gridProblemasDrawColumnCell
             Columns = <
               item
                 Expanded = False
@@ -348,7 +349,7 @@ object formPrincipal: TformPrincipal
             BorderStyle = bsNone
             Color = clWhite
             DataSource = dmConnection.dsModulos
-            FixedColor = clSkyBlue
+            DrawingStyle = gdsGradient
             GradientEndColor = clBtnFace
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -365,6 +366,7 @@ object formPrincipal: TformPrincipal
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
             OnCellClick = gridModulosCellClick
+            OnDrawColumnCell = gridModulosDrawColumnCell
             OnKeyDown = gridModulosKeyDown
             Columns = <
               item

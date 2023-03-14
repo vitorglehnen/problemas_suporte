@@ -151,10 +151,6 @@ type
     procedure btnImagemSolucaoClick(Sender: TObject);
     procedure imgProblemaKeyPress(Sender: TObject; var Key: Char);
     procedure imgSolucaoKeyPress(Sender: TObject; var Key: Char);
-    procedure gridProblemasDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure gridModulosDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -238,38 +234,12 @@ begin
   AtualizaGridProblemas;
 end;
 
-procedure TformPrincipal.gridModulosDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-begin
-  if State = [] then
-  begin
-    if Suporte.Connection.Connection.connection.qModulos.RecNo mod 2 = 1 then
-      gridModulos.Canvas.Brush.Color := clBtnFace
-    else
-      gridModulos.Canvas.Brush.Color := clWhite;
-  end;
-  gridModulos.DefaultDrawColumnCell(Rect, DataCol, Column, State);
-end;
-
 procedure TformPrincipal.gridModulosKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if key = VK_RETURN then
     if Suporte.Connection.Connection.connection.qModulos.State = dsEdit then
       Suporte.Connection.Connection.connection.qModulos.Post;
-end;
-
-procedure TformPrincipal.gridProblemasDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-begin
-  if State = [] then
-  begin
-    if Suporte.Connection.Connection.connection.qProblemas.RecNo mod 2 = 1 then
-      gridProblemas.Canvas.Brush.Color := clBtnFace
-    else
-      gridProblemas.Canvas.Brush.Color := clWhite;
-  end;
-  gridProblemas.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
 procedure TformPrincipal.imgProblemaKeyPress(Sender: TObject; var Key: Char);
