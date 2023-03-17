@@ -8,7 +8,9 @@ uses
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.UI.Intf,
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys, FireDAC.Phys.MySQL,
   FireDAC.Phys.MySQLDef, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
-  FireDAC.Comp.DataSet, FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.Phys.IBBase;
+  FireDAC.Comp.DataSet, FireDAC.Phys.FB, FireDAC.Phys.FBDef,
+  FireDAC.Phys.IBBase,
+  System.IniFiles;
 
 type
   TdmConnection = class(TDataModule)
@@ -45,6 +47,7 @@ type
     procedure qProblemasAfterPost(DataSet: TDataSet);
     procedure qProblemasAfterDelete(DataSet: TDataSet);
     procedure qModulosBeforeInsert(DataSet: TDataSet);
+    procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
     procedure InverteBotoesCrudProblemas;
@@ -53,7 +56,10 @@ type
   end;
 
 var
-  connection : TdmConnection;
+  Connection: TdmConnection;
+
+const
+  ARQ_INI = 'Connect.ini';
 
 implementation
 
@@ -61,23 +67,44 @@ uses
   Suporte.View.Pages.Form.Main;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
-
 {$R *.dfm}
-
 { TdmConnection }
+
+procedure TdmConnection.DataModuleCreate(Sender: TObject);
+var
+  ArqINI: TIniFile;
+begin
+  if not FileExists
+    ('C:\Users\vitor.lehnen\Desktop\problemas_suporte\suporte\Win32\Debug\Connect.ini')
+  then
+  begin
+    ArqINI := TIniFile.Create(ExtractFilePath(ParamStr(0)) + ARQ_INI);
+    try
+      ArqINI.WriteString('Conexão', 'CaminhoDoBanco', 'C:\Problemas Suporte')
+    finally
+      ArqINI.Free;
+    end;
+  end;
+
+end;
 
 procedure TdmConnection.InverteBotoesCrudProblemas;
 begin
-  formPrincipal.btnNovoProblema.Enabled := not formPrincipal.btnNovoProblema.Enabled;
-  formPrincipal.btnExcluirProblema.Enabled := not formPrincipal.btnExcluirProblema.Enabled;
-  formPrincipal.btnSalvarProblema.Enabled := not formPrincipal.btnSalvarProblema.Enabled;
-  formPrincipal.btnCancelarProblema.Enabled := not formPrincipal.btnCancelarProblema.Enabled;
+  formPrincipal.btnNovoProblema.Enabled :=
+    not formPrincipal.btnNovoProblema.Enabled;
+  formPrincipal.btnExcluirProblema.Enabled :=
+    not formPrincipal.btnExcluirProblema.Enabled;
+  formPrincipal.btnSalvarProblema.Enabled :=
+    not formPrincipal.btnSalvarProblema.Enabled;
+  formPrincipal.btnCancelarProblema.Enabled :=
+    not formPrincipal.btnCancelarProblema.Enabled;
 end;
 
 procedure TdmConnection.qModulosAfterScroll(DataSet: TDataSet);
 begin
   formPrincipal.AtualizaGridProblemas;
-  formPrincipal.cardPanelProblemas.ActiveCard := formPrincipal.pnlCadastroProblema;
+  formPrincipal.cardPanelProblemas.ActiveCard :=
+    formPrincipal.pnlCadastroProblema;
 end;
 
 procedure TdmConnection.qModulosBeforeInsert(DataSet: TDataSet);
@@ -103,7 +130,8 @@ end;
 
 procedure TdmConnection.qProblemasAfterScroll(DataSet: TDataSet);
 begin
-  formPrincipal.cardPanelProblemas.ActiveCard := formPrincipal.pnlCadastroProblema;
+  formPrincipal.cardPanelProblemas.ActiveCard :=
+    formPrincipal.pnlCadastroProblema;
 end;
 
 procedure TdmConnection.qProblemasBeforeCancel(DataSet: TDataSet);
@@ -122,6 +150,3 @@ begin
 end;
 
 end.
-
-
-

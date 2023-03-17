@@ -197,7 +197,7 @@ object formPrincipal: TformPrincipal
             Font.Height = -12
             Font.Name = 'Tahoma'
             Font.Style = []
-            Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+            Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
             ReadOnly = True
             TabOrder = 0

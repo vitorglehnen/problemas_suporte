@@ -40,7 +40,7 @@ uses
   Vcl.Mask,
   Vcl.WinXPanels,
   Vcl.FileCtrl,
-  Vcl.Clipbrd;
+  Vcl.Clipbrd, Connection;
 
 type
   TformPrincipal = class(TForm)
@@ -157,78 +157,103 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
+
   public
     { Public declarations }
   end;
 
 var
   formPrincipal: TformPrincipal;
+  aConnection: TdmConnection;
 
 implementation
 {$R *.dfm}
 
 uses
   jpeg,
-  pngimage,
-  Suporte.Connection.Connection;
+  pngimage;
 
 procedure TformPrincipal.ConsultaProblemas;
 begin
-  with Suporte.Connection.Connection.connection.qProblemas do
-  begin
-    Close;
-    SQL.Clear;
-    SQL.Add('select * from problemas where pr_titulo like :ParamProblema order by pr_titulo');
-    ParamByName('ParamProblema').AsString := '%' + edtPesquisaProblema.Text + '%';
-    Open;
+  aConnection.Create;
+  try
+    with aConnection.qProblemas do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('select * from problemas where pr_titulo like :ParamProblema order by pr_titulo');
+      ParamByName('ParamProblema').AsString := '%' + edtPesquisaProblema.Text + '%';
+      Open;
     end;
+  finally
+    aConnection.Free;
+  end;
+
 end;
 
 procedure TformPrincipal.ConsultaProblemasPorModulo;
 begin
-  with Suporte.Connection.Connection.connection.qProblemas do
-  begin
-    close;
-    SQL.Clear;
-    SQL.Add('select * from problemas where pr_modulo = :ParamModulo and pr_titulo like :ParamPesquisa');
-    ParamByName('ParamModulo').AsString := gridModulos.Columns[0].Field.Value;
-    ParamByName('ParamPesquisa').AsString := '%' + edtPesquisaProblema.Text + '%';
-    Open;
+  aConnection.Create;
+
+  try
+    with aConnection.qProblemas do
+    begin
+      close;
+      SQL.Clear;
+      SQL.Add('select * from problemas where pr_modulo = :ParamModulo and pr_titulo like :ParamPesquisa');
+      ParamByName('ParamModulo').AsString := gridModulos.Columns[0].Field.Value;
+      ParamByName('ParamPesquisa').AsString := '%' + edtPesquisaProblema.Text + '%';
+      Open;
+    end;
+  finally
+    aConnection.Free;
   end;
+
 end;
 
 procedure TformPrincipal.ConsultaModulos;
 begin
-  with Suporte.Connection.Connection.connection.qModulos do
-  begin
-    close;
-    sql.Clear;
-    Sql.Add('select * from modulos_problemas where mo_nome like :ParamModulo');
-    ParamByName('ParamModulo').AsString := '%' + edtPesquisaModulo.Text + '%';
-    Open;
+  aConnection.Create;
+
+  try
+    with aConnection.qModulos do
+    begin
+      close;
+      sql.Clear;
+      Sql.Add('select * from modulos_problemas where mo_nome like :ParamModulo');
+      ParamByName('ParamModulo').AsString := '%' + edtPesquisaModulo.Text + '%';
+      Open;
+    end;
+  finally
+    aConnection.Free;
   end;
 end;
 
 procedure TformPrincipal.ContaRegistrosProblemas;
 var
-  registros : integer;
+  registros: integer;
 begin
   registros := 0;
+  aConnection.Create;
 
-  with Suporte.Connection.Connection.connection.qContaRegistros do
-  begin
-    close;
-    Sql.Clear;
-    Sql.Add('Select * from problemas');
-    Open;
-
-    while not Suporte.Connection.Connection.connection.qContaRegistros.Eof  do
+  try
+    with aConnection.qContaRegistros do
     begin
-      registros := registros + 1;
-      next;
-    end;
+      close;
+      Sql.Clear;
+      Sql.Add('Select * from problemas');
+      Open;
 
-    lblTotalDeProblemas.Caption := 'Total de problemas: ' + IntToStr(registros);
+      while not Eof do
+      begin
+        registros := registros + 1;
+        next;
+      end;
+
+      lblTotalDeProblemas.Caption := 'Total de problemas: ' + IntToStr(registros);
+    end;
+  finally
+    aConnection.Free;
   end;
 end;
 
@@ -241,35 +266,54 @@ end;
 procedure TformPrincipal.gridModulosDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  if State = [] then
-  begin
-    if Suporte.Connection.Connection.connection.qModulos.RecNo mod 2 = 1 then
-      gridModulos.Canvas.Brush.Color := clBtnFace
-    else
-      gridModulos.Canvas.Brush.Color := clWhite;
-  end;
+  aConnection.Create;
+
+  try
+    if State = [] then
+    begin
+      if aConnection.qModulos.RecNo mod 2 = 1 then
+        gridModulos.Canvas.Brush.Color := clBtnFace
+      else
+        gridModulos.Canvas.Brush.Color := clWhite;
+    end;
+
   gridModulos.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  finally
+    aConnection.Create;
+  end;
 end;
 
 procedure TformPrincipal.gridModulosKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  if key = VK_RETURN then
-    if Suporte.Connection.Connection.connection.qModulos.State = dsEdit then
-      Suporte.Connection.Connection.connection.qModulos.Post;
+  aConnection.Create;
+
+  try
+    if key = VK_RETURN then
+      if aConnection.qModulos.State = dsEdit then
+        aConnection.qModulos.Post;
+  finally
+    aConnection.Free;
+  end;
 end;
 
 procedure TformPrincipal.gridProblemasDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  if State = [] then
-  begin
-    if Suporte.Connection.Connection.connection.qProblemas.RecNo mod 2 = 1 then
-      gridProblemas.Canvas.Brush.Color := clBtnFace
-    else
-      gridProblemas.Canvas.Brush.Color := clWhite;
+  aConnection.Create;
+
+  try
+    if State = [] then
+    begin
+      if aConnection.qProblemas.RecNo mod 2 = 1 then
+        gridProblemas.Canvas.Brush.Color := clBtnFace
+      else
+        gridProblemas.Canvas.Brush.Color := clWhite;
+    end;
+    gridProblemas.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  finally
+    aConnection.Free;
   end;
-  gridProblemas.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
 procedure TformPrincipal.imgProblemaKeyPress(Sender: TObject; var Key: Char);
@@ -311,19 +355,31 @@ end;
 
 procedure TformPrincipal.FormCreate(Sender: TObject);
 begin
-  cardPanelProblemas.ActiveCard := pnlCadastroProblema;
+  aConnection.Create;
+
+  try
+    cardPanelProblemas.ActiveCard := pnlCadastroProblema;
+  finally
+    aConnection.Free;
+  end;
 end;
 
 procedure TformPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  if key = VK_F4 then
-    Suporte.Connection.Connection.connection.qProblemas.Post;
+  aConnection.Create;
 
-  if key = VK_F3 then
-  begin
-    Suporte.Connection.Connection.connection.qProblemas.Insert;
-    edtTituloProblema.SetFocus;
+  try
+    if key = VK_F4 then
+      aConnection.qProblemas.Post;
+
+    if key = VK_F3 then
+    begin
+      aConnection.qProblemas.Insert;
+      edtTituloProblema.SetFocus;
+    end;
+  finally
+    aConnection.Free;
   end;
 end;
 
@@ -335,29 +391,38 @@ end;
 
 procedure TformPrincipal.AtualizaGridProblemas;
 begin
-  if Suporte.Connection.Connection.connection.qModulos.State in [dsBrowse] then
-    begin
+  aConnection.Create;
+
+  try
+    if aConnection.qModulos.State in [dsBrowse] then
       ConsultaProblemasPorModulo;
-    end;
+  finally
+    aConnection.Free;
+  end;
 end;
 
 procedure TformPrincipal.PreencheCBModulos;
 begin
+  aConnection.Create;
   cbModulos.Clear;
 
-  with Suporte.Connection.Connection.connection.qComboModulos do
-  begin
-    Close;
-    SQL.Clear;
-    SQL.ADD('Select * from modulos_problemas');
-    Open;
-    First;
-
-    while not Suporte.Connection.Connection.connection.qComboModulos.Eof do
+  try
+    with aConnection.qComboModulos do
     begin
-      cbModulos.items.add(Suporte.Connection.Connection.connection.qComboModulos['mo_nome']);
+      Close;
+      SQL.Clear;
+      SQL.ADD('Select * from modulos_problemas');
+      Open;
+      First;
+    end;
+
+    while not aConnection.qComboModulos.Eof do
+    begin
+      cbModulos.items.add(aConnection.qComboModulos['mo_nome']);
       Next;
     end;
+  finally
+    aConnection.Free;
   end;
 end;
 
@@ -383,50 +448,83 @@ end;
 
 procedure TformPrincipal.btnAddImagemProblemaClick(Sender: TObject);
 begin
-  Suporte.Connection.Connection.connection.qProblemas.Edit;
+  aConnection.Create;
 
-  if OpenDialog1.Execute then
-  begin
-    imgProblema.Picture.LoadFromFile(OpenDialog1.FileName);
+  try
+    aConnection.qProblemas.Edit;
+
+    if OpenDialog1.Execute then
+    begin
+      imgProblema.Picture.LoadFromFile(OpenDialog1.FileName);
+    end;
+  finally
+    aConnection.Free;
   end;
 end;
 
 procedure TformPrincipal.btnAddImagemSolucaoClick(Sender: TObject);
 begin
-  Suporte.Connection.Connection.connection.qProblemas.Edit;
+  aConnection.Create;
+  try
+    aConnection.qProblemas.Edit;
 
-  if OpenDialog1.Execute then
-  begin
-    imgSolucao.Picture.LoadFromFile(OpenDialog1.FileName);
+    if OpenDialog1.Execute then
+    begin
+      imgSolucao.Picture.LoadFromFile(OpenDialog1.FileName);
+    end;
+  finally
+    aConnection.Free;
   end;
+
 end;
 
 procedure TformPrincipal.btnCancelarModuloClick(Sender: TObject);
 begin
-  Suporte.Connection.Connection.connection.qModulos.Cancel;
+  aConnection.Create;
+
+  try
+    aConnection.qModulos.Cancel;
+  finally
+    aConnection.Free;
+  end;
+
 end;
 
 procedure TformPrincipal.btnCancelarProblemaClick(Sender: TObject);
 begin
-  Suporte.Connection.Connection.connection.qProblemas.Cancel;
+  aConnection.Create;
+
+  try
+    aConnection.qProblemas.Cancel;
+  finally
+    aConnection.Free;
+  end;
 end;
 
 procedure TformPrincipal.btnExcluirModuloClick(Sender: TObject);
 begin
-  if Application.MessageBox('Deseja excluir este módulo?', 'Excluir',
+  aConnection.Create;
+
+  try
+    if Application.MessageBox('Deseja excluir este módulo?', 'Excluir',
     + MB_ICONQUESTION + MB_YESNO) = MrYes then
-    begin
-      Suporte.Connection.Connection.connection.qModulos.Delete;
-    end;
+      aConnection.qModulos.Delete;
+  finally
+    aConnection.Free;
+  end;
 end;
 
 procedure TformPrincipal.btnExcluirProblemaClick(Sender: TObject);
 begin
-   if Application.MessageBox('Deseja excluir este problema?', 'Excluir',
+  aConnection.Create;
+
+  try
+    if Application.MessageBox('Deseja excluir este problema?', 'Excluir',
     + MB_ICONQUESTION + MB_YESNO) = MrYes then
-    begin
-      Suporte.Connection.Connection.connection.qProblemas.Delete;
-    end;
+      aConnection.qProblemas.Delete;
+  finally
+    aConnection.Free;
+  end;
 end;
 
 procedure TformPrincipal.btnImagemProblemaClick(Sender: TObject);
@@ -441,38 +539,74 @@ end;
 
 procedure TformPrincipal.btnNovoModuloClick(Sender: TObject);
 begin
-  Suporte.Connection.Connection.connection.qModulos.Insert;
+  aConnection.Create;
+
+  try
+    aConnection.qModulos.Insert;
+  finally
+    aConnection.Free;
+  end;
 end;
 
 procedure TformPrincipal.btnNovoProblemaClick(Sender: TObject);
 begin
-  Suporte.Connection.Connection.Connection.qProblemas.Insert;
+  aConnection.Create;
+
+  try
+    aConnection.qProblemas.Insert;
+  finally
+    aConnection.Free;
+  end;
+
   PreencheCBModulos;
   edtTituloProblema.SetFocus;
 end;
 
 procedure TformPrincipal.btnRemoverImagemProblemaClick(Sender: TObject);
 begin
-  Suporte.Connection.Connection.connection.qProblemas.Edit;
+  aConnection.Create;
+
+  try
+    aConnection.qProblemas.Edit;
+  finally
+    aConnection.Free;
+  end;
 
   imgProblema.Picture := nil;
 end;
 
 procedure TformPrincipal.btnRemoverImagemSolucaoClick(Sender: TObject);
 begin
-  Suporte.Connection.Connection.connection.qProblemas.Edit;
+  aConnection.Create;
+  try
+    aConnection.qProblemas.Edit;
+  finally
+    aConnection.Free;
+  end;
 
   imgSolucao.Picture := nil;
 end;
 
 procedure TformPrincipal.btnSalvarModuloClick(Sender: TObject);
 begin
-  Suporte.Connection.Connection.connection.qModulos.Post;
+  aConnection.Create;
+
+  try
+    aConnection.qModulos.Post;
+  finally
+    aConnection.Free;
+  end;
 end;
 
 procedure TformPrincipal.btnSalvarProblemaClick(Sender: TObject);
 begin
-  Suporte.Connection.Connection.Connection.qProblemas.Post;
+  aConnection.Create;
+
+  try
+    aConnection.qProblemas.Post;
+  finally
+    aConnection.Free;
+  end;
 end;
 
 procedure TformPrincipal.btnVerImagensClick(Sender: TObject);

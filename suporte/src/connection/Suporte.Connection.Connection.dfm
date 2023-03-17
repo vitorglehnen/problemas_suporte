@@ -1,5 +1,6 @@
 object dmConnection: TdmConnection
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
   Height = 483
   Width = 785
   object dsModulos: TDataSource

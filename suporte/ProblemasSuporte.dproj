@@ -105,8 +105,8 @@
             <Form>formPrincipal</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\connection\Suporte.Connection.Connection.pas">
-            <Form>dmConnection</Form>
+        <DCCReference Include="src\connection\Connection.pas">
+            <Form>TdmConnection</Form>
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
