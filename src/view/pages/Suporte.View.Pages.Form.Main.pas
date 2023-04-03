@@ -48,11 +48,6 @@ type
     gridProblemas: TDBGrid;
     gridModulos: TDBGrid;
     OpenDialog1: TOpenDialog;
-    mmDetalhesProblema: TDBMemo;
-    mmSolucao: TDBMemo;
-    cbModulos: TDBComboBox;
-    imgSolucao: TDBImage;
-    imgProblema: TDBImage;
     btnNovoProblema: TSpeedButton;
     btnSalvarProblema: TSpeedButton;
     btnExcluirProblema: TSpeedButton;
@@ -62,69 +57,56 @@ type
     btnExcluirModulo: TSpeedButton;
     btnCancelarModulo: TSpeedButton;
     lblTituloProblemas: TLabel;
-    lblTituloModulos: TLabel;
-    lblPesquisa: TLabel;
-    lblModuloProblema: TLabel;
-    lblDetalhesProblema: TLabel;
-    lblSolucaoProblema: TLabel;
-    lblPesquisaModulos: TLabel;
-    lblTituloProblema: TLabel;
-    lblDataProblema: TLabel;
+    lblTituloModulo: TLabel;
     lblTotalDeProblemas: TLabel;
-    lblNumeroChamado: TLabel;
-    edtTituloProblema: TDBEdit;
-    edtHoraProblema: TDBEdit;
-    edtNumeroChamado: TDBEdit;
-    edtPesquisaModulo: TEdit;
-    edtPesquisaProblema: TEdit;
-    btnAddImagemProblema: TButton;
-    btnAddImagemSolucao: TButton;
-    btnVerImagens: TButton;
-    btnVerImagensSolucao: TButton;
-    btnVoltarImagemProblema: TButton;
-    btnRemoverImagemProblema: TButton;
-    btnRemoverImagemSolucao: TButton;
-    btnVoltarImagemSolucao: TButton;
-    rdbtnFiltroPesquisaProblemas: TRadioGroup;
     pnlPrincipal: TPanel;
     pnlBodyModulosProblemas: TPanel;
     pnlCadastroProblema: TCard;
-    pnlImagensProblema: TCard;
     pnlProblemas: TPanel;
-    pnlMainImagemProblema: TPanel;
-    pnlTopImagensProblemas: TPanel;
-    pnlCenterImagemProblema: TPanel;
-    pnlMainImagemSolucao: TPanel;
-    pnlTopImagemSolucao: TPanel;
-    pnlCenterImagemSolucao: TPanel;
     pnlBodyProblemas: TPanel;
     pnlTopProblemas: TPanel;
     pnlGridProblemas: TPanel;
-    pnlPesquisaProblemas: TPanel;
-    pnlPesquisaModulos: TPanel;
-    pnlImagensSolucao: TCard;
+    pnlBodyPesqProblema: TPanel;
+    pnlBodyPesqModulo: TPanel;
     pnlBodyModulos: TPanel;
     pnlTopModulos: TPanel;
-    pnlBotoesModulos: TPanel;
-    pnlBotoesProblemas: TPanel;
+    pnlBotaoCrudModulo: TPanel;
+    pnlBotaoCrudProblema: TPanel;
     pnlGridModulos: TPanel;
-    pnlTituloProblema: TPanel;
     cardPanelProblemas: TCardPanel;
-    pnlTopCenterImagemSolucao: TPanel;
-    btnImagemProblema: TButton;
-    Panel1: TPanel;
-    btnImagemSolucao: TButton;
-    procedure btnVerImagensClick(Sender: TObject);
-    procedure btnVoltarImagemProblemaClick(Sender: TObject);
+    pnlPesqModulo: TPanel;
+    lblPesqModulo: TLabel;
+    edtPesqModulo: TEdit;
+    pnlPesqProblema: TPanel;
+    lblPesqProblema: TLabel;
+    edtPesqProblema: TEdit;
+    pnlFiltroPesqProblema: TPanel;
+    rdbtnFiltroPesqProblema: TRadioGroup;
+    cbFiltroPesqProblema: TComboBox;
+    pnlTopProblema: TPanel;
+    pnlTituloProblema: TPanel;
+    pnlDataProblema: TPanel;
+    pnlChamadoProblema: TPanel;
+    lblTituloProblema: TLabel;
+    edtTituloProblema: TEdit;
+    edtChamadoProblema: TEdit;
+    lblChamadoProblema: TLabel;
+    edtDataProblema: TEdit;
+    lblDataProblema: TLabel;
+    pnlBodyModuloProblema: TPanel;
+    pnlModuloProblema: TPanel;
+    lblModuloProblema: TLabel;
+    pnlBodyDetalhesProblema: TPanel;
+    pnlDetalhesProblema: TPanel;
+    lblDetalhesProblema: TLabel;
+    pnlBodySolucaoProblema: TPanel;
+    pnlSolucaoProblema: TPanel;
+    lblSolucaoProblema: TLabel;
+    cbModulo: TComboBox;
+    mmDetalhesProblema: TMemo;
+    mmSolucaoProblema: TMemo;
     procedure FormCreate(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
-    procedure btnVoltarImagemSolucaoClick(Sender: TObject);
-    procedure pnlImagensSolucaoClick(Sender: TObject);
-    procedure btnVerImagensSolucaoClick(Sender: TObject);
-    procedure btnImagemProblemaClick(Sender: TObject);
-    procedure btnImagemSolucaoClick(Sender: TObject);
-    procedure imgProblemaKeyPress(Sender: TObject; var Key: Char);
-    procedure imgSolucaoKeyPress(Sender: TObject; var Key: Char);
 
   private
     { Private declarations }
@@ -149,59 +131,9 @@ begin
   cardPanelProblemas.ActiveCard := pnlCadastroProblema;
 end;
 
-procedure TformPrincipal.imgProblemaKeyPress(Sender: TObject; var Key: Char);
-begin
-  if Key = ^V then
-    if Clipboard.HasFormat(cf_bitmap) then
-      imgProblema.Picture.Assign(Clipboard);
-end;
-
-procedure TformPrincipal.imgSolucaoKeyPress(Sender: TObject; var Key: Char);
-begin
-  if Key = ^V then
-    if Clipboard.HasFormat(cf_bitmap) then
-      imgSolucao.Picture.Assign(Clipboard);
-end;
-
-procedure TformPrincipal.pnlImagensSolucaoClick(Sender: TObject);
-begin
-  cardPanelProblemas.ActiveCard := pnlImagensSolucao;
-end;
-
 procedure TformPrincipal.FormCreate(Sender: TObject);
 begin
   cardPanelProblemas.ActiveCard := pnlCadastroProblema;
 
 end;
-
-procedure TformPrincipal.btnImagemProblemaClick(Sender: TObject);
-begin
-  cardPanelProblemas.ActiveCard := pnlImagensProblema;
-end;
-
-procedure TformPrincipal.btnImagemSolucaoClick(Sender: TObject);
-begin
-  cardPanelProblemas.ActiveCard := pnlImagensSolucao;
-end;
-
-procedure TformPrincipal.btnVerImagensClick(Sender: TObject);
-begin
-  cardPanelProblemas.ActiveCard := pnlImagensProblema;
-end;
-
-procedure TformPrincipal.btnVoltarImagemSolucaoClick(Sender: TObject);
-begin
-  cardPanelProblemas.ActiveCard := pnlCadastroProblema;
-end;
-
-procedure TformPrincipal.btnVerImagensSolucaoClick(Sender: TObject);
-begin
-  cardPanelProblemas.ActiveCard := pnlImagensSolucao;
-end;
-
-procedure TformPrincipal.btnVoltarImagemProblemaClick(Sender: TObject);
-begin
-  cardPanelProblemas.ActiveCard := pnlCadastroProblema;
-end;
-
 end.
