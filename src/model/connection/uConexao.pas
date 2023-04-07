@@ -5,10 +5,9 @@ interface
 uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, Data.DB, FireDAC.Comp.Client, FireDAC.Phys.MySQLDef,
-  FireDAC.Phys.FB, System.SysUtils, FireDAC.DApt, FireDAC.VCLUI.Wait;
+  FireDAC.Phys.FB, System.SysUtils, FireDAC.DApt, FireDAC.VCLUI.Wait, System.IniFiles, Vcl.Dialogs;
 
 type
-
   TConexao = class
     private
       FConn: TFDConnection;
@@ -21,7 +20,11 @@ type
 
       function CriarQuery: TFDQuery;
       function GetConn: TFDConnection;
+      procedure CriaConnectINI;
   end;
+
+const
+  ARQ_INI = 'Connect.ini';
 
 implementation
 
@@ -40,7 +43,26 @@ constructor TConexao.Create;
 begin
   FConn:= TFDConnection.Create(nil);
 
-  Self.ConfigConexao;
+  CriaConnectINI;
+  //Self.ConfigConexao;
+end;
+
+procedure TConexao.CriaConnectINI;
+var
+  ArqINI: TIniFile;
+begin
+  if not FileExists
+    ('C:\Problemas Suporte\')
+  then
+  begin
+    ArqINI := TIniFile.Create(ExtractFilePath(ParamStr(0)) + ARQ_INI);
+    try
+      ArqINI.WriteString('Conexão', 'CaminhoDoBanco', 'C:\Problemas Suporte\DBPROB.FDB');
+      ArqINI.WriteString('Conexão', 'DriverID', 'FB');
+    finally
+      ArqINI.Free;
+    end;
+  end;
 end;
 
 function TConexao.CriarQuery: TFDQuery;

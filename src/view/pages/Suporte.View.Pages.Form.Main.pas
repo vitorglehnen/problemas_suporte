@@ -103,8 +103,8 @@ type
     pnlSolucaoProblema: TPanel;
     lblSolucaoProblema: TLabel;
     cbModulo: TComboBox;
-    mmDetalhesProblema: TMemo;
     mmSolucaoProblema: TMemo;
+    mmDetalhesProblema: TMemo;
     procedure FormCreate(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
 
@@ -123,7 +123,7 @@ implementation
 
 uses
   jpeg,
-  pngimage;
+  pngimage, uConexao;
 
 
 procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
@@ -134,6 +134,6 @@ end;
 procedure TformPrincipal.FormCreate(Sender: TObject);
 begin
   cardPanelProblemas.ActiveCard := pnlCadastroProblema;
-
+  uConexao.TConexao.Create;
 end;
 end.

@@ -4,8 +4,6 @@ uses
   Suporte.View.Pages.Form.Main in 'src\view\pages\Suporte.View.Pages.Form.Main.pas' {formPrincipal},
   uConexao in 'src\model\connection\uConexao.pas';
 
-//Connection in 'src\connection\Connection.pas' {TdmConnection: TDataModule};
-
 {$R *.res}
 begin
   Application.Initialize;

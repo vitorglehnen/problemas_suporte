@@ -86,6 +86,8 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Icon_MainIcon>ico.ico</Icon_MainIcon>
+        <BRCC_OutputDir>C:\Problemas Suporte\</BRCC_OutputDir>
+        <DCC_ExeOutput>C:\Problemas Suporte\</DCC_ExeOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -129,6 +131,10 @@
                 <Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReport VCL Trial\LibD27\dclfrxTee27.bpl">FastReport VCL Tee Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReport VCL Trial\LibD27\dclfsTee27.bpl">FastScript 1.9 Tee Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReport VCL Trial\LibD27\dclfrxIBX27.bpl">FastReport VCL IBX Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReport VCL Trial\LibD27\dclfsIBX27.bpl">FastScript 1.9 IBX Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
