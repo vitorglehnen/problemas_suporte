@@ -3,24 +3,12 @@ unit uConexao;
 interface
 
 uses
-  FireDAC.Stan.Intf,
-  FireDAC.Stan.Option,
-  FireDAC.Stan.Error,
-  FireDAC.UI.Intf,
-  FireDAC.Phys.Intf,
-  FireDAC.Stan.Def,
-  FireDAC.Stan.Pool,
-  FireDAC.Stan.Async,
-  FireDAC.Phys,
-  Data.DB,
-  FireDAC.Comp.Client,
-  FireDAC.Phys.MySQLDef,
-  FireDAC.Phys.FB,
-  System.SysUtils,
-  FireDAC.DApt,
-  FireDAC.VCLUI.Wait,
-  System.IniFiles,
-  Vcl.Dialogs;
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf,
+  FireDAC.Phys.Intf, FireDAC.Stan.Def,
+  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, Data.DB,
+  FireDAC.Comp.Client, FireDAC.Phys.MySQLDef,
+  FireDAC.Phys.FB, System.SysUtils, FireDAC.DApt, FireDAC.VCLUI.Wait,
+  System.IniFiles, Vcl.Dialogs;
 
 type
   TConexao = class
@@ -28,13 +16,14 @@ type
     FConn: TFDConnection;
 
     procedure ConfigConexao;
-    procedure CriarConnectIniFile;
+
   public
     constructor Create;
     destructor Destroy; override;
 
     function CriarQuery: TFDQuery;
     function GetConn: TFDConnection;
+    procedure CriarConnectIniFile;
   end;
 
 const

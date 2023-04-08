@@ -40,7 +40,7 @@ object formPrincipal: TformPrincipal
         Top = 1
         Width = 269
         Height = 1057
-        Align = alLeft
+        Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object pnlTopProblemas: TPanel
@@ -233,18 +233,6 @@ object formPrincipal: TformPrincipal
             TitleFont.Height = -11
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
-            Columns = <
-              item
-                Expanded = False
-                FieldName = 'PR_TITULO'
-                Title.Caption = 'T'#237'tulo'
-                Title.Font.Charset = DEFAULT_CHARSET
-                Title.Font.Color = clWindowText
-                Title.Font.Height = -14
-                Title.Font.Name = 'Tahoma'
-                Title.Font.Style = [fsBold]
-                Visible = True
-              end>
           end
         end
       end
@@ -295,6 +283,7 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alLeft
               Caption = 'Novo'
+              OnClick = btnNovoModuloClick
               ExplicitLeft = -5
               ExplicitTop = -2
               ExplicitHeight = 23
@@ -306,9 +295,9 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alLeft
               Caption = 'Salvar'
+              OnClick = btnSalvarModuloClick
               ExplicitLeft = 55
-              ExplicitTop = -2
-              ExplicitHeight = 23
+              ExplicitTop = 5
             end
             object btnExcluirModulo: TSpeedButton
               Left = 190
@@ -389,6 +378,7 @@ object formPrincipal: TformPrincipal
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
+            DataSource = dsModulos
             DrawingStyle = gdsGradient
             GradientEndColor = clBtnFace
             Font.Charset = DEFAULT_CHARSET
@@ -405,20 +395,6 @@ object formPrincipal: TformPrincipal
             TitleFont.Height = -11
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
-            OnCellClick = gridModulosCellClick
-            Columns = <
-              item
-                Expanded = False
-                FieldName = 'MO_NOME'
-                Title.Caption = 'Nome'
-                Title.Font.Charset = DEFAULT_CHARSET
-                Title.Font.Color = clWindowText
-                Title.Font.Height = -13
-                Title.Font.Name = 'Tahoma'
-                Title.Font.Style = [fsBold]
-                Width = 244
-                Visible = True
-              end>
           end
         end
       end
@@ -714,5 +690,21 @@ object formPrincipal: TformPrincipal
   object OpenDialog1: TOpenDialog
     Left = 4
     Top = 1
+  end
+  object tbModulos: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 10
+    Top = 304
+  end
+  object dsModulos: TDataSource
+    DataSet = tbModulos
+    Left = 10
+    Top = 355
   end
 end

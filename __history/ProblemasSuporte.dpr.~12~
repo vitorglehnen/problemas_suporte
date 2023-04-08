@@ -1,14 +1,14 @@
 program ProblemasSuporte;
 uses
   Vcl.Forms,
-  suporte in 'suporte.pas' {formPrincipal},
-  dm in 'dm.pas' {dmQuerys: TDataModule};
+  Suporte.View.Pages.Form.Main in 'src\view\pages\Suporte.View.Pages.Form.Main.pas' {formPrincipal},
+  uConexao in 'src\model\connection\uConexao.pas';
 
 {$R *.res}
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  //ReportMemoryLeaksOnShutdown := True;
   Application.CreateForm(TformPrincipal, formPrincipal);
-  Application.CreateForm(TdmQuerys, dmQuerys);
   Application.Run;
 end.

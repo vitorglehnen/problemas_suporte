@@ -47,7 +47,6 @@ type
 
     gridProblemas: TDBGrid;
     gridModulos: TDBGrid;
-    OpenDialog1: TOpenDialog;
     btnNovoProblema: TSpeedButton;
     btnSalvarProblema: TSpeedButton;
     btnExcluirProblema: TSpeedButton;
@@ -105,8 +104,8 @@ type
     cbModulo: TComboBox;
     mmSolucaoProblema: TMemo;
     mmDetalhesProblema: TMemo;
+    OpenDialog1: TOpenDialog;
     procedure FormCreate(Sender: TObject);
-    procedure gridModulosCellClick(Column: TColumn);
 
   private
     { Private declarations }
@@ -123,17 +122,16 @@ implementation
 
 uses
   jpeg,
-  pngimage, uConexao;
+  pngimage,
+  uConexao,
+  DAOModulo;
 
-
-procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
-begin
-  cardPanelProblemas.ActiveCard := pnlCadastroProblema;
-end;
 
 procedure TformPrincipal.FormCreate(Sender: TObject);
+var
+  aDAOModulo: TDAOModulo;
 begin
   cardPanelProblemas.ActiveCard := pnlCadastroProblema;
-  uConexao.TConexao.Create;
+
 end;
 end.

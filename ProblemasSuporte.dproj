@@ -108,6 +108,9 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\model\connection\uConexao.pas"/>
+        <DCCReference Include="src\model\uProblema.pas"/>
+        <DCCReference Include="src\model\uModulo.pas"/>
+        <DCCReference Include="src\model\DAO\DAOModulo.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -138,7 +141,7 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
-                <DeployFile LocalName="Win32\Debug\ProblemasSuporte.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="C:\Problemas Suporte\ProblemasSuporte.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>ProblemasSuporte.exe</RemoteName>
                         <Overwrite>true</Overwrite>

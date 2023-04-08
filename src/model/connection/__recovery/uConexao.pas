@@ -3,28 +3,42 @@ unit uConexao;
 interface
 
 uses
-  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf, FireDAC.Stan.Def,
-  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, Data.DB, FireDAC.Comp.Client, FireDAC.Phys.MySQLDef,
-  FireDAC.Phys.FB, System.SysUtils, FireDAC.DApt, FireDAC.VCLUI.Wait, System.IniFiles, Vcl.Dialogs;
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Error,
+  FireDAC.UI.Intf,
+  FireDAC.Phys.Intf,
+  FireDAC.Stan.Def,
+  FireDAC.Stan.Pool,
+  FireDAC.Stan.Async,
+  FireDAC.Phys,
+  Data.DB,
+  FireDAC.Comp.Client,
+  FireDAC.Phys.MySQLDef,
+  FireDAC.Phys.FB,
+  System.SysUtils,
+  FireDAC.DApt,
+  FireDAC.VCLUI.Wait,
+  System.IniFiles,
+  Vcl.Dialogs;
 
 type
   TConexao = class
-    private
-      FConn: TFDConnection;
+  private
+    FConn: TFDConnection;
 
-      procedure ConfigConexao;
+    procedure ConfigConexao;
+    procedure CriarConnectIniFile;
+  public
+    constructor Create;
+    destructor Destroy; override;
 
-    public
-      constructor Create;
-      destructor Destroy; override;
-
-      function CriarQuery: TFDQuery;
-      function GetConn: TFDConnection;
-      procedure CriarConnectIniFile;
+    function CriarQuery: TFDQuery;
+    function GetConn: TFDConnection;
   end;
 
 const
-  ARQ_INI = 'Connect.ini';
+  NOME_ARQ_INI = 'Connect.ini';
 
 implementation
 
@@ -34,12 +48,13 @@ procedure TConexao.ConfigConexao;
 var
   ArqINI: TIniFIle;
 begin
-  ArqINI := TIniFile.Create('C:\Problemas Suporte\Connect.ini');
+  ArqINI := TIniFIle.Create('C:\Problemas Suporte\Connect.ini');
   try
-    FConn.Params.DriverID:= 'FB';
-    FConn.Params.Database:= ArqINI.ReadString('Conexão', 'CaminhoDoBanco', 'C:\Problemas Suporte\DBPROB.FDB');
-    FConn.Params.UserName:= 'SYSDBA';
-    FConn.Params.Password:= 'masterkey';
+    FConn.Params.DriverID := 'FB';
+    FConn.Params.Database := ArqINI.ReadString('Conexão', 'CaminhoDoBanco',
+      'C:\Problemas Suporte\DBPROB.FDB');
+    FConn.Params.UserName := 'SYSDBA';
+    FConn.Params.Password := 'masterkey';
     FConn.LoginPrompt := False;
 
     FConn.Connected;
@@ -50,7 +65,7 @@ end;
 
 constructor TConexao.Create;
 begin
-  FConn:= TFDConnection.Create(nil);
+  FConn := TFDConnection.Create(nil);
 
   CriarConnectIniFile;
   ConfigConexao;
@@ -58,15 +73,14 @@ end;
 
 procedure TConexao.CriarConnectIniFile;
 var
-  ArqINI: TIniFile;
+  ArqINI: TIniFIle;
 begin
-  if not FileExists
-    ('C:\Problemas Suporte\')
-  then
+  if not FileExists('C:\Problemas Suporte\') then
   begin
-    ArqINI := TIniFile.Create(ExtractFilePath(ParamStr(0)) + ARQ_INI);
+    ArqINI := TIniFIle.Create(ExtractFilePath(ParamStr(0)) + NOME_ARQ_INI);
     try
-      ArqINI.WriteString('Conexão', 'CaminhoDoBanco', 'C:\Problemas Suporte\DBPROB.FDB');
+      ArqINI.WriteString('Conexão', 'CaminhoDoBanco',
+        'C:\Problemas Suporte\DBPROB.FDB');
       ArqINI.WriteString('Conexão', 'DriverID', 'FB');
     finally
       ArqINI.Free;
@@ -78,8 +92,8 @@ function TConexao.CriarQuery: TFDQuery;
 var
   aQuery: TFDQuery;
 begin
-  aQuery := TFDQuery.Create(nil);
-  aQuery.Connection:= FConn;
+  aQuery:= TFDQuery.Create(nil);
+  aQuery.Connection := FConn;
 
   Result:= aQuery;
 end;
@@ -92,7 +106,7 @@ end;
 
 function TConexao.GetConn: TFDConnection;
 begin
-  Result:= FConn;
+  Result := FConn;
 end;
 
 end.
