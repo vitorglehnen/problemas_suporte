@@ -92,10 +92,10 @@ function TConexao.CriarQuery: TFDQuery;
 var
   aQuery: TFDQuery;
 begin
-  aQuery := TFDQuery.Create(nil);
+  aQuery:= TFDQuery.Create(nil);
   aQuery.Connection := FConn;
 
-  Result := aQuery;
+  Result:= aQuery;
 end;
 
 destructor TConexao.Destroy;

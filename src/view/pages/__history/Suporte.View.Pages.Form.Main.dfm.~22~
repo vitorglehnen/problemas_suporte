@@ -217,7 +217,6 @@ object formPrincipal: TformPrincipal
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
-            DataSource = dsProblemas
             DrawingStyle = gdsGradient
             GradientEndColor = clBtnFace
             Font.Charset = DEFAULT_CHARSET
@@ -704,22 +703,6 @@ object formPrincipal: TformPrincipal
   object dsModulos: TDataSource
     DataSet = tbModulos
     Left = 10
-    Top = 355
-  end
-  object tbProblemas: TFDMemTable
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    Left = 258
-    Top = 304
-  end
-  object dsProblemas: TDataSource
-    DataSet = tbProblemas
-    Left = 258
     Top = 355
   end
 end

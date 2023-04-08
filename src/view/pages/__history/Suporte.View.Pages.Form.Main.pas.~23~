@@ -105,10 +105,6 @@ type
     mmSolucaoProblema: TMemo;
     mmDetalhesProblema: TMemo;
     OpenDialog1: TOpenDialog;
-    tbModulos: TFDMemTable;
-    dsModulos: TDataSource;
-    tbProblemas: TFDMemTable;
-    dsProblemas: TDataSource;
     procedure FormCreate(Sender: TObject);
 
   private
@@ -128,23 +124,14 @@ uses
   jpeg,
   pngimage,
   uConexao,
-  DAOModulo,
-  DAOProblema;
+  DAOModulo;
 
 
 procedure TformPrincipal.FormCreate(Sender: TObject);
 var
   aDAOModulo: TDAOModulo;
-  aDAOProblema: TDAOProblema;
 begin
-  aDAOModulo:= TDAOModulo.Create;
-  aDAOProblema:= TDAOProblema.Create;
-  try
-    tbModulos.Data := aDAOModulo.BuscaModulos.Data;
-    tbProblemas.Data:= aDAOProblema.BuscaProblemas.Data;
-  finally
-    aDAOModulo.Free;
-    aDAOProblema.Free;
-  end;
+  cardPanelProblemas.ActiveCard := pnlCadastroProblema;
+
 end;
 end.

@@ -5,7 +5,8 @@ uses
   uConexao in 'src\model\connection\uConexao.pas',
   uProblema in 'src\model\uProblema.pas',
   uModulo in 'src\model\uModulo.pas',
-  DAOModulo in 'src\model\DAO\DAOModulo.pas';
+  DAOModulo in 'src\model\DAO\DAOModulo.pas',
+  DAOProblema in 'src\model\DAO\DAOProblema.pas';
 
 {$R *.res}
 begin

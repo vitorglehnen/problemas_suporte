@@ -108,8 +108,6 @@ type
     tbModulos: TFDMemTable;
     dsModulos: TDataSource;
     procedure FormCreate(Sender: TObject);
-    procedure btnNovoModuloClick(Sender: TObject);
-    procedure btnSalvarModuloClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -128,22 +126,14 @@ uses
   jpeg,
   pngimage,
   uConexao,
-  DAOModulo;
+  DAOModulo,
+  DAOProblema;
 
-
-procedure TformPrincipal.btnNovoModuloClick(Sender: TObject);
-begin
-
-end;
-
-procedure TformPrincipal.btnSalvarModuloClick(Sender: TObject);
-begin
-
-end;
 
 procedure TformPrincipal.FormCreate(Sender: TObject);
 var
   aDAOModulo: TDAOModulo;
+  aDAOProblema: TDAOProblema;
 begin
   aDAOModulo:= TDAOModulo.Create;
   try

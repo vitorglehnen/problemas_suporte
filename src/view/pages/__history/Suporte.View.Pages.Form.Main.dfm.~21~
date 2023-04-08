@@ -65,8 +65,7 @@ object formPrincipal: TformPrincipal
             Font.Style = [fsBold]
             ParentFont = False
             Layout = tlCenter
-            ExplicitWidth = 79
-            ExplicitHeight = 18
+            ExplicitHeight = 640
           end
           object lblTotalDeProblemas: TLabel
             Left = 6
@@ -233,6 +232,18 @@ object formPrincipal: TformPrincipal
             TitleFont.Height = -11
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'PR_TITULO'
+                Title.Caption = 'T'#237'tulo'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -14
+                Title.Font.Name = 'Tahoma'
+                Title.Font.Style = [fsBold]
+                Visible = True
+              end>
           end
         end
       end
@@ -283,7 +294,6 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alLeft
               Caption = 'Novo'
-              OnClick = btnNovoModuloClick
               ExplicitLeft = -5
               ExplicitTop = -2
               ExplicitHeight = 23
@@ -295,9 +305,9 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alLeft
               Caption = 'Salvar'
-              OnClick = btnSalvarModuloClick
               ExplicitLeft = 55
-              ExplicitTop = 5
+              ExplicitTop = -2
+              ExplicitHeight = 23
             end
             object btnExcluirModulo: TSpeedButton
               Left = 190
@@ -378,7 +388,6 @@ object formPrincipal: TformPrincipal
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
-            DataSource = dsModulos
             DrawingStyle = gdsGradient
             GradientEndColor = clBtnFace
             Font.Charset = DEFAULT_CHARSET
@@ -395,6 +404,18 @@ object formPrincipal: TformPrincipal
             TitleFont.Height = -11
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
+            Columns = <
+              item
+                Expanded = False
+                Title.Caption = 'Nome'
+                Title.Font.Charset = DEFAULT_CHARSET
+                Title.Font.Color = clWindowText
+                Title.Font.Height = -15
+                Title.Font.Name = 'Tahoma'
+                Title.Font.Style = []
+                Width = 244
+                Visible = True
+              end>
           end
         end
       end
@@ -411,30 +432,33 @@ object formPrincipal: TformPrincipal
       object pnlCadastroProblema: TCard
         Left = 1
         Top = 1
-        Width = 1404
+        Width = 1285
         Height = 1057
         Caption = 'pnlCadastroProblema'
         CardIndex = 0
         TabOrder = 0
+        ExplicitWidth = 1404
         object pnlProblemas: TPanel
           Left = 0
           Top = 0
-          Width = 1404
+          Width = 1285
           Height = 1057
           Align = alClient
           AutoSize = True
           BevelOuter = bvNone
           TabOrder = 0
           TabStop = True
+          ExplicitWidth = 1404
           object pnlTopProblema: TPanel
             Left = 0
             Top = 0
-            Width = 1404
+            Width = 1285
             Height = 70
             Align = alTop
             AutoSize = True
             Padding.Right = 250
             TabOrder = 0
+            ExplicitWidth = 1404
             object pnlTituloProblema: TPanel
               Left = 1
               Top = 1
@@ -475,7 +499,7 @@ object formPrincipal: TformPrincipal
             object pnlDataProblema: TPanel
               Left = 721
               Top = 1
-              Width = 432
+              Width = 313
               Height = 68
               Align = alClient
               AutoSize = True
@@ -484,6 +508,7 @@ object formPrincipal: TformPrincipal
               Padding.Top = 10
               Padding.Bottom = 10
               TabOrder = 1
+              ExplicitWidth = 432
               object lblDataProblema: TLabel
                 Left = 320
                 Top = 10
@@ -502,10 +527,11 @@ object formPrincipal: TformPrincipal
               object edtDataProblema: TEdit
                 Left = 320
                 Top = 37
-                Width = 112
+                Width = 17
                 Height = 21
                 Align = alBottom
                 TabOrder = 0
+                ExplicitWidth = 112
               end
             end
             object pnlChamadoProblema: TPanel
@@ -549,7 +575,7 @@ object formPrincipal: TformPrincipal
           object pnlBodyModuloProblema: TPanel
             Left = 0
             Top = 70
-            Width = 1404
+            Width = 1285
             Height = 80
             Align = alTop
             AutoSize = True
@@ -557,6 +583,7 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Top = 20
             TabOrder = 1
+            ExplicitWidth = 1404
             object pnlModuloProblema: TPanel
               Left = 30
               Top = 20
@@ -594,7 +621,7 @@ object formPrincipal: TformPrincipal
           object pnlBodyDetalhesProblema: TPanel
             Left = 0
             Top = 150
-            Width = 1404
+            Width = 1285
             Height = 235
             Align = alTop
             AutoSize = True
@@ -602,20 +629,22 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Right = 250
             TabOrder = 2
+            ExplicitWidth = 1404
             object pnlDetalhesProblema: TPanel
               Left = 30
               Top = 0
-              Width = 1124
+              Width = 1005
               Height = 235
               Align = alClient
               AutoSize = True
               BevelOuter = bvNone
               Padding.Bottom = 20
               TabOrder = 0
+              ExplicitWidth = 1124
               object lblDetalhesProblema: TLabel
                 Left = 0
                 Top = 0
-                Width = 1124
+                Width = 1005
                 Height = 17
                 Align = alTop
                 Caption = 'Detalhes do problema'
@@ -630,17 +659,18 @@ object formPrincipal: TformPrincipal
               object mmDetalhesProblema: TMemo
                 Left = 0
                 Top = 17
-                Width = 1124
+                Width = 1005
                 Height = 198
                 Align = alClient
                 TabOrder = 0
+                ExplicitWidth = 1124
               end
             end
           end
           object pnlBodySolucaoProblema: TPanel
             Left = 0
             Top = 385
-            Width = 1404
+            Width = 1285
             Height = 672
             Align = alClient
             AutoSize = True
@@ -648,20 +678,22 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Right = 250
             TabOrder = 3
+            ExplicitWidth = 1404
             object pnlSolucaoProblema: TPanel
               Left = 30
               Top = 0
-              Width = 1124
+              Width = 1005
               Height = 672
               Align = alClient
               AutoSize = True
               BevelOuter = bvNone
               Padding.Bottom = 20
               TabOrder = 0
+              ExplicitWidth = 1124
               object lblSolucaoProblema: TLabel
                 Left = 0
                 Top = 0
-                Width = 1124
+                Width = 1005
                 Height = 17
                 Align = alTop
                 Caption = 'Solu'#231#227'o'
@@ -676,10 +708,12 @@ object formPrincipal: TformPrincipal
               object mmSolucaoProblema: TMemo
                 Left = 0
                 Top = 17
-                Width = 1124
+                Width = 1005
                 Height = 635
                 Align = alClient
                 TabOrder = 0
+                ExplicitTop = 23
+                ExplicitWidth = 1124
               end
             end
           end
@@ -690,21 +724,5 @@ object formPrincipal: TformPrincipal
   object OpenDialog1: TOpenDialog
     Left = 4
     Top = 1
-  end
-  object tbModulos: TFDMemTable
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    Left = 10
-    Top = 304
-  end
-  object dsModulos: TDataSource
-    DataSet = tbModulos
-    Left = 10
-    Top = 355
   end
 end

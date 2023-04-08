@@ -111,6 +111,7 @@
         <DCCReference Include="src\model\uProblema.pas"/>
         <DCCReference Include="src\model\uModulo.pas"/>
         <DCCReference Include="src\model\DAO\DAOModulo.pas"/>
+        <DCCReference Include="src\model\DAO\DAOProblema.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
