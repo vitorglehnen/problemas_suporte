@@ -1,41 +1,40 @@
-unit DAOProblema;
+unit DAOModulo;
 
 interface
 
-uses
-  FireDAC.Comp.Client, uConexao;
+uses uConexao, uModulo, FireDAC.Comp.Client, Vcl.Dialogs, Data.DB;
 
 type
-  TDAOProblema = class
+  TDAOModulo = Class
   private
     FConn: TConexao;
     FQuery: TFDQuery;
   public
-    function BuscaTabelaProblemas : TFDQuery;
+    function BuscaModulos : TFDQuery;
     constructor Create;
     destructor Destroy; override;
-  end;
+  End;
 
 implementation
 
-{ TDAOProblemas }
+{ TDAOModulo }
 
-function TDAOProblema.BuscaTabelaProblemas: TFDQuery;
+function TDAOModulo.BuscaModulos : TFDQuery;
 begin
   FQuery:= FConn.CriarQuery;
 
-  FQuery.Open('SELECT titulo FROM problemas ORDER BY titulo');
+  FQuery.Open('SELECT nome FROM modulos ORDER BY nome');
   FQuery.FetchAll;
 
   Result:= FQuery;
 end;
 
-constructor TDAOProblema.Create;
+constructor TDAOModulo.Create;
 begin
   FConn:= TConexao.Create;
 end;
 
-destructor TDAOProblema.Destroy;
+destructor TDAOModulo.Destroy;
 begin
   FConn.Free;
   FQuery.Free;

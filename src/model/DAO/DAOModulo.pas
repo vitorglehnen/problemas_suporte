@@ -10,7 +10,7 @@ type
     FConn: TConexao;
     FQuery: TFDQuery;
   public
-    function BuscaModulos : TFDQuery;
+    function BuscaTabelaModulos : TFDQuery;
     constructor Create;
     destructor Destroy; override;
   End;
@@ -19,7 +19,7 @@ implementation
 
 { TDAOModulo }
 
-function TDAOModulo.BuscaModulos : TFDQuery;
+function TDAOModulo.BuscaTabelaModulos : TFDQuery;
 begin
   FQuery:= FConn.CriarQuery;
 

@@ -1,0 +1,13 @@
+unit uControllerModulo;
+
+interface
+
+type
+  TControllerModulo = class
+  private
+  public
+  end;
+
+implementation
+
+end.
