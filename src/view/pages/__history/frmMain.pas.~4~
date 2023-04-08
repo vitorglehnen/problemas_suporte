@@ -112,11 +112,9 @@ type
     tbProblemas: TFDMemTable;
     dsProblemas: TDataSource;
     procedure FormCreate(Sender: TObject);
-    procedure gridModulosCellClick(Column: TColumn);
 
   private
     { Private declarations }
-    procedure BuscaTbProblemasPorModulo;
 
   public
     { Public declarations }
@@ -126,47 +124,26 @@ var
   formPrincipal: TformPrincipal;
 
 implementation
-
 {$R *.dfm}
 
 uses
   uControllerProblema, uControllerModulo;
 
+
 procedure TformPrincipal.FormCreate(Sender: TObject);
 var
+  aControllerProblema: TControllerProblema;
   aControllerModulo: TControllerModulo;
 begin
-  aControllerModulo := TControllerModulo.Create;
+  aControllerProblema:= TControllerProblema.Create;
+  aControllerModulo:= TControllerModulo.Create;
 
   try
-    tbModulos.Data := aControllerModulo.BuscaTabelaModulos.Data;
-    BuscaTbProblemasPorModulo;
+    tbProblemas.Data:= aControllerProblema.BuscaTabelaProblemas.Data;
+    tbModulos.Data:= aControllerModulo.BuscaTabelaModulos.Data;
   finally
+    aControllerProblema.Free;
     aControllerModulo.Free;
   end;
 end;
-
-procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
-begin
-  BuscaTbProblemasPorModulo;
-end;
-
-procedure TformPrincipal.BuscaTbProblemasPorModulo;
-var
-  aControllerProblema: TControllerProblema;
-  aModuloSelecionado: String;
-begin
-  aControllerProblema:= TControllerProblema.Create;
-  aModuloSelecionado:= gridModulos.Columns[0].Field.Value;
-
-  try
-    tbProblemas.Close;
-    tbProblemas.Data:= aControllerProblema
-                        .TabelaProblemasPorModulo(aModuloSelecionado)
-                          .Data;
-  finally
-    aControllerProblema.Free;
-  end;
-end;
-
 end.

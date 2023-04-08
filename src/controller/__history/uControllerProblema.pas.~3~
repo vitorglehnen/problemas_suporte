@@ -10,7 +10,7 @@ type
   private
     FDAOProblema: TDAOProblema;
   public
-    function TabelaProblemasPorModulo(aNomeModulo: String): TFDQuery;
+    function BuscaTabelaProblemas: TFDQuery;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -19,9 +19,9 @@ implementation
 
 { TControllerProblemas }
 
-function TControllerProblema.TabelaProblemasPorModulo(aNomeModulo: String): TFDQuery;
+function TControllerProblema.BuscaTabelaProblemas: TFDQuery;
 begin
-  Result := FDAOProblema.TabelaProblemasPorModulo(aNomeModulo);
+  Result := FDAOProblema.BuscaTabelaProblemas;
 end;
 
 constructor TControllerProblema.Create;

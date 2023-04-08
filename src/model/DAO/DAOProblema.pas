@@ -11,7 +11,7 @@ type
     FConn: TConexao;
     FQuery: TFDQuery;
   public
-    function BuscaTabelaProblemas : TFDQuery;
+    function TabelaProblemasPorModulo(aNomeModulo: String): TFDQuery;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -20,19 +20,24 @@ implementation
 
 { TDAOProblemas }
 
-function TDAOProblema.BuscaTabelaProblemas: TFDQuery;
+function TDAOProblema.TabelaProblemasPorModulo(aNomeModulo: String): TFDQuery;
 begin
-  FQuery:= FConn.CriarQuery;
+  FQuery := FConn.CriarQuery;
 
-  FQuery.Open('SELECT titulo FROM problemas ORDER BY titulo');
+  FQuery.SQL.Text:=
+    'SELECT titulo FROM problemas '+
+    'JOIN modulos ON problemas.cod_mod = modulos.cod_mod '+
+    'WHERE modulos.nome = :NomeModulo';
+  FQuery.ParamByName('NomeModulo').AsString := aNomeModulo;
+  FQuery.Open;
   FQuery.FetchAll;
 
-  Result:= FQuery;
+  Result := FQuery;
 end;
 
 constructor TDAOProblema.Create;
 begin
-  FConn:= TConexao.Create;
+  FConn := TConexao.Create;
 end;
 
 destructor TDAOProblema.Destroy;
