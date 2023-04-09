@@ -44,7 +44,8 @@
     <Transaction>2023/04/08 14:44:53.000.972,=C:\problemas_suporte\Unit1.pas</Transaction>
     <Transaction>2023/04/08 14:45:23.000.629,C:\problemas_suporte\src\controller\uControllerProblemas.pas=C:\problemas_suporte\src\controller\uControllerProblema.pas</Transaction>
     <Transaction>2023/04/08 14:47:40.000.531,C:\problemas_suporte\Unit1.pas=C:\problemas_suporte\src\controller\uControllerModulo.pas</Transaction>
-  </Transactions>  <ProjectSortOrder AutoSort="0" SortType="0">
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
     <File Path="src"/>
     <File Path="src\controller"/>
     <File Path="src\controller\uControllerModulo.pas"/>

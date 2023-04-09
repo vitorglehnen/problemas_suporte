@@ -156,13 +156,14 @@ var
   aControllerProblema: TControllerProblema;
   aModuloSelecionado: String;
 begin
-  aControllerProblema := TControllerProblema.Create;
-  aModuloSelecionado := gridModulos.Columns[0].Field.Value;
+  aControllerProblema:= TControllerProblema.Create;
+  aModuloSelecionado:= gridModulos.Columns[0].Field.Value;
 
   try
     tbProblemas.Close;
-    tbProblemas.Data := aControllerProblema.TabelaProblemasPorModulo
-      (aModuloSelecionado).Data;
+    tbProblemas.Data:= aControllerProblema
+                        .TabelaProblemasPorModulo(aModuloSelecionado)
+                          .Data;
   finally
     aControllerProblema.Free;
   end;
