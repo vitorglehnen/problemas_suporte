@@ -117,7 +117,6 @@ type
   private
     { Private declarations }
     procedure BuscaTbProblemasPorModulo;
-    procedure CarregaDadosProblemas;
 
   public
     { Public declarations }
@@ -167,11 +166,6 @@ begin
   finally
     aControllerProblema.Free;
   end;
-end;
-
-procedure TformPrincipal.CarregaDadosProblemas;
-begin
-
 end;
 
 end.

@@ -12,7 +12,6 @@ type
     FQuery: TFDQuery;
   public
     function TabelaProblemasPorModulo(aNomeModulo: String): TFDQuery;
-    function CarregaDadosProblema(aTituloProblema: String): TFDQuery;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -36,21 +35,9 @@ begin
   Result := FQuery;
 end;
 
-function TDAOProblema.CarregaDadosProblema(aTituloProblema: String): TFDQuery;
-begin
-  FQuery:= FConn.CriarQuery;
-
-  FQuery.SQL.Text:='SELECT * FROM problemas WHERE titulo = :TituloProblema';
-  FQuery.ParamByName('TituloProblema').AsString:= aTituloProblema;
-  FQuery.Open;
-
-  Result:= FQuery;
-end;
-
 constructor TDAOProblema.Create;
 begin
   FConn := TConexao.Create;
-  FQuery := FConn.CriarQuery;
 end;
 
 destructor TDAOProblema.Destroy;

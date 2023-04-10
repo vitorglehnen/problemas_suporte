@@ -4,7 +4,7 @@ object formPrincipal: TformPrincipal
   Align = alClient
   AutoSize = True
   Caption = 'Suporte'
-  ClientHeight = 749
+  ClientHeight = 1061
   ClientWidth = 1920
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,7 +23,7 @@ object formPrincipal: TformPrincipal
     Left = 0
     Top = 0
     Width = 1920
-    Height = 749
+    Height = 1061
     Align = alClient
     AutoSize = True
     TabOrder = 0
@@ -31,7 +31,7 @@ object formPrincipal: TformPrincipal
       Left = 1
       Top = 1
       Width = 512
-      Height = 747
+      Height = 1059
       Align = alLeft
       Caption = 'pnlBodyModulosProblemas'
       TabOrder = 0
@@ -39,7 +39,7 @@ object formPrincipal: TformPrincipal
         Left = 242
         Top = 1
         Width = 269
-        Height = 745
+        Height = 1057
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
@@ -204,7 +204,7 @@ object formPrincipal: TformPrincipal
           Left = 0
           Top = 257
           Width = 269
-          Height = 488
+          Height = 800
           Align = alClient
           Color = clWhite
           ParentBackground = False
@@ -213,7 +213,7 @@ object formPrincipal: TformPrincipal
             Left = 1
             Top = 1
             Width = 267
-            Height = 486
+            Height = 798
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
@@ -241,7 +241,7 @@ object formPrincipal: TformPrincipal
         Left = 1
         Top = 1
         Width = 241
-        Height = 745
+        Height = 1057
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
@@ -364,7 +364,7 @@ object formPrincipal: TformPrincipal
           Left = 0
           Top = 257
           Width = 241
-          Height = 488
+          Height = 800
           Align = alClient
           Color = clWhite
           ParentBackground = False
@@ -373,7 +373,7 @@ object formPrincipal: TformPrincipal
             Left = 1
             Top = 1
             Width = 239
-            Height = 486
+            Height = 798
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
@@ -403,7 +403,7 @@ object formPrincipal: TformPrincipal
       Left = 513
       Top = 1
       Width = 1406
-      Height = 747
+      Height = 1059
       Align = alClient
       ActiveCard = pnlCadastroProblema
       AutoSize = True
@@ -412,7 +412,7 @@ object formPrincipal: TformPrincipal
         Left = 1
         Top = 1
         Width = 1404
-        Height = 745
+        Height = 1057
         Caption = 'pnlCadastroProblema'
         CardIndex = 0
         TabOrder = 0
@@ -420,7 +420,7 @@ object formPrincipal: TformPrincipal
           Left = 0
           Top = 0
           Width = 1404
-          Height = 745
+          Height = 1057
           Align = alClient
           AutoSize = True
           BevelOuter = bvNone
@@ -641,7 +641,7 @@ object formPrincipal: TformPrincipal
             Left = 0
             Top = 385
             Width = 1404
-            Height = 360
+            Height = 672
             Align = alClient
             AutoSize = True
             BevelOuter = bvNone
@@ -652,7 +652,7 @@ object formPrincipal: TformPrincipal
               Left = 30
               Top = 0
               Width = 1124
-              Height = 360
+              Height = 672
               Align = alClient
               AutoSize = True
               BevelOuter = bvNone
@@ -677,7 +677,7 @@ object formPrincipal: TformPrincipal
                 Left = 0
                 Top = 17
                 Width = 1124
-                Height = 323
+                Height = 635
                 Align = alClient
                 TabOrder = 0
               end
