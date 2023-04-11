@@ -2,7 +2,7 @@ unit uControllerModulo;
 
 interface
 
-uses DAOModulo, FireDAC.Comp.Client;
+uses DAOModulo, FireDAC.Comp.Client, Data.DB;
 
 type
   TControllerModulo = class

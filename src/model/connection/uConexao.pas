@@ -89,10 +89,8 @@ begin
 end;
 
 function TConexao.CriarQuery: TFDQuery;
-var
-  aQuery: TFDQuery;
 begin
-  aQuery:= TFDQuery.Create(nil);
+  var aQuery: TFDQuery := TFDQuery.Create(nil);
   aQuery.Connection := FConn;
 
   Result:= aQuery;

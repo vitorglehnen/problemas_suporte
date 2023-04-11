@@ -134,14 +134,13 @@ uses
   uControllerProblema, uControllerModulo;
 
 procedure TformPrincipal.FormCreate(Sender: TObject);
-var
-  aControllerModulo: TControllerModulo;
 begin
-  aControllerModulo := TControllerModulo.Create;
+  var aControllerModulo: TControllerModulo := TControllerModulo.Create;
 
   try
     tbModulos.Data := aControllerModulo.BuscaTabelaModulos.Data;
     BuscaTbProblemasPorModulo;
+    CarregaDadosProblemas;
   finally
     aControllerModulo.Free;
   end;
@@ -153,12 +152,9 @@ begin
 end;
 
 procedure TformPrincipal.BuscaTbProblemasPorModulo;
-var
-  aControllerProblema: TControllerProblema;
-  aModuloSelecionado: String;
 begin
-  aControllerProblema := TControllerProblema.Create;
-  aModuloSelecionado := gridModulos.Columns[0].Field.Value;
+  var aControllerProblema: TControllerProblema := TControllerProblema.Create;
+  var aModuloSelecionado: String := gridModulos.Columns[0].Field.Value;
 
   try
     tbProblemas.Close;
@@ -171,7 +167,16 @@ end;
 
 procedure TformPrincipal.CarregaDadosProblemas;
 begin
+  var aControllerProblema: TControllerProblema := TControllerProblema.Create;
+  var teste: TFDQuery;
 
+  try
+    teste := aControllerProblema.CarregaDadosProblema(gridProblemas.Columns[0].Field.Value);
+    edtTituloProblema.Text := teste.FieldByName('TITULO').AsString;
+    mmDetalhesProblema.Text := teste.FieldByName('DETALHES').AsString;
+  finally
+    aControllerProblema.Free;
+  end;
 end;
 
 end.

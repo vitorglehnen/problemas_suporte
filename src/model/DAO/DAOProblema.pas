@@ -19,6 +19,9 @@ type
 
 implementation
 
+uses
+  System.SysUtils;
+
 { TDAOProblemas }
 
 function TDAOProblema.TabelaProblemasPorModulo(aNomeModulo: String): TFDQuery;
@@ -41,7 +44,7 @@ begin
   FQuery:= FConn.CriarQuery;
 
   FQuery.SQL.Text:='SELECT * FROM problemas WHERE titulo = :TituloProblema';
-  FQuery.ParamByName('TituloProblema').AsString:= aTituloProblema;
+  FQuery.ParamByName('TituloProblema').AsString:= UpperCase(aTituloProblema);
   FQuery.Open;
 
   Result:= FQuery;
@@ -50,7 +53,6 @@ end;
 constructor TDAOProblema.Create;
 begin
   FConn := TConexao.Create;
-  FQuery := FConn.CriarQuery;
 end;
 
 destructor TDAOProblema.Destroy;
