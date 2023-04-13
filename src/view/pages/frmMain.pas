@@ -12,7 +12,6 @@ uses
   Vcl.Controls,
   Vcl.Forms,
   Vcl.Dialogs,
-  Data.DB,
   Vcl.Grids,
   Vcl.DBGrids,
   Vcl.ExtCtrls,
@@ -42,7 +41,10 @@ uses
   Vcl.FileCtrl,
   Vcl.Clipbrd,
   jpeg,
-  pngimage;
+  pngimage,
+  System.Generics.Collections,
+  Data.DB,
+  Data.DBXCommon, Vcl.ComCtrls;
 
 type
   TformPrincipal = class(TForm)
@@ -105,6 +107,9 @@ type
     mmSolucaoProblema: TMemo;
     mmDetalhesProblema: TMemo;
     gridProblemas: TDBGrid;
+    tbModulos: TFDMemTable;
+    dsModulos: TDataSource;
+    ListView1: TListView;
 
   private
     { Private declarations }
@@ -125,7 +130,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uControllerProblema, uControllerModulo;
+  uControllerProblema, uControllerModulo, uModulo;
 
 procedure TformPrincipal.CarregaTbProblemasPorModulo;
 begin
@@ -137,13 +142,8 @@ end;
 
 procedure TformPrincipal.CarregaGridModulos;
 begin
-  var aControllerModulo: TControllerModulo:= TControllerModulo.Create;
-
-  try
-    aControllerModulo.BuscaTabelaModulos;
-  finally
-
-  end;
+  var aControllerModulo : TControllerModulo:= TControllerModulo.Create;
+  var aListaModulo: TList<TModulo>;
 end;
 
 procedure TformPrincipal.CarregaGridProblemasPorModulo;

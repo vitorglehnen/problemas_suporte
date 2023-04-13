@@ -375,6 +375,7 @@ object formPrincipal: TformPrincipal
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
+            DataSource = dsModulos
             DrawingStyle = gdsGradient
             GradientEndColor = clBtnFace
             Font.Charset = DEFAULT_CHARSET
@@ -631,6 +632,14 @@ object formPrincipal: TformPrincipal
                 Align = alClient
                 TabOrder = 0
               end
+              object ListView1: TListView
+                Left = 17
+                Top = 79
+                Width = 250
+                Height = 150
+                Columns = <>
+                TabOrder = 1
+              end
             end
           end
           object pnlBodySolucaoProblema: TPanel
@@ -682,5 +691,21 @@ object formPrincipal: TformPrincipal
         end
       end
     end
+  end
+  object tbModulos: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 26
+    Top = 307
+  end
+  object dsModulos: TDataSource
+    DataSet = tbModulos
+    Left = 26
+    Top = 355
   end
 end
