@@ -330,6 +330,8 @@ object formPrincipal: TformPrincipal
             Padding.Right = 8
             Padding.Bottom = 8
             TabOrder = 1
+            ExplicitLeft = -2
+            ExplicitTop = 109
             object pnlPesqModulo: TPanel
               Left = 9
               Top = 9

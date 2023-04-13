@@ -8,8 +8,7 @@ uses
   DAOModulo in 'src\model\DAO\DAOModulo.pas',
   DAOProblema in 'src\model\DAO\DAOProblema.pas',
   uControllerProblema in 'src\controller\uControllerProblema.pas',
-  uControllerModulo in 'src\controller\uControllerModulo.pas',
-  uServiceModulo in 'src\services\uServiceModulo.pas';
+  uControllerModulo in 'src\controller\uControllerModulo.pas';
 
 {$R *.res}
 begin

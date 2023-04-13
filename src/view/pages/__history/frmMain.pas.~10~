@@ -46,6 +46,8 @@ uses
 
 type
   TformPrincipal = class(TForm)
+
+    gridProblemas: TDBGrid;
     gridModulos: TDBGrid;
     btnNovoProblema: TSpeedButton;
     btnSalvarProblema: TSpeedButton;
@@ -104,14 +106,18 @@ type
     cbModulo: TComboBox;
     mmSolucaoProblema: TMemo;
     mmDetalhesProblema: TMemo;
-    gridProblemas: TDBGrid;
+    OpenDialog1: TOpenDialog;
+    tbModulos: TFDMemTable;
+    dsModulos: TDataSource;
+    tbProblemas: TFDMemTable;
+    dsProblemas: TDataSource;
+    procedure FormCreate(Sender: TObject);
+    procedure gridModulosCellClick(Column: TColumn);
 
   private
     { Private declarations }
-    procedure CarregaGridProblemasPorModulo;
+    procedure BuscaTbProblemasPorModulo;
     procedure CarregaDadosProblemas;
-    procedure CarregaGridModulos;
-    procedure CarregaTbProblemasPorModulo;
 
   public
     { Public declarations }
@@ -127,28 +133,50 @@ implementation
 uses
   uControllerProblema, uControllerModulo;
 
-procedure TformPrincipal.CarregaTbProblemasPorModulo;
+procedure TformPrincipal.FormCreate(Sender: TObject);
 begin
+  var aControllerModulo: TControllerModulo := TControllerModulo.Create;
+
+  try
+    tbModulos.Data := aControllerModulo.BuscaTabelaModulos.Data;
+    BuscaTbProblemasPorModulo;
+    CarregaDadosProblemas;
+  finally
+    aControllerModulo.Free;
+  end;
+end;
+
+procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
+begin
+  BuscaTbProblemasPorModulo;
+end;
+
+procedure TformPrincipal.BuscaTbProblemasPorModulo;
+begin
+  var aControllerProblema: TControllerProblema := TControllerProblema.Create;
+  var aModuloSelecionado: String := gridModulos.Columns[0].Field.Value;
+
+  try
+    tbProblemas.Close;
+    tbProblemas.Data := aControllerProblema.TabelaProblemasPorModulo
+      (aModuloSelecionado).Data;
+  finally
+    aControllerProblema.Free;
+  end;
 end;
 
 procedure TformPrincipal.CarregaDadosProblemas;
 begin
-end;
-
-procedure TformPrincipal.CarregaGridModulos;
-begin
-  var aControllerModulo: TControllerModulo:= TControllerModulo.Create;
+  var aControllerProblema: TControllerProblema := TControllerProblema.Create;
+  var teste: TFDQuery;
 
   try
-    aControllerModulo.BuscaTabelaModulos;
+    teste := aControllerProblema.CarregaDadosProblema(gridProblemas.Columns[0].Field.Value);
+    edtTituloProblema.Text := teste.FieldByName('TITULO').AsString;
+    mmDetalhesProblema.Text := teste.FieldByName('DETALHES').AsString;
   finally
-
+    aControllerProblema.Free;
   end;
-end;
-
-procedure TformPrincipal.CarregaGridProblemasPorModulo;
-begin
-
 end;
 
 end.

@@ -2,14 +2,14 @@ unit uControllerModulo;
 
 interface
 
-uses uServiceModulo, System.Generics.Collections, uModulo;
+uses DAOModulo, FireDAC.Comp.Client, Data.DB;
 
 type
   TControllerModulo = class
   private
-    FServiceModulo: TServiceModulo;
+    FDAOModulo: TDAOModulo;
   public
-    function BuscaTabelaModulos: TList<TModulo>;
+    function BuscaTabelaModulos: TFDQuery;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -18,19 +18,19 @@ implementation
 
 { TControllerModulo }
 
-function TControllerModulo.BuscaTabelaModulos: TList<TModulo>;
+function TControllerModulo.BuscaTabelaModulos: TFDQuery;
 begin
-  Result := FServiceModulo.BuscaTabelaModulos;
+  Result := FDAOModulo.BuscaTabelaModulos;
 end;
 
 constructor TControllerModulo.Create;
 begin
-  FServiceModulo := TServiceModulo.Create;
+  FDAOModulo := TDAOModulo.Create;
 end;
 
 destructor TControllerModulo.Destroy;
 begin
-  FServiceModulo.Free;
+  FDAOModulo.Free;
   inherited;
 end;
 
