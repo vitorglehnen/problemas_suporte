@@ -2,14 +2,15 @@ unit uControllerModulo;
 
 interface
 
-uses uServiceModulo, System.Generics.Collections, uModulo;
+uses uServiceModulo, System.Generics.Collections, uModulo, Datasnap.DBClient,
+  Data.DB;
 
 type
   TControllerModulo = class
   private
     FServiceModulo: TServiceModulo;
   public
-    function BuscaTabelaModulos: TList<TModulo>;
+    function BuscaTabelaModulos: TDataSource;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -18,7 +19,7 @@ implementation
 
 { TControllerModulo }
 
-function TControllerModulo.BuscaTabelaModulos: TList<TModulo>;
+function TControllerModulo.BuscaTabelaModulos: TDataSource;
 begin
   Result := FServiceModulo.BuscaTabelaModulos;
 end;

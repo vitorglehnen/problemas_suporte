@@ -3,16 +3,16 @@ unit DAOModulo;
 interface
 
 uses uConexao, uModulo, FireDAC.Comp.Client, Vcl.Dialogs, System.Generics.Collections,
-  Vcl.DBCtrls;
+  Vcl.DBCtrls, DBClient, Data.DB;
 
 type
   TDAOModulo = Class
   private
     FConn: TConexao;
     FQuery: TFDQuery;
-    FModulo: TModulo;
+    FDataSource: TDataSource;
   public
-    function BuscaTabelaModulos : TList<TModulo>;
+    function BuscaTabelaModulos : TDataSource;
     constructor Create;
     destructor Destroy; override;
   End;
@@ -21,38 +21,28 @@ implementation
 
 { TDAOModulo }
 
-function TDAOModulo.BuscaTabelaModulos : TList<TModulo>;
+function TDAOModulo.BuscaTabelaModulos : TDataSource;
 begin
-  var aListModulo: TList<TModulo>:= TList<TModulo>.Create;
   FQuery:= FConn.CriarQuery;
 
-  try
-    FQuery.Open('SELECT nome FROM modulos ORDER BY nome');
+  FQuery.Open('SELECT nome FROM modulos ORDER BY nome');
 
-    while not FQuery.Eof do
-    begin
-      FModulo.Nome:= FQuery.FieldByName('nome').AsString;
-      aListModulo.Add(FModulo);
-      FQuery.Next;
-    end;
+  FDataSource.DataSet := FQuery;
 
-    Result := aListModulo;
-  finally
-    aListModulo.Free;
-  end;
+  Result := FDataSource;
 end;
 
 constructor TDAOModulo.Create;
 begin
   FConn:= TConexao.Create;
-  FModulo:= TModulo.Create;
+  FDataSource:= TDataSource.Create(nil);
 end;
 
 destructor TDAOModulo.Destroy;
 begin
   FConn.Free;
-  FModulo.Free;
   FQuery.Free;
+  FDataSource.Free;
   inherited;
 end;
 

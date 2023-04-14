@@ -44,7 +44,7 @@ uses
   pngimage,
   System.Generics.Collections,
   Data.DB,
-  Data.DBXCommon, Vcl.ComCtrls;
+  Data.DBXCommon, Vcl.ComCtrls, uControllerModulo, uControllerProblema;
 
 type
   TformPrincipal = class(TForm)
@@ -107,17 +107,18 @@ type
     mmSolucaoProblema: TMemo;
     mmDetalhesProblema: TMemo;
     gridProblemas: TDBGrid;
-    tbModulos: TFDMemTable;
     dsModulos: TDataSource;
-    ListView1: TListView;
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
 
   private
     { Private declarations }
+    FControllerModulo: TControllerModulo;
+    FControllerProblema: TControllerProblema;
     procedure CarregaGridProblemasPorModulo;
     procedure CarregaDadosProblemas;
     procedure CarregaGridModulos;
     procedure CarregaTbProblemasPorModulo;
-
   public
     { Public declarations }
   end;
@@ -130,10 +131,23 @@ implementation
 {$R *.dfm}
 
 uses
-  uControllerProblema, uControllerModulo, uModulo;
+  uModulo;
 
 procedure TformPrincipal.CarregaTbProblemasPorModulo;
 begin
+end;
+
+procedure TformPrincipal.FormCreate(Sender: TObject);
+begin
+  FControllerModulo:= TControllerModulo.Create;
+  FControllerProblema:= TControllerProblema.Create;
+
+  CarregaGridModulos;
+end;
+
+procedure TformPrincipal.FormDestroy(Sender: TObject);
+begin
+  FControllerModulo.Free;
 end;
 
 procedure TformPrincipal.CarregaDadosProblemas;
@@ -142,13 +156,12 @@ end;
 
 procedure TformPrincipal.CarregaGridModulos;
 begin
-  var aControllerModulo : TControllerModulo:= TControllerModulo.Create;
-  var aListaModulo: TList<TModulo>;
+  gridModulos.DataSource:= FControllerModulo.BuscaTabelaModulos;
 end;
 
 procedure TformPrincipal.CarregaGridProblemasPorModulo;
 begin
-
+  gridProblemas.DataSource:= FControllerProblema.
 end;
 
 end.

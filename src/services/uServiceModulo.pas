@@ -3,14 +3,14 @@ unit uServiceModulo;
 interface
 
 uses
-  DAOModulo, uModulo, System.Generics.Collections;
+  DAOModulo, uModulo, System.Generics.Collections, Datasnap.DBClient, Data.DB;
 
 type
   TServiceModulo = class
   private
     FDaoModulo: TDaoModulo;
   public
-    function BuscaTabelaModulos: TList<TModulo>;
+    function BuscaTabelaModulos: TDataSource;
 
     constructor Create;
     destructor Destroy; override;
@@ -20,7 +20,7 @@ implementation
 
 { TServiceModulo }
 
-function TServiceModulo.BuscaTabelaModulos: TList<TModulo>;
+function TServiceModulo.BuscaTabelaModulos: TDataSource;
 begin
   Result := FDaoModulo.BuscaTabelaModulos;
 end;

@@ -9,7 +9,8 @@ uses
   DAOProblema in 'src\model\DAO\DAOProblema.pas',
   uControllerProblema in 'src\controller\uControllerProblema.pas',
   uControllerModulo in 'src\controller\uControllerModulo.pas',
-  uServiceModulo in 'src\services\uServiceModulo.pas';
+  uServiceModulo in 'src\services\uServiceModulo.pas',
+  uServiceProblema in 'src\services\uServiceProblema.pas';
 
 {$R *.res}
 begin
