@@ -65,6 +65,7 @@ destructor TDAOProblema.Destroy;
 begin
   FConn.Free;
   FDataSource.Free;
+  FQuery.Free;
   inherited;
 end;
 

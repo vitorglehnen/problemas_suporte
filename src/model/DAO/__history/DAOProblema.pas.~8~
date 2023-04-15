@@ -3,17 +3,16 @@ unit DAOProblema;
 interface
 
 uses
-  FireDAC.Comp.Client, uConexao, Data.DB;
+  FireDAC.Comp.Client, uConexao;
 
 type
   TDAOProblema = class
   private
     FConn: TConexao;
     FQuery: TFDQuery;
-    FDataSource: TDataSource;
   public
-    function TabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
-    function CarregaDadosProblema(aTituloProblema: String): TDataSource;
+    function TabelaProblemasPorModulo(aNomeModulo: String): TFDQuery;
+    function CarregaDadosProblema(aTituloProblema: String): TFDQuery;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -25,7 +24,7 @@ uses
 
 { TDAOProblemas }
 
-function TDAOProblema.TabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
+function TDAOProblema.TabelaProblemasPorModulo(aNomeModulo: String): TFDQuery;
 begin
   FQuery := FConn.CriarQuery;
 
@@ -37,12 +36,10 @@ begin
   FQuery.Open;
   FQuery.FetchAll;
 
-  FDataSource.DataSet := FQuery;
-
-  Result := FDataSource;
+  Result := FQuery;
 end;
 
-function TDAOProblema.CarregaDadosProblema(aTituloProblema: String): TDataSource;
+function TDAOProblema.CarregaDadosProblema(aTituloProblema: String): TFDQuery;
 begin
   FQuery:= FConn.CriarQuery;
 
@@ -50,21 +47,18 @@ begin
   FQuery.ParamByName('TituloProblema').AsString:= UpperCase(aTituloProblema);
   FQuery.Open;
 
-  FDataSource.DataSet := FQuery;
-
-  Result:= FDataSource;
+  Result:= FQuery;
 end;
 
 constructor TDAOProblema.Create;
 begin
   FConn := TConexao.Create;
-  FDataSource := TDataSource.Create(nil);
 end;
 
 destructor TDAOProblema.Destroy;
 begin
   FConn.Free;
-  FDataSource.Free;
+  FQuery.Free;
   inherited;
 end;
 

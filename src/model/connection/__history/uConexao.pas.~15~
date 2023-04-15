@@ -26,7 +26,6 @@ type
   TConexao = class
   private
     FConn: TFDConnection;
-    FQuery: TFDQuery;
 
     procedure ConfigConexao;
     procedure CriarConnectIniFile;
@@ -67,7 +66,6 @@ end;
 constructor TConexao.Create;
 begin
   FConn := TFDConnection.Create(nil);
-  FQuery := TFDQuery.Create(nil);
 
   CriarConnectIniFile;
   ConfigConexao;
@@ -92,15 +90,16 @@ end;
 
 function TConexao.CriarQuery: TFDQuery;
 begin
-  FQuery.Connection := FConn;
+  var
+    aQuery: TFDQuery := TFDQuery.Create(nil);
+  aQuery.Connection := FConn;
 
-  Result := FQuery;
+  Result := aQuery;
 end;
 
 destructor TConexao.Destroy;
 begin
   FConn.Free;
-  FQuery.Free;
   inherited;
 end;
 

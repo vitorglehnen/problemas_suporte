@@ -8,9 +8,9 @@ uses
 type
   TServiceProblema = class
   private
-    FDAOProblema: TDAOProblema;
+    FDaoProblema: TDAOProblema;
   public
-    function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
+    function BuscaTabelaProblemasPorModulo: TDataSource;
 
     constructor Create;
     destructor Destroy; override;
@@ -20,19 +20,19 @@ implementation
 
 { TServiceProblema }
 
-function TServiceProblema.BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
+function TServiceProblema.BuscaTabelaProblemasPorModulo: TDataSource;
 begin
-  Result := FDAOProblema.TabelaProblemasPorModulo(aNomeModulo);
+  Result := FDaoProblema.TabelaProblemasPorModulo();
 end;
 
 constructor TServiceProblema.Create;
 begin
-  FDAOProblema:= TDAOProblema.Create;
+  FDaoProblema:= TDAOProblema.Create;
 end;
 
 destructor TServiceProblema.Destroy;
 begin
-  FDAOProblema.Free;
+  FDaoProblema.Free;
   inherited;
 end;
 

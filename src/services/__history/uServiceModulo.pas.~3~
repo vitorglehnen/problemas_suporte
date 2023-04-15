@@ -11,7 +11,7 @@ type
     FDaoModulo: TDaoModulo;
   public
     function BuscaTabelaModulos: TDataSource;
-    procedure InsertModulo(aNomeModulo:String);
+
     constructor Create;
     destructor Destroy; override;
   end;
@@ -34,11 +34,6 @@ destructor TServiceModulo.Destroy;
 begin
   FDaoModulo.Free;
   inherited;
-end;
-
-procedure TServiceModulo.InsertModulo(aNomeModulo:String);
-begin
-  FDaoModulo.InsertModulo(aNomeModulo);
 end;
 
 end.

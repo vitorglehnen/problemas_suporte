@@ -107,9 +107,12 @@ type
     mmSolucaoProblema: TMemo;
     mmDetalhesProblema: TMemo;
     gridProblemas: TDBGrid;
-    dsModulos: TDataSource;
+    edtNomeModulo: TLabeledEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure btnNovoModuloClick(Sender: TObject);
+    procedure gridModulosCellClick(Column: TColumn);
+    procedure btnSalvarModuloClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -139,15 +142,40 @@ end;
 
 procedure TformPrincipal.FormCreate(Sender: TObject);
 begin
-  FControllerModulo:= TControllerModulo.Create;
-  FControllerProblema:= TControllerProblema.Create;
+  FControllerModulo := TControllerModulo.Create;
+  FControllerProblema := TControllerProblema.Create;
 
   CarregaGridModulos;
+  CarregaGridProblemasPorModulo;
 end;
 
 procedure TformPrincipal.FormDestroy(Sender: TObject);
 begin
+  FControllerProblema.Free;
   FControllerModulo.Free;
+end;
+
+procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
+begin
+  CarregaGridProblemasPorModulo;
+end;
+
+procedure TformPrincipal.btnNovoModuloClick(Sender: TObject);
+begin
+  edtNomeModulo.SetFocus;
+  edtNomeModulo.Text := '';
+
+  btnSalvarModulo.Enabled := True;
+  btnCancelarModulo.Enabled := True;
+  btnNovoModulo.Enabled := False;
+  btnExcluirModulo.Enabled := False;
+end;
+
+procedure TformPrincipal.btnSalvarModuloClick(Sender: TObject);
+begin
+  FControllerModulo.InsertModulo(edtNomeModulo.Text);
+
+  CarregaGridModulos;
 end;
 
 procedure TformPrincipal.CarregaDadosProblemas;
@@ -156,12 +184,18 @@ end;
 
 procedure TformPrincipal.CarregaGridModulos;
 begin
-  gridModulos.DataSource:= FControllerModulo.BuscaTabelaModulos;
+  gridModulos.DataSource := FControllerModulo.BuscaTabelaModulos;
 end;
 
 procedure TformPrincipal.CarregaGridProblemasPorModulo;
 begin
-  gridProblemas.DataSource:= FControllerProblema.
+  var
+    aNomeModulo: String := gridModulos.Columns[0].Field.Value;
+
+  gridProblemas.DataSource := FControllerProblema
+                              .BuscaTabelaProblemasPorModulo(aNomeModulo);
+
+  edtNomeModulo.Text := aNomeModulo;
 end;
 
 end.

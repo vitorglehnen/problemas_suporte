@@ -3,8 +3,8 @@ object formPrincipal: TformPrincipal
   Top = 0
   Align = alClient
   AutoSize = True
-  Caption = 'Suporte'
-  ClientHeight = 1061
+  Caption = 'Problemas Suporte'
+  ClientHeight = 749
   ClientWidth = 1920
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,13 +17,14 @@ object formPrincipal: TformPrincipal
   Position = poScreenCenter
   WindowState = wsMaximized
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object pnlPrincipal: TPanel
     Left = 0
     Top = 0
     Width = 1920
-    Height = 1061
+    Height = 749
     Align = alClient
     AutoSize = True
     TabOrder = 0
@@ -31,7 +32,7 @@ object formPrincipal: TformPrincipal
       Left = 1
       Top = 1
       Width = 512
-      Height = 1059
+      Height = 747
       Align = alLeft
       Caption = 'pnlBodyModulosProblemas'
       TabOrder = 0
@@ -39,7 +40,7 @@ object formPrincipal: TformPrincipal
         Left = 242
         Top = 1
         Width = 269
-        Height = 1057
+        Height = 745
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
@@ -204,7 +205,7 @@ object formPrincipal: TformPrincipal
           Left = 0
           Top = 257
           Width = 269
-          Height = 800
+          Height = 488
           Align = alClient
           Color = clWhite
           ParentBackground = False
@@ -213,11 +214,10 @@ object formPrincipal: TformPrincipal
             Left = 1
             Top = 1
             Width = 267
-            Height = 798
+            Height = 486
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
-            DataSource = dsProblemas
             DrawingStyle = gdsGradient
             GradientEndColor = clBtnFace
             Font.Charset = DEFAULT_CHARSET
@@ -241,7 +241,7 @@ object formPrincipal: TformPrincipal
         Left = 1
         Top = 1
         Width = 241
-        Height = 1057
+        Height = 745
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
@@ -364,7 +364,7 @@ object formPrincipal: TformPrincipal
           Left = 0
           Top = 257
           Width = 241
-          Height = 800
+          Height = 488
           Align = alClient
           Color = clWhite
           ParentBackground = False
@@ -373,7 +373,7 @@ object formPrincipal: TformPrincipal
             Left = 1
             Top = 1
             Width = 239
-            Height = 798
+            Height = 486
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
@@ -388,13 +388,13 @@ object formPrincipal: TformPrincipal
             ImeMode = imSAlpha
             Options = [dgEditing, dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
+            ReadOnly = True
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
             TitleFont.Height = -11
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
-            OnCellClick = gridModulosCellClick
           end
         end
       end
@@ -403,7 +403,7 @@ object formPrincipal: TformPrincipal
       Left = 513
       Top = 1
       Width = 1406
-      Height = 1059
+      Height = 747
       Align = alClient
       ActiveCard = pnlCadastroProblema
       AutoSize = True
@@ -412,7 +412,7 @@ object formPrincipal: TformPrincipal
         Left = 1
         Top = 1
         Width = 1404
-        Height = 1057
+        Height = 745
         Caption = 'pnlCadastroProblema'
         CardIndex = 0
         TabOrder = 0
@@ -420,7 +420,7 @@ object formPrincipal: TformPrincipal
           Left = 0
           Top = 0
           Width = 1404
-          Height = 1057
+          Height = 745
           Align = alClient
           AutoSize = True
           BevelOuter = bvNone
@@ -641,7 +641,7 @@ object formPrincipal: TformPrincipal
             Left = 0
             Top = 385
             Width = 1404
-            Height = 672
+            Height = 360
             Align = alClient
             AutoSize = True
             BevelOuter = bvNone
@@ -652,7 +652,7 @@ object formPrincipal: TformPrincipal
               Left = 30
               Top = 0
               Width = 1124
-              Height = 672
+              Height = 360
               Align = alClient
               AutoSize = True
               BevelOuter = bvNone
@@ -677,7 +677,7 @@ object formPrincipal: TformPrincipal
                 Left = 0
                 Top = 17
                 Width = 1124
-                Height = 635
+                Height = 323
                 Align = alClient
                 TabOrder = 0
               end
@@ -687,40 +687,8 @@ object formPrincipal: TformPrincipal
       end
     end
   end
-  object OpenDialog1: TOpenDialog
-    Left = 4
-    Top = 1
-  end
-  object tbModulos: TFDMemTable
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    Left = 10
-    Top = 304
-  end
   object dsModulos: TDataSource
-    DataSet = tbModulos
-    Left = 10
-    Top = 355
-  end
-  object tbProblemas: TFDMemTable
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    Left = 258
-    Top = 304
-  end
-  object dsProblemas: TDataSource
-    DataSet = tbProblemas
-    Left = 258
+    Left = 26
     Top = 355
   end
 end

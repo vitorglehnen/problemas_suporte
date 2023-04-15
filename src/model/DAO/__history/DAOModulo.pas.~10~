@@ -13,7 +13,6 @@ type
     FDataSource: TDataSource;
   public
     function BuscaTabelaModulos : TDataSource;
-    procedure InsertModulo(aNomeModulo:String);
     constructor Create;
     destructor Destroy; override;
   End;
@@ -25,8 +24,9 @@ implementation
 function TDAOModulo.BuscaTabelaModulos : TDataSource;
 begin
   FQuery:= FConn.CriarQuery;
-  
+
   FQuery.Open('SELECT nome FROM modulos ORDER BY nome');
+
   FDataSource.DataSet := FQuery;
 
   Result := FDataSource;
@@ -41,15 +41,9 @@ end;
 destructor TDAOModulo.Destroy;
 begin
   FConn.Free;
+  FQuery.Free;
   FDataSource.Free;
   inherited;
-end;
-
-procedure TDAOModulo.InsertModulo(aNomeModulo:String);
-begin
-  FQuery := FConn.CriarQuery;
-
-  FQuery.ExecSQL('insert into modulos (nome) values (:nome)', [aNomeModulo]); 
 end;
 
 end.
