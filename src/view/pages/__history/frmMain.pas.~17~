@@ -12,7 +12,6 @@ uses
   Vcl.Controls,
   Vcl.Forms,
   Vcl.Dialogs,
-  Data.DB,
   Vcl.Grids,
   Vcl.DBGrids,
   Vcl.ExtCtrls,
@@ -42,12 +41,13 @@ uses
   Vcl.FileCtrl,
   Vcl.Clipbrd,
   jpeg,
-  pngimage;
+  pngimage,
+  System.Generics.Collections,
+  Data.DB,
+  Data.DBXCommon, Vcl.ComCtrls, uControllerModulo, uControllerProblema;
 
 type
   TformPrincipal = class(TForm)
-
-    gridProblemas: TDBGrid;
     gridModulos: TDBGrid;
     btnNovoProblema: TSpeedButton;
     btnSalvarProblema: TSpeedButton;
@@ -106,18 +106,22 @@ type
     cbModulo: TComboBox;
     mmSolucaoProblema: TMemo;
     mmDetalhesProblema: TMemo;
-    OpenDialog1: TOpenDialog;
-    tbModulos: TFDMemTable;
-    dsModulos: TDataSource;
-    tbProblemas: TFDMemTable;
-    dsProblemas: TDataSource;
+    gridProblemas: TDBGrid;
+    edtNomeModulo: TLabeledEdit;
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure btnNovoModuloClick(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
+    procedure btnSalvarModuloClick(Sender: TObject);
 
   private
     { Private declarations }
-    procedure BuscaTbProblemasPorModulo;
-
+    FControllerModulo: TControllerModulo;
+    FControllerProblema: TControllerProblema;
+    procedure CarregaGridProblemasPorModulo;
+    procedure CarregaDadosProblemas;
+    procedure CarregaGridModulos;
+    procedure CarregaTbProblemasPorModulo;
   public
     { Public declarations }
   end;
@@ -130,42 +134,68 @@ implementation
 {$R *.dfm}
 
 uses
-  uControllerProblema, uControllerModulo;
+  uModulo;
+
+procedure TformPrincipal.CarregaTbProblemasPorModulo;
+begin
+end;
 
 procedure TformPrincipal.FormCreate(Sender: TObject);
-var
-  aControllerModulo: TControllerModulo;
 begin
-  aControllerModulo := TControllerModulo.Create;
+  FControllerModulo := TControllerModulo.Create;
+  FControllerProblema := TControllerProblema.Create;
 
-  try
-    tbModulos.Data := aControllerModulo.BuscaTabelaModulos.Data;
-    BuscaTbProblemasPorModulo;
-  finally
-    aControllerModulo.Free;
-  end;
+  CarregaGridModulos;
+  CarregaGridProblemasPorModulo;
+end;
+
+procedure TformPrincipal.FormDestroy(Sender: TObject);
+begin
+  FControllerProblema.Free;
+  FControllerModulo.Free;
 end;
 
 procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
 begin
-  BuscaTbProblemasPorModulo;
+  CarregaGridProblemasPorModulo;
 end;
 
-procedure TformPrincipal.BuscaTbProblemasPorModulo;
-var
-  aControllerProblema: TControllerProblema;
-  aModuloSelecionado: String;
+procedure TformPrincipal.btnNovoModuloClick(Sender: TObject);
 begin
-  aControllerProblema := TControllerProblema.Create;
-  aModuloSelecionado := gridModulos.Columns[0].Field.Value;
+  edtNomeModulo.SetFocus;
+  edtNomeModulo.Text := '';
 
-  try
-    tbProblemas.Close;
-    tbProblemas.Data := aControllerProblema.TabelaProblemasPorModulo
-      (aModuloSelecionado).Data;
-  finally
-    aControllerProblema.Free;
-  end;
+  btnSalvarModulo.Enabled := True;
+  btnCancelarModulo.Enabled := True;
+  btnNovoModulo.Enabled := False;
+  btnExcluirModulo.Enabled := False;
+end;
+
+procedure TformPrincipal.btnSalvarModuloClick(Sender: TObject);
+begin
+  FControllerModulo.InsertModulo(edtNomeModulo.Text);
+
+  CarregaGridModulos;
+end;
+
+procedure TformPrincipal.CarregaDadosProblemas;
+begin
+end;
+
+procedure TformPrincipal.CarregaGridModulos;
+begin
+  gridModulos.DataSource := FControllerModulo.BuscaTabelaModulos;
+end;
+
+procedure TformPrincipal.CarregaGridProblemasPorModulo;
+begin
+  var
+    aNomeModulo: String := gridModulos.Columns[0].Field.Value;
+
+  gridProblemas.DataSource := FControllerProblema
+                              .BuscaTabelaProblemasPorModulo(aNomeModulo);
+
+  edtNomeModulo.Text := aNomeModulo;
 end;
 
 end.

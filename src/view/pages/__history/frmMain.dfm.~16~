@@ -3,7 +3,7 @@ object formPrincipal: TformPrincipal
   Top = 0
   Align = alClient
   AutoSize = True
-  Caption = 'Suporte'
+  Caption = 'Problemas Suporte'
   ClientHeight = 749
   ClientWidth = 1920
   Color = clBtnFace
@@ -17,6 +17,7 @@ object formPrincipal: TformPrincipal
   Position = poScreenCenter
   WindowState = wsMaximized
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object pnlPrincipal: TPanel
@@ -217,7 +218,6 @@ object formPrincipal: TformPrincipal
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
-            DataSource = dsProblemas
             DrawingStyle = gdsGradient
             GradientEndColor = clBtnFace
             Font.Charset = DEFAULT_CHARSET
@@ -284,9 +284,9 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alLeft
               Caption = 'Novo'
+              OnClick = btnNovoModuloClick
               ExplicitLeft = -5
-              ExplicitTop = -2
-              ExplicitHeight = 23
+              ExplicitTop = 5
             end
             object btnSalvarModulo: TSpeedButton
               Left = 49
@@ -295,7 +295,8 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alLeft
               Caption = 'Salvar'
-              ExplicitLeft = 55
+              Enabled = False
+              OnClick = btnSalvarModuloClick
               ExplicitTop = 5
             end
             object btnExcluirModulo: TSpeedButton
@@ -316,6 +317,7 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alRight
               Caption = 'Cancelar'
+              Enabled = False
               ExplicitLeft = 136
               ExplicitTop = -2
               ExplicitHeight = 23
@@ -358,6 +360,16 @@ object formPrincipal: TformPrincipal
                 TabOrder = 0
               end
             end
+            object edtNomeModulo: TLabeledEdit
+              Left = 9
+              Top = 88
+              Width = 217
+              Height = 21
+              EditLabel.Width = 79
+              EditLabel.Height = 13
+              EditLabel.Caption = 'Nome do m'#243'dulo'
+              TabOrder = 1
+            end
           end
         end
         object pnlGridModulos: TPanel
@@ -377,7 +389,6 @@ object formPrincipal: TformPrincipal
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
-            DataSource = dsModulos
             DrawingStyle = gdsGradient
             GradientEndColor = clBtnFace
             Font.Charset = DEFAULT_CHARSET
@@ -385,9 +396,9 @@ object formPrincipal: TformPrincipal
             Font.Height = -14
             Font.Name = 'Tahoma'
             Font.Style = []
-            ImeMode = imSAlpha
             Options = [dgEditing, dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
+            ReadOnly = True
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
@@ -686,41 +697,5 @@ object formPrincipal: TformPrincipal
         end
       end
     end
-  end
-  object OpenDialog1: TOpenDialog
-    Left = 4
-    Top = 1
-  end
-  object tbModulos: TFDMemTable
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    Left = 10
-    Top = 304
-  end
-  object dsModulos: TDataSource
-    DataSet = tbModulos
-    Left = 10
-    Top = 355
-  end
-  object tbProblemas: TFDMemTable
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    Left = 258
-    Top = 304
-  end
-  object dsProblemas: TDataSource
-    DataSet = tbProblemas
-    Left = 258
-    Top = 355
   end
 end

@@ -277,17 +277,6 @@ object formPrincipal: TformPrincipal
             Height = 27
             Align = alBottom
             TabOrder = 0
-            object btnNovoModulo: TSpeedButton
-              Left = 1
-              Top = 1
-              Width = 48
-              Height = 25
-              Align = alLeft
-              Caption = 'Novo'
-              OnClick = btnNovoModuloClick
-              ExplicitLeft = -5
-              ExplicitTop = 5
-            end
             object btnSalvarModulo: TSpeedButton
               Left = 49
               Top = 1
@@ -299,17 +288,6 @@ object formPrincipal: TformPrincipal
               OnClick = btnSalvarModuloClick
               ExplicitTop = 5
             end
-            object btnExcluirModulo: TSpeedButton
-              Left = 190
-              Top = 1
-              Width = 48
-              Height = 25
-              Align = alRight
-              Caption = 'Excluir'
-              ExplicitLeft = 188
-              ExplicitTop = -2
-              ExplicitHeight = 23
-            end
             object btnCancelarModulo: TSpeedButton
               Left = 142
               Top = 1
@@ -318,9 +296,30 @@ object formPrincipal: TformPrincipal
               Align = alRight
               Caption = 'Cancelar'
               Enabled = False
-              ExplicitLeft = 136
-              ExplicitTop = -2
-              ExplicitHeight = 23
+              ExplicitLeft = 118
+              ExplicitTop = 5
+            end
+            object btnEditarModulo: TSpeedButton
+              Left = 190
+              Top = 1
+              Width = 48
+              Height = 25
+              Align = alRight
+              Caption = 'Editar'
+              OnClick = btnEditarModuloClick
+              ExplicitLeft = 103
+              ExplicitTop = 5
+            end
+            object btnNovoModulo: TSpeedButton
+              Left = 1
+              Top = 1
+              Width = 48
+              Height = 25
+              Align = alLeft
+              Caption = 'Novo'
+              OnClick = btnNovoModuloClick
+              ExplicitLeft = 9
+              ExplicitTop = 2
             end
           end
           object pnlBodyPesqModulo: TPanel
@@ -368,7 +367,9 @@ object formPrincipal: TformPrincipal
               EditLabel.Width = 79
               EditLabel.Height = 13
               EditLabel.Caption = 'Nome do m'#243'dulo'
+              Enabled = False
               TabOrder = 1
+              OnExit = edtNomeModuloExit
             end
           end
         end

@@ -53,9 +53,7 @@ type
     btnSalvarProblema: TSpeedButton;
     btnExcluirProblema: TSpeedButton;
     btnCancelarProblema: TSpeedButton;
-    btnNovoModulo: TSpeedButton;
     btnSalvarModulo: TSpeedButton;
-    btnExcluirModulo: TSpeedButton;
     btnCancelarModulo: TSpeedButton;
     lblTituloProblemas: TLabel;
     lblTituloModulo: TLabel;
@@ -108,16 +106,21 @@ type
     mmDetalhesProblema: TMemo;
     gridProblemas: TDBGrid;
     edtNomeModulo: TLabeledEdit;
+    btnEditarModulo: TSpeedButton;
+    btnNovoModulo: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnNovoModuloClick(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
     procedure btnSalvarModuloClick(Sender: TObject);
+    procedure edtNomeModuloExit(Sender: TObject);
+    procedure btnEditarModuloClick(Sender: TObject);
 
   private
     { Private declarations }
     FControllerModulo: TControllerModulo;
     FControllerProblema: TControllerProblema;
+    FEdicaoModulo: Boolean;
     procedure CarregaGridProblemasPorModulo;
     procedure CarregaDadosProblemas;
     procedure CarregaGridModulos;
@@ -140,6 +143,15 @@ procedure TformPrincipal.CarregaTbProblemasPorModulo;
 begin
 end;
 
+procedure TformPrincipal.edtNomeModuloExit(Sender: TObject);
+begin
+  btnNovoModulo.Enabled := True;
+  btnSalvarModulo.Enabled := False;
+  btnCancelarModulo.Enabled := False;
+  btnEditarModulo.Enabled := True;
+  edtNomeModulo.Enabled := False;
+end;
+
 procedure TformPrincipal.FormCreate(Sender: TObject);
 begin
   FControllerModulo := TControllerModulo.Create;
@@ -160,22 +172,46 @@ begin
   CarregaGridProblemasPorModulo;
 end;
 
+procedure TformPrincipal.btnEditarModuloClick(Sender: TObject);
+begin
+  btnNovoModulo.Enabled := False;
+  btnSalvarModulo.Enabled := True;
+  btnCancelarModulo.Enabled := True;
+  btnEditarModulo.Enabled := False;
+  edtNomeModulo.Enabled := True;
+
+  FEdicaoModulo := True;
+end;
+
 procedure TformPrincipal.btnNovoModuloClick(Sender: TObject);
 begin
+  btnNovoModulo.Enabled := False;
+  btnSalvarModulo.Enabled := True;
+  btnCancelarModulo.Enabled := True;
+  btnEditarModulo.Enabled := False;
+  edtNomeModulo.Enabled := True;
+
   edtNomeModulo.SetFocus;
   edtNomeModulo.Text := '';
 
-  btnSalvarModulo.Enabled := True;
-  btnCancelarModulo.Enabled := True;
-  btnNovoModulo.Enabled := False;
-  btnExcluirModulo.Enabled := False;
+  FEdicaoModulo := False;
 end;
 
 procedure TformPrincipal.btnSalvarModuloClick(Sender: TObject);
 begin
-  FControllerModulo.InsertModulo(edtNomeModulo.Text);
+  if FEdicaoModulo then
+    //
+  else
+    FControllerModulo.InsertModulo(edtNomeModulo.Text);
 
   CarregaGridModulos;
+  ShowMessage('Registro inserido com sucesso!');
+
+  btnNovoModulo.Enabled := True;
+  btnSalvarModulo.Enabled := False;
+  btnCancelarModulo.Enabled := False;
+  btnEditarModulo.Enabled := True;
+  edtNomeModulo.Enabled := False;
 end;
 
 procedure TformPrincipal.CarregaDadosProblemas;
@@ -184,7 +220,13 @@ end;
 
 procedure TformPrincipal.CarregaGridModulos;
 begin
+  var
+    aNomeModulo: String;
+
   gridModulos.DataSource := FControllerModulo.BuscaTabelaModulos;
+
+  aNomeModulo:= gridModulos.Columns[0].Field.Value;
+  edtNomeModulo.Text := aNomeModulo;
 end;
 
 procedure TformPrincipal.CarregaGridProblemasPorModulo;
