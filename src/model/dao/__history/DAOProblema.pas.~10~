@@ -12,7 +12,7 @@ type
     FQuery: TFDQuery;
     FDataSource: TDataSource;
   public
-    function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
+    function TabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
     function CarregaDadosProblema(aTituloProblema: String): TDataSource;
     constructor Create;
     destructor Destroy; override;
@@ -25,7 +25,7 @@ uses
 
 { TDAOProblemas }
 
-function TDAOProblema.BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
+function TDAOProblema.TabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
 begin
   FQuery := FConn.CriarQuery;
 

@@ -98,6 +98,7 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alLeft
               Caption = 'Novo(F3)'
+              OnClick = btnNovoProblemaClick
               ExplicitHeight = 23
             end
             object btnSalvarProblema: TSpeedButton
@@ -296,6 +297,7 @@ object formPrincipal: TformPrincipal
               Align = alRight
               Caption = 'Cancelar'
               Enabled = False
+              OnClick = btnCancelarModuloClick
               ExplicitLeft = 118
               ExplicitTop = 5
             end
@@ -364,6 +366,7 @@ object formPrincipal: TformPrincipal
               Top = 88
               Width = 217
               Height = 21
+              CharCase = ecUpperCase
               EditLabel.Width = 79
               EditLabel.Height = 13
               EditLabel.Caption = 'Nome do m'#243'dulo'
@@ -407,6 +410,7 @@ object formPrincipal: TformPrincipal
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
             OnCellClick = gridModulosCellClick
+            OnColExit = gridModulosColExit
           end
         end
       end
@@ -436,6 +440,7 @@ object formPrincipal: TformPrincipal
           Align = alClient
           AutoSize = True
           BevelOuter = bvNone
+          Enabled = False
           TabOrder = 0
           TabStop = True
           object pnlTopProblema: TPanel

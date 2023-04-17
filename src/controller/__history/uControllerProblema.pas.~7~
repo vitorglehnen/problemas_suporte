@@ -22,7 +22,7 @@ implementation
 
 function TControllerProblema.BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
 begin
-  Result := FDAOProblema.BuscaTabelaProblemasPorModulo(aNomeModulo);
+  Result := FDAOProblema.TabelaProblemasPorModulo(aNomeModulo);
 end;
 
 function TControllerProblema.CarregaDadosProblema(
