@@ -12,6 +12,7 @@ type
   public
     function BuscaTabelaModulos: TDataSource;
     procedure InsertModulo(aNomeModulo:String);
+    procedure UpdateModulo(aNomeModuloAnt: String; aNomeModuloAtt: String);
     constructor Create;
     destructor Destroy; override;
   end;
@@ -39,6 +40,12 @@ end;
 procedure TControllerModulo.InsertModulo(aNomeModulo: String);
 begin
   FServiceModulo.InsertModulo(aNomeModulo);
+end;
+
+procedure TControllerModulo.UpdateModulo(aNomeModuloAnt,
+  aNomeModuloAtt: String);
+begin
+  FServiceModulo.UpdateModulo(aNomeModuloAnt, aNomeModuloAtt);
 end;
 
 end.

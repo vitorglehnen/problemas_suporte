@@ -14,6 +14,7 @@ type
   public
     function BuscaTabelaModulos : TDataSource;
     procedure InsertModulo(aNomeModulo:String);
+    procedure UpdateModulo(aNomeModuloAnt: String; aNomeModuloAtt: String);
     constructor Create;
     destructor Destroy; override;
   End;
@@ -50,6 +51,17 @@ begin
   FQuery := FConn.CriarQuery;
 
   FQuery.ExecSQL('insert into modulos (nome) values (:nome)', [aNomeModulo]); 
+end;
+
+procedure TDAOModulo.UpdateModulo(aNomeModuloAnt, aNomeModuloAtt: String);
+begin
+  FQuery := FConn.CriarQuery;
+
+  FQuery.SQL.Text := 'UPDATE modulos SET nome = :nomeAtt WHERE (nome = :nomeAnt)';
+  FQuery.ParamByName('nomeAtt').AsString := aNomeModuloAtt;
+  FQuery.ParamByName('nomeAnt').AsString := aNomeModuloAnt;
+
+  FQuery.ExecSQL;
 end;
 
 end.
