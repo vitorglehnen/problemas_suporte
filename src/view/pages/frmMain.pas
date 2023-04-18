@@ -110,14 +110,19 @@ type
     btnNovoModulo: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure btnNovoModuloClick(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
-    procedure btnSalvarModuloClick(Sender: TObject);
     procedure edtNomeModuloExit(Sender: TObject);
-    procedure btnEditarModuloClick(Sender: TObject);
-    procedure btnCancelarModuloClick(Sender: TObject);
     procedure gridModulosColExit(Sender: TObject);
-    procedure btnNovoProblemaClick(Sender: TObject);
+    procedure btnNovoModuloMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure btnCancelarModuloMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure btnSalvarModuloMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure btnEditarModuloMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure btnNovoProblemaMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
 
   private
     { Private declarations }
@@ -127,7 +132,8 @@ type
     procedure CarregaGridProblemasPorModulo;
     procedure CarregaDadosProblemas;
     procedure CarregaGridModulos;
-    procedure CarregaTbProblemasPorModulo;
+//    procedure CarregaTbProblemasPorModulo;
+    procedure InverteBotoesCrudProblema;
   public
     { Public declarations }
   end;
@@ -141,10 +147,6 @@ implementation
 
 uses
   uModulo;
-
-procedure TformPrincipal.CarregaTbProblemasPorModulo;
-begin
-end;
 
 procedure TformPrincipal.edtNomeModuloExit(Sender: TObject);
 begin
@@ -181,38 +183,36 @@ begin
   ShowMessage(gridModulos.Columns[0].Field.Value);
 end;
 
-procedure TformPrincipal.btnCancelarModuloClick(Sender: TObject);
+procedure TformPrincipal.InverteBotoesCrudProblema;
 begin
-  btnNovoModulo.Enabled := True;
-  btnSalvarModulo.Enabled := False;
-  btnCancelarModulo.Enabled := False;
-  btnEditarModulo.Enabled := True;
-  edtNomeModulo.Enabled := False;
-  gridModulos.Enabled := True;
+  btnNovoModulo.Enabled := not btnNovoModulo.Enabled;
+  btnSalvarModulo.Enabled := not btnSalvarModulo.Enabled;
+  btnCancelarModulo.Enabled := not btnCancelarModulo.Enabled;
+  btnEditarModulo.Enabled := not btnEditarModulo.Enabled;
+  edtNomeModulo.Enabled := not edtNomeModulo.Enabled;
+  gridModulos.Enabled := not gridModulos.Enabled;
+end;
+
+procedure TformPrincipal.btnCancelarModuloMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  InverteBotoesCrudProblema;
 
   edtNomeModulo.Text := gridModulos.Columns[0].Field.Value;
 end;
 
-procedure TformPrincipal.btnEditarModuloClick(Sender: TObject);
+procedure TformPrincipal.btnEditarModuloMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  btnNovoModulo.Enabled := False;
-  btnSalvarModulo.Enabled := True;
-  btnCancelarModulo.Enabled := True;
-  btnEditarModulo.Enabled := False;
-  edtNomeModulo.Enabled := True;
-  gridModulos.Enabled := False;
+  InverteBotoesCrudProblema;
 
   FEdicaoModulo := True;
 end;
 
-procedure TformPrincipal.btnNovoModuloClick(Sender: TObject);
+procedure TformPrincipal.btnNovoModuloMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  btnNovoModulo.Enabled := False;
-  btnSalvarModulo.Enabled := True;
-  btnCancelarModulo.Enabled := True;
-  btnEditarModulo.Enabled := False;
-  edtNomeModulo.Enabled := True;
-  gridModulos.Enabled := False;
+  InverteBotoesCrudProblema;
 
   edtNomeModulo.SetFocus;
   edtNomeModulo.Text := '';
@@ -220,20 +220,23 @@ begin
   FEdicaoModulo := False;
 end;
 
-procedure TformPrincipal.btnNovoProblemaClick(Sender: TObject);
+procedure TformPrincipal.btnNovoProblemaMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  var aTabelaModulos := FControllerModulo.BuscaTabelaModulos;
+  var aNomeModulos := FControllerModulo.BuscaTabelaModulos.DataSet;
+
   pnlProblemas.Enabled := True;
   edtTituloProblema.SetFocus;
 
-  while not FControllerModulo.BuscaTabelaModulos.DataSet.Eof do
+  while not aNomeModulos.Eof do
   begin
-    cbModulo.Items.Add(aTabelaModulos.DataSet.FieldByName('nome').Value);
-    ShowMessage(aTabelaModulos.DataSet.FieldByName('nome').Value);
+    cbModulo.Items.Add(aNomeModulos.FieldByName('nome').Value);
+    aNomeModulos.Next;
   end;
 end;
 
-procedure TformPrincipal.btnSalvarModuloClick(Sender: TObject);
+procedure TformPrincipal.btnSalvarModuloMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   if FEdicaoModulo then
   begin
@@ -244,13 +247,7 @@ begin
     FControllerModulo.InsertModulo(edtNomeModulo.Text);
 
   CarregaGridModulos;
-
-  btnNovoModulo.Enabled := True;
-  btnSalvarModulo.Enabled := False;
-  btnCancelarModulo.Enabled := False;
-  btnEditarModulo.Enabled := True;
-  edtNomeModulo.Enabled := False;
-  gridModulos.Enabled := True;
+  InverteBotoesCrudProblema;
 end;
 
 procedure TformPrincipal.CarregaDadosProblemas;
@@ -259,8 +256,7 @@ end;
 
 procedure TformPrincipal.CarregaGridModulos;
 begin
-  var
-    aNomeModulo: String;
+  var aNomeModulo: String;
 
   gridModulos.DataSource := FControllerModulo.BuscaTabelaModulos;
 
@@ -270,8 +266,7 @@ end;
 
 procedure TformPrincipal.CarregaGridProblemasPorModulo;
 begin
-  var
-    aNomeModulo: String := gridModulos.Columns[0].Field.Value;
+  var aNomeModulo: String := gridModulos.Columns[0].Field.Value;
 
   gridProblemas.DataSource := FControllerProblema
                               .BuscaTabelaProblemasPorModulo(aNomeModulo);

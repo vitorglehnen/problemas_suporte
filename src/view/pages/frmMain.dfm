@@ -98,7 +98,7 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alLeft
               Caption = 'Novo(F3)'
-              OnClick = btnNovoProblemaClick
+              OnMouseDown = btnNovoProblemaMouseDown
               ExplicitHeight = 23
             end
             object btnSalvarProblema: TSpeedButton
@@ -286,7 +286,7 @@ object formPrincipal: TformPrincipal
               Align = alLeft
               Caption = 'Salvar'
               Enabled = False
-              OnClick = btnSalvarModuloClick
+              OnMouseDown = btnSalvarModuloMouseDown
               ExplicitTop = 5
             end
             object btnCancelarModulo: TSpeedButton
@@ -297,7 +297,7 @@ object formPrincipal: TformPrincipal
               Align = alRight
               Caption = 'Cancelar'
               Enabled = False
-              OnClick = btnCancelarModuloClick
+              OnMouseDown = btnCancelarModuloMouseDown
               ExplicitLeft = 118
               ExplicitTop = 5
             end
@@ -308,8 +308,8 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alRight
               Caption = 'Editar'
-              OnClick = btnEditarModuloClick
-              ExplicitLeft = 103
+              OnMouseDown = btnEditarModuloMouseDown
+              ExplicitLeft = 188
               ExplicitTop = 5
             end
             object btnNovoModulo: TSpeedButton
@@ -319,7 +319,7 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alLeft
               Caption = 'Novo'
-              OnClick = btnNovoModuloClick
+              OnMouseDown = btnNovoModuloMouseDown
               ExplicitLeft = 9
               ExplicitTop = 2
             end
