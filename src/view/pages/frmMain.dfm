@@ -66,8 +66,8 @@ object formPrincipal: TformPrincipal
             Font.Style = [fsBold]
             ParentFont = False
             Layout = tlCenter
-            ExplicitWidth = 79
-            ExplicitHeight = 18
+            ExplicitLeft = 4
+            ExplicitTop = -4
           end
           object lblTotalDeProblemas: TLabel
             Left = 6
@@ -108,6 +108,8 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alLeft
               Caption = 'Salvar(F4)'
+              Enabled = False
+              OnMouseDown = btnSalvarProblemaMouseDown
               ExplicitLeft = 71
               ExplicitTop = -4
             end
@@ -123,12 +125,24 @@ object formPrincipal: TformPrincipal
               ExplicitHeight = 23
             end
             object btnCancelarProblema: TSpeedButton
-              Left = 170
+              Left = 122
               Top = 1
               Width = 48
               Height = 25
               Align = alRight
               Caption = 'Cancelar'
+              Enabled = False
+              OnMouseDown = btnCancelarProblemaMouseDown
+              ExplicitLeft = 106
+              ExplicitTop = 5
+            end
+            object btnEditarProblema: TSpeedButton
+              Left = 170
+              Top = 1
+              Width = 48
+              Height = 25
+              Align = alRight
+              Caption = 'Editar'
               ExplicitTop = 5
             end
           end
@@ -443,6 +457,7 @@ object formPrincipal: TformPrincipal
           Enabled = False
           TabOrder = 0
           TabStop = True
+          OnExit = pnlProblemasExit
           object pnlTopProblema: TPanel
             Left = 0
             Top = 0

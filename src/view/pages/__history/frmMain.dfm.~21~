@@ -16,6 +16,8 @@ object formPrincipal: TformPrincipal
   OldCreateOrder = False
   Position = poScreenCenter
   WindowState = wsMaximized
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object pnlPrincipal: TPanel
@@ -96,6 +98,7 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alLeft
               Caption = 'Novo(F3)'
+              OnMouseDown = btnNovoProblemaMouseDown
               ExplicitHeight = 23
             end
             object btnSalvarProblema: TSpeedButton
@@ -275,17 +278,6 @@ object formPrincipal: TformPrincipal
             Height = 27
             Align = alBottom
             TabOrder = 0
-            object btnNovoModulo: TSpeedButton
-              Left = 1
-              Top = 1
-              Width = 48
-              Height = 25
-              Align = alLeft
-              Caption = 'Novo'
-              ExplicitLeft = -5
-              ExplicitTop = -2
-              ExplicitHeight = 23
-            end
             object btnSalvarModulo: TSpeedButton
               Left = 49
               Top = 1
@@ -293,19 +285,9 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alLeft
               Caption = 'Salvar'
-              ExplicitLeft = 55
+              Enabled = False
+              OnMouseDown = btnSalvarModuloMouseDown
               ExplicitTop = 5
-            end
-            object btnExcluirModulo: TSpeedButton
-              Left = 190
-              Top = 1
-              Width = 48
-              Height = 25
-              Align = alRight
-              Caption = 'Excluir'
-              ExplicitLeft = 188
-              ExplicitTop = -2
-              ExplicitHeight = 23
             end
             object btnCancelarModulo: TSpeedButton
               Left = 142
@@ -314,9 +296,32 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alRight
               Caption = 'Cancelar'
-              ExplicitLeft = 136
-              ExplicitTop = -2
-              ExplicitHeight = 23
+              Enabled = False
+              OnMouseDown = btnCancelarModuloMouseDown
+              ExplicitLeft = 118
+              ExplicitTop = 5
+            end
+            object btnEditarModulo: TSpeedButton
+              Left = 190
+              Top = 1
+              Width = 48
+              Height = 25
+              Align = alRight
+              Caption = 'Editar'
+              OnMouseDown = btnEditarModuloMouseDown
+              ExplicitLeft = 188
+              ExplicitTop = 5
+            end
+            object btnNovoModulo: TSpeedButton
+              Left = 1
+              Top = 1
+              Width = 48
+              Height = 25
+              Align = alLeft
+              Caption = 'Novo'
+              OnMouseDown = btnNovoModuloMouseDown
+              ExplicitLeft = 9
+              ExplicitTop = 2
             end
           end
           object pnlBodyPesqModulo: TPanel
@@ -356,6 +361,19 @@ object formPrincipal: TformPrincipal
                 TabOrder = 0
               end
             end
+            object edtNomeModulo: TLabeledEdit
+              Left = 9
+              Top = 88
+              Width = 217
+              Height = 21
+              CharCase = ecUpperCase
+              EditLabel.Width = 79
+              EditLabel.Height = 13
+              EditLabel.Caption = 'Nome do m'#243'dulo'
+              Enabled = False
+              TabOrder = 1
+              OnExit = edtNomeModuloExit
+            end
           end
         end
         object pnlGridModulos: TPanel
@@ -375,7 +393,6 @@ object formPrincipal: TformPrincipal
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
-            DataSource = dsModulos
             DrawingStyle = gdsGradient
             GradientEndColor = clBtnFace
             Font.Charset = DEFAULT_CHARSET
@@ -383,15 +400,17 @@ object formPrincipal: TformPrincipal
             Font.Height = -14
             Font.Name = 'Tahoma'
             Font.Style = []
-            ImeMode = imSAlpha
             Options = [dgEditing, dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
+            ReadOnly = True
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
             TitleFont.Height = -11
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
+            OnCellClick = gridModulosCellClick
+            OnColExit = gridModulosColExit
           end
         end
       end
@@ -421,6 +440,7 @@ object formPrincipal: TformPrincipal
           Align = alClient
           AutoSize = True
           BevelOuter = bvNone
+          Enabled = False
           TabOrder = 0
           TabStop = True
           object pnlTopProblema: TPanel
@@ -632,14 +652,6 @@ object formPrincipal: TformPrincipal
                 Align = alClient
                 TabOrder = 0
               end
-              object ListView1: TListView
-                Left = 17
-                Top = 79
-                Width = 250
-                Height = 150
-                Columns = <>
-                TabOrder = 1
-              end
             end
           end
           object pnlBodySolucaoProblema: TPanel
@@ -691,21 +703,5 @@ object formPrincipal: TformPrincipal
         end
       end
     end
-  end
-  object tbModulos: TFDMemTable
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    Left = 26
-    Top = 307
-  end
-  object dsModulos: TDataSource
-    DataSet = tbModulos
-    Left = 26
-    Top = 355
   end
 end
