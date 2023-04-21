@@ -3,16 +3,15 @@ unit uControllerProblema;
 interface
 
 uses
-  FireDAC.Comp.Client, Data.DB, uProblema, uServiceProblema;
+  FireDAC.Comp.Client, DAOProblema, Data.DB;
 
 type
   TControllerProblema = class
   private
-    FServiceProblema: TDAOProblema;
+    FDAOProblema: TDAOProblema;
   public
     function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
     function CarregaDadosProblema(aTituloProblema: String): TDataSource;
-    procedure InsertProblema(aProblema: TProblema);
     constructor Create;
     destructor Destroy; override;
   end;
@@ -23,29 +22,24 @@ implementation
 
 function TControllerProblema.BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
 begin
-  Result := FServiceProblema.BuscaTabelaProblemasPorModulo(aNomeModulo);
+  Result := FDAOProblema.BuscaTabelaProblemasPorModulo(aNomeModulo);
 end;
 
 function TControllerProblema.CarregaDadosProblema(
   aTituloProblema: String): TDataSource;
 begin
-  Result:= FServiceProblema.CarregaDadosProblema(aTituloProblema);
+  Result:= FDAOProblema.CarregaDadosProblema(aTituloProblema);
 end;
 
 constructor TControllerProblema.Create;
 begin
-  FServiceProblema := TServiceProblema.Create;
+  FDAOProblema := TDAOProblema.Create;
 end;
 
 destructor TControllerProblema.Destroy;
 begin
-  FServiceProblema.Free;
+  FDAOProblema.Free;
   inherited;
-end;
-
-procedure TControllerProblema.InsertProblema(aProblema: TProblema);
-begin
-
 end;
 
 end.

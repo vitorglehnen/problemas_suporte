@@ -66,8 +66,8 @@ object formPrincipal: TformPrincipal
             Font.Style = [fsBold]
             ParentFont = False
             Layout = tlCenter
-            ExplicitLeft = 4
-            ExplicitTop = -4
+            ExplicitWidth = 79
+            ExplicitHeight = 18
           end
           object lblTotalDeProblemas: TLabel
             Left = 6
@@ -520,7 +520,7 @@ object formPrincipal: TformPrincipal
                 Left = 320
                 Top = 10
                 Width = 36
-                Height = 27
+                Height = 48
                 Align = alLeft
                 Caption = 'Data'
                 Font.Charset = DEFAULT_CHARSET
@@ -531,12 +531,14 @@ object formPrincipal: TformPrincipal
                 ParentFont = False
                 ExplicitHeight = 21
               end
-              object edtDataProblema: TEdit
+              object edtDataProblema: TDateTimePicker
                 Left = 320
                 Top = 37
-                Width = 112
+                Width = 97
                 Height = 21
-                Align = alBottom
+                Date = 45036.000000000000000000
+                Time = 0.894674131945066600
+                Enabled = False
                 TabOrder = 0
               end
             end
@@ -574,6 +576,7 @@ object formPrincipal: TformPrincipal
                 Width = 128
                 Height = 21
                 Align = alBottom
+                NumbersOnly = True
                 TabOrder = 0
               end
             end
@@ -589,6 +592,8 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Top = 20
             TabOrder = 1
+            ExplicitLeft = 2
+            ExplicitTop = 75
             object pnlModuloProblema: TPanel
               Left = 30
               Top = 20

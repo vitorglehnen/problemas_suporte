@@ -11,10 +11,8 @@ type
     FSolucao: String;
     FData: TDate;
     FHora: TTime;
-    FModulo: String;
   public
     property Titulo: String read FTitulo write FTitulo;
-    property Modulo: String read FModulo write FModulo;
     property Chamado: String read FChamado write FChamado;
     property Detalhes: String read FDetalhes write FDetalhes;
     property Solucao: String read FSolucao write FSolucao;

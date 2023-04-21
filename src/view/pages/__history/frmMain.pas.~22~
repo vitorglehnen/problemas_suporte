@@ -44,8 +44,7 @@ uses
   pngimage,
   System.Generics.Collections,
   Data.DB,
-  Data.DBXCommon, Vcl.ComCtrls, uControllerModulo, uControllerProblema,
-  uProblema;
+  Data.DBXCommon, Vcl.ComCtrls, uControllerModulo, uControllerProblema;
 
 type
   TformPrincipal = class(TForm)
@@ -311,18 +310,7 @@ end;
 procedure TformPrincipal.btnSalvarProblemaMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  var aProblema : TProblema:= TProblema.Create;
-
   InverteBotoesCrudProblemas;
-
-  aProblema.Titulo := edtTituloProblema.Text;
-  aProblema.Modulo := cbModulo.Text;
-  aProblema.Chamado := edtChamadoProblema.Text;
-  aProblema.Detalhes := mmDetalhesProblema.Text;
-  aProblema.Solucao := mmSolucaoProblema.Text;
-
-
-
 end;
 
 procedure TformPrincipal.CarregaDadosProblemas;
