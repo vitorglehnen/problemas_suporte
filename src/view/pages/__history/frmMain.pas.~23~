@@ -130,8 +130,6 @@ type
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure btnSalvarProblemaMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure rdbtnFiltroPesqProblemaClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
 
   private
     { Private declarations }
@@ -139,7 +137,6 @@ type
     FControllerProblema: TControllerProblema;
     FEdicaoModulo: Boolean;
     procedure CarregaGridProblemasPorModulo;
-    procedure CarregaGridProblemasTodos;
     procedure CarregaDadosProblemas;
     procedure CarregaGridModulos;
     // procedure CarregaTbProblemasPorModulo;
@@ -162,6 +159,18 @@ uses
 
 procedure TformPrincipal.edtNomeModuloExit(Sender: TObject);
 begin
+  // if edtNomeModulo.Text <> '' then
+  // if MessageDlg('Deseja sair sem salvar o registro?', mtConfirmation,
+  // [mbYes, mbNo], 0) = mrYes then
+  // begin
+  // btnNovoModulo.Enabled := True;
+  // btnSalvarModulo.Enabled := False;
+  // btnCancelarModulo.Enabled := False;
+  // btnEditarModulo.Enabled := True;
+  // edtNomeModulo.Enabled := False;
+  // gridModulos.Enabled := True;
+  // end;
+
   if not btnNovoModulo.Enabled then
   begin
     MessageBox(0, PChar('Salve ou cancele antes de continuar!'), 'Cadastro de módulos',
@@ -176,17 +185,13 @@ begin
   FControllerProblema := TControllerProblema.Create;
 
   CarregaGridModulos;
+  CarregaGridProblemasPorModulo;
 end;
 
 procedure TformPrincipal.FormDestroy(Sender: TObject);
 begin
   FControllerProblema.Free;
   FControllerModulo.Free;
-end;
-
-procedure TformPrincipal.FormShow(Sender: TObject);
-begin
-  edtPesqModulo.SetFocus;
 end;
 
 procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
@@ -244,28 +249,12 @@ begin
   end;
 end;
 
-procedure TformPrincipal.rdbtnFiltroPesqProblemaClick(Sender: TObject);
-begin
-  if rdbtnFiltroPesqProblema.ItemIndex = 0 then
-  begin
-    pnlBodyModulos.Visible := False;
-
-    CarregaGridProblemasTodos;
-  end
-  else if rdbtnFiltroPesqProblema.ItemIndex = 1 then
-  begin
-    pnlBodyModulos.Visible := True;
-
-    CarregaGridProblemasPorModulo;
-  end;
-end;
-
 procedure TformPrincipal.btnCancelarModuloMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   InverteBotoesCrudModulos;
 
-  //edtNomeModulo.Text := gridModulos.Columns[0].Field.Value;
+  edtNomeModulo.Text := gridModulos.Columns[0].Field.Value;
 end;
 
 procedure TformPrincipal.btnCancelarProblemaMouseDown(Sender: TObject;
@@ -301,13 +290,6 @@ begin
   pnlProblemas.Enabled := True;
   edtTituloProblema.SetFocus;
 
-  edtTituloProblema.Clear;
-  edtChamadoProblema.Clear;
-  edtDataProblema.Date := Date;
-  cbModulo.ItemIndex := -1;
-  mmSolucaoProblema.Clear;
-  mmDetalhesProblema.Clear;
-
   PreencheCbxModulos;
 end;
 
@@ -333,17 +315,14 @@ begin
 
   InverteBotoesCrudProblemas;
 
-  try
-    aProblema.Titulo := edtTituloProblema.Text;
-    aProblema.Modulo := cbModulo.Text;
-    aProblema.Chamado := edtChamadoProblema.Text;
-    aProblema.Detalhes := mmDetalhesProblema.Text;
-    aProblema.Solucao := mmSolucaoProblema.Text;
+  aProblema.Titulo := edtTituloProblema.Text;
+  aProblema.Modulo := cbModulo.Text;
+  aProblema.Chamado := edtChamadoProblema.Text;
+  aProblema.Detalhes := mmDetalhesProblema.Text;
+  aProblema.Solucao := mmSolucaoProblema.Text;
 
-    FControllerProblema.InsertProblema(aProblema);
-  finally
-    aProblema.Free;
-  end;
+
+
 end;
 
 procedure TformPrincipal.CarregaDadosProblemas;
@@ -355,12 +334,10 @@ begin
   var
     aNomeModulo: String;
 
-  if FControllerModulo.BuscaTabelaModulos.DataSet.RecordCount > 0 then
-  begin
-    gridModulos.DataSource := FControllerModulo.BuscaTabelaModulos;
-    aNomeModulo := gridModulos.Columns[0].Field.Value;
-    edtNomeModulo.Text := aNomeModulo;
-  end;
+  gridModulos.DataSource := FControllerModulo.BuscaTabelaModulos;
+
+  aNomeModulo := gridModulos.Columns[0].Field.Value;
+  edtNomeModulo.Text := aNomeModulo;
 end;
 
 procedure TformPrincipal.CarregaGridProblemasPorModulo;
@@ -372,13 +349,6 @@ begin
     (aNomeModulo);
 
   edtNomeModulo.Text := aNomeModulo;
-end;
-
-procedure TformPrincipal.CarregaGridProblemasTodos;
-begin
-  FControllerProblema.BuscaTabelaProblemas;
-
-  gridProblemas.DataSource := FControllerProblema.BuscaTabelaProblemas;
 end;
 
 end.

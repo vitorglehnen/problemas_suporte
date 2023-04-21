@@ -8,7 +8,7 @@ uses
 type
   TControllerProblema = class
   private
-    FServiceProblema: TServiceProblema;
+    FServiceProblema: TDAOProblema;
   public
     function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
     function CarregaDadosProblema(aTituloProblema: String): TDataSource;
@@ -45,7 +45,7 @@ end;
 
 procedure TControllerProblema.InsertProblema(aProblema: TProblema);
 begin
-  FServiceProblema.InsertProblema(aProblema);
+
 end;
 
 end.

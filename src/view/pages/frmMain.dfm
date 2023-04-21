@@ -18,6 +18,7 @@ object formPrincipal: TformPrincipal
   WindowState = wsMaximized
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlPrincipal: TPanel
@@ -66,8 +67,8 @@ object formPrincipal: TformPrincipal
             Font.Style = [fsBold]
             ParentFont = False
             Layout = tlCenter
-            ExplicitWidth = 79
-            ExplicitHeight = 18
+            ExplicitLeft = -1
+            ExplicitTop = -4
           end
           object lblTotalDeProblemas: TLabel
             Left = 6
@@ -98,20 +99,23 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alLeft
               Caption = 'Novo(F3)'
+              Spacing = 2
               OnMouseDown = btnNovoProblemaMouseDown
               ExplicitHeight = 23
             end
             object btnSalvarProblema: TSpeedButton
               Left = 65
               Top = 1
-              Width = 64
+              Width = 55
               Height = 25
               Align = alLeft
               Caption = 'Salvar(F4)'
               Enabled = False
+              Spacing = 2
               OnMouseDown = btnSalvarProblemaMouseDown
-              ExplicitLeft = 71
-              ExplicitTop = -4
+              ExplicitLeft = 41
+              ExplicitTop = 5
+              ExplicitWidth = 64
             end
             object btnExcluirProblema: TSpeedButton
               Left = 218
@@ -120,29 +124,32 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alRight
               Caption = 'Excluir'
-              ExplicitLeft = 216
+              Spacing = 2
+              ExplicitLeft = 146
               ExplicitTop = -4
-              ExplicitHeight = 23
             end
             object btnCancelarProblema: TSpeedButton
-              Left = 122
+              Left = 168
               Top = 1
-              Width = 48
+              Width = 50
               Height = 25
               Align = alRight
               Caption = 'Cancelar'
               Enabled = False
+              Spacing = 2
               OnMouseDown = btnCancelarProblemaMouseDown
-              ExplicitLeft = 106
-              ExplicitTop = 5
+              ExplicitLeft = 144
+              ExplicitTop = -4
             end
             object btnEditarProblema: TSpeedButton
-              Left = 170
+              Left = 120
               Top = 1
               Width = 48
               Height = 25
-              Align = alRight
+              Align = alClient
               Caption = 'Editar'
+              Spacing = 2
+              ExplicitLeft = 98
               ExplicitTop = 5
             end
           end
@@ -203,6 +210,9 @@ object formPrincipal: TformPrincipal
                     'Geral'
                     'Somente do m'#243'dulo')
                   TabOrder = 0
+                  OnClick = rdbtnFiltroPesqProblemaClick
+                  ExplicitLeft = -4
+                  ExplicitTop = 47
                 end
                 object cbFiltroPesqProblema: TComboBox
                   Left = 0
@@ -225,6 +235,8 @@ object formPrincipal: TformPrincipal
           Color = clWhite
           ParentBackground = False
           TabOrder = 1
+          ExplicitLeft = -4
+          ExplicitTop = 253
           object gridProblemas: TDBGrid
             Left = 1
             Top = 1
@@ -312,8 +324,8 @@ object formPrincipal: TformPrincipal
               Caption = 'Cancelar'
               Enabled = False
               OnMouseDown = btnCancelarModuloMouseDown
-              ExplicitLeft = 118
-              ExplicitTop = 5
+              ExplicitLeft = 136
+              ExplicitTop = -4
             end
             object btnEditarModulo: TSpeedButton
               Left = 190
@@ -592,8 +604,6 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Top = 20
             TabOrder = 1
-            ExplicitLeft = 2
-            ExplicitTop = 75
             object pnlModuloProblema: TPanel
               Left = 30
               Top = 20
@@ -622,8 +632,9 @@ object formPrincipal: TformPrincipal
                 Left = 0
                 Top = 17
                 Width = 135
-                Height = 21
+                Height = 22
                 Align = alTop
+                Style = csOwnerDrawFixed
                 TabOrder = 0
               end
             end

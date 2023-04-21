@@ -11,6 +11,8 @@ type
     FDAOProblema: TDAOProblema;
   public
     function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
+    function CarregaDadosProblema(aTituloProblema: String): TDataSource;
+    function BuscaTabelaProblemas : TDataSource;
     procedure InsertProblema(aProblema: TProblema);
 
     constructor Create;
@@ -21,9 +23,20 @@ implementation
 
 { TServiceProblema }
 
+function TServiceProblema.BuscaTabelaProblemas: TDataSource;
+begin
+  Result := FDAOProblema.BuscaTabelaProblemas;
+end;
+
 function TServiceProblema.BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
 begin
   Result := FDAOProblema.BuscaTabelaProblemasPorModulo(aNomeModulo);
+end;
+
+function TServiceProblema.CarregaDadosProblema(
+  aTituloProblema: String): TDataSource;
+begin
+  Result := FDAOProblema.CarregaDadosProblema(aTituloProblema);
 end;
 
 constructor TServiceProblema.Create;

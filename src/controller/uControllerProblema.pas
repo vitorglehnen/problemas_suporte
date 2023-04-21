@@ -8,10 +8,11 @@ uses
 type
   TControllerProblema = class
   private
-    FServiceProblema: TDAOProblema;
+    FServiceProblema: TServiceProblema;
   public
     function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
     function CarregaDadosProblema(aTituloProblema: String): TDataSource;
+    function BuscaTabelaProblemas : TDataSource;
     procedure InsertProblema(aProblema: TProblema);
     constructor Create;
     destructor Destroy; override;
@@ -20,6 +21,11 @@ type
 implementation
 
 { TControllerProblemas }
+
+function TControllerProblema.BuscaTabelaProblemas: TDataSource;
+begin
+  Result := FServiceProblema.BuscaTabelaProblemas;
+end;
 
 function TControllerProblema.BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
 begin
@@ -45,7 +51,7 @@ end;
 
 procedure TControllerProblema.InsertProblema(aProblema: TProblema);
 begin
-
+  FServiceProblema.InsertProblema(aProblema);
 end;
 
 end.
