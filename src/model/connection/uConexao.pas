@@ -27,6 +27,7 @@ type
   private
     FConn: TFDConnection;
     FQuery: TFDQuery;
+    FDataSource: TDataSource;
 
     procedure ConfigConexao;
     procedure CriarConnectIniFile;
@@ -35,6 +36,7 @@ type
     destructor Destroy; override;
 
     function CriarQuery: TFDQuery;
+    function CriarDataSource: TDataSource;
     function GetConn: TFDConnection;
   end;
 
@@ -68,6 +70,7 @@ constructor TConexao.Create;
 begin
   FConn := TFDConnection.Create(nil);
   FQuery := TFDQuery.Create(nil);
+  FDataSource := TDataSource.Create(nil);
 
   CriarConnectIniFile;
   ConfigConexao;
@@ -90,6 +93,11 @@ begin
   end;
 end;
 
+function TConexao.CriarDataSource: TDataSource;
+begin
+  Result := FDataSource;
+end;
+
 function TConexao.CriarQuery: TFDQuery;
 begin
   FQuery.Connection := FConn;
@@ -101,6 +109,7 @@ destructor TConexao.Destroy;
 begin
   FConn.Free;
   FQuery.Free;
+  FDataSource.Free;
   inherited;
 end;
 

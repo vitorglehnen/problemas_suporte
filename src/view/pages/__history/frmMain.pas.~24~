@@ -109,7 +109,7 @@ type
     btnEditarModulo: TSpeedButton;
     btnNovoModulo: TSpeedButton;
     btnEditarProblema: TSpeedButton;
-    edtDataProblema: TMaskEdit;
+    edtDataProblema: TDateTimePicker;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
@@ -132,7 +132,6 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure rdbtnFiltroPesqProblemaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure gridProblemasCellClick(Column: TColumn);
 
   private
     { Private declarations }
@@ -143,7 +142,7 @@ type
     procedure CarregaGridProblemasTodos;
     procedure CarregaDadosProblemas;
     procedure CarregaGridModulos;
-    procedure CarregaTbProblemasPorModulo;
+    // procedure CarregaTbProblemasPorModulo;
     procedure PreencheCbxModulos;
     procedure InverteBotoesCrudModulos;
     procedure InverteBotoesCrudProblemas;
@@ -173,8 +172,8 @@ end;
 
 procedure TformPrincipal.FormCreate(Sender: TObject);
 begin
-  FControllerProblema := TControllerProblema.Create;
   FControllerModulo := TControllerModulo.Create;
+  FControllerProblema := TControllerProblema.Create;
 
   CarregaGridModulos;
 end;
@@ -198,11 +197,6 @@ end;
 procedure TformPrincipal.gridModulosColExit(Sender: TObject);
 begin
   ShowMessage(gridModulos.Columns[0].Field.Value);
-end;
-
-procedure TformPrincipal.gridProblemasCellClick(Column: TColumn);
-begin
-  CarregaDadosProblemas;
 end;
 
 procedure TformPrincipal.InverteBotoesCrudModulos;
@@ -309,7 +303,7 @@ begin
 
   edtTituloProblema.Clear;
   edtChamadoProblema.Clear;
-  edtDataProblema.Text := DateToStr(date);
+  edtDataProblema.Date := Date;
   cbModulo.ItemIndex := -1;
   mmSolucaoProblema.Clear;
   mmDetalhesProblema.Clear;
@@ -336,7 +330,6 @@ procedure TformPrincipal.btnSalvarProblemaMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   var aProblema : TProblema:= TProblema.Create;
-  FControllerProblema := TControllerProblema.Create;
 
   InverteBotoesCrudProblemas;
 
@@ -347,39 +340,14 @@ begin
     aProblema.Detalhes := mmDetalhesProblema.Text;
     aProblema.Solucao := mmSolucaoProblema.Text;
 
-    try
-      FControllerProblema.InsertProblema(aProblema);
-    finally
-
-    end;
-
+    FControllerProblema.InsertProblema(aProblema);
   finally
     aProblema.Free;
-  end;
-
-  if rdbtnFiltroPesqProblema.ItemIndex = 0 then
-  begin
-    CarregaGridProblemasTodos;
-  end
-  else if rdbtnFiltroPesqProblema.ItemIndex = 1 then
-  begin
-    CarregaGridProblemasPorModulo;
   end;
 end;
 
 procedure TformPrincipal.CarregaDadosProblemas;
 begin
-  var aNomeProblema: String := gridProblemas.Columns[0].Field.Value;
-  var aProblema: TDataSet;
-
-  aProblema := FControllerProblema.CarregaDadosProblema(aNomeProblema).DataSet;
-
-  edtTituloProblema.Text := aProblema.FieldByName('titulo').Value;
-  cbModulo.Text := aProblema.FieldByName('modulo').Value;
-  edtChamadoProblema.Text := aProblema.FieldByName('chamado').Value;
-  mmDetalhesProblema.Text := aProblema.FieldByName('detalhes').Value;
-  mmSolucaoProblema.Text := aProblema.FieldByName('solucao').Value;
-  edtDataProblema.Text := aProblema.FieldByName('datacr').Value;
 end;
 
 procedure TformPrincipal.CarregaGridModulos;
@@ -401,18 +369,16 @@ begin
     aNomeModulo: String := gridModulos.Columns[0].Field.Value;
 
   gridProblemas.DataSource := FControllerProblema.BuscaTabelaProblemasPorModulo
-  (aNomeModulo);
+    (aNomeModulo);
+
   edtNomeModulo.Text := aNomeModulo;
 end;
 
 procedure TformPrincipal.CarregaGridProblemasTodos;
 begin
+  FControllerProblema.BuscaTabelaProblemas;
+
   gridProblemas.DataSource := FControllerProblema.BuscaTabelaProblemas;
-end;
-
-procedure TformPrincipal.CarregaTbProblemasPorModulo;
-begin
-
 end;
 
 end.

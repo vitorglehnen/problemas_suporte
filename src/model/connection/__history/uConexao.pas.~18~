@@ -3,27 +3,39 @@ unit uConexao;
 interface
 
 uses
-  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf,
-  FireDAC.Phys.Intf, FireDAC.Stan.Def,
-  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, Data.DB,
-  FireDAC.Comp.Client, FireDAC.Phys.MySQLDef,
-  FireDAC.Phys.FB, System.SysUtils, FireDAC.DApt, FireDAC.VCLUI.Wait,
-  System.IniFiles, Vcl.Dialogs;
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Error,
+  FireDAC.UI.Intf,
+  FireDAC.Phys.Intf,
+  FireDAC.Stan.Def,
+  FireDAC.Stan.Pool,
+  FireDAC.Stan.Async,
+  FireDAC.Phys,
+  Data.DB,
+  FireDAC.Comp.Client,
+  FireDAC.Phys.MySQLDef,
+  FireDAC.Phys.FB,
+  System.SysUtils,
+  FireDAC.DApt,
+  FireDAC.VCLUI.Wait,
+  System.IniFiles,
+  Vcl.Dialogs;
 
 type
   TConexao = class
   private
     FConn: TFDConnection;
+    FQuery: TFDQuery;
 
     procedure ConfigConexao;
-
+    procedure CriarConnectIniFile;
   public
     constructor Create;
     destructor Destroy; override;
 
     function CriarQuery: TFDQuery;
     function GetConn: TFDConnection;
-    procedure CriarConnectIniFile;
   end;
 
 const
@@ -55,6 +67,7 @@ end;
 constructor TConexao.Create;
 begin
   FConn := TFDConnection.Create(nil);
+  FQuery := TFDQuery.Create(nil);
 
   CriarConnectIniFile;
   ConfigConexao;
@@ -78,18 +91,16 @@ begin
 end;
 
 function TConexao.CriarQuery: TFDQuery;
-var
-  aQuery: TFDQuery;
 begin
-  aQuery := TFDQuery.Create(nil);
-  aQuery.Connection := FConn;
+  FQuery.Connection := FConn;
 
-  Result := aQuery;
+  Result := FQuery;
 end;
 
 destructor TConexao.Destroy;
 begin
   FConn.Free;
+  FQuery.Free;
   inherited;
 end;
 

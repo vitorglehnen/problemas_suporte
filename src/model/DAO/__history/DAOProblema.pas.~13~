@@ -30,7 +30,6 @@ uses
 function TDAOProblema.BuscaTabelaProblemas: TDataSource;
 begin
   FQuery := FConn.CriarQuery;
-  FDataSource := FConn.CriarDataSource;
 
   FQuery.SQL.Text := 'SELECT titulo FROM PROBLEMAS ORDER BY TITULO';
   FQuery.Open;
@@ -45,11 +44,10 @@ function TDAOProblema.BuscaTabelaProblemasPorModulo(aNomeModulo: String)
   : TDataSource;
 begin
   FQuery := FConn.CriarQuery;
-  FDataSource := FConn.CriarDataSource;
 
   FQuery.SQL.Text := 'SELECT titulo FROM problemas ' +
-  'JOIN modulos ON problemas.cod_mod = modulos.cod_mod ' +
-  'WHERE modulos.nome = :NomeModulo';
+    'JOIN modulos ON problemas.cod_mod = modulos.cod_mod ' +
+    'WHERE modulos.nome = :NomeModulo';
   FQuery.ParamByName('NomeModulo').AsString := aNomeModulo;
   FQuery.Open;
   FQuery.FetchAll;
@@ -62,10 +60,9 @@ end;
 function TDAOProblema.CarregaDadosProblema(aTituloProblema: String):TDataSource;
 begin
   FQuery := FConn.CriarQuery;
-  FDataSource := FConn.CriarDataSource;
 
-  FQuery.SQL.Text := 'SELECT p.cod_prob, m.nome as modulo, p.titulo, p.chamado, p.detalhes, p.solucao, p.datacr, p.horacr FROM problemas p JOIN modulos m on p.cod_mod = m.cod_mod WHERE p.titulo = :TituloProblema';
-  FQuery.ParamByName('TituloProblema').AsString := aTituloProblema;
+  FQuery.SQL.Text := 'SELECT * FROM problemas WHERE titulo = :TituloProblema';
+  FQuery.ParamByName('TituloProblema').AsString := UpperCase(aTituloProblema);
   FQuery.Open;
 
   FDataSource.DataSet := FQuery;
@@ -76,11 +73,13 @@ end;
 constructor TDAOProblema.Create;
 begin
   FConn := TConexao.Create;
+  FDataSource := TDataSource.Create(nil);
 end;
 
 destructor TDAOProblema.Destroy;
 begin
   FConn.Free;
+  FDataSource.Free;
   inherited;
 end;
 

@@ -113,9 +113,8 @@ object formPrincipal: TformPrincipal
               Enabled = False
               Spacing = 2
               OnMouseDown = btnSalvarProblemaMouseDown
-              ExplicitLeft = 41
+              ExplicitLeft = 71
               ExplicitTop = 5
-              ExplicitWidth = 64
             end
             object btnExcluirProblema: TSpeedButton
               Left = 218
@@ -211,7 +210,7 @@ object formPrincipal: TformPrincipal
                     'Somente do m'#243'dulo')
                   TabOrder = 0
                   OnClick = rdbtnFiltroPesqProblemaClick
-                  ExplicitLeft = -4
+                  ExplicitLeft = 5
                   ExplicitTop = 47
                 end
                 object cbFiltroPesqProblema: TComboBox
@@ -261,6 +260,7 @@ object formPrincipal: TformPrincipal
             TitleFont.Height = -11
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
+            OnCellClick = gridProblemasCellClick
           end
         end
       end
@@ -528,6 +528,8 @@ object formPrincipal: TformPrincipal
               Padding.Top = 10
               Padding.Bottom = 10
               TabOrder = 1
+              ExplicitLeft = 727
+              ExplicitTop = -4
               object lblDataProblema: TLabel
                 Left = 320
                 Top = 10
@@ -543,15 +545,16 @@ object formPrincipal: TformPrincipal
                 ParentFont = False
                 ExplicitHeight = 21
               end
-              object edtDataProblema: TDateTimePicker
+              object edtDataProblema: TMaskEdit
                 Left = 320
                 Top = 37
                 Width = 97
                 Height = 21
-                Date = 45036.000000000000000000
-                Time = 0.894674131945066600
-                Enabled = False
+                EditMask = '!99/99/0000;1;_'
+                MaxLength = 10
+                ReadOnly = True
                 TabOrder = 0
+                Text = '  /  /    '
               end
             end
             object pnlChamadoProblema: TPanel
@@ -680,7 +683,6 @@ object formPrincipal: TformPrincipal
                 Top = 17
                 Width = 1124
                 Height = 198
-                Align = alClient
                 TabOrder = 0
               end
             end
