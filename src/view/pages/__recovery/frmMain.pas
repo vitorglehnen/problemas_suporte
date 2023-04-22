@@ -113,6 +113,34 @@ type
     FormatRichEditAlignCenter3: TRichEditAlignCenter;
     CustomizeActionBars1: TCustomizeActionBars;
     pnlImagensProblema: TCard;
+    pnlProblemas: TPanel;
+    pnlBodyModuloProblema: TPanel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    pnlModuloProblema: TPanel;
+    lblModuloProblema: TLabel;
+    cbModulo: TComboBox;
+    pnlBodySolucaoProblema: TPanel;
+    pnlSolucaoProblema: TPanel;
+    lblSolucaoProblema: TLabel;
+    mmSolucaoProblema: TRichEdit;
+    ActionToolBar1: TActionToolBar;
+    pnlTopProblema: TPanel;
+    pnlDataProblema: TPanel;
+    lblDataProblema: TLabel;
+    edtDataProblema: TMaskEdit;
+    pnlChamadoProblema: TPanel;
+    lblChamadoProblema: TLabel;
+    edtChamadoProblema: TEdit;
+    pnlTituloProblema: TPanel;
+    lblTituloProblema: TLabel;
+    edtTituloProblema: TEdit;
+    pnlBodyDetalhesProblema: TPanel;
+    pnlDetalhesProblema: TPanel;
+    lblDetalhesProblema: TLabel;
+    mmDetalhesProblema: TMemo;
+    edtCodProblema: TEdit;
+    lblCodProblema: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
@@ -173,7 +201,7 @@ procedure TformPrincipal.edtNomeModuloExit(Sender: TObject);
 begin
   if not btnNovoModulo.Enabled then
   begin
-    MessageBox(0, PChar('Salve ou cancele antes de continuar!'), 'Cadastro de módulos',
+    MessageBox(0, PChar('Salve ou cancele antes de continuar!'), 'Cadastro de mÃ³dulos',
       MB_ICONWARNING or MB_OK);
     edtNomeModulo.SetFocus;
   end;

@@ -100,8 +100,7 @@ object formPrincipal: TformPrincipal
               Caption = 'Novo(F3)'
               Spacing = 2
               OnMouseDown = btnNovoProblemaMouseDown
-              ExplicitLeft = 3
-              ExplicitTop = -4
+              ExplicitHeight = 23
             end
             object btnSalvarProblema: TSpeedButton
               Left = 65
@@ -137,8 +136,8 @@ object formPrincipal: TformPrincipal
               Enabled = False
               Spacing = 2
               OnMouseDown = btnCancelarProblemaMouseDown
-              ExplicitLeft = 174
-              ExplicitTop = 5
+              ExplicitLeft = 162
+              ExplicitTop = -4
             end
             object btnEditarProblema: TSpeedButton
               Left = 120
@@ -456,6 +455,368 @@ object formPrincipal: TformPrincipal
         Caption = 'pnlCadastroProblema'
         CardIndex = 0
         TabOrder = 0
+        object pnlProblemas: TPanel
+          Left = 0
+          Top = 0
+          Width = 1404
+          Height = 745
+          Align = alClient
+          AutoSize = True
+          BevelOuter = bvNone
+          TabOrder = 0
+          TabStop = True
+          object pnlBodyModuloProblema: TPanel
+            Left = 0
+            Top = 0
+            Width = 1404
+            Height = 100
+            Align = alTop
+            AutoSize = True
+            BevelOuter = bvNone
+            Padding.Left = 30
+            Padding.Top = 20
+            TabOrder = 1
+            ExplicitLeft = 3
+            ExplicitTop = 324
+            object SpeedButton1: TSpeedButton
+              Left = 1052
+              Top = 33
+              Width = 103
+              Height = 34
+              Caption = 'Ver imagens'
+              Enabled = False
+            end
+            object SpeedButton2: TSpeedButton
+              Left = 943
+              Top = 32
+              Width = 103
+              Height = 34
+              Caption = 'Adicionar imagens'
+              OnClick = SpeedButton2Click
+            end
+            object pnlModuloProblema: TPanel
+              Left = 30
+              Top = 20
+              Width = 135
+              Height = 80
+              Align = alLeft
+              AutoSize = True
+              BevelOuter = bvNone
+              TabOrder = 0
+              object lblModuloProblema: TLabel
+                Left = 0
+                Top = 0
+                Width = 135
+                Height = 17
+                Align = alTop
+                Caption = 'Modulo do problema'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -13
+                Font.Name = 'Segoe UI'
+                Font.Style = [fsBold]
+                ParentFont = False
+                ExplicitWidth = 131
+              end
+              object cbModulo: TComboBox
+                Left = 0
+                Top = 17
+                Width = 135
+                Height = 22
+                Align = alTop
+                Style = csOwnerDrawFixed
+                Color = clWhite
+                Enabled = False
+                TabOrder = 0
+              end
+            end
+          end
+          object pnlBodySolucaoProblema: TPanel
+            Left = 0
+            Top = 335
+            Width = 1404
+            Height = 410
+            Align = alClient
+            AutoSize = True
+            BevelOuter = bvNone
+            Padding.Left = 30
+            Padding.Right = 250
+            TabOrder = 2
+            ExplicitTop = 406
+            ExplicitHeight = 339
+            object pnlSolucaoProblema: TPanel
+              Left = 30
+              Top = 0
+              Width = 1124
+              Height = 410
+              Align = alClient
+              AutoSize = True
+              BevelOuter = bvNone
+              Padding.Bottom = 20
+              TabOrder = 0
+              ExplicitHeight = 339
+              object lblSolucaoProblema: TLabel
+                Left = 0
+                Top = 0
+                Width = 1124
+                Height = 17
+                Align = alTop
+                Caption = 'Solu'#231#227'o'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clGreen
+                Font.Height = -13
+                Font.Name = 'Segoe UI'
+                Font.Style = [fsBold]
+                ParentFont = False
+                ExplicitTop = 6
+              end
+              object mmSolucaoProblema: TRichEdit
+                Left = 0
+                Top = 40
+                Width = 1124
+                Height = 350
+                Align = alClient
+                Font.Charset = ANSI_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentFont = False
+                ReadOnly = True
+                TabOrder = 0
+                Zoom = 100
+                ExplicitLeft = -27
+                ExplicitTop = 46
+                ExplicitHeight = 279
+              end
+              object toolbSolucaoProblema: TActionToolBar
+                Left = 0
+                Top = 17
+                Width = 1124
+                Height = 23
+                ActionManager = ActionManager1
+                Caption = 'toolbSolucaoProblema'
+                Color = clMenuBar
+                ColorMap.DisabledFontColor = 10461087
+                ColorMap.HighlightColor = clWhite
+                ColorMap.BtnSelectedFont = clBlack
+                ColorMap.UnusedColor = clWhite
+                Enabled = False
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clBlack
+                Font.Height = -11
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentFont = False
+                Spacing = 0
+              end
+            end
+          end
+          object pnlTopProblema: TPanel
+            Left = 0
+            Top = 0
+            Width = 1556
+            Height = 443
+            AutoSize = True
+            Padding.Right = 250
+            TabOrder = 0
+            object lblCodProblema: TLabel
+              Left = 1208
+              Top = 17
+              Width = 95
+              Height = 13
+              Caption = 'C'#243'digo do problema'
+            end
+            object pnlDataProblema: TPanel
+              Left = 209
+              Top = 320
+              Width = 1096
+              Height = 122
+              Align = alClient
+              AutoSize = True
+              BevelOuter = bvNone
+              Padding.Left = 320
+              Padding.Top = 10
+              Padding.Bottom = 10
+              TabOrder = 2
+              ExplicitLeft = 721
+              ExplicitTop = 2
+              ExplicitWidth = 432
+              ExplicitHeight = 318
+              object lblDataProblema: TLabel
+                Left = 320
+                Top = 10
+                Width = 36
+                Height = 102
+                Align = alLeft
+                Caption = 'Data'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -17
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentFont = False
+                ExplicitHeight = 21
+              end
+              object edtDataProblema: TMaskEdit
+                Left = 320
+                Top = 37
+                Width = 97
+                Height = 21
+                EditMask = '!99/99/0000;1;_'
+                MaxLength = 10
+                ReadOnly = True
+                TabOrder = 0
+                Text = '  /  /    '
+              end
+            end
+            object pnlChamadoProblema: TPanel
+              Left = 1
+              Top = 320
+              Width = 208
+              Height = 122
+              Align = alLeft
+              AutoSize = True
+              BevelOuter = bvNone
+              Padding.Left = 10
+              Padding.Top = 10
+              Padding.Right = 70
+              Padding.Bottom = 10
+              TabOrder = 1
+              ExplicitLeft = 513
+              ExplicitTop = 2
+              ExplicitHeight = 318
+              object lblChamadoProblema: TLabel
+                Left = 10
+                Top = 10
+                Width = 128
+                Height = 21
+                Align = alTop
+                Caption = 'Chamado'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -17
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentFont = False
+                ExplicitWidth = 69
+              end
+              object edtChamadoProblema: TEdit
+                Tag = 1
+                Left = 10
+                Top = 91
+                Width = 128
+                Height = 21
+                Align = alBottom
+                NumbersOnly = True
+                ReadOnly = True
+                TabOrder = 0
+                ExplicitTop = 38
+              end
+            end
+            object pnlTituloProblema: TPanel
+              Left = 1
+              Top = 1
+              Width = 1304
+              Height = 319
+              Align = alTop
+              AutoSize = True
+              BevelOuter = bvNone
+              Padding.Left = 30
+              Padding.Top = 10
+              Padding.Right = 30
+              Padding.Bottom = 10
+              TabOrder = 0
+              ExplicitTop = 123
+              ExplicitWidth = 319
+              object lblTituloProblema: TLabel
+                Left = 30
+                Top = 10
+                Width = 1244
+                Height = 21
+                Align = alTop
+                Caption = 'T'#237'tulo'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -17
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentFont = False
+                ExplicitWidth = 42
+              end
+              object edtTituloProblema: TEdit
+                Left = 30
+                Top = 288
+                Width = 1244
+                Height = 21
+                Align = alBottom
+                ReadOnly = True
+                TabOrder = 0
+                ExplicitTop = 38
+                ExplicitWidth = 452
+              end
+            end
+            object edtCodProblema: TEdit
+              Left = 1208
+              Top = 38
+              Width = 97
+              Height = 21
+              Enabled = False
+              TabOrder = 3
+            end
+          end
+          object pnlBodyDetalhesProblema: TPanel
+            Left = 0
+            Top = 100
+            Width = 1404
+            Height = 235
+            Align = alTop
+            AutoSize = True
+            BevelOuter = bvNone
+            Padding.Left = 30
+            Padding.Right = 250
+            TabOrder = 3
+            ExplicitTop = 171
+            object pnlDetalhesProblema: TPanel
+              Left = 30
+              Top = 0
+              Width = 1124
+              Height = 235
+              Align = alClient
+              AutoSize = True
+              BevelOuter = bvNone
+              Padding.Bottom = 20
+              TabOrder = 0
+              object lblDetalhesProblema: TLabel
+                Left = 0
+                Top = 0
+                Width = 1124
+                Height = 17
+                Align = alTop
+                Caption = 'Detalhes do problema'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clGreen
+                Font.Height = -13
+                Font.Name = 'Segoe UI'
+                Font.Style = [fsBold]
+                ParentFont = False
+                ExplicitWidth = 137
+              end
+              object mmDetalhesProblema: TMemo
+                Left = 0
+                Top = 17
+                Width = 1124
+                Height = 198
+                Align = alTop
+                ReadOnly = True
+                ScrollBars = ssVertical
+                TabOrder = 0
+                ExplicitLeft = 1
+                ExplicitTop = 16
+              end
+            end
+          end
+        end
       end
       object pnlImagensProblema: TCard
         Left = 1
@@ -546,6 +907,7 @@ object formPrincipal: TformPrincipal
             Action = FormatRichEditAlignCenter1
             ImageIndex = 37
           end>
+        ActionBar = toolbSolucaoProblema
       end>
     Left = 1552
     Top = 489

@@ -14,7 +14,6 @@ type
   public
     function CarregaDadosProblema(aTituloProblema: String): TDataSource;
     procedure InsertProblema(aProblema: TProblema);
-    procedure UpdateProblema(aProblema: TProblema);
     constructor Create;
     destructor Destroy; override;
   end;
@@ -65,11 +64,6 @@ begin
   FQuery.ParamByName('solucao').AsString := aProblema.Solucao;
 
   FQuery.ExecSQL;
-end;
-
-procedure TDAOProblema.UpdateProblema(aProblema: TProblema);
-begin
-
 end;
 
 end.
