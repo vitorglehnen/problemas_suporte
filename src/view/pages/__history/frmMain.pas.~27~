@@ -154,6 +154,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure btnNovoProblemaMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure pnlProblemasExit(Sender: TObject);
     procedure btnCancelarProblemaMouseDown(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure btnSalvarProblemaMouseDown(Sender: TObject; Button: TMouseButton;
@@ -161,8 +162,6 @@ type
     procedure rdbtnFiltroPesqProblemaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure gridProblemasCellClick(Column: TColumn);
-    procedure SpeedButton2Click(Sender: TObject);
-    procedure cardPanelProblemasExit(Sender: TObject);
 
   private
     { Private declarations }
@@ -262,6 +261,16 @@ begin
   edtTituloProblema.SetFocus;
 end;
 
+procedure TformPrincipal.pnlProblemasExit(Sender: TObject);
+begin
+  if not btnNovoProblema.Enabled then
+  begin
+    MessageBox(0, PChar('Salve ou cancele antes de continuar!'), 'Cadastro de problemas',
+      MB_ICONWARNING or MB_OK);
+    pnlProblemas.SetFocus;
+  end;
+end;
+
 procedure TformPrincipal.PreencheCbxModulos;
 begin
   var
@@ -288,11 +297,6 @@ begin
 
     CarregaGridProblemasPorModulo;
   end;
-end;
-
-procedure TformPrincipal.SpeedButton2Click(Sender: TObject);
-begin
-  cardPanelProblemas.ActiveCard := pnlImagensProblema;
 end;
 
 procedure TformPrincipal.btnCancelarModuloMouseDown(Sender: TObject;
@@ -387,16 +391,6 @@ begin
   else if rdbtnFiltroPesqProblema.ItemIndex = 1 then
   begin
     CarregaGridProblemasPorModulo;
-  end;
-end;
-
-procedure TformPrincipal.cardPanelProblemasExit(Sender: TObject);
-begin
-  if not btnNovoProblema.Enabled then
-  begin
-    MessageBox(0, PChar('Salve ou cancele antes de continuar!'), 'Cadastro de problemas',
-      MB_ICONWARNING or MB_OK);
-    pnlProblemas.SetFocus;
   end;
 end;
 

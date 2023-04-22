@@ -446,6 +446,7 @@ object formPrincipal: TformPrincipal
       ActiveCard = pnlCadastroProblema
       AutoSize = True
       TabOrder = 1
+      OnExit = cardPanelProblemasExit
       object pnlCadastroProblema: TCard
         Left = 1
         Top = 1
@@ -465,7 +466,6 @@ object formPrincipal: TformPrincipal
           Enabled = False
           TabOrder = 0
           TabStop = True
-          OnExit = pnlProblemasExit
           object pnlBodyModuloProblema: TPanel
             Left = 0
             Top = 71
@@ -480,18 +480,20 @@ object formPrincipal: TformPrincipal
             ExplicitLeft = 3
             ExplicitTop = 66
             object SpeedButton1: TSpeedButton
-              Left = 380
+              Left = 1052
               Top = 33
               Width = 103
               Height = 34
               Caption = 'Ver imagens'
+              Enabled = False
             end
             object SpeedButton2: TSpeedButton
-              Left = 242
+              Left = 943
               Top = 32
               Width = 103
               Height = 34
               Caption = 'Adicionar imagens'
+              OnClick = SpeedButton2Click
             end
             object pnlModuloProblema: TPanel
               Left = 30
