@@ -14,6 +14,7 @@ type
     function CarregaDadosProblema(aTituloProblema: String): TDataSource;
     function BuscaTabelaProblemas : TDataSource;
     procedure InsertProblema(aProblema: TProblema);
+    procedure UpdateProblema(aProblema: TProblema);
     constructor Create;
     destructor Destroy; override;
   end;
@@ -52,6 +53,11 @@ end;
 procedure TControllerProblema.InsertProblema(aProblema: TProblema);
 begin
   FServiceProblema.InsertProblema(aProblema);
+end;
+
+procedure TControllerProblema.UpdateProblema(aProblema: TProblema);
+begin
+  FServiceProblema.UpdateProblema(aProblema);
 end;
 
 end.

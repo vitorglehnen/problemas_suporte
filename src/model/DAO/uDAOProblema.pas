@@ -69,7 +69,18 @@ end;
 
 procedure TDAOProblema.UpdateProblema(aProblema: TProblema);
 begin
+  FQuery := FConn.CriarQuery;
 
+  FQuery.SQL.Text := 'UPDATE problemas SET titulo = :titulo, chamado = :chamado, ' +
+  'detalhes = :detalhes, solucao = :solucao WHERE (cod_prob = :cod_prob)';
+
+  FQuery.ParamByName('titulo').AsString := aProblema.Titulo;
+  FQuery.ParamByName('chamado').AsString := aProblema.Chamado;
+  FQuery.ParamByName('detalhes').AsString := aProblema.Detalhes;
+  FQuery.ParamByName('solucao').AsString := aProblema.Solucao;
+  FQuery.ParamByName('cod_prob').AsInteger := aProblema.Codigo;
+
+  FQuery.ExecSQL;
 end;
 
 end.

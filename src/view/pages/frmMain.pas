@@ -113,6 +113,34 @@ type
     FormatRichEditAlignCenter3: TRichEditAlignCenter;
     CustomizeActionBars1: TCustomizeActionBars;
     pnlImagensProblema: TCard;
+    pnlProblemas: TPanel;
+    pnlBodyModuloProblema: TPanel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    pnlModuloProblema: TPanel;
+    lblModuloProblema: TLabel;
+    cbModulo: TComboBox;
+    pnlBodySolucaoProblema: TPanel;
+    pnlSolucaoProblema: TPanel;
+    lblSolucaoProblema: TLabel;
+    mmSolucaoProblema: TRichEdit;
+    ActionToolBar1: TActionToolBar;
+    pnlTopProblema: TPanel;
+    pnlDataProblema: TPanel;
+    lblDataProblema: TLabel;
+    edtDataProblema: TMaskEdit;
+    pnlChamadoProblema: TPanel;
+    lblChamadoProblema: TLabel;
+    edtChamadoProblema: TEdit;
+    pnlTituloProblema: TPanel;
+    lblTituloProblema: TLabel;
+    edtTituloProblema: TEdit;
+    pnlBodyDetalhesProblema: TPanel;
+    pnlDetalhesProblema: TPanel;
+    lblDetalhesProblema: TLabel;
+    mmDetalhesProblema: TMemo;
+    edtCodProblema: TEdit;
+    lblCodProblema: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
@@ -366,13 +394,21 @@ begin
   InverteBotoesCrudProblemas;
 
   try
+    aProblema.Codigo := StrToInt(edtCodProblema.Text);
     aProblema.Titulo := edtTituloProblema.Text;
     aProblema.Modulo := cbModulo.Text;
     aProblema.Chamado := edtChamadoProblema.Text;
     aProblema.Detalhes := mmDetalhesProblema.Text;
     aProblema.Solucao := mmSolucaoProblema.Text;
 
-    FControllerProblema.InsertProblema(aProblema);
+    if FEdicaoProblema then
+    begin
+      FControllerProblema.UpdateProblema(aProblema);
+    end
+    else
+    begin
+      FControllerProblema.InsertProblema(aProblema);
+    end;
   finally
     aProblema.Free;
   end;
@@ -414,7 +450,7 @@ begin
     cont := cont + 1;
   end;
 
-  //edtCodProblema.Text := IntToStr(aProblema.FieldByName('cod_prob').Value);
+  edtCodProblema.Text := IntToStr(aProblema.FieldByName('cod_prob').Value);
   edtTituloProblema.Text := aProblema.FieldByName('titulo').Value;
   edtChamadoProblema.Text := aProblema.FieldByName('chamado').Value;
   mmDetalhesProblema.Text := aProblema.FieldByName('detalhes').Value;

@@ -12,7 +12,9 @@ type
     FData: TDate;
     FHora: TTime;
     FModulo: String;
+    FCodigo: Integer;
   public
+    property Codigo: Integer read FCodigo write FCodigo;
     property Titulo: String read FTitulo write FTitulo;
     property Modulo: String read FModulo write FModulo;
     property Chamado: String read FChamado write FChamado;
