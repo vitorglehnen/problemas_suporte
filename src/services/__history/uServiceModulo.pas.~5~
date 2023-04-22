@@ -3,7 +3,7 @@ unit uServiceModulo;
 interface
 
 uses
-  uModulo, System.Generics.Collections, Datasnap.DBClient, Data.DB, uDAOModulo;
+  DAOModulo, uModulo, System.Generics.Collections, Datasnap.DBClient, Data.DB;
 
 type
   TServiceModulo = class

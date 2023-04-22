@@ -1,0 +1,37 @@
+unit uDAOProblema;
+
+interface
+
+uses
+  FireDAC.Comp.Client, uConexao, Data.DB, uProblema;
+
+type
+  TDAOProblema = class
+  private
+    FConn: TConexao;
+    FQuery: TFDQuery;
+    FDataSource: TDataSource;
+  public
+    function CarregaDadosProblema(aTituloProblema: String): TDataSource;
+  end;
+
+implementation
+
+{ TDAOProblema }
+
+function TDAOProblema.CarregaDadosProblema(
+  aTituloProblema: String): TDataSource;
+begin
+  FQuery := FConn.CriarQuery;
+  FDataSource := FConn.CriarDataSource;
+
+  FQuery.SQL.Text := 'SELECT p.cod_prob, m.nome as modulo, p.titulo, p.chamado, p.detalhes, p.solucao, p.datacr, p.horacr FROM problemas p JOIN modulos m on p.cod_mod = m.cod_mod WHERE p.titulo = :TituloProblema';
+  FQuery.ParamByName('TituloProblema').AsString := aTituloProblema;
+  FQuery.Open;
+
+  FDataSource.DataSet := FQuery;
+
+  Result := FDataSource;
+end;
+
+end.

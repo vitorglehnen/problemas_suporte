@@ -1,0 +1,90 @@
+unit uDAOGridProblema;
+
+interface
+
+uses
+  FireDAC.Comp.Client, uConexao, Data.DB, uProblema;
+
+type
+  TDAOGridProblema = class
+  private
+    FConn: TConexao;
+    FQuery: TFDQuery;
+    FDataSource: TDataSource;
+  public
+    function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
+    function BuscaTabelaProblemas : TDataSource;
+    procedure InsertProblema(aProblema: TProblema);
+    constructor Create;
+    destructor Destroy; override;
+  end;
+
+implementation
+
+uses
+  System.SysUtils;
+
+{ TDAOProblemas }
+
+function TDAOGridProblema.BuscaTabelaProblemas: TDataSource;
+begin
+  FQuery := FConn.CriarQuery;
+  FDataSource := FConn.CriarDataSource;
+
+  FQuery.SQL.Text := 'SELECT titulo FROM PROBLEMAS ORDER BY TITULO';
+  FQuery.Open;
+  FQuery.FetchAll;
+
+  FDataSource.DataSet := FQuery;
+
+  Result := FDataSource;
+end;
+
+function TDAOGridProblema.BuscaTabelaProblemasPorModulo(aNomeModulo: String)
+  : TDataSource;
+begin
+  FQuery := FConn.CriarQuery;
+  FDataSource := FConn.CriarDataSource;
+
+  FQuery.SQL.Text := 'SELECT titulo FROM problemas ' +
+  'JOIN modulos ON problemas.cod_mod = modulos.cod_mod ' +
+  'WHERE modulos.nome = :NomeModulo';
+  FQuery.ParamByName('NomeModulo').AsString := aNomeModulo;
+  FQuery.Open;
+  FQuery.FetchAll;
+
+  FDataSource.DataSet := FQuery;
+
+  Result := FDataSource;
+end;
+
+constructor TDAOGridProblema.Create;
+begin
+  FConn := TConexao.Create;
+end;
+
+destructor TDAOGridProblema.Destroy;
+begin
+  FConn.Free;
+  inherited;
+end;
+
+procedure TDAOGridProblema.InsertProblema(aProblema: TProblema);
+begin
+  FQuery := FConn.CriarQuery;
+
+  FQuery.SQL.Text :=
+    'INSERT INTO problemas ' +
+    '(cod_mod, titulo, chamado, detalhes, solucao)' +
+    'VALUES ((SELECT cod_mod FROM modulos WHERE nome = :nome_mod), :titulo, :chamado, :detalhes, :solucao)';
+
+  FQuery.ParamByName('nome_mod').AsString := aProblema.Modulo;
+  FQuery.ParamByName('titulo').AsString := aProblema.Titulo;
+  FQuery.ParamByName('chamado').AsString := aProblema.Chamado;
+  FQuery.ParamByName('detalhes').AsString := aProblema.Detalhes;
+  FQuery.ParamByName('solucao').AsString := aProblema.Solucao;
+
+  FQuery.ExecSQL;
+end;
+
+end.

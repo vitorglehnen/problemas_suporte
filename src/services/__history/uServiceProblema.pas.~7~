@@ -3,12 +3,11 @@ unit uServiceProblema;
 interface
 
 uses
-  Data.DB, uProblema, uDAOGridProblema, uDAOProblema;
+  Data.DB, uProblema, DAOGridProblema;
 
 type
   TServiceProblema = class
   private
-    FDAOGridProblema: TDAOGridProblema;
     FDAOProblema: TDAOProblema;
   public
     function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
@@ -26,12 +25,12 @@ implementation
 
 function TServiceProblema.BuscaTabelaProblemas: TDataSource;
 begin
-  Result := FDAOGridProblema.BuscaTabelaProblemas;
+  Result := FDAOProblema.BuscaTabelaProblemas;
 end;
 
 function TServiceProblema.BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
 begin
-  Result := FDAOGridProblema.BuscaTabelaProblemasPorModulo(aNomeModulo);
+  Result := FDAOProblema.BuscaTabelaProblemasPorModulo(aNomeModulo);
 end;
 
 function TServiceProblema.CarregaDadosProblema(
@@ -42,13 +41,11 @@ end;
 
 constructor TServiceProblema.Create;
 begin
-  FDAOGridProblema:= TDAOGridProblema.Create;
   FDAOProblema:= TDAOProblema.Create;
 end;
 
 destructor TServiceProblema.Destroy;
 begin
-  FDAOGridProblema.Free;
   FDAOProblema.Free;
   inherited;
 end;

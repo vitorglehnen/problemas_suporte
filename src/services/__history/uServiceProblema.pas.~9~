@@ -37,19 +37,17 @@ end;
 function TServiceProblema.CarregaDadosProblema(
   aTituloProblema: String): TDataSource;
 begin
-  Result := FDAOProblema.CarregaDadosProblema(aTituloProblema);
+  Result := FDAOGridProblema.CarregaDadosProblema(aTituloProblema);
 end;
 
 constructor TServiceProblema.Create;
 begin
   FDAOGridProblema:= TDAOGridProblema.Create;
-  FDAOProblema:= TDAOProblema.Create;
 end;
 
 destructor TServiceProblema.Destroy;
 begin
   FDAOGridProblema.Free;
-  FDAOProblema.Free;
   inherited;
 end;
 
