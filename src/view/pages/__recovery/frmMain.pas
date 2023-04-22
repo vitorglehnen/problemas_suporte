@@ -394,13 +394,21 @@ begin
   InverteBotoesCrudProblemas;
 
   try
+    aProblema.Codigo := StrToInt(edtCodProblema.Text);
     aProblema.Titulo := edtTituloProblema.Text;
     aProblema.Modulo := cbModulo.Text;
     aProblema.Chamado := edtChamadoProblema.Text;
     aProblema.Detalhes := mmDetalhesProblema.Text;
     aProblema.Solucao := mmSolucaoProblema.Text;
 
-    FControllerProblema.InsertProblema(aProblema);
+    if FEdicaoProblema then
+    begin
+      FControllerProblema.UpdateProblema(aProblema);
+    end
+    else
+    begin
+      FControllerProblema.InsertProblema(aProblema);
+    end;
   finally
     aProblema.Free;
   end;
@@ -442,7 +450,7 @@ begin
     cont := cont + 1;
   end;
 
-  //edtCodProblema.Text := IntToStr(aProblema.FieldByName('cod_prob').Value);
+  edtCodProblema.Text := IntToStr(aProblema.FieldByName('cod_prob').Value);
   edtTituloProblema.Text := aProblema.FieldByName('titulo').Value;
   edtChamadoProblema.Text := aProblema.FieldByName('chamado').Value;
   mmDetalhesProblema.Text := aProblema.FieldByName('detalhes').Value;
