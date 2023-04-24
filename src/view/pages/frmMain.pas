@@ -124,23 +124,20 @@ type
     pnlSolucaoProblema: TPanel;
     lblSolucaoProblema: TLabel;
     mmSolucaoProblema: TRichEdit;
-    ActionToolBar1: TActionToolBar;
     pnlTopProblema: TPanel;
-    pnlDataProblema: TPanel;
-    lblDataProblema: TLabel;
-    edtDataProblema: TMaskEdit;
-    pnlChamadoProblema: TPanel;
-    lblChamadoProblema: TLabel;
-    edtChamadoProblema: TEdit;
-    pnlTituloProblema: TPanel;
-    lblTituloProblema: TLabel;
-    edtTituloProblema: TEdit;
     pnlBodyDetalhesProblema: TPanel;
     pnlDetalhesProblema: TPanel;
     lblDetalhesProblema: TLabel;
     mmDetalhesProblema: TMemo;
-    edtCodProblema: TEdit;
+    edtDataProblema: TMaskEdit;
+    lblDataProblema: TLabel;
+    edtChamadoProblema: TEdit;
+    lblChamadoProblema: TLabel;
     lblCodProblema: TLabel;
+    pnlTituloProblema: TPanel;
+    lblTituloProblema: TLabel;
+    edtTituloProblema: TEdit;
+    edtCodProblema: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
@@ -267,7 +264,7 @@ begin
   btnExcluirProblema.Enabled := not btnExcluirProblema.Enabled;
   btnCancelarProblema.Enabled := not btnCancelarProblema.Enabled;
 
-  edtTituloProblema.SetFocus;
+  pnlBodyModulos.Enabled := not pnlBodyModulos.Enabled;
 end;
 
 procedure TformPrincipal.InverteCamposProblemas;
@@ -283,6 +280,8 @@ procedure TformPrincipal.PreencheCbxModulos;
 begin
   var
   aNomeModulos := FControllerModulo.BuscaTabelaModulos.DataSet;
+
+  cbModulo.Clear;
 
   while not aNomeModulos.Eof do
   begin
@@ -394,7 +393,6 @@ begin
   InverteBotoesCrudProblemas;
 
   try
-    aProblema.Codigo := StrToInt(edtCodProblema.Text);
     aProblema.Titulo := edtTituloProblema.Text;
     aProblema.Modulo := cbModulo.Text;
     aProblema.Chamado := edtChamadoProblema.Text;
@@ -403,6 +401,8 @@ begin
 
     if FEdicaoProblema then
     begin
+      aProblema.Codigo := StrToInt(edtCodProblema.Text);
+
       FControllerProblema.UpdateProblema(aProblema);
     end
     else

@@ -26,6 +26,8 @@ type
   TConexao = class
   private
     FConn: TFDConnection;
+    FQuery: TFDQuery;
+    FDataSource: TDataSource;
 
     procedure ConfigConexao;
     procedure CriarConnectIniFile;
@@ -34,6 +36,7 @@ type
     destructor Destroy; override;
 
     function CriarQuery: TFDQuery;
+    function CriarDataSource: TDataSource;
     function GetConn: TFDConnection;
   end;
 
@@ -54,7 +57,7 @@ begin
     FConn.Params.Database := ArqINI.ReadString('Conexão', 'CaminhoDoBanco',
       'C:\Problemas Suporte\DBPROB.FDB');
     FConn.Params.UserName := 'SYSDBA';
-    FConn.Params.Password := 'Office25';
+    FConn.Params.Password := 'masterkey';
     FConn.LoginPrompt := False;
 
     FConn.Connected;
@@ -66,6 +69,8 @@ end;
 constructor TConexao.Create;
 begin
   FConn := TFDConnection.Create(nil);
+  FQuery := TFDQuery.Create(nil);
+  FDataSource := TDataSource.Create(nil);
 
   CriarConnectIniFile;
   ConfigConexao;
@@ -88,19 +93,23 @@ begin
   end;
 end;
 
-function TConexao.CriarQuery: TFDQuery;
-var
-  aQuery: TFDQuery;
+function TConexao.CriarDataSource: TDataSource;
 begin
-  aQuery:= TFDQuery.Create(nil);
-  aQuery.Connection := FConn;
+  Result := FDataSource;
+end;
 
-  Result:= aQuery;
+function TConexao.CriarQuery: TFDQuery;
+begin
+  FQuery.Connection := FConn;
+
+  Result := FQuery;
 end;
 
 destructor TConexao.Destroy;
 begin
   FConn.Free;
+  FQuery.Free;
+  FDataSource.Free;
   inherited;
 end;
 
