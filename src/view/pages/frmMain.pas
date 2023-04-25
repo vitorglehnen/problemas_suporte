@@ -163,6 +163,7 @@ type
     procedure SpeedButton2Click(Sender: TObject);
     procedure cardPanelProblemasExit(Sender: TObject);
     procedure btnEditarProblemaClick(Sender: TObject);
+    procedure btnExcluirProblemaClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -171,11 +172,9 @@ type
     FEdicaoModulo: Boolean;
     FEdicaoProblema: Boolean;
 
-    procedure CarregaGridProblemasPorModulo;
-    procedure CarregaGridProblemasTodos;
+    procedure CarregaGridProblemas;
     procedure CarregaDadosProblemas;
     procedure CarregaGridModulos;
-    procedure CarregaTbProblemasPorModulo;
     procedure PreencheCbxModulos;
     procedure InverteBotoesCrudModulos;
     procedure InverteBotoesCrudProblemas;
@@ -231,8 +230,7 @@ end;
 
 procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
 begin
-  CarregaGridProblemasPorModulo;
-
+  CarregaGridProblemas;
   CarregaDadosProblemas;
 end;
 
@@ -292,18 +290,7 @@ end;
 
 procedure TformPrincipal.rdbtnFiltroPesqProblemaClick(Sender: TObject);
 begin
-  if rdbtnFiltroPesqProblema.ItemIndex = 0 then
-  begin
-    pnlBodyModulos.Visible := False;
-
-    CarregaGridProblemasTodos;
-  end
-  else if rdbtnFiltroPesqProblema.ItemIndex = 1 then
-  begin
-    pnlBodyModulos.Visible := True;
-
-    CarregaGridProblemasPorModulo;
-  end;
+  CarregaGridProblemas;
 end;
 
 procedure TformPrincipal.SpeedButton2Click(Sender: TObject);
@@ -339,6 +326,24 @@ begin
   InverteCamposProblemas;
 end;
 
+procedure TformPrincipal.btnExcluirProblemaClick(Sender: TObject);
+begin
+  var aProblema: TProblema := TProblema.Create;
+
+  try
+    if Application.MessageBox('Deseja excluir este registro?', 'Excluir problema',
+    + MB_ICONQUESTION + MB_YESNO) = MrYes then
+    begin
+      aProblema.Codigo := StrToInt(edtCodProblema.Text);
+      FControllerProblema.DeleteProblema(aProblema);
+      CarregaGridProblemas;
+      CarregaDadosProblemas;
+    end;
+  finally
+    aProblema.Free;
+  end;
+end;
+
 procedure TformPrincipal.btnNovoModuloMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
@@ -363,6 +368,7 @@ begin
   edtTituloProblema.Clear;
   edtChamadoProblema.Clear;
   edtDataProblema.Text := DateToStr(date);
+  edtCodProblema.Clear;
   cbModulo.ItemIndex := -1;
   mmSolucaoProblema.Clear;
   mmDetalhesProblema.Clear;
@@ -413,14 +419,7 @@ begin
     aProblema.Free;
   end;
 
-  if rdbtnFiltroPesqProblema.ItemIndex = 0 then
-  begin
-    CarregaGridProblemasTodos;
-  end
-  else if rdbtnFiltroPesqProblema.ItemIndex = 1 then
-  begin
-    CarregaGridProblemasPorModulo;
-  end;
+  CarregaGridProblemas;
 
   InverteCamposProblemas;
 end;
@@ -471,24 +470,25 @@ begin
   end;
 end;
 
-procedure TformPrincipal.CarregaGridProblemasPorModulo;
+procedure TformPrincipal.CarregaGridProblemas;
 begin
   var
     aNomeModulo: String := gridModulos.Columns[0].Field.Value;
 
-  gridProblemas.DataSource := FControllerProblema.BuscaTabelaProblemasPorModulo
-  (aNomeModulo);
-  edtNomeModulo.Text := aNomeModulo;
-end;
+  if rdbtnFiltroPesqProblema.ItemIndex = 0 then
+  begin
+    pnlBodyModulos.Visible := False;
 
-procedure TformPrincipal.CarregaGridProblemasTodos;
-begin
-  gridProblemas.DataSource := FControllerProblema.BuscaTabelaProblemas;
-end;
+    gridProblemas.DataSource := FControllerProblema.BuscaTabelaProblemas;
+  end
+  else if rdbtnFiltroPesqProblema.ItemIndex = 1 then
+  begin
+    pnlBodyModulos.Visible := True;
 
-procedure TformPrincipal.CarregaTbProblemasPorModulo;
-begin
-
+    gridProblemas.DataSource := FControllerProblema.BuscaTabelaProblemasPorModulo
+    (aNomeModulo);
+    edtNomeModulo.Text := aNomeModulo;;
+  end;
 end;
 
 end.

@@ -15,6 +15,7 @@ type
     function BuscaTabelaProblemas : TDataSource;
     procedure InsertProblema(aProblema: TProblema);
     procedure UpdateProblema(aProblema: TProblema);
+    procedure DeleteProblema(aProblema: TProblema);
     constructor Create;
     destructor Destroy; override;
   end;
@@ -42,6 +43,11 @@ end;
 constructor TControllerProblema.Create;
 begin
   FServiceProblema := TServiceProblema.Create;
+end;
+
+procedure TControllerProblema.DeleteProblema(aProblema: TProblema);
+begin
+  FServiceProblema.DeleteProblema(aProblema);
 end;
 
 destructor TControllerProblema.Destroy;

@@ -124,6 +124,7 @@ object formPrincipal: TformPrincipal
               Align = alRight
               Caption = 'Excluir'
               Spacing = 2
+              OnClick = btnExcluirProblemaClick
               ExplicitLeft = 146
               ExplicitTop = -4
             end
@@ -478,7 +479,6 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Top = 20
             TabOrder = 1
-            ExplicitTop = 72
             object SpeedButton1: TSpeedButton
               Left = 1052
               Top = 33
@@ -542,8 +542,6 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Right = 250
             TabOrder = 2
-            ExplicitTop = 407
-            ExplicitHeight = 338
             object pnlSolucaoProblema: TPanel
               Left = 30
               Top = 0
@@ -554,7 +552,6 @@ object formPrincipal: TformPrincipal
               BevelOuter = bvNone
               Padding.Bottom = 20
               TabOrder = 0
-              ExplicitHeight = 338
               object lblSolucaoProblema: TLabel
                 Left = 0
                 Top = 0
@@ -585,8 +582,6 @@ object formPrincipal: TformPrincipal
                 ReadOnly = True
                 TabOrder = 0
                 Zoom = 100
-                ExplicitTop = 23
-                ExplicitHeight = 263
               end
             end
           end
@@ -598,7 +593,6 @@ object formPrincipal: TformPrincipal
             Align = alTop
             AutoSize = True
             TabOrder = 0
-            ExplicitTop = 24
             object lblDataProblema: TLabel
               Left = 633
               Top = 20
@@ -629,14 +623,14 @@ object formPrincipal: TformPrincipal
               Left = 752
               Top = 34
               Width = 33
-              Height = 15
+              Height = 13
               Caption = 'C'#243'digo'
             end
             object edtDataProblema: TMaskEdit
               Left = 633
               Top = 47
               Width = 97
-              Height = 22
+              Height = 21
               EditMask = '!99/99/0000;1;_'
               MaxLength = 10
               ReadOnly = True
@@ -666,12 +660,10 @@ object formPrincipal: TformPrincipal
               Padding.Right = 30
               Padding.Bottom = 10
               TabOrder = 2
-              ExplicitTop = 2
-              ExplicitHeight = 84
               object lblTituloProblema: TLabel
                 Left = 30
                 Top = 19
-                Width = 452
+                Width = 42
                 Height = 21
                 Caption = 'T'#237'tulo'
                 Font.Charset = DEFAULT_CHARSET
@@ -710,7 +702,6 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Right = 250
             TabOrder = 3
-            ExplicitTop = 172
             object pnlDetalhesProblema: TPanel
               Left = 30
               Top = 0
@@ -745,8 +736,6 @@ object formPrincipal: TformPrincipal
                 ReadOnly = True
                 ScrollBars = ssVertical
                 TabOrder = 0
-                ExplicitLeft = -36
-                ExplicitTop = 23
               end
             end
           end

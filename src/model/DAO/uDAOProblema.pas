@@ -15,6 +15,7 @@ type
     function CarregaDadosProblema(aTituloProblema: String): TDataSource;
     procedure InsertProblema(aProblema: TProblema);
     procedure UpdateProblema(aProblema: TProblema);
+    procedure DeleteProblema(aProblema: TProblema);
     constructor Create;
     destructor Destroy; override;
   end;
@@ -41,6 +42,16 @@ end;
 constructor TDAOProblema.Create;
 begin
   FConn := TConexao.Create;
+end;
+
+procedure TDAOProblema.DeleteProblema(aProblema: TProblema);
+begin
+  FQuery := FConn.CriarQuery;
+
+  FQuery.SQL.Text := 'delete from problemas where cod_prob = :cod_prob';
+
+  FQuery.ParamByName('cod_prob').AsInteger := aProblema.Codigo;
+  FQuery.ExecSQL;
 end;
 
 destructor TDAOProblema.Destroy;
