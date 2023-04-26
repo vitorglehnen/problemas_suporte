@@ -3,13 +3,12 @@ unit uControllerProblema;
 interface
 
 uses
-  FireDAC.Comp.Client, Data.DB, uProblema, uDAOGridProblema, uDAOProblema;
+  FireDAC.Comp.Client, Data.DB, uProblema, uServiceProblema;
 
 type
   TControllerProblema = class
   private
-    FDAOProblema: TDaoProblema;
-    FDAOGridProblema: TDAOGridProblema;
+    FServiceProblema: TServiceProblema;
   public
     function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
     function CarregaDadosProblema(aTituloProblema: String): TDataSource;
@@ -27,46 +26,44 @@ implementation
 
 function TControllerProblema.BuscaTabelaProblemas: TDataSource;
 begin
-  Result := FDAOGridProblema.BuscaTabelaProblemas;
+  Result := FServiceProblema.BuscaTabelaProblemas;
 end;
 
 function TControllerProblema.BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
 begin
-  Result := FDAOGridProblema.BuscaTabelaProblemasPorModulo(aNomeModulo);
+  Result := FServiceProblema.BuscaTabelaProblemasPorModulo(aNomeModulo);
 end;
 
 function TControllerProblema.CarregaDadosProblema(
   aTituloProblema: String): TDataSource;
 begin
-  Result:= FDAOProblema.CarregaDadosProblema(aTituloProblema);
+  Result:= FServiceProblema.CarregaDadosProblema(aTituloProblema);
 end;
 
 constructor TControllerProblema.Create;
 begin
-  FDAOProblema := TDAOProblema.Create;
-  FDAOGridProblema := TDAOGridProblema.Create;
+  FServiceProblema := TServiceProblema.Create;
 end;
 
 procedure TControllerProblema.DeleteProblema(aProblema: TProblema);
 begin
-  FDAOProblema.DeleteProblema(aProblema);
+  FServiceProblema.DeleteProblema(aProblema);
 end;
 
 destructor TControllerProblema.Destroy;
 begin
-  FDAOProblema.Free;
-  FDAOGridProblema.Free;
+  FServiceProblema.Free;
   inherited;
 end;
 
 procedure TControllerProblema.InsertProblema(aProblema: TProblema);
 begin
-  FDAOProblema.InsertProblema(aProblema);
+  FServiceProblema.InsertProblema(aProblema);
 end;
 
 procedure TControllerProblema.UpdateProblema(aProblema: TProblema);
 begin
-  FDAOProblema.UpdateProblema(aProblema);
+  FServiceProblema.UpdateProblema(aProblema);
 end;
 
 end.

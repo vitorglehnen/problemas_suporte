@@ -134,10 +134,9 @@ type
     edtChamadoProblema: TEdit;
     lblChamadoProblema: TLabel;
     lblCodProblema: TLabel;
-    pnlTituloProblema: TPanel;
+    edtCodProblema: TEdit;
     lblTituloProblema: TLabel;
     edtTituloProblema: TEdit;
-    edtCodProblema: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
@@ -252,6 +251,9 @@ begin
   btnEditarModulo.Enabled := not btnEditarModulo.Enabled;
   edtNomeModulo.Enabled := not edtNomeModulo.Enabled;
   gridModulos.Enabled := not gridModulos.Enabled;
+
+  pnlProblemas.Enabled := not pnlProblemas.Enabled;
+  pnlBodyProblemas.Enabled := not pnlBodyProblemas.Enabled;
 end;
 
 procedure TformPrincipal.InverteBotoesCrudProblemas;
@@ -302,6 +304,8 @@ procedure TformPrincipal.btnCancelarModuloMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   InverteBotoesCrudModulos;
+
+  edtNomeModulo.Text := gridModulos.Columns[0].Field.Value;
 end;
 
 procedure TformPrincipal.btnCancelarProblemaMouseDown(Sender: TObject;
@@ -436,25 +440,29 @@ end;
 
 procedure TformPrincipal.CarregaDadosProblemas;
 begin
-  var aNomeProblema: String := gridProblemas.Columns[0].Field.Value;
+  var aNomeProblema: String;
   var aProblema: TDataSet;
   var cont: Integer := 0;
 
-  aProblema := FControllerProblema.CarregaDadosProblema(aNomeProblema).DataSet;
-
- //passa por cada item do cbx e identifica com o modulo correspondente no cadastro
-  while cbModulo.text <> aProblema.FieldByName('modulo').Value do
+  if gridProblemas.DataSource.DataSet.RecordCount > 0 then
   begin
-    cbModulo.ItemIndex := cont;
-    cont := cont + 1;
-  end;
+    aNomeProblema := gridProblemas.Columns[0].Field.Value;
+    aProblema := FControllerProblema.CarregaDadosProblema(aNomeProblema).DataSet;
 
-  edtCodProblema.Text := IntToStr(aProblema.FieldByName('cod_prob').Value);
-  edtTituloProblema.Text := aProblema.FieldByName('titulo').Value;
-  edtChamadoProblema.Text := aProblema.FieldByName('chamado').Value;
-  mmDetalhesProblema.Text := aProblema.FieldByName('detalhes').Value;
-  mmSolucaoProblema.Text := aProblema.FieldByName('solucao').Value;
-  edtDataProblema.Text := aProblema.FieldByName('datacr').Value;
+   //passa por cada item do cbx e identifica com o modulo correspondente no cadastro
+    while cbModulo.text <> aProblema.FieldByName('modulo').Value do
+    begin
+      cbModulo.ItemIndex := cont;
+      cont := cont + 1;
+    end;
+
+    edtCodProblema.Text := IntToStr(aProblema.FieldByName('cod_prob').Value);
+    edtTituloProblema.Text := aProblema.FieldByName('titulo').Value;
+    edtChamadoProblema.Text := aProblema.FieldByName('chamado').Value;
+    mmDetalhesProblema.Text := aProblema.FieldByName('detalhes').Value;
+    mmSolucaoProblema.Text := aProblema.FieldByName('solucao').Value;
+    edtDataProblema.Text := aProblema.FieldByName('datacr').Value;
+  end;
 end;
 
 procedure TformPrincipal.CarregaGridModulos;

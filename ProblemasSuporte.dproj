@@ -114,8 +114,6 @@
         <DCCReference Include="src\model\DAO\uDAOGridProblema.pas"/>
         <DCCReference Include="src\controller\uControllerProblema.pas"/>
         <DCCReference Include="src\controller\uControllerModulo.pas"/>
-        <DCCReference Include="src\services\uServiceModulo.pas"/>
-        <DCCReference Include="src\services\uServiceProblema.pas"/>
         <DCCReference Include="src\model\DAO\uDAOProblema.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>

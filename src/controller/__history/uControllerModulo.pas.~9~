@@ -2,13 +2,13 @@ unit uControllerModulo;
 
 interface
 
-uses uDAOModulo, System.Generics.Collections, uModulo, Datasnap.DBClient,
+uses uServiceModulo, System.Generics.Collections, uModulo, Datasnap.DBClient,
   Data.DB;
 
 type
   TControllerModulo = class
   private
-    FDAOModulo: TDAOModulo;
+    FServiceModulo: TServiceModulo;
   public
     function BuscaTabelaModulos: TDataSource;
     procedure InsertModulo(aNomeModulo:String);
@@ -23,29 +23,29 @@ implementation
 
 function TControllerModulo.BuscaTabelaModulos: TDataSource;
 begin
-  Result := FDAOModulo.BuscaTabelaModulos;
+  Result := FServiceModulo.BuscaTabelaModulos;
 end;
 
 constructor TControllerModulo.Create;
 begin
-  FDAOModulo := TDAOModulo.Create;
+  FServiceModulo := TServiceModulo.Create;
 end;
 
 destructor TControllerModulo.Destroy;
 begin
-  FDAOModulo.Free;
+  FServiceModulo.Free;
   inherited;
 end;
 
 procedure TControllerModulo.InsertModulo(aNomeModulo: String);
 begin
-  FDAOModulo.InsertModulo(aNomeModulo);
+  FServiceModulo.InsertModulo(aNomeModulo);
 end;
 
 procedure TControllerModulo.UpdateModulo(aNomeModuloAnt,
   aNomeModuloAtt: String);
 begin
-  FDAOModulo.UpdateModulo(aNomeModuloAnt, aNomeModuloAtt);
+  FServiceModulo.UpdateModulo(aNomeModuloAnt, aNomeModuloAtt);
 end;
 
 end.
