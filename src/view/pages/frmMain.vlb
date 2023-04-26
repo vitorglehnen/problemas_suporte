@@ -1,118 +1,254 @@
 ﻿[pnlBodyPesqModulo]
-Coordinates=738,144,132,58
+Coordinates=738,144,116,51
 
 [edtNomeModulo]
-Coordinates=869,10,108,58
+Coordinates=869,10,95,51
 
 [pnlBotaoCrudProblema]
-Coordinates=820,212,148,58
+Coordinates=820,212,129,51
 
 [btnCancelarProblema]
-Coordinates=389,598,139,36
+Coordinates=389,598,120,33
 
 [btnNovoModulo]
-Coordinates=275,598,104,36
+Coordinates=275,598,92,33
 
 [pnlTopProblemas]
-Coordinates=841,416,115,58
+Coordinates=841,416,101,51
 
 [lblTituloModulo]
-Coordinates=344,416,102,58
+Coordinates=344,416,90,51
 
 [pnlBodyModulos]
-Coordinates=271,212,109,58
+Coordinates=271,212,97,51
 
 [lblPesqProblema]
-Coordinates=674,348,112,58
+Coordinates=674,348,97,51
 
 [lblTituloProblemas]
-Coordinates=406,280,121,58
+Coordinates=406,280,107,51
 
 [pnlPrincipal]
-Coordinates=749,416,82,58
+Coordinates=749,416,73,51
 
 [pnlFiltroPesqProblema]
-Coordinates=454,144,145,58
+Coordinates=454,144,127,51
 
 [pnlPesqProblema]
-Coordinates=272,10,116,58
+Coordinates=272,10,101,51
 
 [pnlBodyPesqProblema]
-Coordinates=537,10,145,58
+Coordinates=537,10,127,51
 
 [pnlGridProblemas]
-Coordinates=10,484,118,58
+Coordinates=10,484,103,51
 
 [pnlGridModulos]
-Coordinates=291,280,105,58
+Coordinates=291,280,93,51
 
 [btnSalvarProblema]
-Coordinates=141,598,124,36
+Coordinates=141,598,108,33
 
 [pnlBotaoCrudModulo]
-Coordinates=798,280,135,58
+Coordinates=798,280,119,51
 
 [pnlTopModulos]
-Coordinates=232,416,102,58
+Coordinates=232,416,91,51
 
 [btnEditarProblema]
-Coordinates=10,598,121,36
+Coordinates=10,598,106,33
 
 [lblTotalDeProblemas]
-Coordinates=796,348,134,58
+Coordinates=796,348,116,51
 
 [pnlBodyProblemas]
-Coordinates=10,212,122,58
+Coordinates=10,212,108,51
 
 [gridProblemas]
-Coordinates=890,552,98,36
+Coordinates=890,552,86,33
 
 [lblPesqModulo]
-Coordinates=182,280,99,58
+Coordinates=182,280,87,51
 
 [pnlCadastroProblema]
-Coordinates=456,416,139,58
+Coordinates=456,416,121,51
 
 [rdbtnFiltroPesqProblema]
-Coordinates=430,484,157,58
+Coordinates=430,484,137,51
 
 [pnlBodyModulosProblemas]
-Coordinates=639,212,171,58
+Coordinates=639,212,150,51
 
 [pnlPesqModulo]
-Coordinates=537,280,103,58
+Coordinates=537,280,91,51
 
 [gridModulos]
-Coordinates=795,552,85,36
+Coordinates=795,552,76,33
 
 [btnCancelarModulo]
-Coordinates=659,552,126,36
+Coordinates=659,552,110,33
 
 [btnSalvarModulo]
-Coordinates=538,552,111,36
+Coordinates=538,552,97,33
 
 [btnExcluirProblema]
-Coordinates=402,552,126,36
+Coordinates=402,552,111,33
 
 [edtPesqProblema]
-Coordinates=427,348,117,58
+Coordinates=427,348,101,51
 
 [btnEditarModulo]
-Coordinates=284,552,108,36
+Coordinates=284,552,96,33
 
 [cbFiltroPesqProblema]
-Coordinates=121,10,141,124
+Coordinates=121,10,123,105
 
 [btnNovoProblema]
-Coordinates=10,552,117,36
+Coordinates=10,552,103,33
 
 [edtPesqModulo]
-Coordinates=390,212,104,58
+Coordinates=390,212,91,51
 
 [cardPanelProblemas]
-Coordinates=605,416,134,58
+Coordinates=605,416,116,51
 
 []
-Coordinates=129,416,93,58
+Coordinates=445,1,82,33
 Visible=True
+
+[lblCodProblema]
+Coordinates=157,1,93,51
+
+[FormatRichEditBullets2]
+Coordinates=268,376,131,33
+
+[lblModuloProblema]
+Coordinates=1006,1,109,51
+
+[FormatRichEditItalic2]
+Coordinates=1215,1,120,33
+
+[edtCodProblema]
+Coordinates=532,1,96,51
+
+[pnlDetalhesProblema]
+Coordinates=145,512,119,51
+
+[FormatRichEditStrikeOut2]
+Coordinates=1215,56,143,33
+
+[SpeedButton1]
+Coordinates=532,221,84,33
+
+[FormatRichEditAlignCenter2]
+Coordinates=1215,111,155,33
+
+[SpeedButton2]
+Coordinates=83,335,84,33
+
+[lblDetalhesProblema]
+Coordinates=720,1,116,51
+
+[FormatRichEditStrikeOut1]
+Coordinates=1215,166,143,33
+
+[edtTituloProblema]
+Coordinates=1006,155,104,51
+
+[FormatRichEditBullets1]
+Coordinates=1215,221,131,33
+
+[pnlProblemas]
+Coordinates=532,78,82,51
+Visible=True
+
+[lblDataProblema]
+Coordinates=113,376,95,51
+
+[pnlModuloProblema]
+Coordinates=1006,386,113,51
+
+[lblChamadoProblema]
+Coordinates=0,0,120,51
+
+[edtDataProblema]
+Coordinates=63,239,99,51
+
+[FormatRichEditBold2]
+Coordinates=1215,276,119,33
+
+[FormatRichEditItalic1]
+Coordinates=1215,331,120,33
+
+[lblSolucaoProblema]
+Coordinates=123,153,113,51
+
+[pnlBodySolucaoProblema]
+Coordinates=1015,232,142,51
+
+[FormatRichEditAlignLeft2]
+Coordinates=1215,386,141,33
+
+[FormatRichEditAlignRight2]
+Coordinates=1215,441,148,33
+
+[edtChamadoProblema]
+Coordinates=281,87,123,51
+
+[Action2]
+Coordinates=212,239,52,33
+
+[FormatRichEditBold1]
+Coordinates=1215,496,119,33
+
+[FormatRichEditAlignCenter3]
+Coordinates=1431,1,155,33
+
+[CustomizeActionBars1]
+Coordinates=1215,551,127,33
+
+[pnlBodyModuloProblema]
+Coordinates=1015,78,139,51
+
+[cbModulo]
+Coordinates=12,77,84,105
+
+[FormatRichEditAlignLeft1]
+Coordinates=1046,580,141,33
+
+[pnlSolucaoProblema]
+Coordinates=1006,463,116,51
+
+[mmDetalhesProblema]
+Coordinates=1006,309,122,51
+
+[pnlTopProblema]
+Coordinates=532,289,95,51
+
+[mmSolucaoProblema]
+Coordinates=1431,56,119,33
+
+[FormatRichEditUnderline1]
+Coordinates=1431,111,144,33
+
+[FormatRichEditAlignRight1]
+Coordinates=1431,166,148,33
+
+[pnlBodyDetalhesProblema]
+Coordinates=262,153,145,51
+
+[ActionManager1]
+Coordinates=123,444,94,33
+
+[pnlImagensProblema]
+Coordinates=720,78,118,51
+
+[FormatRichEditAlignCenter1]
+Coordinates=1431,221,155,33
+
+[FormatRichEditUnderline2]
+Coordinates=1431,276,144,33
+
+[lblTituloProblema]
+Coordinates=138,77,101,51
 

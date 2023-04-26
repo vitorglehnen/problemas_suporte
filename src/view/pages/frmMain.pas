@@ -159,10 +159,13 @@ type
     procedure rdbtnFiltroPesqProblemaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure gridProblemasCellClick(Column: TColumn);
-    procedure SpeedButton2Click(Sender: TObject);
     procedure cardPanelProblemasExit(Sender: TObject);
     procedure btnEditarProblemaClick(Sender: TObject);
     procedure btnExcluirProblemaClick(Sender: TObject);
+    procedure mmSolucaoProblemaKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure SpeedButton2Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -171,6 +174,8 @@ type
     FEdicaoModulo: Boolean;
     FEdicaoProblema: Boolean;
 
+    procedure EventoSalvarProblema;
+    procedure EventoCadastrarProblema;
     procedure CarregaGridProblemas;
     procedure CarregaDadosProblemas;
     procedure CarregaGridModulos;
@@ -190,7 +195,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uModulo;
+  uModulo, frmImagensProblema;
 
 procedure TformPrincipal.edtNomeModuloExit(Sender: TObject);
 begin
@@ -200,6 +205,58 @@ begin
       MB_ICONWARNING or MB_OK);
     edtNomeModulo.SetFocus;
   end;
+end;
+
+procedure TformPrincipal.EventoCadastrarProblema;
+begin
+  FEdicaoProblema := False;
+
+  InverteCamposProblemas;
+  InverteBotoesCrudProblemas;
+
+  edtTituloProblema.SetFocus;
+
+  edtTituloProblema.Clear;
+  edtChamadoProblema.Clear;
+  edtDataProblema.Text := DateToStr(date);
+  edtCodProblema.Clear;
+  cbModulo.ItemIndex := -1;
+  mmSolucaoProblema.Clear;
+  mmDetalhesProblema.Clear;
+
+  PreencheCbxModulos;
+end;
+
+procedure TformPrincipal.EventoSalvarProblema;
+begin
+  var aProblema : TProblema:= TProblema.Create;
+
+  InverteBotoesCrudProblemas;
+
+  try
+    aProblema.Titulo := edtTituloProblema.Text;
+    aProblema.Modulo := cbModulo.Text;
+    aProblema.Chamado := edtChamadoProblema.Text;
+    aProblema.Detalhes := mmDetalhesProblema.Text;
+    aProblema.Solucao := mmSolucaoProblema.Text;
+
+    if FEdicaoProblema then
+    begin
+      aProblema.Codigo := StrToInt(edtCodProblema.Text);
+
+      FControllerProblema.UpdateProblema(aProblema);
+    end
+    else
+    begin
+      FControllerProblema.InsertProblema(aProblema);
+    end;
+  finally
+    aProblema.Free;
+  end;
+
+  CarregaGridProblemas;
+
+  InverteCamposProblemas;
 end;
 
 procedure TformPrincipal.FormCreate(Sender: TObject);
@@ -214,6 +271,20 @@ procedure TformPrincipal.FormDestroy(Sender: TObject);
 begin
   FControllerProblema.Free;
   FControllerModulo.Free;
+end;
+
+procedure TformPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if Key = VK_F3 then
+    if btnNovoProblema.Enabled then
+      if pnlProblemas.Enabled then
+        EventoCadastrarProblema;
+
+  if Key = VK_F4 then
+    if btnNovoProblema.Enabled = false then
+      if pnlProblemas.Enabled then
+        EventoSalvarProblema;
 end;
 
 procedure TformPrincipal.FormShow(Sender: TObject);
@@ -276,6 +347,13 @@ begin
   mmSolucaoProblema.ReadOnly := not mmSolucaoProblema.ReadOnly;
 end;
 
+procedure TformPrincipal.mmSolucaoProblemaKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if Key = VK_TAB then
+    Showmessage('sim');
+end;
+
 procedure TformPrincipal.PreencheCbxModulos;
 begin
   var
@@ -297,7 +375,7 @@ end;
 
 procedure TformPrincipal.SpeedButton2Click(Sender: TObject);
 begin
-  cardPanelProblemas.ActiveCard := pnlImagensProblema;
+  TformImagensProblema.Create(nil);
 end;
 
 procedure TformPrincipal.btnCancelarModuloMouseDown(Sender: TObject;
@@ -362,22 +440,7 @@ end;
 procedure TformPrincipal.btnNovoProblemaMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  FEdicaoProblema := False;
-
-  InverteCamposProblemas;
-  InverteBotoesCrudProblemas;
-
-  edtTituloProblema.SetFocus;
-
-  edtTituloProblema.Clear;
-  edtChamadoProblema.Clear;
-  edtDataProblema.Text := DateToStr(date);
-  edtCodProblema.Clear;
-  cbModulo.ItemIndex := -1;
-  mmSolucaoProblema.Clear;
-  mmDetalhesProblema.Clear;
-
-  PreencheCbxModulos;
+  EventoCadastrarProblema;
 end;
 
 procedure TformPrincipal.btnSalvarModuloMouseDown(Sender: TObject;
@@ -398,34 +461,7 @@ end;
 procedure TformPrincipal.btnSalvarProblemaMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  var aProblema : TProblema:= TProblema.Create;
-
-  InverteBotoesCrudProblemas;
-
-  try
-    aProblema.Titulo := edtTituloProblema.Text;
-    aProblema.Modulo := cbModulo.Text;
-    aProblema.Chamado := edtChamadoProblema.Text;
-    aProblema.Detalhes := mmDetalhesProblema.Text;
-    aProblema.Solucao := mmSolucaoProblema.Text;
-
-    if FEdicaoProblema then
-    begin
-      aProblema.Codigo := StrToInt(edtCodProblema.Text);
-
-      FControllerProblema.UpdateProblema(aProblema);
-    end
-    else
-    begin
-      FControllerProblema.InsertProblema(aProblema);
-    end;
-  finally
-    aProblema.Free;
-  end;
-
-  CarregaGridProblemas;
-
-  InverteCamposProblemas;
+  EventoSalvarProblema;
 end;
 
 procedure TformPrincipal.cardPanelProblemasExit(Sender: TObject);

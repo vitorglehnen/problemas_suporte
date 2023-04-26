@@ -9,7 +9,8 @@ uses
   uDAOGridProblema in 'src\model\DAO\uDAOGridProblema.pas',
   uControllerProblema in 'src\controller\uControllerProblema.pas',
   uControllerModulo in 'src\controller\uControllerModulo.pas',
-  uDAOProblema in 'src\model\DAO\uDAOProblema.pas';
+  uDAOProblema in 'src\model\DAO\uDAOProblema.pas',
+  frmImagensProblema in 'src\view\pages\frmImagensProblema.pas' {formImagensProblema};
 
 {$R *.res}
 begin

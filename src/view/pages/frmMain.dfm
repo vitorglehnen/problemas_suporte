@@ -17,6 +17,7 @@ object formPrincipal: TformPrincipal
   WindowState = wsMaximized
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -66,8 +67,8 @@ object formPrincipal: TformPrincipal
             Font.Style = [fsBold]
             ParentFont = False
             Layout = tlCenter
-            ExplicitLeft = 4
-            ExplicitTop = 5
+            ExplicitWidth = 79
+            ExplicitHeight = 18
           end
           object lblTotalDeProblemas: TLabel
             Left = 6
@@ -212,8 +213,6 @@ object formPrincipal: TformPrincipal
                     'Somente do m'#243'dulo')
                   TabOrder = 0
                   OnClick = rdbtnFiltroPesqProblemaClick
-                  ExplicitLeft = -4
-                  ExplicitTop = 47
                 end
                 object cbFiltroPesqProblema: TComboBox
                   Left = 0
@@ -481,7 +480,6 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Top = 20
             TabOrder = 1
-            ExplicitTop = 87
             object SpeedButton1: TSpeedButton
               Left = 1052
               Top = 33
@@ -496,6 +494,7 @@ object formPrincipal: TformPrincipal
               Width = 103
               Height = 34
               Caption = 'Adicionar imagens'
+              OnClick = SpeedButton2Click
             end
             object pnlModuloProblema: TPanel
               Left = 30
@@ -544,9 +543,7 @@ object formPrincipal: TformPrincipal
             BevelOuter = bvNone
             Padding.Left = 30
             Padding.Right = 250
-            TabOrder = 2
-            ExplicitTop = 422
-            ExplicitHeight = 323
+            TabOrder = 3
             object pnlSolucaoProblema: TPanel
               Left = 30
               Top = 0
@@ -557,7 +554,6 @@ object formPrincipal: TformPrincipal
               BevelOuter = bvNone
               Padding.Bottom = 20
               TabOrder = 0
-              ExplicitHeight = 323
               object lblSolucaoProblema: TLabel
                 Left = 0
                 Top = 0
@@ -588,7 +584,7 @@ object formPrincipal: TformPrincipal
                 ReadOnly = True
                 TabOrder = 0
                 Zoom = 100
-                ExplicitHeight = 286
+                OnKeyDown = mmSolucaoProblemaKeyDown
               end
             end
           end
@@ -696,9 +692,7 @@ object formPrincipal: TformPrincipal
             BevelOuter = bvNone
             Padding.Left = 30
             Padding.Right = 250
-            TabOrder = 3
-            ExplicitLeft = -6
-            ExplicitTop = 188
+            TabOrder = 2
             object pnlDetalhesProblema: TPanel
               Left = 30
               Top = 0
@@ -733,7 +727,6 @@ object formPrincipal: TformPrincipal
                 ReadOnly = True
                 ScrollBars = ssVertical
                 TabOrder = 0
-                ExplicitTop = 23
               end
             end
           end
