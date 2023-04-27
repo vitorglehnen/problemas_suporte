@@ -375,7 +375,13 @@ end;
 
 procedure TformPrincipal.SpeedButton2Click(Sender: TObject);
 begin
-  TformImagensProblema.Create(nil);
+  var aFormImagensProblema : TFormImagensProblema := TformImagensProblema.Create(nil);
+
+  try
+    aFormImagensProblema.ShowModal;
+  finally
+    aFormImagensProblema.Free;
+  end;
 end;
 
 procedure TformPrincipal.btnCancelarModuloMouseDown(Sender: TObject;

@@ -481,16 +481,16 @@ object formPrincipal: TformPrincipal
             Padding.Top = 20
             TabOrder = 1
             object SpeedButton1: TSpeedButton
-              Left = 1052
-              Top = 33
+              Left = 619
+              Top = 25
               Width = 103
               Height = 34
               Caption = 'Ver imagens'
               Enabled = False
             end
             object SpeedButton2: TSpeedButton
-              Left = 943
-              Top = 32
+              Left = 510
+              Top = 24
               Width = 103
               Height = 34
               Caption = 'Adicionar imagens'
