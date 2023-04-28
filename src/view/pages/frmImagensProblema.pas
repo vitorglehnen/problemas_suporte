@@ -19,9 +19,13 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure btnAddImagemClick(Sender: TObject);
     procedure btnRemoverImagemClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     FCont: Integer;
+    FListaImagens: TImageList;
   public
     { Public declarations }
   end;
@@ -38,6 +42,19 @@ begin
   imgProblema.Picture := nil;
 end;
 
+procedure TformImagensProblema.FormCreate(Sender: TObject);
+begin
+  FCont:= 0;
+  FListaImagens:= TImageList.Create(nil);
+  FListaImagens.Width := 64;
+  FListaImagens.Height := 64;
+end;
+
+procedure TformImagensProblema.FormDestroy(Sender: TObject);
+begin
+  FListaImagens.Free;
+end;
+
 procedure TformImagensProblema.FormKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = ^V then
@@ -45,17 +62,20 @@ begin
       imgProblema.Picture.Assign(Clipboard);
 end;
 
+procedure TformImagensProblema.FormShow(Sender: TObject);
+begin
+  FListaImagens.getbitmap(0, imgProblema.Picture.Bitmap);
+end;
+
 procedure TformImagensProblema.btnAddImagemClick(Sender: TObject);
 begin
   var aListaImagens: TImageList := TImageList.Create(nil);
   var aImagem: TBitmap := imgProblema.Picture.Bitmap;
 
-  try
-    aListaImagens.Add(aImagem, nil);
-    imgProblema.Picture := nil;
-  finally
-    aListaImagens.Free;
-  end;
+  FCont := FCont + 1;
+
+  aListaImagens.Add(aImagem, nil);
+  imgProblema.Picture := nil;
 end;
 
 end.

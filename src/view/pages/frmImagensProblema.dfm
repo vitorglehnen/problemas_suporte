@@ -12,7 +12,10 @@ object formImagensProblema: TformImagensProblema
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnKeyPress = FormKeyPress
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object btnAdicionarImagem: TPanel
@@ -23,10 +26,6 @@ object formImagensProblema: TformImagensProblema
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = 232
-    ExplicitTop = 240
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object imgProblema: TImage
       Left = 81
       Top = 57
@@ -69,7 +68,6 @@ object formImagensProblema: TformImagensProblema
       Padding.Top = 5
       Padding.Bottom = 5
       TabOrder = 0
-      ExplicitTop = -6
       object btnRemoverImagem: TSpeedButton
         Left = 81
         Top = 6
