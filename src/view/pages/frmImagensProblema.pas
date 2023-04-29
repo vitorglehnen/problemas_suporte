@@ -24,10 +24,12 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure btnAddImagemMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure btnAntImagemMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
     FCont: Integer;
-    FListaImagens: TImageList;
+    FListaImagens: TList;
   public
     { Public declarations }
   end;
@@ -42,13 +44,18 @@ implementation
 procedure TformImagensProblema.btnAddImagemMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  btnAdicionarImagem.Enabled := not btnAdicionarImagem.Enabled;
-  //  var aImagem: TBitmap := imgProblema.Picture.Bitmap;
-  //
-  //  FCont := FCont + 1;
-  //
-  //  FListaImagens.Add(aImagem, nil);
-  //  imgProblema.Picture := nil;
+    var aImagem: TBitmap := imgProblema.Picture.Bitmap;
+
+    FCont := FCont + 1;
+
+    FListaImagens.Add(aImagem);
+    imgProblema.Picture := nil;
+end;
+
+procedure TformImagensProblema.btnAntImagemMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  imgProblema.Picture.Bitmap.Assign(FListaImagens.Items[0]);
 end;
 
 procedure TformImagensProblema.btnRemoverImagemClick(Sender: TObject);
@@ -59,7 +66,7 @@ end;
 procedure TformImagensProblema.FormCreate(Sender: TObject);
 begin
   FCont:= 0;
-  FListaImagens:= TImageList.Create(nil);
+  FListaImagens:= TList.Create();
 end;
 
 procedure TformImagensProblema.FormDestroy(Sender: TObject);
@@ -70,14 +77,14 @@ end;
 procedure TformImagensProblema.FormKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = ^V then
-    if not btnAdicionarImagem.Enabled then
+//    if not btnAdicionarImagem.Enabled then
       if Clipboard.HasFormat(cf_bitmap) then
         imgProblema.Picture.Assign(Clipboard);
 end;
 
 procedure TformImagensProblema.FormShow(Sender: TObject);
 begin
-  FListaImagens.GetBitmap(0, imgProblema.Picture.Bitmap);
+  //imgProblema.Picture.Assign(FListaImagens.Items[0]);
 end;
 
 end.

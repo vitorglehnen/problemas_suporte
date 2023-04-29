@@ -113,20 +113,14 @@ Coordinates=390,212,91,51
 Coordinates=605,416,116,51
 
 []
-Coordinates=445,1,82,33
+Coordinates=1431,1,155,33
 Visible=True
 
 [lblCodProblema]
 Coordinates=157,1,93,51
 
-[FormatRichEditBullets2]
-Coordinates=268,376,131,33
-
 [lblModuloProblema]
 Coordinates=1006,1,109,51
-
-[FormatRichEditItalic2]
-Coordinates=1215,1,120,33
 
 [edtCodProblema]
 Coordinates=532,1,96,51
@@ -134,14 +128,8 @@ Coordinates=532,1,96,51
 [pnlDetalhesProblema]
 Coordinates=145,512,119,51
 
-[FormatRichEditStrikeOut2]
-Coordinates=1215,56,143,33
-
 [SpeedButton1]
 Coordinates=532,221,84,33
-
-[FormatRichEditAlignCenter2]
-Coordinates=1215,111,155,33
 
 [SpeedButton2]
 Coordinates=83,335,84,33
@@ -149,14 +137,8 @@ Coordinates=83,335,84,33
 [lblDetalhesProblema]
 Coordinates=720,1,116,51
 
-[FormatRichEditStrikeOut1]
-Coordinates=1215,166,143,33
-
 [edtTituloProblema]
 Coordinates=1006,155,104,51
-
-[FormatRichEditBullets1]
-Coordinates=1215,221,131,33
 
 [pnlProblemas]
 Coordinates=532,78,82,51
@@ -174,35 +156,14 @@ Coordinates=0,0,120,51
 [edtDataProblema]
 Coordinates=63,239,99,51
 
-[FormatRichEditBold2]
-Coordinates=1215,276,119,33
-
-[FormatRichEditItalic1]
-Coordinates=1215,331,120,33
-
 [lblSolucaoProblema]
 Coordinates=123,153,113,51
 
 [pnlBodySolucaoProblema]
 Coordinates=1015,232,142,51
 
-[FormatRichEditAlignLeft2]
-Coordinates=1215,386,141,33
-
-[FormatRichEditAlignRight2]
-Coordinates=1215,441,148,33
-
 [edtChamadoProblema]
 Coordinates=281,87,123,51
-
-[Action2]
-Coordinates=212,239,52,33
-
-[FormatRichEditBold1]
-Coordinates=1215,496,119,33
-
-[FormatRichEditAlignCenter3]
-Coordinates=1431,1,155,33
 
 [CustomizeActionBars1]
 Coordinates=1215,551,127,33
@@ -212,9 +173,6 @@ Coordinates=1015,78,139,51
 
 [cbModulo]
 Coordinates=12,77,84,105
-
-[FormatRichEditAlignLeft1]
-Coordinates=1046,580,141,33
 
 [pnlSolucaoProblema]
 Coordinates=1006,463,116,51
@@ -228,12 +186,6 @@ Coordinates=532,289,95,51
 [mmSolucaoProblema]
 Coordinates=1431,56,119,33
 
-[FormatRichEditUnderline1]
-Coordinates=1431,111,144,33
-
-[FormatRichEditAlignRight1]
-Coordinates=1431,166,148,33
-
 [pnlBodyDetalhesProblema]
 Coordinates=262,153,145,51
 
@@ -242,12 +194,6 @@ Coordinates=123,444,94,33
 
 [pnlImagensProblema]
 Coordinates=720,78,118,51
-
-[FormatRichEditAlignCenter1]
-Coordinates=1431,221,155,33
-
-[FormatRichEditUnderline2]
-Coordinates=1431,276,144,33
 
 [lblTituloProblema]
 Coordinates=138,77,101,51

@@ -73,7 +73,7 @@ begin
   FQuery.ParamByName('titulo').AsString := aProblema.Titulo;
   FQuery.ParamByName('chamado').AsString := aProblema.Chamado;
   FQuery.ParamByName('detalhes').AsString := aProblema.Detalhes;
-  FQuery.ParamByName('solucao').AsString := aProblema.Solucao;
+  FQuery.ParamByName('solucao').LoadFromStream(aProblema.Solucao, ftMemo);
 
   FQuery.ExecSQL;
 end;
@@ -89,7 +89,7 @@ begin
   FQuery.ParamByName('modulo').AsString := aProblema.Modulo;
   FQuery.ParamByName('chamado').AsString := aProblema.Chamado;
   FQuery.ParamByName('detalhes').AsString := aProblema.Detalhes;
-  FQuery.ParamByName('solucao').AsString := aProblema.Solucao;
+  FQuery.ParamByName('solucao').LoadFromStream(aProblema.Solucao, ftMemo);
   FQuery.ParamByName('cod_prob').AsInteger := aProblema.Codigo;
 
   FQuery.ExecSQL;

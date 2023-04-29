@@ -2,13 +2,16 @@ unit uProblema;
 
 interface
 
+uses
+  System.Classes;
+
 type
   TProblema = class
   private
     FTitulo: String;
     FChamado: String;
     FDetalhes: String;
-    FSolucao: String;
+    FSolucao: TStream;
     FData: TDate;
     FHora: TTime;
     FModulo: String;
@@ -19,7 +22,7 @@ type
     property Modulo: String read FModulo write FModulo;
     property Chamado: String read FChamado write FChamado;
     property Detalhes: String read FDetalhes write FDetalhes;
-    property Solucao: String read FSolucao write FSolucao;
+    property Solucao: TStream read FSolucao write FSolucao;
     property Data: TDate read FData write FData;
     property Hora: TTime read FHora write FHora;
   end;

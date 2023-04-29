@@ -93,24 +93,6 @@ type
     btnNovoModulo: TSpeedButton;
     btnEditarProblema: TSpeedButton;
     ActionManager1: TActionManager;
-    Action2: TAction;
-    FormatRichEditBold1: TRichEditBold;
-    FormatRichEditItalic1: TRichEditItalic;
-    FormatRichEditUnderline1: TRichEditUnderline;
-    FormatRichEditStrikeOut1: TRichEditStrikeOut;
-    FormatRichEditBullets1: TRichEditBullets;
-    FormatRichEditAlignLeft1: TRichEditAlignLeft;
-    FormatRichEditAlignRight1: TRichEditAlignRight;
-    FormatRichEditAlignCenter1: TRichEditAlignCenter;
-    FormatRichEditBold2: TRichEditBold;
-    FormatRichEditItalic2: TRichEditItalic;
-    FormatRichEditUnderline2: TRichEditUnderline;
-    FormatRichEditStrikeOut2: TRichEditStrikeOut;
-    FormatRichEditBullets2: TRichEditBullets;
-    FormatRichEditAlignLeft2: TRichEditAlignLeft;
-    FormatRichEditAlignRight2: TRichEditAlignRight;
-    FormatRichEditAlignCenter2: TRichEditAlignCenter;
-    FormatRichEditAlignCenter3: TRichEditAlignCenter;
     CustomizeActionBars1: TCustomizeActionBars;
     pnlImagensProblema: TCard;
     pnlProblemas: TPanel;
@@ -137,6 +119,17 @@ type
     edtCodProblema: TEdit;
     lblTituloProblema: TLabel;
     edtTituloProblema: TEdit;
+    ActionToolBar1: TActionToolBar;
+    FormatRichEditBold1: TRichEditBold;
+    FormatRichEditItalic1: TRichEditItalic;
+    FormatRichEditUnderline1: TRichEditUnderline;
+    FormatRichEditStrikeOut1: TRichEditStrikeOut;
+    FormatRichEditBullets1: TRichEditBullets;
+    FormatRichEditAlignLeft1: TRichEditAlignLeft;
+    FormatRichEditAlignRight1: TRichEditAlignRight;
+    FormatRichEditAlignCenter1: TRichEditAlignCenter;
+    cbSizeFontSolucao: TComboBox;
+    cbNameFontSolucao: TComboBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
@@ -166,6 +159,8 @@ type
       Shift: TShiftState);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure SpeedButton2Click(Sender: TObject);
+    procedure mmSolucaoProblemaEnter(Sender: TObject);
+    procedure cbSizeFontSolucaoChange(Sender: TObject);
 
   private
     { Private declarations }
@@ -230,15 +225,18 @@ end;
 procedure TformPrincipal.EventoSalvarProblema;
 begin
   var aProblema : TProblema:= TProblema.Create;
+  var ms : TMemoryStream := TMemoryStream.Create;
 
   InverteBotoesCrudProblemas;
 
   try
+    mmSolucaoProblema.Lines.SaveToStream(ms);
+
     aProblema.Titulo := edtTituloProblema.Text;
     aProblema.Modulo := cbModulo.Text;
     aProblema.Chamado := edtChamadoProblema.Text;
     aProblema.Detalhes := mmDetalhesProblema.Text;
-    aProblema.Solucao := mmSolucaoProblema.Text;
+    aProblema.Solucao := ms;
 
     if FEdicaoProblema then
     begin
@@ -252,6 +250,7 @@ begin
     end;
   finally
     aProblema.Free;
+    ms.Free;
   end;
 
   CarregaGridProblemas;
@@ -296,6 +295,9 @@ begin
   PreencheCbxModulos;
 
   pnlProblemas.Enabled := True;
+
+  cbNameFontSolucao.items := Screen.fonts;
+  cbNameFontSolucao.ItemIndex := 28;
 end;
 
 procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
@@ -345,6 +347,12 @@ begin
   cbModulo.Enabled := not cbModulo.Enabled;
   mmDetalhesProblema.ReadOnly := not mmDetalhesProblema.ReadOnly;
   mmSolucaoProblema.ReadOnly := not mmSolucaoProblema.ReadOnly;
+end;
+
+procedure TformPrincipal.mmSolucaoProblemaEnter(Sender: TObject);
+begin
+  mmSolucaoProblema.SelStart := Length(mmSolucaoProblema.Text);
+  mmSolucaoProblema.SelAttributes.Size := StrToint(cbSizeFontSolucao.Text);
 end;
 
 procedure TformPrincipal.mmSolucaoProblemaKeyDown(Sender: TObject;
@@ -485,6 +493,7 @@ begin
   var aNomeProblema: String;
   var aProblema: TDataSet;
   var cont: Integer := 0;
+  var ms: TStream;
 
   if gridProblemas.DataSource.DataSet.RecordCount > 0 then
   begin
@@ -502,8 +511,11 @@ begin
     edtTituloProblema.Text := aProblema.FieldByName('titulo').Value;
     edtChamadoProblema.Text := aProblema.FieldByName('chamado').Value;
     mmDetalhesProblema.Text := aProblema.FieldByName('detalhes').Value;
-    mmSolucaoProblema.Text := aProblema.FieldByName('solucao').Value;
+    ms := aProblema.CreateBlobStream(aProblema.FieldByName('solucao'), bmread);
+    mmSolucaoProblema.Lines.LoadFromStream(ms);
     edtDataProblema.Text := aProblema.FieldByName('datacr').Value;
+
+    ms.Free;
   end;
 end;
 
@@ -539,6 +551,11 @@ begin
     (aNomeModulo);
     edtNomeModulo.Text := aNomeModulo;;
   end;
+end;
+
+procedure TformPrincipal.cbSizeFontSolucaoChange(Sender: TObject);
+begin
+  mmSolucaoProblema.SetFocus;
 end;
 
 end.

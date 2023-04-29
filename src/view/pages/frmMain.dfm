@@ -114,8 +114,8 @@ object formPrincipal: TformPrincipal
               Enabled = False
               Spacing = 2
               OnMouseDown = btnSalvarProblemaMouseDown
-              ExplicitLeft = 71
-              ExplicitTop = 5
+              ExplicitLeft = 59
+              ExplicitTop = -4
             end
             object btnExcluirProblema: TSpeedButton
               Left = 218
@@ -571,9 +571,9 @@ object formPrincipal: TformPrincipal
               end
               object mmSolucaoProblema: TRichEdit
                 Left = 0
-                Top = 17
+                Top = 40
                 Width = 1124
-                Height = 291
+                Height = 268
                 Align = alClient
                 Font.Charset = ANSI_CHARSET
                 Font.Color = clWindowText
@@ -584,7 +584,103 @@ object formPrincipal: TformPrincipal
                 ReadOnly = True
                 TabOrder = 0
                 Zoom = 100
+                OnEnter = mmSolucaoProblemaEnter
                 OnKeyDown = mmSolucaoProblemaKeyDown
+                ExplicitTop = 45
+              end
+              object ActionToolBar1: TActionToolBar
+                Left = 0
+                Top = 17
+                Width = 1124
+                Height = 23
+                ActionManager = ActionManager1
+                Caption = 'ActionToolBar1'
+                Color = clMenuBar
+                ColorMap.DisabledFontColor = 10461087
+                ColorMap.HighlightColor = clWhite
+                ColorMap.BtnSelectedFont = clBlack
+                ColorMap.UnusedColor = clWhite
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clBlack
+                Font.Height = -11
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentFont = False
+                Spacing = 0
+                ExplicitTop = 11
+              end
+              object cbSizeFontSolucao: TComboBox
+                Left = 248
+                Top = 17
+                Width = 41
+                Height = 22
+                Style = csOwnerDrawFixed
+                ItemIndex = 11
+                TabOrder = 2
+                Text = '12'
+                OnChange = cbSizeFontSolucaoChange
+                Items.Strings = (
+                  '1'
+                  '2'
+                  '3'
+                  '4'
+                  '5'
+                  '6'
+                  '7'
+                  '8'
+                  '9'
+                  '10'
+                  '11'
+                  '12'
+                  '13'
+                  '14'
+                  '15'
+                  '16'
+                  '17'
+                  '18'
+                  '19'
+                  '20'
+                  '21'
+                  '22'
+                  '23'
+                  '24'
+                  '25'
+                  '26'
+                  '27'
+                  '28'
+                  '29'
+                  '30'
+                  '31'
+                  '32'
+                  '33'
+                  '34'
+                  '35'
+                  '36'
+                  '37'
+                  '38'
+                  '39'
+                  '40'
+                  '41'
+                  '42'
+                  '43'
+                  '44'
+                  '45'
+                  '46'
+                  '47'
+                  '48'
+                  '49'
+                  '50')
+              end
+              object cbNameFontSolucao: TComboBox
+                Left = 295
+                Top = 17
+                Width = 98
+                Height = 22
+                Style = csOwnerDrawFixed
+                TabOrder = 3
+                OnChange = cbSizeFontSolucaoChange
+                Items.Strings = (
+                  '')
               end
             end
           end
@@ -727,6 +823,7 @@ object formPrincipal: TformPrincipal
                 ReadOnly = True
                 ScrollBars = ssVertical
                 TabOrder = 0
+                ExplicitTop = 10
               end
             end
           end
@@ -748,37 +845,8 @@ object formPrincipal: TformPrincipal
       item
       end
       item
-        Items = <
-          item
-            Action = FormatRichEditItalic1
-            ImageIndex = 29
-            ShortCut = 16457
-          end
-          item
-            Action = FormatRichEditUnderline1
-            ImageIndex = 28
-            ShortCut = 16469
-          end
-          item
-            Action = FormatRichEditStrikeOut1
-            ImageIndex = 44
-          end
-          item
-            Action = FormatRichEditBullets1
-            ImageIndex = 38
-          end
-          item
-            Action = FormatRichEditAlignLeft1
-            ImageIndex = 35
-          end
-          item
-            Action = FormatRichEditAlignRight1
-            ImageIndex = 36
-          end
-          item
-            Action = FormatRichEditAlignCenter1
-            ImageIndex = 37
-          end>
+      end
+      item
       end
       item
       end
@@ -795,20 +863,6 @@ object formPrincipal: TformPrincipal
             ShortCut = 16457
           end
           item
-            Action = FormatRichEditUnderline1
-            ImageIndex = 28
-            ShortCut = 16469
-          end
-          item
-            Action = FormatRichEditStrikeOut1
-            ImageIndex = 44
-          end
-          item
-            Action = FormatRichEditBullets1
-            Caption = 'Bu&llets'
-            ImageIndex = 38
-          end
-          item
             Action = FormatRichEditAlignLeft1
             Caption = '&Align Left'
             ImageIndex = 35
@@ -821,12 +875,15 @@ object formPrincipal: TformPrincipal
             Action = FormatRichEditAlignCenter1
             ImageIndex = 37
           end>
+        ActionBar = ActionToolBar1
       end>
     Left = 1552
     Top = 489
     StyleName = 'Platform Default'
-    object Action2: TAction
-      Caption = 'Action2'
+    object CustomizeActionBars1: TCustomizeActionBars
+      Category = 'Tools'
+      Caption = '&Customize...'
+      CustomizeDlg.StayOnTop = False
     end
     object FormatRichEditBold1: TRichEditBold
       Category = 'Format'
@@ -886,76 +943,6 @@ object formPrincipal: TformPrincipal
       Caption = '&Center'
       Hint = 'Center|Centers text between margins'
       ImageIndex = 37
-    end
-    object FormatRichEditBold2: TRichEditBold
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Bold'
-      Hint = 'Bold'
-      ImageIndex = 31
-      ShortCut = 16450
-    end
-    object FormatRichEditItalic2: TRichEditItalic
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Italic'
-      Hint = 'Italic'
-      ImageIndex = 29
-      ShortCut = 16457
-    end
-    object FormatRichEditUnderline2: TRichEditUnderline
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Underline'
-      Hint = 'Underline'
-      ImageIndex = 28
-      ShortCut = 16469
-    end
-    object FormatRichEditStrikeOut2: TRichEditStrikeOut
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Strikeout'
-      Hint = 'Strikeout'
-      ImageIndex = 44
-    end
-    object FormatRichEditBullets2: TRichEditBullets
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Bullets'
-      Hint = 'Bullets|Inserts a bullet on the current line'
-      ImageIndex = 38
-    end
-    object FormatRichEditAlignLeft2: TRichEditAlignLeft
-      Category = 'Format'
-      AutoCheck = True
-      Caption = 'Align &Left'
-      Hint = 'Align Left|Aligns text at the left indent'
-      ImageIndex = 35
-    end
-    object FormatRichEditAlignRight2: TRichEditAlignRight
-      Category = 'Format'
-      AutoCheck = True
-      Caption = 'Align &Right'
-      Hint = 'Align Right|Aligns text at the right indent'
-      ImageIndex = 36
-    end
-    object FormatRichEditAlignCenter2: TRichEditAlignCenter
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Center'
-      Hint = 'Center|Centers text between margins'
-      ImageIndex = 37
-    end
-    object FormatRichEditAlignCenter3: TRichEditAlignCenter
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Center'
-      ImageIndex = 37
-    end
-    object CustomizeActionBars1: TCustomizeActionBars
-      Category = 'Tools'
-      Caption = '&Customize...'
-      CustomizeDlg.StayOnTop = False
     end
   end
 end
