@@ -2,8 +2,8 @@ object formImagensProblema: TformImagensProblema
   Left = 0
   Top = 0
   Caption = 'formImagensProblema'
-  ClientHeight = 650
-  ClientWidth = 900
+  ClientHeight = 700
+  ClientWidth = 1150
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -21,25 +21,26 @@ object formImagensProblema: TformImagensProblema
   object btnAdicionarImagem: TPanel
     Left = 0
     Top = 0
-    Width = 900
-    Height = 650
+    Width = 1150
+    Height = 700
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object imgProblema: TImage
       Left = 81
       Top = 57
-      Width = 738
-      Height = 593
+      Width = 988
+      Height = 643
       Align = alClient
       Center = True
-      ExplicitLeft = 75
+      ExplicitLeft = 87
+      ExplicitTop = 63
     end
     object btnProxImagem: TSpeedButton
-      Left = 819
+      Left = 1069
       Top = 57
       Width = 81
-      Height = 593
+      Height = 643
       Align = alRight
       Caption = '------->'
       Enabled = False
@@ -51,9 +52,10 @@ object formImagensProblema: TformImagensProblema
       Left = 0
       Top = 57
       Width = 81
-      Height = 593
+      Height = 643
       Align = alLeft
       Caption = '<-------'
+      Enabled = False
       ExplicitLeft = 8
       ExplicitTop = 0
       ExplicitHeight = 650
@@ -61,7 +63,7 @@ object formImagensProblema: TformImagensProblema
     object pnlTopImagem: TPanel
       Left = 0
       Top = 0
-      Width = 900
+      Width = 1150
       Height = 57
       Align = alTop
       Padding.Left = 5
@@ -69,25 +71,30 @@ object formImagensProblema: TformImagensProblema
       Padding.Bottom = 5
       TabOrder = 0
       object btnRemoverImagem: TSpeedButton
-        Left = 81
+        Left = 75
         Top = 6
-        Width = 75
+        Width = 69
         Height = 45
         Align = alLeft
         Caption = 'Remover'
-        OnClick = btnRemoverImagemClick
-        ExplicitLeft = 87
+        ExplicitLeft = 81
       end
       object btnAddImagem: TSpeedButton
         Left = 6
         Top = 6
-        Width = 75
+        Width = 69
         Height = 45
         Align = alLeft
-        Caption = 'Adicionar'
-        OnClick = btnAddImagemClick
-        ExplicitLeft = 0
+        Caption = 'Adcionar'
+        OnMouseDown = btnAddImagemMouseDown
       end
     end
+  end
+  object ImageList1: TImageList
+    ColorDepth = cd32Bit
+    DrawingStyle = dsTransparent
+    Masked = False
+    Left = 752
+    Top = 360
   end
 end

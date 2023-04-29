@@ -57,7 +57,7 @@ begin
     FConn.Params.Database := ArqINI.ReadString('Conexão', 'CaminhoDoBanco',
       'C:\Problemas Suporte\DBPROB.FDB');
     FConn.Params.UserName := 'SYSDBA';
-    FConn.Params.Password := 'Office25';
+    FConn.Params.Password := 'masterkey';
     FConn.LoginPrompt := False;
 
     FConn.Connected;
