@@ -117,22 +117,20 @@ type
     edtTituloProblema: TEdit;
     lblSolucaoProblema: TLabel;
     pnlTopSolucaoProblema: TPanel;
-    ActionToolBar1: TActionToolBar;
     cbNameFontSolucao: TComboBox;
     cbSizeFontSolucao: TComboBox;
     Panel1: TPanel;
     cbNameFontDetalhes: TComboBox;
     cbSizeFontDetalhes: TComboBox;
     mmDetalhesProblema: TRichEdit;
+    amDetalhes: TActionManager;
     amSolucao: TActionManager;
+    ActionToolBar2: TActionToolBar;
     FormatRichEditBold1: TRichEditBold;
-    FormatRichEditItalic1: TRichEditItalic;
-    FormatRichEditUnderline1: TRichEditUnderline;
-    FormatRichEditStrikeOut1: TRichEditStrikeOut;
-    FormatRichEditBullets1: TRichEditBullets;
-    FormatRichEditAlignLeft1: TRichEditAlignLeft;
-    FormatRichEditAlignRight1: TRichEditAlignRight;
-    FormatRichEditAlignCenter1: TRichEditAlignCenter;
+    chkItalicoDetalhes: TCheckBox;
+    chkNegritoDetalhes: TCheckBox;
+    chkItalicoSolucao: TCheckBox;
+    chkNegritoSolucao: TCheckBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
@@ -165,6 +163,12 @@ type
     procedure mmSolucaoProblemaEnter(Sender: TObject);
     procedure cbSizeFontSolucaoChange(Sender: TObject);
     procedure mmDetalhesProblemaEnter(Sender: TObject);
+    procedure cbNameFontDetalhesChange(Sender: TObject);
+    procedure cbSizeFontDetalhesChange(Sender: TObject);
+    procedure chkNegritoDetalhesClick(Sender: TObject);
+    procedure chkItalicoDetalhesClick(Sender: TObject);
+    procedure chkNegritoSolucaoClick(Sender: TObject);
+    procedure chkItalicoSolucaoClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -228,21 +232,21 @@ end;
 
 procedure TformPrincipal.EventoSalvarProblema;
 begin
-  var
-    aProblema: TProblema := TProblema.Create;
-  var
-    ms: TMemoryStream := TMemoryStream.Create;
+  var aProblema: TProblema := TProblema.Create;
+  var msDetalhes: TMemoryStream := TMemoryStream.Create;
+  var msSolucao: TMemoryStream := TMemoryStream.Create;
 
   InverteBotoesCrudProblemas;
 
   try
-    mmSolucaoProblema.Lines.SaveToStream(ms);
+    mmDetalhesProblema.Lines.SaveToStream(msDetalhes);
+    mmSolucaoProblema.Lines.SaveToStream(msSolucao);
 
     aProblema.Titulo := edtTituloProblema.Text;
     aProblema.Modulo := cbModulo.Text;
     aProblema.Chamado := edtChamadoProblema.Text;
-    aProblema.Detalhes := mmDetalhesProblema.Text;
-    aProblema.Solucao := ms;
+    aProblema.Detalhes := msDetalhes;
+    aProblema.Solucao := msSolucao;
 
     if FEdicaoProblema then
     begin
@@ -256,7 +260,8 @@ begin
     end;
   finally
     aProblema.Free;
-    ms.Free;
+    msDetalhes.Free;
+    msSolucao.Free;
   end;
 
   CarregaGridProblemas;
@@ -301,6 +306,8 @@ begin
   PreencheCbxModulos;
 
   pnlProblemas.Enabled := True;
+
+  lblTotalDeProblemas.Caption := 'Total de problemas: ' + IntToStr(FControllerProblema.BuscaQuantidadeProblemas);
 
   cbNameFontSolucao.items := Screen.fonts;
   cbNameFontDetalhes.items := Screen.fonts;
@@ -362,9 +369,16 @@ procedure TformPrincipal.mmDetalhesProblemaEnter(Sender: TObject);
 begin
   with mmDetalhesProblema do
   begin
+    SelAttributes.Style := [];
     SelStart := Length(mmDetalhesProblema.Text);
     SelAttributes.Size := StrToInt(cbSizeFontDetalhes.Text);
     SelAttributes.Name := cbNameFontDetalhes.Text;
+
+    if chkNegritoDetalhes.Checked then SelAttributes.Style := [fsBold];
+    if chkItalicoDetalhes.Checked then SelAttributes.Style := [fsItalic];
+
+    if chkNegritoDetalhes.Checked and chkItalicoDetalhes.Checked then
+      SelAttributes.Style := [fsItalic, fsBold];
   end;
 end;
 
@@ -372,9 +386,16 @@ procedure TformPrincipal.mmSolucaoProblemaEnter(Sender: TObject);
 begin
   with mmSolucaoProblema do
   begin
+    SelAttributes.Style := [];
     SelStart := Length(mmSolucaoProblema.Text);
     SelAttributes.Size := StrToInt(cbSizeFontSolucao.Text);
     SelAttributes.Name := cbNameFontSolucao.Text;
+
+    if chkNegritoSolucao.Checked then SelAttributes.Style := [fsBold];
+    if chkItalicoSolucao.Checked then SelAttributes.Style := [fsItalic];
+
+    if chkNegritoSolucao.Checked and chkItalicoSolucao.Checked then
+      SelAttributes.Style := [fsItalic, fsBold];
   end;
 end;
 
@@ -515,15 +536,14 @@ begin
 end;
 
 procedure TformPrincipal.CarregaDadosProblemas;
+var
+   aNomeProblema: String;
+   aProblema: TDataSet;
+   cont: Integer;
+   msDetalhes: TStream;
+   msSolucao: TStream;
 begin
-  var
-    aNomeProblema: String;
-  var
-    aProblema: TDataSet;
-  var
-    cont: Integer := 0;
-  var
-    ms: TStream;
+  cont := 0;
 
   if gridProblemas.DataSource.DataSet.RecordCount > 0 then
   begin
@@ -541,12 +561,16 @@ begin
     edtCodProblema.Text := IntToStr(aProblema.FieldByName('cod_prob').Value);
     edtTituloProblema.Text := aProblema.FieldByName('titulo').Value;
     edtChamadoProblema.Text := aProblema.FieldByName('chamado').Value;
-    mmDetalhesProblema.Text := aProblema.FieldByName('detalhes').Value;
-    ms := aProblema.CreateBlobStream(aProblema.FieldByName('solucao'), bmread);
-    mmSolucaoProblema.Lines.LoadFromStream(ms);
+
+    msDetalhes:= aProblema.CreateBlobStream(aProblema.FieldByName('detalhes'), bmread);
+    mmDetalhesProblema.Lines.LoadFromStream(msDetalhes);
+    msSolucao := aProblema.CreateBlobStream(aProblema.FieldByName('solucao'), bmread);
+    mmSolucaoProblema.Lines.LoadFromStream(msSolucao);
+
     edtDataProblema.Text := aProblema.FieldByName('datacr').Value;
 
-    ms.Free;
+    msDetalhes.Free;
+    msSolucao.Free;
   end;
 end;
 
@@ -584,7 +608,37 @@ begin
   end;
 end;
 
+procedure TformPrincipal.cbNameFontDetalhesChange(Sender: TObject);
+begin
+  mmDetalhesProblema.SetFocus;
+end;
+
+procedure TformPrincipal.cbSizeFontDetalhesChange(Sender: TObject);
+begin
+  mmDetalhesProblema.SetFocus;
+end;
+
 procedure TformPrincipal.cbSizeFontSolucaoChange(Sender: TObject);
+begin
+  mmSolucaoProblema.SetFocus;
+end;
+
+procedure TformPrincipal.chkItalicoDetalhesClick(Sender: TObject);
+begin
+  mmDetalhesProblema.SetFocus;
+end;
+
+procedure TformPrincipal.chkItalicoSolucaoClick(Sender: TObject);
+begin
+  mmSolucaoProblema.SetFocus;
+end;
+
+procedure TformPrincipal.chkNegritoDetalhesClick(Sender: TObject);
+begin
+  mmDetalhesProblema.SetFocus;
+end;
+
+procedure TformPrincipal.chkNegritoSolucaoClick(Sender: TObject);
 begin
   mmSolucaoProblema.SetFocus;
 end;

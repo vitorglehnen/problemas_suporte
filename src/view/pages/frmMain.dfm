@@ -71,8 +71,8 @@ object formPrincipal: TformPrincipal
             ExplicitHeight = 18
           end
           object lblTotalDeProblemas: TLabel
-            Left = 6
-            Top = 6
+            Left = 5
+            Top = 11
             Width = 95
             Height = 12
             Caption = 'Total de problemas: '
@@ -114,8 +114,8 @@ object formPrincipal: TformPrincipal
               Enabled = False
               Spacing = 2
               OnMouseDown = btnSalvarProblemaMouseDown
-              ExplicitLeft = 59
-              ExplicitTop = -4
+              ExplicitLeft = 71
+              ExplicitTop = 5
             end
             object btnExcluirProblema: TSpeedButton
               Left = 218
@@ -567,7 +567,7 @@ object formPrincipal: TformPrincipal
                 Font.Name = 'Segoe UI'
                 Font.Style = [fsBold]
                 ParentFont = False
-                ExplicitTop = 6
+                ExplicitTop = -6
               end
               object mmSolucaoProblema: TRichEdit
                 Left = 0
@@ -599,30 +599,6 @@ object formPrincipal: TformPrincipal
                 BevelOuter = bvNone
                 Enabled = False
                 TabOrder = 1
-                ExplicitTop = 11
-                object ActionToolBar1: TActionToolBar
-                  Left = 139
-                  Top = 0
-                  Width = 985
-                  Height = 24
-                  ActionManager = amSolucao
-                  Align = alClient
-                  Caption = 'ActionToolBar1'
-                  Color = clMenuBar
-                  ColorMap.DisabledFontColor = 10461087
-                  ColorMap.HighlightColor = clWhite
-                  ColorMap.BtnSelectedFont = clBlack
-                  ColorMap.UnusedColor = clWhite
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clBlack
-                  Font.Height = -11
-                  Font.Name = 'Tahoma'
-                  Font.Style = []
-                  ParentFont = False
-                  Spacing = 0
-                  ExplicitLeft = 145
-                  ExplicitTop = -6
-                end
                 object cbNameFontSolucao: TComboBox
                   Left = 41
                   Top = 0
@@ -630,12 +606,11 @@ object formPrincipal: TformPrincipal
                   Height = 22
                   Align = alLeft
                   Style = csOwnerDrawFixed
-                  TabOrder = 1
+                  TabOrder = 0
+                  TabStop = False
                   OnChange = cbSizeFontSolucaoChange
                   Items.Strings = (
                     '')
-                  ExplicitLeft = 35
-                  ExplicitTop = 6
                 end
                 object cbSizeFontSolucao: TComboBox
                   Left = 0
@@ -645,7 +620,8 @@ object formPrincipal: TformPrincipal
                   Align = alLeft
                   Style = csOwnerDrawFixed
                   ItemIndex = 9
-                  TabOrder = 2
+                  TabOrder = 1
+                  TabStop = False
                   Text = '10'
                   OnChange = cbSizeFontSolucaoChange
                   Items.Strings = (
@@ -701,6 +677,57 @@ object formPrincipal: TformPrincipal
                     '50')
                   ExplicitLeft = -6
                   ExplicitTop = -4
+                end
+                object ActionToolBar2: TActionToolBar
+                  Left = 257
+                  Top = 0
+                  Width = 867
+                  Height = 24
+                  ActionManager = amSolucao
+                  Align = alClient
+                  Caption = 'ActionToolBar2'
+                  Color = clMenuBar
+                  ColorMap.DisabledFontColor = 10461087
+                  ColorMap.HighlightColor = clWhite
+                  ColorMap.BtnSelectedFont = clBlack
+                  ColorMap.UnusedColor = clWhite
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
+                  Spacing = 0
+                  ExplicitLeft = 0
+                  ExplicitTop = -5
+                  ExplicitWidth = 1124
+                  ExplicitHeight = 29
+                end
+                object chkItalicoSolucao: TCheckBox
+                  Left = 201
+                  Top = 0
+                  Width = 56
+                  Height = 24
+                  TabStop = False
+                  Align = alLeft
+                  Caption = 'It'#225'lico'
+                  TabOrder = 3
+                  OnClick = chkItalicoSolucaoClick
+                  ExplicitLeft = 195
+                  ExplicitTop = -6
+                end
+                object chkNegritoSolucao: TCheckBox
+                  Left = 139
+                  Top = 0
+                  Width = 62
+                  Height = 24
+                  TabStop = False
+                  Align = alLeft
+                  Caption = 'Negrito'
+                  TabOrder = 4
+                  OnClick = chkNegritoSolucaoClick
+                  ExplicitLeft = 145
+                  ExplicitTop = 6
                 end
               end
             end
@@ -766,6 +793,7 @@ object formPrincipal: TformPrincipal
               Top = 38
               Width = 97
               Height = 21
+              TabStop = False
               EditMask = '!99/99/0000;1;_'
               MaxLength = 10
               ReadOnly = True
@@ -820,7 +848,6 @@ object formPrincipal: TformPrincipal
               BevelOuter = bvNone
               Padding.Bottom = 20
               TabOrder = 0
-              ExplicitTop = -6
               object lblDetalhesProblema: TLabel
                 Left = 0
                 Top = 0
@@ -834,7 +861,7 @@ object formPrincipal: TformPrincipal
                 Font.Name = 'Segoe UI'
                 Font.Style = [fsBold]
                 ParentFont = False
-                ExplicitTop = 6
+                ExplicitTop = 18
               end
               object Panel1: TPanel
                 Left = 0
@@ -853,11 +880,10 @@ object formPrincipal: TformPrincipal
                   Align = alLeft
                   Style = csOwnerDrawFixed
                   TabOrder = 0
-                  OnChange = cbSizeFontSolucaoChange
+                  TabStop = False
+                  OnChange = cbNameFontDetalhesChange
                   Items.Strings = (
                     '')
-                  ExplicitLeft = 8
-                  ExplicitTop = 2
                 end
                 object cbSizeFontDetalhes: TComboBox
                   Left = 0
@@ -868,8 +894,9 @@ object formPrincipal: TformPrincipal
                   Style = csOwnerDrawFixed
                   ItemIndex = 9
                   TabOrder = 1
+                  TabStop = False
                   Text = '10'
-                  OnChange = cbSizeFontSolucaoChange
+                  OnChange = cbSizeFontDetalhesChange
                   Items.Strings = (
                     '1'
                     '2'
@@ -921,8 +948,34 @@ object formPrincipal: TformPrincipal
                     '48'
                     '49'
                     '50')
-                  ExplicitLeft = 8
-                  ExplicitTop = 2
+                  ExplicitLeft = -6
+                  ExplicitTop = -4
+                end
+                object chkItalicoDetalhes: TCheckBox
+                  Left = 201
+                  Top = 0
+                  Width = 56
+                  Height = 24
+                  TabStop = False
+                  Align = alLeft
+                  Caption = 'It'#225'lico'
+                  TabOrder = 2
+                  OnClick = chkItalicoDetalhesClick
+                  ExplicitLeft = 207
+                  ExplicitTop = 6
+                end
+                object chkNegritoDetalhes: TCheckBox
+                  Left = 139
+                  Top = 0
+                  Width = 62
+                  Height = 24
+                  TabStop = False
+                  Align = alLeft
+                  Caption = 'Negrito'
+                  TabOrder = 3
+                  OnClick = chkNegritoDetalhesClick
+                  ExplicitLeft = 133
+                  ExplicitTop = 6
                 end
               end
               object mmDetalhesProblema: TRichEdit
@@ -943,6 +996,7 @@ object formPrincipal: TformPrincipal
                 TabOrder = 1
                 Zoom = 100
                 OnEnter = mmDetalhesProblemaEnter
+                ExplicitTop = 45
               end
             end
           end
@@ -959,73 +1013,20 @@ object formPrincipal: TformPrincipal
       end
     end
   end
-  object amSolucao: TActionManager
+  object amDetalhes: TActionManager
     ActionBars = <
       item
       end
       item
-      end
-      item
-        Items = <
-          item
-            Action = FormatRichEditBold1
-            Caption = '&Negrito'
-            ImageIndex = 31
-            ShortCut = 16450
-          end
-          item
-            Action = FormatRichEditItalic1
-            Caption = '&It'#225'lico'
-            ImageIndex = 29
-            ShortCut = 16457
-          end
-          item
-            Action = FormatRichEditAlignLeft1
-            Caption = '&Alinhar '#224' esquerda'
-            ImageIndex = 35
-          end
-          item
-            Action = FormatRichEditAlignRight1
-            Caption = 'A&linhar '#224' direita'
-            ImageIndex = 36
-          end
-          item
-            Action = FormatRichEditAlignCenter1
-            Caption = '&Centralizar'
-            ImageIndex = 37
-          end>
-        ActionBar = ActionToolBar1
-      end
-      item
-      end
-      item
         Items = <
           item
             Action = FormatRichEditBold1
             ImageIndex = 31
             ShortCut = 16450
-          end
-          item
-            Action = FormatRichEditItalic1
-            ImageIndex = 29
-            ShortCut = 16457
-          end
-          item
-            Action = FormatRichEditAlignLeft1
-            Caption = '&Align Left'
-            ImageIndex = 35
-          end
-          item
-            Action = FormatRichEditAlignRight1
-            ImageIndex = 36
-          end
-          item
-            Action = FormatRichEditAlignCenter1
-            ImageIndex = 37
           end>
       end>
-    Left = 1048
-    Top = 539
+    Left = 1296
+    Top = 547
     StyleName = 'Platform Default'
     object FormatRichEditBold1: TRichEditBold
       Category = 'Format'
@@ -1035,56 +1036,13 @@ object formPrincipal: TformPrincipal
       ImageIndex = 31
       ShortCut = 16450
     end
-    object FormatRichEditItalic1: TRichEditItalic
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Italic'
-      Hint = 'Italic'
-      ImageIndex = 29
-      ShortCut = 16457
-    end
-    object FormatRichEditUnderline1: TRichEditUnderline
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Underline'
-      Hint = 'Underline'
-      ImageIndex = 28
-      ShortCut = 16469
-    end
-    object FormatRichEditStrikeOut1: TRichEditStrikeOut
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Strikeout'
-      Hint = 'Strikeout'
-      ImageIndex = 44
-    end
-    object FormatRichEditBullets1: TRichEditBullets
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Bullets'
-      Hint = 'Bullets|Inserts a bullet on the current line'
-      ImageIndex = 38
-    end
-    object FormatRichEditAlignLeft1: TRichEditAlignLeft
-      Category = 'Format'
-      AutoCheck = True
-      Caption = 'Align &Left'
-      Hint = 'Align Left|Aligns text at the left indent'
-      ImageIndex = 35
-    end
-    object FormatRichEditAlignRight1: TRichEditAlignRight
-      Category = 'Format'
-      AutoCheck = True
-      Caption = 'Align &Right'
-      Hint = 'Align Right|Aligns text at the right indent'
-      ImageIndex = 36
-    end
-    object FormatRichEditAlignCenter1: TRichEditAlignCenter
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Center'
-      Hint = 'Center|Centers text between margins'
-      ImageIndex = 37
-    end
+  end
+  object amSolucao: TActionManager
+    ActionBars = <
+      item
+      end>
+    Left = 1384
+    Top = 547
+    StyleName = 'Platform Default'
   end
 end

@@ -113,7 +113,7 @@ Coordinates=390,212,104,58
 Coordinates=605,416,134,58
 
 []
-Coordinates=182,239,83,36
+Coordinates=123,444,103,36
 Visible=True
 
 [lblCodProblema]
@@ -186,18 +186,9 @@ Coordinates=720,78,136,58
 [lblTituloProblema]
 Coordinates=138,77,115,58
 
-[ActionToolBar1]
-Coordinates=123,444,103,36
-
-[FormatRichEditAlignLeft1]
-Coordinates=1215,1,161,36
-
 [mmDetalhesProblema]
 Coordinates=1215,56,141,36
 Visible=True
-
-[FormatRichEditUnderline1]
-Coordinates=1215,111,166,36
 
 [cbNameFontSolucao]
 Coordinates=567,608,134,124
@@ -205,23 +196,11 @@ Coordinates=567,608,134,124
 [cbSizeFontSolucao]
 Coordinates=848,607,125,124
 
-[FormatRichEditItalic1]
-Coordinates=1215,276,137,36
-
-[FormatRichEditAlignRight1]
-Coordinates=1215,331,169,36
-
 [Panel1]
 Coordinates=467,1,55,58
 
-[FormatRichEditStrikeOut1]
-Coordinates=1215,496,164,36
-
 [pnlTopSolucaoProblema]
 Coordinates=1015,309,155,58
-
-[amSolucao]
-Coordinates=0,299,79,36
 
 [cbSizeFontDetalhes]
 Coordinates=1026,540,130,124
@@ -231,13 +210,4 @@ Coordinates=123,153,129,58
 
 [cbNameFontDetalhes]
 Coordinates=706,608,139,124
-
-[FormatRichEditBullets1]
-Coordinates=1422,166,149,36
-
-[FormatRichEditAlignCenter1]
-Coordinates=1422,221,178,36
-
-[FormatRichEditBold1]
-Coordinates=1422,276,136,36
 

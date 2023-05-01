@@ -3,7 +3,7 @@ unit uDAOProblema;
 interface
 
 uses
-  FireDAC.Comp.Client, uConexao, Data.DB, uProblema;
+  FireDAC.Comp.Client, uConexao, Data.DB, uProblema, Vcl.Dialogs;
 
 type
   TDAOProblema = class
@@ -16,6 +16,7 @@ type
     procedure InsertProblema(aProblema: TProblema);
     procedure UpdateProblema(aProblema: TProblema);
     procedure DeleteProblema(aProblema: TProblema);
+    function BuscaQuantidadeProblemas: Integer;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -23,6 +24,22 @@ type
 implementation
 
 { TDAOProblema }
+
+function TDAOProblema.BuscaQuantidadeProblemas: Integer;
+begin
+  var Resultado : integer;
+
+  FQuery:= FConn.CriarQuery;
+  FDataSource:= FConn.CriarDataSource;
+
+  FQuery.SQL.Text := 'SELECT COUNT(*) FROM PROBLEMAS';
+  FQuery.Open;
+
+  FDataSource.DataSet := FQuery;
+  Resultado := FDataSource.DataSet.Fields[0].AsInteger;
+
+  Result := Resultado;
+end;
 
 function TDAOProblema.CarregaDadosProblema(
   aTituloProblema: String): TDataSource;
@@ -72,7 +89,7 @@ begin
   FQuery.ParamByName('nome_mod').AsString := aProblema.Modulo;
   FQuery.ParamByName('titulo').AsString := aProblema.Titulo;
   FQuery.ParamByName('chamado').AsString := aProblema.Chamado;
-  FQuery.ParamByName('detalhes').AsString := aProblema.Detalhes;
+  FQuery.ParamByName('detalhes').LoadFromStream(aProblema.Detalhes, ftMemo);
   FQuery.ParamByName('solucao').LoadFromStream(aProblema.Solucao, ftMemo);
 
   FQuery.ExecSQL;
@@ -88,7 +105,7 @@ begin
   FQuery.ParamByName('titulo').AsString := aProblema.Titulo;
   FQuery.ParamByName('modulo').AsString := aProblema.Modulo;
   FQuery.ParamByName('chamado').AsString := aProblema.Chamado;
-  FQuery.ParamByName('detalhes').AsString := aProblema.Detalhes;
+  FQuery.ParamByName('detalhes').LoadFromStream(aProblema.Detalhes, ftMemo);
   FQuery.ParamByName('solucao').LoadFromStream(aProblema.Solucao, ftMemo);
   FQuery.ParamByName('cod_prob').AsInteger := aProblema.Codigo;
 
