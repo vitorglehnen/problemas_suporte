@@ -92,8 +92,6 @@ type
     btnEditarModulo: TSpeedButton;
     btnNovoModulo: TSpeedButton;
     btnEditarProblema: TSpeedButton;
-    ActionManager1: TActionManager;
-    CustomizeActionBars1: TCustomizeActionBars;
     pnlImagensProblema: TCard;
     pnlProblemas: TPanel;
     pnlBodyModuloProblema: TPanel;
@@ -104,13 +102,11 @@ type
     cbModulo: TComboBox;
     pnlBodySolucaoProblema: TPanel;
     pnlSolucaoProblema: TPanel;
-    lblSolucaoProblema: TLabel;
     mmSolucaoProblema: TRichEdit;
     pnlTopProblema: TPanel;
     pnlBodyDetalhesProblema: TPanel;
     pnlDetalhesProblema: TPanel;
     lblDetalhesProblema: TLabel;
-    mmDetalhesProblema: TMemo;
     edtDataProblema: TMaskEdit;
     lblDataProblema: TLabel;
     edtChamadoProblema: TEdit;
@@ -119,7 +115,16 @@ type
     edtCodProblema: TEdit;
     lblTituloProblema: TLabel;
     edtTituloProblema: TEdit;
+    lblSolucaoProblema: TLabel;
+    pnlTopSolucaoProblema: TPanel;
     ActionToolBar1: TActionToolBar;
+    cbNameFontSolucao: TComboBox;
+    cbSizeFontSolucao: TComboBox;
+    Panel1: TPanel;
+    cbNameFontDetalhes: TComboBox;
+    cbSizeFontDetalhes: TComboBox;
+    mmDetalhesProblema: TRichEdit;
+    amSolucao: TActionManager;
     FormatRichEditBold1: TRichEditBold;
     FormatRichEditItalic1: TRichEditItalic;
     FormatRichEditUnderline1: TRichEditUnderline;
@@ -128,8 +133,6 @@ type
     FormatRichEditAlignLeft1: TRichEditAlignLeft;
     FormatRichEditAlignRight1: TRichEditAlignRight;
     FormatRichEditAlignCenter1: TRichEditAlignCenter;
-    cbSizeFontSolucao: TComboBox;
-    cbNameFontSolucao: TComboBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
@@ -161,6 +164,7 @@ type
     procedure SpeedButton2Click(Sender: TObject);
     procedure mmSolucaoProblemaEnter(Sender: TObject);
     procedure cbSizeFontSolucaoChange(Sender: TObject);
+    procedure mmDetalhesProblemaEnter(Sender: TObject);
 
   private
     { Private declarations }
@@ -196,8 +200,8 @@ procedure TformPrincipal.edtNomeModuloExit(Sender: TObject);
 begin
   if not btnNovoModulo.Enabled then
   begin
-    MessageBox(0, PChar('Salve ou cancele antes de continuar!'), 'Cadastro de módulos',
-      MB_ICONWARNING or MB_OK);
+    MessageBox(0, PChar('Salve ou cancele antes de continuar!'),
+      'Cadastro de módulos', MB_ICONWARNING or MB_OK);
     edtNomeModulo.SetFocus;
   end;
 end;
@@ -224,8 +228,10 @@ end;
 
 procedure TformPrincipal.EventoSalvarProblema;
 begin
-  var aProblema : TProblema:= TProblema.Create;
-  var ms : TMemoryStream := TMemoryStream.Create;
+  var
+    aProblema: TProblema := TProblema.Create;
+  var
+    ms: TMemoryStream := TMemoryStream.Create;
 
   InverteBotoesCrudProblemas;
 
@@ -281,7 +287,7 @@ begin
         EventoCadastrarProblema;
 
   if Key = VK_F4 then
-    if btnNovoProblema.Enabled = false then
+    if btnNovoProblema.Enabled = False then
       if pnlProblemas.Enabled then
         EventoSalvarProblema;
 end;
@@ -297,7 +303,9 @@ begin
   pnlProblemas.Enabled := True;
 
   cbNameFontSolucao.items := Screen.fonts;
+  cbNameFontDetalhes.items := Screen.fonts;
   cbNameFontSolucao.ItemIndex := 28;
+  cbNameFontDetalhes.ItemIndex := 28;
 end;
 
 procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
@@ -337,6 +345,7 @@ begin
   btnExcluirProblema.Enabled := not btnExcluirProblema.Enabled;
   btnCancelarProblema.Enabled := not btnCancelarProblema.Enabled;
 
+  pnlTopSolucaoProblema.Enabled := not pnlTopSolucaoProblema.Enabled;
   pnlBodyModulos.Enabled := not pnlBodyModulos.Enabled;
 end;
 
@@ -349,17 +358,31 @@ begin
   mmSolucaoProblema.ReadOnly := not mmSolucaoProblema.ReadOnly;
 end;
 
+procedure TformPrincipal.mmDetalhesProblemaEnter(Sender: TObject);
+begin
+  with mmDetalhesProblema do
+  begin
+    SelStart := Length(mmDetalhesProblema.Text);
+    SelAttributes.Size := StrToInt(cbSizeFontDetalhes.Text);
+    SelAttributes.Name := cbNameFontDetalhes.Text;
+  end;
+end;
+
 procedure TformPrincipal.mmSolucaoProblemaEnter(Sender: TObject);
 begin
-  mmSolucaoProblema.SelStart := Length(mmSolucaoProblema.Text);
-  mmSolucaoProblema.SelAttributes.Size := StrToint(cbSizeFontSolucao.Text);
+  with mmSolucaoProblema do
+  begin
+    SelStart := Length(mmSolucaoProblema.Text);
+    SelAttributes.Size := StrToInt(cbSizeFontSolucao.Text);
+    SelAttributes.Name := cbNameFontSolucao.Text;
+  end;
 end;
 
 procedure TformPrincipal.mmSolucaoProblemaKeyDown(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
   if Key = VK_TAB then
-    Showmessage('sim');
+    ShowMessage('sim');
 end;
 
 procedure TformPrincipal.PreencheCbxModulos;
@@ -371,7 +394,7 @@ begin
 
   while not aNomeModulos.Eof do
   begin
-    cbModulo.Items.Add(aNomeModulos.FieldByName('nome').Value);
+    cbModulo.items.Add(aNomeModulos.FieldByName('nome').Value);
     aNomeModulos.Next;
   end;
 end;
@@ -383,7 +406,9 @@ end;
 
 procedure TformPrincipal.SpeedButton2Click(Sender: TObject);
 begin
-  var aFormImagensProblema : TFormImagensProblema := TformImagensProblema.Create(nil);
+  var
+    aFormImagensProblema: TFormImagensProblema :=
+      TFormImagensProblema.Create(nil);
 
   try
     aFormImagensProblema.ShowModal;
@@ -424,11 +449,12 @@ end;
 
 procedure TformPrincipal.btnExcluirProblemaClick(Sender: TObject);
 begin
-  var aProblema: TProblema := TProblema.Create;
+  var
+    aProblema: TProblema := TProblema.Create;
 
   try
-    if Application.MessageBox('Deseja excluir este registro?', 'Excluir problema',
-    + MB_ICONQUESTION + MB_YESNO) = MrYes then
+    if Application.MessageBox('Deseja excluir este registro?',
+      'Excluir problema', +MB_ICONQUESTION + MB_YESNO) = MrYes then
     begin
       aProblema.Codigo := StrToInt(edtCodProblema.Text);
       FControllerProblema.DeleteProblema(aProblema);
@@ -482,26 +508,31 @@ procedure TformPrincipal.cardPanelProblemasExit(Sender: TObject);
 begin
   if not btnNovoProblema.Enabled then
   begin
-    MessageBox(0, PChar('Salve ou cancele antes de continuar!'), 'Cadastro de problemas',
-      MB_ICONWARNING or MB_OK);
+    MessageBox(0, PChar('Salve ou cancele antes de continuar!'),
+      'Cadastro de problemas', MB_ICONWARNING or MB_OK);
     pnlProblemas.SetFocus;
   end;
 end;
 
 procedure TformPrincipal.CarregaDadosProblemas;
 begin
-  var aNomeProblema: String;
-  var aProblema: TDataSet;
-  var cont: Integer := 0;
-  var ms: TStream;
+  var
+    aNomeProblema: String;
+  var
+    aProblema: TDataSet;
+  var
+    cont: Integer := 0;
+  var
+    ms: TStream;
 
   if gridProblemas.DataSource.DataSet.RecordCount > 0 then
   begin
     aNomeProblema := gridProblemas.Columns[0].Field.Value;
-    aProblema := FControllerProblema.CarregaDadosProblema(aNomeProblema).DataSet;
+    aProblema := FControllerProblema.CarregaDadosProblema
+      (aNomeProblema).DataSet;
 
-   //passa por cada item do cbx e identifica com o modulo correspondente no cadastro
-    while cbModulo.text <> aProblema.FieldByName('modulo').Value do
+    // passa por cada item do cbx e identifica com o modulo correspondente no cadastro
+    while cbModulo.Text <> aProblema.FieldByName('modulo').Value do
     begin
       cbModulo.ItemIndex := cont;
       cont := cont + 1;
@@ -547,8 +578,8 @@ begin
   begin
     pnlBodyModulos.Visible := True;
 
-    gridProblemas.DataSource := FControllerProblema.BuscaTabelaProblemasPorModulo
-    (aNomeModulo);
+    gridProblemas.DataSource :=
+      FControllerProblema.BuscaTabelaProblemasPorModulo(aNomeModulo);
     edtNomeModulo.Text := aNomeModulo;;
   end;
 end;

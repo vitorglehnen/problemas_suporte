@@ -567,13 +567,13 @@ object formPrincipal: TformPrincipal
                 Font.Name = 'Segoe UI'
                 Font.Style = [fsBold]
                 ParentFont = False
-                ExplicitWidth = 48
+                ExplicitTop = 6
               end
               object mmSolucaoProblema: TRichEdit
                 Left = 0
-                Top = 40
+                Top = 41
                 Width = 1124
-                Height = 268
+                Height = 267
                 Align = alClient
                 Font.Charset = ANSI_CHARSET
                 Font.Color = clWindowText
@@ -582,105 +582,126 @@ object formPrincipal: TformPrincipal
                 Font.Style = []
                 ParentFont = False
                 ReadOnly = True
+                ScrollBars = ssVertical
                 TabOrder = 0
                 Zoom = 100
                 OnEnter = mmSolucaoProblemaEnter
                 OnKeyDown = mmSolucaoProblemaKeyDown
                 ExplicitTop = 45
               end
-              object ActionToolBar1: TActionToolBar
+              object pnlTopSolucaoProblema: TPanel
                 Left = 0
                 Top = 17
                 Width = 1124
-                Height = 23
-                ActionManager = ActionManager1
-                Caption = 'ActionToolBar1'
-                Color = clMenuBar
-                ColorMap.DisabledFontColor = 10461087
-                ColorMap.HighlightColor = clWhite
-                ColorMap.BtnSelectedFont = clBlack
-                ColorMap.UnusedColor = clWhite
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clBlack
-                Font.Height = -11
-                Font.Name = 'Tahoma'
-                Font.Style = []
-                ParentFont = False
-                Spacing = 0
+                Height = 24
+                Align = alTop
+                Alignment = taLeftJustify
+                BevelOuter = bvNone
+                Enabled = False
+                TabOrder = 1
                 ExplicitTop = 11
-              end
-              object cbSizeFontSolucao: TComboBox
-                Left = 248
-                Top = 17
-                Width = 41
-                Height = 22
-                Style = csOwnerDrawFixed
-                ItemIndex = 11
-                TabOrder = 2
-                Text = '12'
-                OnChange = cbSizeFontSolucaoChange
-                Items.Strings = (
-                  '1'
-                  '2'
-                  '3'
-                  '4'
-                  '5'
-                  '6'
-                  '7'
-                  '8'
-                  '9'
-                  '10'
-                  '11'
-                  '12'
-                  '13'
-                  '14'
-                  '15'
-                  '16'
-                  '17'
-                  '18'
-                  '19'
-                  '20'
-                  '21'
-                  '22'
-                  '23'
-                  '24'
-                  '25'
-                  '26'
-                  '27'
-                  '28'
-                  '29'
-                  '30'
-                  '31'
-                  '32'
-                  '33'
-                  '34'
-                  '35'
-                  '36'
-                  '37'
-                  '38'
-                  '39'
-                  '40'
-                  '41'
-                  '42'
-                  '43'
-                  '44'
-                  '45'
-                  '46'
-                  '47'
-                  '48'
-                  '49'
-                  '50')
-              end
-              object cbNameFontSolucao: TComboBox
-                Left = 295
-                Top = 17
-                Width = 98
-                Height = 22
-                Style = csOwnerDrawFixed
-                TabOrder = 3
-                OnChange = cbSizeFontSolucaoChange
-                Items.Strings = (
-                  '')
+                object ActionToolBar1: TActionToolBar
+                  Left = 139
+                  Top = 0
+                  Width = 985
+                  Height = 24
+                  ActionManager = amSolucao
+                  Align = alClient
+                  Caption = 'ActionToolBar1'
+                  Color = clMenuBar
+                  ColorMap.DisabledFontColor = 10461087
+                  ColorMap.HighlightColor = clWhite
+                  ColorMap.BtnSelectedFont = clBlack
+                  ColorMap.UnusedColor = clWhite
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
+                  Spacing = 0
+                  ExplicitLeft = 145
+                  ExplicitTop = -6
+                end
+                object cbNameFontSolucao: TComboBox
+                  Left = 41
+                  Top = 0
+                  Width = 98
+                  Height = 22
+                  Align = alLeft
+                  Style = csOwnerDrawFixed
+                  TabOrder = 1
+                  OnChange = cbSizeFontSolucaoChange
+                  Items.Strings = (
+                    '')
+                  ExplicitLeft = 35
+                  ExplicitTop = 6
+                end
+                object cbSizeFontSolucao: TComboBox
+                  Left = 0
+                  Top = 0
+                  Width = 41
+                  Height = 22
+                  Align = alLeft
+                  Style = csOwnerDrawFixed
+                  ItemIndex = 9
+                  TabOrder = 2
+                  Text = '10'
+                  OnChange = cbSizeFontSolucaoChange
+                  Items.Strings = (
+                    '1'
+                    '2'
+                    '3'
+                    '4'
+                    '5'
+                    '6'
+                    '7'
+                    '8'
+                    '9'
+                    '10'
+                    '11'
+                    '12'
+                    '13'
+                    '14'
+                    '15'
+                    '16'
+                    '17'
+                    '18'
+                    '19'
+                    '20'
+                    '21'
+                    '22'
+                    '23'
+                    '24'
+                    '25'
+                    '26'
+                    '27'
+                    '28'
+                    '29'
+                    '30'
+                    '31'
+                    '32'
+                    '33'
+                    '34'
+                    '35'
+                    '36'
+                    '37'
+                    '38'
+                    '39'
+                    '40'
+                    '41'
+                    '42'
+                    '43'
+                    '44'
+                    '45'
+                    '46'
+                    '47'
+                    '48'
+                    '49'
+                    '50')
+                  ExplicitLeft = -6
+                  ExplicitTop = -4
+                end
               end
             end
           end
@@ -799,6 +820,7 @@ object formPrincipal: TformPrincipal
               BevelOuter = bvNone
               Padding.Bottom = 20
               TabOrder = 0
+              ExplicitTop = -6
               object lblDetalhesProblema: TLabel
                 Left = 0
                 Top = 0
@@ -812,18 +834,115 @@ object formPrincipal: TformPrincipal
                 Font.Name = 'Segoe UI'
                 Font.Style = [fsBold]
                 ParentFont = False
-                ExplicitWidth = 137
+                ExplicitTop = 6
               end
-              object mmDetalhesProblema: TMemo
+              object Panel1: TPanel
                 Left = 0
                 Top = 17
                 Width = 1124
-                Height = 198
+                Height = 24
                 Align = alTop
+                BevelOuter = bvNone
+                TabOrder = 0
+                ExplicitTop = 11
+                object cbNameFontDetalhes: TComboBox
+                  Left = 41
+                  Top = 0
+                  Width = 98
+                  Height = 22
+                  Align = alLeft
+                  Style = csOwnerDrawFixed
+                  TabOrder = 0
+                  OnChange = cbSizeFontSolucaoChange
+                  Items.Strings = (
+                    '')
+                  ExplicitLeft = 8
+                  ExplicitTop = 2
+                end
+                object cbSizeFontDetalhes: TComboBox
+                  Left = 0
+                  Top = 0
+                  Width = 41
+                  Height = 22
+                  Align = alLeft
+                  Style = csOwnerDrawFixed
+                  ItemIndex = 9
+                  TabOrder = 1
+                  Text = '10'
+                  OnChange = cbSizeFontSolucaoChange
+                  Items.Strings = (
+                    '1'
+                    '2'
+                    '3'
+                    '4'
+                    '5'
+                    '6'
+                    '7'
+                    '8'
+                    '9'
+                    '10'
+                    '11'
+                    '12'
+                    '13'
+                    '14'
+                    '15'
+                    '16'
+                    '17'
+                    '18'
+                    '19'
+                    '20'
+                    '21'
+                    '22'
+                    '23'
+                    '24'
+                    '25'
+                    '26'
+                    '27'
+                    '28'
+                    '29'
+                    '30'
+                    '31'
+                    '32'
+                    '33'
+                    '34'
+                    '35'
+                    '36'
+                    '37'
+                    '38'
+                    '39'
+                    '40'
+                    '41'
+                    '42'
+                    '43'
+                    '44'
+                    '45'
+                    '46'
+                    '47'
+                    '48'
+                    '49'
+                    '50')
+                  ExplicitLeft = 8
+                  ExplicitTop = 2
+                end
+              end
+              object mmDetalhesProblema: TRichEdit
+                Tag = 1
+                Left = 0
+                Top = 41
+                Width = 1124
+                Height = 174
+                Align = alClient
+                Font.Charset = ANSI_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentFont = False
                 ReadOnly = True
                 ScrollBars = ssVertical
-                TabOrder = 0
-                ExplicitTop = 10
+                TabOrder = 1
+                Zoom = 100
+                OnEnter = mmDetalhesProblemaEnter
               end
             end
           end
@@ -840,13 +959,42 @@ object formPrincipal: TformPrincipal
       end
     end
   end
-  object ActionManager1: TActionManager
+  object amSolucao: TActionManager
     ActionBars = <
       item
       end
       item
       end
       item
+        Items = <
+          item
+            Action = FormatRichEditBold1
+            Caption = '&Negrito'
+            ImageIndex = 31
+            ShortCut = 16450
+          end
+          item
+            Action = FormatRichEditItalic1
+            Caption = '&It'#225'lico'
+            ImageIndex = 29
+            ShortCut = 16457
+          end
+          item
+            Action = FormatRichEditAlignLeft1
+            Caption = '&Alinhar '#224' esquerda'
+            ImageIndex = 35
+          end
+          item
+            Action = FormatRichEditAlignRight1
+            Caption = 'A&linhar '#224' direita'
+            ImageIndex = 36
+          end
+          item
+            Action = FormatRichEditAlignCenter1
+            Caption = '&Centralizar'
+            ImageIndex = 37
+          end>
+        ActionBar = ActionToolBar1
       end
       item
       end
@@ -875,16 +1023,10 @@ object formPrincipal: TformPrincipal
             Action = FormatRichEditAlignCenter1
             ImageIndex = 37
           end>
-        ActionBar = ActionToolBar1
       end>
-    Left = 1552
-    Top = 489
+    Left = 1048
+    Top = 539
     StyleName = 'Platform Default'
-    object CustomizeActionBars1: TCustomizeActionBars
-      Category = 'Tools'
-      Caption = '&Customize...'
-      CustomizeDlg.StayOnTop = False
-    end
     object FormatRichEditBold1: TRichEditBold
       Category = 'Format'
       AutoCheck = True
