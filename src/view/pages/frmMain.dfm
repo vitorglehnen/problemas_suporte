@@ -2,9 +2,11 @@ object formPrincipal: TformPrincipal
   Left = 0
   Top = 0
   Align = alClient
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'Problemas Suporte'
-  ClientHeight = 749
-  ClientWidth = 1540
+  ClientHeight = 759
+  ClientWidth = 1550
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,27 +26,31 @@ object formPrincipal: TformPrincipal
   object pnlPrincipal: TPanel
     Left = 0
     Top = 0
-    Width = 1540
-    Height = 749
+    Width = 1550
+    Height = 759
     Align = alClient
     AutoSize = True
     TabOrder = 0
+    ExplicitWidth = 1540
+    ExplicitHeight = 749
     object pnlBodyModulosProblemas: TPanel
       Left = 1
       Top = 1
       Width = 512
-      Height = 747
+      Height = 757
       Align = alLeft
       Caption = 'pnlBodyModulosProblemas'
       TabOrder = 0
+      ExplicitHeight = 747
       object pnlBodyProblemas: TPanel
         Left = 242
         Top = 1
         Width = 269
-        Height = 745
+        Height = 755
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitHeight = 745
         object pnlTopProblemas: TPanel
           Left = 0
           Top = 0
@@ -230,16 +236,17 @@ object formPrincipal: TformPrincipal
           Left = 0
           Top = 257
           Width = 269
-          Height = 488
+          Height = 498
           Align = alClient
           Color = clWhite
           ParentBackground = False
           TabOrder = 1
+          ExplicitHeight = 488
           object gridProblemas: TDBGrid
             Left = 1
             Top = 1
             Width = 267
-            Height = 486
+            Height = 496
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
@@ -267,10 +274,11 @@ object formPrincipal: TformPrincipal
         Left = 1
         Top = 1
         Width = 241
-        Height = 745
+        Height = 755
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitHeight = 745
         object pnlTopModulos: TPanel
           Left = 0
           Top = 0
@@ -315,7 +323,7 @@ object formPrincipal: TformPrincipal
               ExplicitTop = 5
             end
             object btnCancelarModulo: TSpeedButton
-              Left = 142
+              Left = 190
               Top = 1
               Width = 48
               Height = 25
@@ -325,17 +333,6 @@ object formPrincipal: TformPrincipal
               OnMouseDown = btnCancelarModuloMouseDown
               ExplicitLeft = 136
               ExplicitTop = -4
-            end
-            object btnEditarModulo: TSpeedButton
-              Left = 190
-              Top = 1
-              Width = 48
-              Height = 25
-              Align = alRight
-              Caption = 'Editar'
-              OnMouseDown = btnEditarModuloMouseDown
-              ExplicitLeft = 188
-              ExplicitTop = 5
             end
             object btnNovoModulo: TSpeedButton
               Left = 1
@@ -386,35 +383,23 @@ object formPrincipal: TformPrincipal
                 TabOrder = 0
               end
             end
-            object edtNomeModulo: TLabeledEdit
-              Left = 9
-              Top = 88
-              Width = 217
-              Height = 21
-              CharCase = ecUpperCase
-              EditLabel.Width = 79
-              EditLabel.Height = 13
-              EditLabel.Caption = 'Nome do m'#243'dulo'
-              Enabled = False
-              TabOrder = 1
-              OnExit = edtNomeModuloExit
-            end
           end
         end
         object pnlGridModulos: TPanel
           Left = 0
           Top = 257
           Width = 241
-          Height = 488
+          Height = 498
           Align = alClient
           Color = clWhite
           ParentBackground = False
           TabOrder = 1
+          ExplicitHeight = 488
           object gridModulos: TDBGrid
             Left = 1
             Top = 1
             Width = 239
-            Height = 486
+            Height = 496
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
@@ -427,7 +412,6 @@ object formPrincipal: TformPrincipal
             Font.Style = []
             Options = [dgEditing, dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
-            ReadOnly = True
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
@@ -443,36 +427,42 @@ object formPrincipal: TformPrincipal
     object cardPanelProblemas: TCardPanel
       Left = 513
       Top = 1
-      Width = 1026
-      Height = 747
+      Width = 1036
+      Height = 757
       Align = alClient
       ActiveCard = pnlCadastroProblema
       AutoSize = True
       TabOrder = 1
       OnExit = cardPanelProblemasExit
+      ExplicitWidth = 1026
+      ExplicitHeight = 747
       object pnlCadastroProblema: TCard
         Left = 1
         Top = 1
-        Width = 1024
-        Height = 745
+        Width = 1034
+        Height = 755
         Caption = 'pnlCadastroProblema'
         CardIndex = 0
         TabOrder = 0
+        ExplicitWidth = 1024
+        ExplicitHeight = 745
         object pnlProblemas: TPanel
           Left = 0
           Top = 0
-          Width = 1024
-          Height = 745
+          Width = 1034
+          Height = 755
           Align = alClient
           AutoSize = True
           BevelOuter = bvNone
           Enabled = False
           TabOrder = 0
           TabStop = True
+          ExplicitWidth = 1024
+          ExplicitHeight = 745
           object pnlBodyModuloProblema: TPanel
             Left = 0
             Top = 82
-            Width = 1024
+            Width = 1034
             Height = 100
             Align = alTop
             AutoSize = True
@@ -480,6 +470,7 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Top = 20
             TabOrder = 1
+            ExplicitWidth = 1024
             object SpeedButton1: TSpeedButton
               Left = 619
               Top = 25
@@ -536,28 +527,32 @@ object formPrincipal: TformPrincipal
           object pnlBodySolucaoProblema: TPanel
             Left = 0
             Top = 417
-            Width = 1024
-            Height = 328
+            Width = 1034
+            Height = 338
             Align = alClient
             AutoSize = True
             BevelOuter = bvNone
             Padding.Left = 30
             Padding.Right = 250
             TabOrder = 3
+            ExplicitWidth = 1024
+            ExplicitHeight = 328
             object pnlSolucaoProblema: TPanel
               Left = 30
               Top = 0
-              Width = 744
-              Height = 328
+              Width = 754
+              Height = 338
               Align = alClient
               AutoSize = True
               BevelOuter = bvNone
-              Padding.Bottom = 20
+              Padding.Bottom = 50
               TabOrder = 0
+              ExplicitWidth = 744
+              ExplicitHeight = 328
               object lblSolucaoProblema: TLabel
                 Left = 0
                 Top = 0
-                Width = 744
+                Width = 754
                 Height = 17
                 Align = alTop
                 Caption = 'Solu'#231#227'o'
@@ -572,8 +567,8 @@ object formPrincipal: TformPrincipal
               object mmSolucaoProblema: TRichEdit
                 Left = 0
                 Top = 41
-                Width = 744
-                Height = 267
+                Width = 754
+                Height = 247
                 Align = alClient
                 Font.Charset = ANSI_CHARSET
                 Font.Color = clWindowText
@@ -586,17 +581,19 @@ object formPrincipal: TformPrincipal
                 TabOrder = 0
                 Zoom = 100
                 OnEnter = mmSolucaoProblemaEnter
+                ExplicitHeight = 248
               end
               object pnlTopSolucaoProblema: TPanel
                 Left = 0
                 Top = 17
-                Width = 744
+                Width = 754
                 Height = 24
                 Align = alTop
                 Alignment = taLeftJustify
                 BevelOuter = bvNone
                 Enabled = False
                 TabOrder = 1
+                ExplicitWidth = 744
                 object cbNameFontSolucao: TComboBox
                   Left = 41
                   Top = 0
@@ -677,13 +674,12 @@ object formPrincipal: TformPrincipal
                 object ActionToolBar2: TActionToolBar
                   Left = 257
                   Top = 0
-                  Width = 487
+                  Width = 497
                   Height = 24
-                  ActionManager = amSolucao
                   Align = alClient
                   Caption = 'ActionToolBar2'
                   Color = clMenuBar
-                  ColorMap.DisabledFontColor = 10461087
+                  ColorMap.DisabledFontColor = 7171437
                   ColorMap.HighlightColor = clWhite
                   ColorMap.BtnSelectedFont = clBlack
                   ColorMap.UnusedColor = clWhite
@@ -694,6 +690,7 @@ object formPrincipal: TformPrincipal
                   Font.Style = []
                   ParentFont = False
                   Spacing = 0
+                  ExplicitWidth = 487
                 end
                 object chkItalicoSolucao: TCheckBox
                   Left = 201
@@ -723,13 +720,14 @@ object formPrincipal: TformPrincipal
           object pnlTopProblema: TPanel
             Left = 0
             Top = 0
-            Width = 1024
+            Width = 1034
             Height = 82
             Align = alTop
             AutoSize = True
             Padding.Top = 10
             Padding.Bottom = 20
             TabOrder = 0
+            ExplicitWidth = 1024
             object lblDataProblema: TLabel
               Left = 633
               Top = 11
@@ -818,7 +816,7 @@ object formPrincipal: TformPrincipal
           object pnlBodyDetalhesProblema: TPanel
             Left = 0
             Top = 182
-            Width = 1024
+            Width = 1034
             Height = 235
             Align = alTop
             AutoSize = True
@@ -826,20 +824,22 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Right = 250
             TabOrder = 2
+            ExplicitWidth = 1024
             object pnlDetalhesProblema: TPanel
               Left = 30
               Top = 0
-              Width = 744
+              Width = 754
               Height = 235
               Align = alClient
               AutoSize = True
               BevelOuter = bvNone
               Padding.Bottom = 20
               TabOrder = 0
+              ExplicitWidth = 744
               object lblDetalhesProblema: TLabel
                 Left = 0
                 Top = 0
-                Width = 744
+                Width = 754
                 Height = 17
                 Align = alTop
                 Caption = 'Detalhes do problema'
@@ -854,11 +854,12 @@ object formPrincipal: TformPrincipal
               object Panel1: TPanel
                 Left = 0
                 Top = 17
-                Width = 744
+                Width = 754
                 Height = 24
                 Align = alTop
                 BevelOuter = bvNone
                 TabOrder = 0
+                ExplicitWidth = 744
                 object cbNameFontDetalhes: TComboBox
                   Left = 41
                   Top = 0
@@ -964,7 +965,7 @@ object formPrincipal: TformPrincipal
                 Tag = 1
                 Left = 0
                 Top = 41
-                Width = 744
+                Width = 754
                 Height = 174
                 Align = alClient
                 Font.Charset = ANSI_CHARSET
@@ -978,6 +979,7 @@ object formPrincipal: TformPrincipal
                 TabOrder = 1
                 Zoom = 100
                 OnEnter = mmDetalhesProblemaEnter
+                ExplicitWidth = 744
               end
             end
           end
@@ -986,44 +988,12 @@ object formPrincipal: TformPrincipal
       object pnlImagensProblema: TCard
         Left = 1
         Top = 1
-        Width = 1024
-        Height = 745
+        Width = 1034
+        Height = 755
         Caption = 'pnlImagensProblema'
         CardIndex = 1
         TabOrder = 1
       end
     end
-  end
-  object amDetalhes: TActionManager
-    ActionBars = <
-      item
-      end
-      item
-        Items = <
-          item
-            Action = FormatRichEditBold1
-            ImageIndex = 31
-            ShortCut = 16450
-          end>
-      end>
-    Left = 1296
-    Top = 547
-    StyleName = 'Platform Default'
-    object FormatRichEditBold1: TRichEditBold
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Bold'
-      Hint = 'Bold'
-      ImageIndex = 31
-      ShortCut = 16450
-    end
-  end
-  object amSolucao: TActionManager
-    ActionBars = <
-      item
-      end>
-    Left = 1384
-    Top = 547
-    StyleName = 'Platform Default'
   end
 end

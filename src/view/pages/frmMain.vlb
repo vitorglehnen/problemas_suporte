@@ -1,9 +1,6 @@
 ﻿[pnlBodyPesqModulo]
 Coordinates=738,144,132,58
 
-[edtNomeModulo]
-Coordinates=869,10,108,58
-
 [pnlBotaoCrudProblema]
 Coordinates=820,212,148,58
 
@@ -97,9 +94,6 @@ Coordinates=402,552,126,36
 [edtPesqProblema]
 Coordinates=427,348,117,58
 
-[btnEditarModulo]
-Coordinates=284,552,108,36
-
 [cbFiltroPesqProblema]
 Coordinates=121,10,141,124
 
@@ -113,7 +107,7 @@ Coordinates=390,212,104,58
 Coordinates=605,416,134,58
 
 []
-Coordinates=123,444,103,36
+Coordinates=869,10,108,58
 Visible=True
 
 [lblCodProblema]

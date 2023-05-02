@@ -23,6 +23,8 @@ type
     procedure FormShow(Sender: TObject);
     procedure btnAddImagemMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure btnAntImagemMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
     FCont: Integer;
@@ -45,6 +47,16 @@ begin
     FCont := FCont + 1;
 
     imgProblema.Picture := nil;
+end;
+
+procedure TformImagensProblema.btnAntImagemMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  var aImagem: TBitmap;
+
+  aImagem := TBitmap.Create;
+
+  imgProblema.Picture.Assign(aImagem);
 end;
 
 procedure TformImagensProblema.btnRemoverImagemClick(Sender: TObject);

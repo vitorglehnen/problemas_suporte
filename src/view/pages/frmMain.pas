@@ -88,8 +88,6 @@ type
     rdbtnFiltroPesqProblema: TRadioGroup;
     cbFiltroPesqProblema: TComboBox;
     gridProblemas: TDBGrid;
-    edtNomeModulo: TLabeledEdit;
-    btnEditarModulo: TSpeedButton;
     btnNovoModulo: TSpeedButton;
     btnEditarProblema: TSpeedButton;
     pnlImagensProblema: TCard;
@@ -123,10 +121,7 @@ type
     cbNameFontDetalhes: TComboBox;
     cbSizeFontDetalhes: TComboBox;
     mmDetalhesProblema: TRichEdit;
-    amDetalhes: TActionManager;
-    amSolucao: TActionManager;
     ActionToolBar2: TActionToolBar;
-    FormatRichEditBold1: TRichEditBold;
     chkItalicoDetalhes: TCheckBox;
     chkNegritoDetalhes: TCheckBox;
     chkItalicoSolucao: TCheckBox;
@@ -134,7 +129,6 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
-    procedure edtNomeModuloExit(Sender: TObject);
     procedure gridModulosColExit(Sender: TObject);
     procedure btnNovoModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -172,7 +166,6 @@ type
     { Private declarations }
     FControllerModulo: TControllerModulo;
     FControllerProblema: TControllerProblema;
-    FEdicaoModulo: Boolean;
     FEdicaoProblema: Boolean;
 
     procedure EventoSalvarProblema;
@@ -197,16 +190,6 @@ implementation
 
 uses
   uModulo, frmImagensProblema;
-
-procedure TformPrincipal.edtNomeModuloExit(Sender: TObject);
-begin
-  if not btnNovoModulo.Enabled then
-  begin
-    MessageBox(0, PChar('Salve ou cancele antes de continuar!'),
-      'Cadastro de módulos', MB_ICONWARNING or MB_OK);
-    edtNomeModulo.SetFocus;
-  end;
-end;
 
 procedure TformPrincipal.EventoCadastrarProblema;
 begin
@@ -273,6 +256,7 @@ begin
   FControllerModulo := TControllerModulo.Create;
 
   CarregaGridModulos;
+  CarregaGridProblemas;
 end;
 
 procedure TformPrincipal.FormDestroy(Sender: TObject);
@@ -300,6 +284,8 @@ begin
   edtPesqModulo.SetFocus;
 
   cardPanelProblemas.ActiveCard := pnlCadastroProblema;
+
+  lblTotalDeProblemas.Caption := 'Total de problemas: ' + inttostr(FControllerProblema.BuscaTabelaProblemas.DataSet.RecordCount);
 
   PreencheCbxModulos;
 
@@ -332,9 +318,6 @@ begin
   btnNovoModulo.Enabled := not btnNovoModulo.Enabled;
   btnSalvarModulo.Enabled := not btnSalvarModulo.Enabled;
   btnCancelarModulo.Enabled := not btnCancelarModulo.Enabled;
-  btnEditarModulo.Enabled := not btnEditarModulo.Enabled;
-  edtNomeModulo.Enabled := not edtNomeModulo.Enabled;
-  gridModulos.Enabled := not gridModulos.Enabled;
 
   pnlProblemas.Enabled := not pnlProblemas.Enabled;
   pnlBodyProblemas.Enabled := not pnlBodyProblemas.Enabled;
@@ -431,8 +414,6 @@ procedure TformPrincipal.btnCancelarModuloMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   InverteBotoesCrudModulos;
-
-  edtNomeModulo.Text := gridModulos.Columns[0].Field.Value;
 end;
 
 procedure TformPrincipal.btnCancelarProblemaMouseDown(Sender: TObject;
@@ -445,8 +426,6 @@ procedure TformPrincipal.btnEditarModuloMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   InverteBotoesCrudModulos;
-
-  FEdicaoModulo := True;
 end;
 
 procedure TformPrincipal.btnEditarProblemaClick(Sender: TObject);
@@ -479,12 +458,13 @@ end;
 procedure TformPrincipal.btnNovoModuloMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  InverteBotoesCrudModulos;
+  //InverteBotoesCrudModulos;
 
-  edtNomeModulo.SetFocus;
-  edtNomeModulo.Text := '';
-
-  FEdicaoModulo := False;
+  with gridModulos do
+  begin
+    DataSource.DataSet.Insert;
+    SetFocus;
+  end;
 end;
 
 procedure TformPrincipal.btnNovoProblemaMouseDown(Sender: TObject;
@@ -496,14 +476,6 @@ end;
 procedure TformPrincipal.btnSalvarModuloMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  if FEdicaoModulo then
-  begin
-    FControllerModulo.UpdateModulo(gridModulos.Columns[0].Field.Value,
-      edtNomeModulo.Text);
-  end
-  else
-    FControllerModulo.InsertModulo(edtNomeModulo.Text);
-
   CarregaGridModulos;
   InverteBotoesCrudModulos;
 end;
@@ -571,15 +543,15 @@ begin
   if FControllerModulo.BuscaTabelaModulos.DataSet.RecordCount > 0 then
   begin
     gridModulos.DataSource := FControllerModulo.BuscaTabelaModulos;
+    gridModulos.DataSource.DataSet.First;
     aNomeModulo := gridModulos.Columns[0].Field.Value;
-    edtNomeModulo.Text := aNomeModulo;
   end;
 end;
 
 procedure TformPrincipal.CarregaGridProblemas;
 begin
   var
-    aNomeModulo: String := gridModulos.Columns[0].Field.Value;
+    aNomeModulo: String := gridModulos.columns[0].Field.value;
 
   if rdbtnFiltroPesqProblema.ItemIndex = 0 then
   begin
@@ -593,7 +565,6 @@ begin
 
     gridProblemas.DataSource :=
       FControllerProblema.BuscaTabelaProblemasPorModulo(aNomeModulo);
-    edtNomeModulo.Text := aNomeModulo;;
   end;
 end;
 

@@ -33,7 +33,6 @@ object formImagensProblema: TformImagensProblema
       Align = alClient
       AutoSize = True
       Center = True
-      Stretch = True
       ExplicitLeft = 87
       ExplicitTop = 63
     end
@@ -56,6 +55,7 @@ object formImagensProblema: TformImagensProblema
       Height = 643
       Align = alLeft
       Caption = '<-------'
+      OnMouseDown = btnAntImagemMouseDown
       ExplicitLeft = -6
     end
     object pnlTopImagem: TPanel
