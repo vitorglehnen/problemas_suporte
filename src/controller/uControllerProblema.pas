@@ -14,7 +14,7 @@ type
     function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
     function CarregaDadosProblema(aTituloProblema: String): TDataSource;
     function BuscaTabelaProblemas : TDataSource;
-    function BuscaQuantidadeProblemas : Integer;
+    function BuscaQuantidadeProblemas : TDataSource;
     procedure InsertProblema(aProblema: TProblema);
     procedure UpdateProblema(aProblema: TProblema);
     procedure DeleteProblema(aProblema: TProblema);
@@ -26,7 +26,7 @@ implementation
 
 { TControllerProblemas }
 
-function TControllerProblema.BuscaQuantidadeProblemas: Integer;
+function TControllerProblema.BuscaQuantidadeProblemas: TDataSource;
 begin
   FDAOProblema.BuscaQuantidadeProblemas;
 end;

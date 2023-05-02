@@ -21,15 +21,11 @@ type
     procedure btnRemoverImagemClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
     procedure btnAddImagemMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure btnAntImagemMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
     FCont: Integer;
-    FListaImagens: TList;
   public
     { Public declarations }
   end;
@@ -48,14 +44,7 @@ begin
 
     FCont := FCont + 1;
 
-    FListaImagens.Add(aImagem);
     imgProblema.Picture := nil;
-end;
-
-procedure TformImagensProblema.btnAntImagemMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  imgProblema.Picture.Bitmap.Assign(FListaImagens.Items[0]);
 end;
 
 procedure TformImagensProblema.btnRemoverImagemClick(Sender: TObject);
@@ -66,12 +55,6 @@ end;
 procedure TformImagensProblema.FormCreate(Sender: TObject);
 begin
   FCont:= 0;
-  FListaImagens:= TList.Create();
-end;
-
-procedure TformImagensProblema.FormDestroy(Sender: TObject);
-begin
-  FListaImagens.Free;
 end;
 
 procedure TformImagensProblema.FormKeyPress(Sender: TObject; var Key: Char);

@@ -13,7 +13,6 @@ object formImagensProblema: TformImagensProblema
   OldCreateOrder = False
   Position = poScreenCenter
   OnCreate = FormCreate
-  OnDestroy = FormDestroy
   OnKeyPress = FormKeyPress
   OnShow = FormShow
   PixelsPerInch = 96
@@ -57,7 +56,6 @@ object formImagensProblema: TformImagensProblema
       Height = 643
       Align = alLeft
       Caption = '<-------'
-      OnMouseDown = btnAntImagemMouseDown
       ExplicitLeft = -6
     end
     object pnlTopImagem: TPanel

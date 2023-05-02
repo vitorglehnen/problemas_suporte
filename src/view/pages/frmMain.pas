@@ -156,8 +156,6 @@ type
     procedure cardPanelProblemasExit(Sender: TObject);
     procedure btnEditarProblemaClick(Sender: TObject);
     procedure btnExcluirProblemaClick(Sender: TObject);
-    procedure mmSolucaoProblemaKeyDown(Sender: TObject; var Key: Word;
-      Shift: TShiftState);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure SpeedButton2Click(Sender: TObject);
     procedure mmSolucaoProblemaEnter(Sender: TObject);
@@ -307,8 +305,6 @@ begin
 
   pnlProblemas.Enabled := True;
 
-  lblTotalDeProblemas.Caption := 'Total de problemas: ' + IntToStr(FControllerProblema.BuscaQuantidadeProblemas);
-
   cbNameFontSolucao.items := Screen.fonts;
   cbNameFontDetalhes.items := Screen.fonts;
   cbNameFontSolucao.ItemIndex := 28;
@@ -397,13 +393,6 @@ begin
     if chkNegritoSolucao.Checked and chkItalicoSolucao.Checked then
       SelAttributes.Style := [fsItalic, fsBold];
   end;
-end;
-
-procedure TformPrincipal.mmSolucaoProblemaKeyDown(Sender: TObject;
-  var Key: Word; Shift: TShiftState);
-begin
-  if Key = VK_TAB then
-    ShowMessage('sim');
 end;
 
 procedure TformPrincipal.PreencheCbxModulos;

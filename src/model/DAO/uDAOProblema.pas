@@ -16,7 +16,7 @@ type
     procedure InsertProblema(aProblema: TProblema);
     procedure UpdateProblema(aProblema: TProblema);
     procedure DeleteProblema(aProblema: TProblema);
-    function BuscaQuantidadeProblemas: Integer;
+    function BuscaQuantidadeProblemas: TDataSource;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -25,20 +25,17 @@ implementation
 
 { TDAOProblema }
 
-function TDAOProblema.BuscaQuantidadeProblemas: Integer;
+function TDAOProblema.BuscaQuantidadeProblemas: TDataSource;
 begin
-  var Resultado : integer;
-
   FQuery:= FConn.CriarQuery;
   FDataSource:= FConn.CriarDataSource;
 
-  FQuery.SQL.Text := 'SELECT COUNT(*) FROM PROBLEMAS';
+  FQuery.SQL.Text := 'SELECT COUNT(*) FROM problemas';
   FQuery.Open;
 
   FDataSource.DataSet := FQuery;
-  Resultado := FDataSource.DataSet.Fields[0].AsInteger;
 
-  Result := Resultado;
+  Result := FDataSource;
 end;
 
 function TDAOProblema.CarregaDadosProblema(

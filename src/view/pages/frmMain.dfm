@@ -4,7 +4,7 @@ object formPrincipal: TformPrincipal
   Align = alClient
   Caption = 'Problemas Suporte'
   ClientHeight = 749
-  ClientWidth = 1920
+  ClientWidth = 1540
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,7 +24,7 @@ object formPrincipal: TformPrincipal
   object pnlPrincipal: TPanel
     Left = 0
     Top = 0
-    Width = 1920
+    Width = 1540
     Height = 749
     Align = alClient
     AutoSize = True
@@ -443,7 +443,7 @@ object formPrincipal: TformPrincipal
     object cardPanelProblemas: TCardPanel
       Left = 513
       Top = 1
-      Width = 1406
+      Width = 1026
       Height = 747
       Align = alClient
       ActiveCard = pnlCadastroProblema
@@ -453,7 +453,7 @@ object formPrincipal: TformPrincipal
       object pnlCadastroProblema: TCard
         Left = 1
         Top = 1
-        Width = 1404
+        Width = 1024
         Height = 745
         Caption = 'pnlCadastroProblema'
         CardIndex = 0
@@ -461,7 +461,7 @@ object formPrincipal: TformPrincipal
         object pnlProblemas: TPanel
           Left = 0
           Top = 0
-          Width = 1404
+          Width = 1024
           Height = 745
           Align = alClient
           AutoSize = True
@@ -472,7 +472,7 @@ object formPrincipal: TformPrincipal
           object pnlBodyModuloProblema: TPanel
             Left = 0
             Top = 82
-            Width = 1404
+            Width = 1024
             Height = 100
             Align = alTop
             AutoSize = True
@@ -536,7 +536,7 @@ object formPrincipal: TformPrincipal
           object pnlBodySolucaoProblema: TPanel
             Left = 0
             Top = 417
-            Width = 1404
+            Width = 1024
             Height = 328
             Align = alClient
             AutoSize = True
@@ -547,7 +547,7 @@ object formPrincipal: TformPrincipal
             object pnlSolucaoProblema: TPanel
               Left = 30
               Top = 0
-              Width = 1124
+              Width = 744
               Height = 328
               Align = alClient
               AutoSize = True
@@ -557,7 +557,7 @@ object formPrincipal: TformPrincipal
               object lblSolucaoProblema: TLabel
                 Left = 0
                 Top = 0
-                Width = 1124
+                Width = 744
                 Height = 17
                 Align = alTop
                 Caption = 'Solu'#231#227'o'
@@ -567,12 +567,12 @@ object formPrincipal: TformPrincipal
                 Font.Name = 'Segoe UI'
                 Font.Style = [fsBold]
                 ParentFont = False
-                ExplicitTop = -6
+                ExplicitWidth = 48
               end
               object mmSolucaoProblema: TRichEdit
                 Left = 0
                 Top = 41
-                Width = 1124
+                Width = 744
                 Height = 267
                 Align = alClient
                 Font.Charset = ANSI_CHARSET
@@ -586,13 +586,11 @@ object formPrincipal: TformPrincipal
                 TabOrder = 0
                 Zoom = 100
                 OnEnter = mmSolucaoProblemaEnter
-                OnKeyDown = mmSolucaoProblemaKeyDown
-                ExplicitTop = 45
               end
               object pnlTopSolucaoProblema: TPanel
                 Left = 0
                 Top = 17
-                Width = 1124
+                Width = 744
                 Height = 24
                 Align = alTop
                 Alignment = taLeftJustify
@@ -675,13 +673,11 @@ object formPrincipal: TformPrincipal
                     '48'
                     '49'
                     '50')
-                  ExplicitLeft = -6
-                  ExplicitTop = -4
                 end
                 object ActionToolBar2: TActionToolBar
                   Left = 257
                   Top = 0
-                  Width = 867
+                  Width = 487
                   Height = 24
                   ActionManager = amSolucao
                   Align = alClient
@@ -698,10 +694,6 @@ object formPrincipal: TformPrincipal
                   Font.Style = []
                   ParentFont = False
                   Spacing = 0
-                  ExplicitLeft = 0
-                  ExplicitTop = -5
-                  ExplicitWidth = 1124
-                  ExplicitHeight = 29
                 end
                 object chkItalicoSolucao: TCheckBox
                   Left = 201
@@ -713,8 +705,6 @@ object formPrincipal: TformPrincipal
                   Caption = 'It'#225'lico'
                   TabOrder = 3
                   OnClick = chkItalicoSolucaoClick
-                  ExplicitLeft = 195
-                  ExplicitTop = -6
                 end
                 object chkNegritoSolucao: TCheckBox
                   Left = 139
@@ -726,8 +716,6 @@ object formPrincipal: TformPrincipal
                   Caption = 'Negrito'
                   TabOrder = 4
                   OnClick = chkNegritoSolucaoClick
-                  ExplicitLeft = 145
-                  ExplicitTop = 6
                 end
               end
             end
@@ -735,7 +723,7 @@ object formPrincipal: TformPrincipal
           object pnlTopProblema: TPanel
             Left = 0
             Top = 0
-            Width = 1404
+            Width = 1024
             Height = 82
             Align = alTop
             AutoSize = True
@@ -830,7 +818,7 @@ object formPrincipal: TformPrincipal
           object pnlBodyDetalhesProblema: TPanel
             Left = 0
             Top = 182
-            Width = 1404
+            Width = 1024
             Height = 235
             Align = alTop
             AutoSize = True
@@ -841,7 +829,7 @@ object formPrincipal: TformPrincipal
             object pnlDetalhesProblema: TPanel
               Left = 30
               Top = 0
-              Width = 1124
+              Width = 744
               Height = 235
               Align = alClient
               AutoSize = True
@@ -851,7 +839,7 @@ object formPrincipal: TformPrincipal
               object lblDetalhesProblema: TLabel
                 Left = 0
                 Top = 0
-                Width = 1124
+                Width = 744
                 Height = 17
                 Align = alTop
                 Caption = 'Detalhes do problema'
@@ -861,17 +849,16 @@ object formPrincipal: TformPrincipal
                 Font.Name = 'Segoe UI'
                 Font.Style = [fsBold]
                 ParentFont = False
-                ExplicitTop = 18
+                ExplicitWidth = 137
               end
               object Panel1: TPanel
                 Left = 0
                 Top = 17
-                Width = 1124
+                Width = 744
                 Height = 24
                 Align = alTop
                 BevelOuter = bvNone
                 TabOrder = 0
-                ExplicitTop = 11
                 object cbNameFontDetalhes: TComboBox
                   Left = 41
                   Top = 0
@@ -892,6 +879,7 @@ object formPrincipal: TformPrincipal
                   Height = 22
                   Align = alLeft
                   Style = csOwnerDrawFixed
+                  Color = clWhite
                   ItemIndex = 9
                   TabOrder = 1
                   TabStop = False
@@ -948,8 +936,6 @@ object formPrincipal: TformPrincipal
                     '48'
                     '49'
                     '50')
-                  ExplicitLeft = -6
-                  ExplicitTop = -4
                 end
                 object chkItalicoDetalhes: TCheckBox
                   Left = 201
@@ -961,8 +947,6 @@ object formPrincipal: TformPrincipal
                   Caption = 'It'#225'lico'
                   TabOrder = 2
                   OnClick = chkItalicoDetalhesClick
-                  ExplicitLeft = 207
-                  ExplicitTop = 6
                 end
                 object chkNegritoDetalhes: TCheckBox
                   Left = 139
@@ -974,15 +958,13 @@ object formPrincipal: TformPrincipal
                   Caption = 'Negrito'
                   TabOrder = 3
                   OnClick = chkNegritoDetalhesClick
-                  ExplicitLeft = 133
-                  ExplicitTop = 6
                 end
               end
               object mmDetalhesProblema: TRichEdit
                 Tag = 1
                 Left = 0
                 Top = 41
-                Width = 1124
+                Width = 744
                 Height = 174
                 Align = alClient
                 Font.Charset = ANSI_CHARSET
@@ -996,7 +978,6 @@ object formPrincipal: TformPrincipal
                 TabOrder = 1
                 Zoom = 100
                 OnEnter = mmDetalhesProblemaEnter
-                ExplicitTop = 45
               end
             end
           end
@@ -1005,7 +986,7 @@ object formPrincipal: TformPrincipal
       object pnlImagensProblema: TCard
         Left = 1
         Top = 1
-        Width = 1404
+        Width = 1024
         Height = 745
         Caption = 'pnlImagensProblema'
         CardIndex = 1
