@@ -13,11 +13,12 @@ object formImagensProblema: TformImagensProblema
   OldCreateOrder = False
   Position = poScreenCenter
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnKeyPress = FormKeyPress
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object btnAdicionarImagem: TPanel
+  object pnlPrincipal: TPanel
     Left = 0
     Top = 0
     Width = 1150
@@ -27,36 +28,42 @@ object formImagensProblema: TformImagensProblema
     TabOrder = 0
     object imgProblema: TImage
       Left = 81
-      Top = 57
+      Top = 98
       Width = 988
-      Height = 643
+      Height = 602
       Align = alClient
       AutoSize = True
       Center = True
+      Enabled = False
       ExplicitLeft = 87
-      ExplicitTop = 63
+      ExplicitTop = 136
+      ExplicitHeight = 564
     end
     object btnProxImagem: TSpeedButton
       Left = 1069
-      Top = 57
+      Top = 98
       Width = 81
-      Height = 643
+      Height = 602
       Align = alRight
       Caption = '------->'
       Enabled = False
+      OnClick = btnProxImagemClick
       ExplicitLeft = 825
       ExplicitTop = 0
       ExplicitHeight = 650
     end
     object btnAntImagem: TSpeedButton
       Left = 0
-      Top = 57
+      Top = 98
       Width = 81
-      Height = 643
+      Height = 602
       Align = alLeft
       Caption = '<-------'
-      OnMouseDown = btnAntImagemMouseDown
+      Enabled = False
+      OnClick = btnAntImagemClick
       ExplicitLeft = -6
+      ExplicitTop = 57
+      ExplicitHeight = 643
     end
     object pnlTopImagem: TPanel
       Left = 0
@@ -68,13 +75,15 @@ object formImagensProblema: TformImagensProblema
       Padding.Top = 5
       Padding.Bottom = 5
       TabOrder = 0
+      ExplicitTop = -6
       object btnRemoverImagem: TSpeedButton
-        Left = 75
+        Left = 213
         Top = 6
         Width = 69
         Height = 45
         Align = alLeft
         Caption = 'Remover'
+        OnClick = btnRemoverImagemClick
         ExplicitLeft = 81
       end
       object btnAddImagem: TSpeedButton
@@ -84,16 +93,87 @@ object formImagensProblema: TformImagensProblema
         Height = 45
         Align = alLeft
         Caption = 'Adcionar'
-        OnMouseDown = btnAddImagemMouseDown
-        ExplicitLeft = 12
+        OnClick = btnAddImagemClick
+        ExplicitLeft = 0
+      end
+      object btnSalvarImagem: TSpeedButton
+        Left = 75
+        Top = 6
+        Width = 69
+        Height = 45
+        Align = alLeft
+        Caption = 'Salvar'
+        Enabled = False
+        OnMouseDown = btnSalvarImagemMouseDown
+        ExplicitLeft = 69
+      end
+      object btnCancelarImagem: TSpeedButton
+        Left = 144
+        Top = 6
+        Width = 69
+        Height = 45
+        Align = alLeft
+        Caption = 'Cancelar'
+        Enabled = False
+        ExplicitLeft = 81
+      end
+      object pnlQtdeImagens: TPanel
+        Left = 964
+        Top = 6
+        Width = 185
+        Height = 45
+        Align = alRight
+        TabOrder = 0
+        ExplicitLeft = 936
+        ExplicitTop = 8
+        ExplicitHeight = 41
+        object lblQtdeImagens: TLabel
+          Left = 1
+          Top = 1
+          Width = 183
+          Height = 43
+          Align = alClient
+          Alignment = taCenter
+          Caption = 'Imagens: 0'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Tahoma'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Layout = tlCenter
+          ExplicitTop = 2
+        end
       end
     end
-  end
-  object ImageList1: TImageList
-    ColorDepth = cd32Bit
-    DrawingStyle = dsTransparent
-    Masked = False
-    Left = 752
-    Top = 360
+    object Panel1: TPanel
+      Left = 0
+      Top = 57
+      Width = 1150
+      Height = 41
+      Align = alTop
+      TabOrder = 1
+      ExplicitLeft = 480
+      ExplicitTop = 72
+      ExplicitWidth = 185
+      object lblNmroImagem: TLabel
+        Left = 1
+        Top = 1
+        Width = 1148
+        Height = 39
+        Align = alClient
+        Alignment = taCenter
+        Caption = '1/5'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+        Layout = tlCenter
+        ExplicitWidth = 24
+        ExplicitHeight = 19
+      end
+    end
   end
 end
