@@ -10,7 +10,9 @@ uses
   uControllerProblema in 'src\controller\uControllerProblema.pas',
   uControllerModulo in 'src\controller\uControllerModulo.pas',
   uDAOProblema in 'src\model\DAO\uDAOProblema.pas',
-  frmImagensProblema in 'src\view\pages\frmImagensProblema.pas' {formImagensProblema};
+  frmImagensProblema in 'src\view\pages\frmImagensProblema.pas' {formImagensProblema},
+  uImagemProblema in 'src\model\models\uImagemProblema.pas',
+  uDAOImagemProblema in 'src\model\dao\uDAOImagemProblema.pas';
 
 {$R *.res}
 begin

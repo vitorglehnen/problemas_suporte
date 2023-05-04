@@ -3,19 +3,27 @@ unit uControllerProblema;
 interface
 
 uses
-  FireDAC.Comp.Client, Data.DB, uProblema, uDAOGridProblema, uDAOProblema;
+  FireDAC.Comp.Client,
+  Data.DB,
+  uProblema,
+  uDAOGridProblema,
+  uDAOProblema,
+  uImagemProblema,
+  uDAOImagemProblema;
 
 type
   TControllerProblema = class
   private
     FDAOProblema: TDaoProblema;
     FDAOGridProblema: TDAOGridProblema;
+    FDAOImagemProblema: TDAOImagemProblema;
   public
     function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
     function CarregaDadosProblema(aTituloProblema: String): TDataSource;
     function BuscaTabelaProblemas : TDataSource;
     function BuscaQuantidadeProblemas : TDataSource;
     procedure InsertProblema(aProblema: TProblema);
+    procedure InsertImagem(aImagem: TImagemProblema);
     procedure UpdateProblema(aProblema: TProblema);
     procedure DeleteProblema(aProblema: TProblema);
     constructor Create;
@@ -63,6 +71,11 @@ begin
   FDAOProblema.Free;
   FDAOGridProblema.Free;
   inherited;
+end;
+
+procedure TControllerProblema.InsertImagem(aImagem: TImagemProblema);
+begin
+  FDAOImagemProblema.InsertImagem(aImagem);
 end;
 
 procedure TControllerProblema.InsertProblema(aProblema: TProblema);

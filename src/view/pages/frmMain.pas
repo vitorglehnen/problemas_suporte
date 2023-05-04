@@ -167,6 +167,7 @@ type
     FControllerModulo: TControllerModulo;
     FControllerProblema: TControllerProblema;
     FEdicaoProblema: Boolean;
+    FListaImagens: TStringList;
 
     procedure EventoSalvarProblema;
     procedure EventoCadastrarProblema;
@@ -402,10 +403,12 @@ begin
   var
     aFormImagensProblema: TFormImagensProblema :=
       TFormImagensProblema.Create(nil);
+  var aCaminhoImagem: String;
 
   try
     aFormImagensProblema.ShowModal;
   finally
+    FListaImagens := aFormImagensProblema.FListaImagens;
     aFormImagensProblema.Free;
   end;
 end;

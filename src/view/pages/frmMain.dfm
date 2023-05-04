@@ -31,8 +31,6 @@ object formPrincipal: TformPrincipal
     Align = alClient
     AutoSize = True
     TabOrder = 0
-    ExplicitWidth = 1540
-    ExplicitHeight = 749
     object pnlBodyModulosProblemas: TPanel
       Left = 1
       Top = 1
@@ -41,7 +39,6 @@ object formPrincipal: TformPrincipal
       Align = alLeft
       Caption = 'pnlBodyModulosProblemas'
       TabOrder = 0
-      ExplicitHeight = 747
       object pnlBodyProblemas: TPanel
         Left = 242
         Top = 1
@@ -50,7 +47,6 @@ object formPrincipal: TformPrincipal
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitHeight = 745
         object pnlTopProblemas: TPanel
           Left = 0
           Top = 0
@@ -241,7 +237,6 @@ object formPrincipal: TformPrincipal
           Color = clWhite
           ParentBackground = False
           TabOrder = 1
-          ExplicitHeight = 488
           object gridProblemas: TDBGrid
             Left = 1
             Top = 1
@@ -278,7 +273,6 @@ object formPrincipal: TformPrincipal
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitHeight = 745
         object pnlTopModulos: TPanel
           Left = 0
           Top = 0
@@ -394,7 +388,6 @@ object formPrincipal: TformPrincipal
           Color = clWhite
           ParentBackground = False
           TabOrder = 1
-          ExplicitHeight = 488
           object gridModulos: TDBGrid
             Left = 1
             Top = 1
@@ -434,8 +427,6 @@ object formPrincipal: TformPrincipal
       AutoSize = True
       TabOrder = 1
       OnExit = cardPanelProblemasExit
-      ExplicitWidth = 1026
-      ExplicitHeight = 747
       object pnlCadastroProblema: TCard
         Left = 1
         Top = 1
@@ -444,8 +435,6 @@ object formPrincipal: TformPrincipal
         Caption = 'pnlCadastroProblema'
         CardIndex = 0
         TabOrder = 0
-        ExplicitWidth = 1024
-        ExplicitHeight = 745
         object pnlProblemas: TPanel
           Left = 0
           Top = 0
@@ -457,8 +446,6 @@ object formPrincipal: TformPrincipal
           Enabled = False
           TabOrder = 0
           TabStop = True
-          ExplicitWidth = 1024
-          ExplicitHeight = 745
           object pnlBodyModuloProblema: TPanel
             Left = 0
             Top = 82
@@ -470,7 +457,6 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Top = 20
             TabOrder = 1
-            ExplicitWidth = 1024
             object SpeedButton1: TSpeedButton
               Left = 619
               Top = 25
@@ -535,8 +521,6 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Right = 250
             TabOrder = 3
-            ExplicitWidth = 1024
-            ExplicitHeight = 328
             object pnlSolucaoProblema: TPanel
               Left = 30
               Top = 0
@@ -547,8 +531,6 @@ object formPrincipal: TformPrincipal
               BevelOuter = bvNone
               Padding.Bottom = 50
               TabOrder = 0
-              ExplicitWidth = 744
-              ExplicitHeight = 328
               object lblSolucaoProblema: TLabel
                 Left = 0
                 Top = 0
@@ -581,7 +563,6 @@ object formPrincipal: TformPrincipal
                 TabOrder = 0
                 Zoom = 100
                 OnEnter = mmSolucaoProblemaEnter
-                ExplicitHeight = 248
               end
               object pnlTopSolucaoProblema: TPanel
                 Left = 0
@@ -593,7 +574,6 @@ object formPrincipal: TformPrincipal
                 BevelOuter = bvNone
                 Enabled = False
                 TabOrder = 1
-                ExplicitWidth = 744
                 object cbNameFontSolucao: TComboBox
                   Left = 41
                   Top = 0
@@ -690,7 +670,6 @@ object formPrincipal: TformPrincipal
                   Font.Style = []
                   ParentFont = False
                   Spacing = 0
-                  ExplicitWidth = 487
                 end
                 object chkItalicoSolucao: TCheckBox
                   Left = 201
@@ -727,7 +706,6 @@ object formPrincipal: TformPrincipal
             Padding.Top = 10
             Padding.Bottom = 20
             TabOrder = 0
-            ExplicitWidth = 1024
             object lblDataProblema: TLabel
               Left = 633
               Top = 11
@@ -824,7 +802,6 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Right = 250
             TabOrder = 2
-            ExplicitWidth = 1024
             object pnlDetalhesProblema: TPanel
               Left = 30
               Top = 0
@@ -835,7 +812,6 @@ object formPrincipal: TformPrincipal
               BevelOuter = bvNone
               Padding.Bottom = 20
               TabOrder = 0
-              ExplicitWidth = 744
               object lblDetalhesProblema: TLabel
                 Left = 0
                 Top = 0
@@ -859,7 +835,6 @@ object formPrincipal: TformPrincipal
                 Align = alTop
                 BevelOuter = bvNone
                 TabOrder = 0
-                ExplicitWidth = 744
                 object cbNameFontDetalhes: TComboBox
                   Left = 41
                   Top = 0
@@ -979,7 +954,6 @@ object formPrincipal: TformPrincipal
                 TabOrder = 1
                 Zoom = 100
                 OnEnter = mmDetalhesProblemaEnter
-                ExplicitWidth = 744
               end
             end
           end

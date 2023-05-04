@@ -35,10 +35,10 @@ type
     procedure btnRemoverImagemClick(Sender: TObject);
   private
     { Private declarations }
-    FListaImagens: TStringList;
     FPosicaoListaImagem: Integer;
   public
     { Public declarations }
+    FListaImagens: TStringList;
   end;
 
 var

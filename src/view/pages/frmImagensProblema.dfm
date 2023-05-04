@@ -75,7 +75,6 @@ object formImagensProblema: TformImagensProblema
       Padding.Top = 5
       Padding.Bottom = 5
       TabOrder = 0
-      ExplicitTop = -6
       object btnRemoverImagem: TSpeedButton
         Left = 213
         Top = 6
@@ -124,9 +123,6 @@ object formImagensProblema: TformImagensProblema
         Height = 45
         Align = alRight
         TabOrder = 0
-        ExplicitLeft = 936
-        ExplicitTop = 8
-        ExplicitHeight = 41
         object lblQtdeImagens: TLabel
           Left = 1
           Top = 1
@@ -142,7 +138,8 @@ object formImagensProblema: TformImagensProblema
           Font.Style = [fsBold]
           ParentFont = False
           Layout = tlCenter
-          ExplicitTop = 2
+          ExplicitWidth = 83
+          ExplicitHeight = 18
         end
       end
     end
@@ -153,9 +150,6 @@ object formImagensProblema: TformImagensProblema
       Height = 41
       Align = alTop
       TabOrder = 1
-      ExplicitLeft = 480
-      ExplicitTop = 72
-      ExplicitWidth = 185
       object lblNmroImagem: TLabel
         Left = 1
         Top = 1
