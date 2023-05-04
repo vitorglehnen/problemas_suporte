@@ -190,7 +190,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uModulo, frmImagensProblema;
+  uModulo, frmImagensProblema, uImagemProblema;
 
 procedure TformPrincipal.EventoCadastrarProblema;
 begin
@@ -217,6 +217,9 @@ begin
   var aProblema: TProblema := TProblema.Create;
   var msDetalhes: TMemoryStream := TMemoryStream.Create;
   var msSolucao: TMemoryStream := TMemoryStream.Create;
+  var aImagemProblema: TImagemProblema := TImagemProblema.Create;
+  var aImagem: String;
+  var aContSequencia: Integer := 0;
 
   InverteBotoesCrudProblemas;
 
@@ -240,8 +243,19 @@ begin
     begin
       FControllerProblema.InsertProblema(aProblema);
     end;
+
+    for aImagem in FListaImagens do
+    begin
+      aContSequencia := aContSequencia + 1;
+      aImagemProblema.Sequencia := aContSequencia;
+      aImagemProblema.Imagem := aImagem;
+
+      FControllerProblema.InsertImagem(aImagemProblema);
+    end;
+
   finally
     aProblema.Free;
+    aImagemProblema.Free;
     msDetalhes.Free;
     msSolucao.Free;
   end;

@@ -36,10 +36,11 @@ procedure TDAOImagemProblema.InsertImagem(aImagemProblema: TImagemProblema);
 begin
   FQuery := FConn.CriarQuery;
 
-  FQuery.SQL.Text := 'INSERT INTO probimg (seq_img, cod_prob, imagem, datacr, horacr)' +
-                      'VALUES (:seq_img, :cod_prob, :imagem, :datacr, :horacr)';
+  FQuery.SQL.Text :=
+    'INSERT INTO probimg (seq_img, cod_prob, imagem, datacr, horacr)' +
+    'VALUES (:seq_img, (SELECT GEN_ID(GEN_PROBLEMAS_ID, 0) FROM RDB$DATABASE), '
+    + ':imagem, :datacr, :horacr)';
   FQuery.ParamByName('seq_img').AsInteger := aImagemProblema.Sequencia;
-  FQuery.ParamByName('cod_prob').AsInteger := aImagemProblema.CodigoProblema;
   FQuery.ParamByName('imagem').AsString := aImagemProblema.Imagem;
   FQuery.ParamByName('datacr').AsDate := aImagemProblema.Data;
   FQuery.ParamByName('horacr').AsTime := aImagemProblema.Hora;
