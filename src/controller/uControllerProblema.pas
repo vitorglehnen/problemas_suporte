@@ -59,6 +59,7 @@ constructor TControllerProblema.Create;
 begin
   FDAOProblema := TDAOProblema.Create;
   FDAOGridProblema := TDAOGridProblema.Create;
+  FDAOImagemProblema := TDAOImagemProblema.Create;
 end;
 
 procedure TControllerProblema.DeleteProblema(aProblema: TProblema);
@@ -70,6 +71,7 @@ destructor TControllerProblema.Destroy;
 begin
   FDAOProblema.Free;
   FDAOGridProblema.Free;
+  FDAOImagemProblema.Free;
   inherited;
 end;
 

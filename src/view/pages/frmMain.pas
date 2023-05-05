@@ -50,7 +50,7 @@ uses
   uControllerProblema,
   uProblema, Vcl.ExtActns, Vcl.StdActns, System.Actions, Vcl.ActnList,
   Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, Vcl.ToolWin, Vcl.ActnCtrls,
-  Vcl.BandActn;
+  Vcl.BandActn, frmImagensProblema;
 
 type
   TformPrincipal = class(TForm)
@@ -164,6 +164,7 @@ type
 
   private
     { Private declarations }
+    FFormImagensProblema: TformImagensProblema;
     FControllerModulo: TControllerModulo;
     FControllerProblema: TControllerProblema;
     FEdicaoProblema: Boolean;
@@ -190,7 +191,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uModulo, frmImagensProblema, uImagemProblema;
+  uModulo, uImagemProblema;
 
 procedure TformPrincipal.EventoCadastrarProblema;
 begin
@@ -226,7 +227,6 @@ begin
   try
     mmDetalhesProblema.Lines.SaveToStream(msDetalhes);
     mmSolucaoProblema.Lines.SaveToStream(msSolucao);
-
     aProblema.Titulo := edtTituloProblema.Text;
     aProblema.Modulo := cbModulo.Text;
     aProblema.Chamado := edtChamadoProblema.Text;
@@ -244,20 +244,27 @@ begin
       FControllerProblema.InsertProblema(aProblema);
     end;
 
-    for aImagem in FListaImagens do
+    ShowMessage(inttostr(FListaImagens.Count));
+
+    while (aContSequencia < FListaImagens.Count) and (FListaImagens.Count > 0) do
     begin
-      aContSequencia := aContSequencia + 1;
-      aImagemProblema.Sequencia := aContSequencia;
-      aImagemProblema.Imagem := aImagem;
+      aImagemProblema.Sequencia := aContSequencia + 1;
+      aImagemProblema.Imagem := FListaImagens[aContSequencia];
 
       FControllerProblema.InsertImagem(aImagemProblema);
+      aContSequencia := aContSequencia + 1;
     end;
 
   finally
     aProblema.Free;
-    aImagemProblema.Free;
     msDetalhes.Free;
     msSolucao.Free;
+
+    if Assigned(FFormImagensProblema) then
+    begin
+      FFormImagensProblema.free;
+      aImagemProblema.Free;
+    end;
   end;
 
   CarregaGridProblemas;
@@ -414,17 +421,12 @@ end;
 
 procedure TformPrincipal.SpeedButton2Click(Sender: TObject);
 begin
-  var
-    aFormImagensProblema: TFormImagensProblema :=
-      TFormImagensProblema.Create(nil);
   var aCaminhoImagem: String;
 
-  try
-    aFormImagensProblema.ShowModal;
-  finally
-    FListaImagens := aFormImagensProblema.FListaImagens;
-    aFormImagensProblema.Free;
-  end;
+  FFormImagensProblema := TformImagensProblema.Create(nil);
+
+  FFormImagensProblema.ShowModal;
+  FListaImagens := FFormImagensProblema.FListaImagens;
 end;
 
 procedure TformPrincipal.btnCancelarModuloMouseDown(Sender: TObject;
