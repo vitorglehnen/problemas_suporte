@@ -48,9 +48,17 @@ uses
   Vcl.ComCtrls,
   uControllerModulo,
   uControllerProblema,
-  uProblema, Vcl.ExtActns, Vcl.StdActns, System.Actions, Vcl.ActnList,
-  Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan, Vcl.ToolWin, Vcl.ActnCtrls,
-  Vcl.BandActn, frmImagensProblema;
+  uProblema,
+  Vcl.ExtActns,
+  Vcl.StdActns,
+  System.Actions,
+  Vcl.ActnList,
+  Vcl.PlatformDefaultStyleActnCtrls,
+  Vcl.ActnMan,
+  Vcl.ToolWin,
+  Vcl.ActnCtrls,
+  Vcl.BandActn,
+  frmImagensProblema;
 
 type
   TformPrincipal = class(TForm)
@@ -93,8 +101,7 @@ type
     pnlImagensProblema: TCard;
     pnlProblemas: TPanel;
     pnlBodyModuloProblema: TPanel;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
+    btnImagensProblema: TSpeedButton;
     pnlModuloProblema: TPanel;
     lblModuloProblema: TLabel;
     cbModulo: TComboBox;
@@ -151,7 +158,7 @@ type
     procedure btnEditarProblemaClick(Sender: TObject);
     procedure btnExcluirProblemaClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure SpeedButton2Click(Sender: TObject);
+    procedure btnImagensProblemaClick(Sender: TObject);
     procedure mmSolucaoProblemaEnter(Sender: TObject);
     procedure cbSizeFontSolucaoChange(Sender: TObject);
     procedure mmDetalhesProblemaEnter(Sender: TObject);
@@ -244,30 +251,29 @@ begin
       FControllerProblema.InsertProblema(aProblema);
     end;
 
-    ShowMessage(inttostr(FListaImagens.Count));
-
-    while (aContSequencia < FListaImagens.Count) and (FListaImagens.Count > 0) do
+    if Assigned(FListaImagens) then
     begin
-      aImagemProblema.Sequencia := aContSequencia + 1;
-      aImagemProblema.Imagem := FListaImagens[aContSequencia];
+      while (aContSequencia < FListaImagens.Count) and (FListaImagens.Count > 0) do
+      begin
+        aImagemProblema.Sequencia := aContSequencia + 1;
+        aImagemProblema.Imagem := FListaImagens[aContSequencia];
 
-      FControllerProblema.InsertImagem(aImagemProblema);
-      aContSequencia := aContSequencia + 1;
+        FControllerProblema.InsertImagem(aImagemProblema);
+        aContSequencia := aContSequencia + 1;
+      end;
     end;
 
   finally
     aProblema.Free;
     msDetalhes.Free;
     msSolucao.Free;
+    aImagemProblema.Free;
 
     if Assigned(FFormImagensProblema) then
     begin
       FFormImagensProblema.free;
-      aImagemProblema.Free;
     end;
   end;
-
-  CarregaGridProblemas;
 
   InverteCamposProblemas;
 end;
@@ -312,11 +318,6 @@ begin
   PreencheCbxModulos;
 
   pnlProblemas.Enabled := True;
-
-  cbNameFontSolucao.items := Screen.fonts;
-  cbNameFontDetalhes.items := Screen.fonts;
-  cbNameFontSolucao.ItemIndex := 28;
-  cbNameFontDetalhes.ItemIndex := 28;
 end;
 
 procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
@@ -364,6 +365,15 @@ begin
   cbModulo.Enabled := not cbModulo.Enabled;
   mmDetalhesProblema.ReadOnly := not mmDetalhesProblema.ReadOnly;
   mmSolucaoProblema.ReadOnly := not mmSolucaoProblema.ReadOnly;
+  btnImagensProblema.Enabled := not btnImagensProblema.Enabled;
+  cbNameFontDetalhes.Enabled := not cbNameFontDetalhes.Enabled;
+  cbNameFontSolucao.Enabled := not cbNameFontSolucao.Enabled;
+  cbSizeFontDetalhes.Enabled := not cbSizeFontDetalhes.Enabled;
+  cbSizeFontSolucao.Enabled := not cbSizeFontSolucao.Enabled;
+  chkItalicoDetalhes.Enabled := not chkItalicoDetalhes.Enabled;
+  chkNegritoDetalhes.Enabled := not chkNegritoDetalhes.Enabled;
+  chkItalicoSolucao.Enabled := not chkItalicoSolucao.Enabled;
+  chkNegritoSolucao.Enabled := not chkNegritoSolucao.Enabled;
 end;
 
 procedure TformPrincipal.mmDetalhesProblemaEnter(Sender: TObject);
@@ -419,11 +429,15 @@ begin
   CarregaGridProblemas;
 end;
 
-procedure TformPrincipal.SpeedButton2Click(Sender: TObject);
+procedure TformPrincipal.btnImagensProblemaClick(Sender: TObject);
 begin
   var aCaminhoImagem: String;
 
-  FFormImagensProblema := TformImagensProblema.Create(nil);
+  if not Assigned(FFormImagensProblema) then
+  begin
+    FFormImagensProblema := TformImagensProblema.Create(nil);
+    //FFormImagensProblema.RecebeListaImagens(FListaImagens);
+  end;
 
   FFormImagensProblema.ShowModal;
   FListaImagens := FFormImagensProblema.FListaImagens;
@@ -531,7 +545,6 @@ begin
     aProblema := FControllerProblema.CarregaDadosProblema
       (aNomeProblema).DataSet;
 
-    // passa por cada item do cbx e identifica com o modulo correspondente no cadastro
     while cbModulo.Text <> aProblema.FieldByName('modulo').Value do
     begin
       cbModulo.ItemIndex := cont;

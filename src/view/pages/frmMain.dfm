@@ -457,21 +457,14 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Top = 20
             TabOrder = 1
-            object SpeedButton1: TSpeedButton
-              Left = 619
-              Top = 25
-              Width = 103
-              Height = 34
-              Caption = 'Ver imagens'
-              Enabled = False
-            end
-            object SpeedButton2: TSpeedButton
-              Left = 510
+            object btnImagensProblema: TSpeedButton
+              Left = 519
               Top = 24
               Width = 103
               Height = 34
-              Caption = 'Adicionar imagens'
-              OnClick = SpeedButton2Click
+              Caption = 'Imagens'
+              Enabled = False
+              OnClick = btnImagensProblemaClick
             end
             object pnlModuloProblema: TPanel
               Left = 30
@@ -581,11 +574,31 @@ object formPrincipal: TformPrincipal
                   Height = 22
                   Align = alLeft
                   Style = csOwnerDrawFixed
+                  Enabled = False
+                  ItemIndex = 0
                   TabOrder = 0
                   TabStop = False
+                  Text = 'Arial'
                   OnChange = cbSizeFontSolucaoChange
                   Items.Strings = (
-                    '')
+                    'Arial'
+                    'Calibri'
+                    'Cambria'
+                    'Candara'
+                    'Comic Sans MS'
+                    'Consolas'
+                    'Courier New'
+                    'Georgia'
+                    'Impact'
+                    'Lucida Console'
+                    'Lucida Sans Unicode'
+                    'Microsoft Sans Serif'
+                    'Palatino Linotype'
+                    'Segoe UI'
+                    'Tahoma'
+                    'Times New Roman'
+                    'Trebuchet MS'
+                    'Verdana')
                 end
                 object cbSizeFontSolucao: TComboBox
                   Left = 0
@@ -594,6 +607,7 @@ object formPrincipal: TformPrincipal
                   Height = 22
                   Align = alLeft
                   Style = csOwnerDrawFixed
+                  Enabled = False
                   ItemIndex = 9
                   TabOrder = 1
                   TabStop = False
@@ -679,6 +693,7 @@ object formPrincipal: TformPrincipal
                   TabStop = False
                   Align = alLeft
                   Caption = 'It'#225'lico'
+                  Enabled = False
                   TabOrder = 3
                   OnClick = chkItalicoSolucaoClick
                 end
@@ -690,6 +705,7 @@ object formPrincipal: TformPrincipal
                   TabStop = False
                   Align = alLeft
                   Caption = 'Negrito'
+                  Enabled = False
                   TabOrder = 4
                   OnClick = chkNegritoSolucaoClick
                 end
@@ -825,7 +841,7 @@ object formPrincipal: TformPrincipal
                 Font.Name = 'Segoe UI'
                 Font.Style = [fsBold]
                 ParentFont = False
-                ExplicitWidth = 137
+                ExplicitTop = -6
               end
               object Panel1: TPanel
                 Left = 0
@@ -842,11 +858,31 @@ object formPrincipal: TformPrincipal
                   Height = 22
                   Align = alLeft
                   Style = csOwnerDrawFixed
+                  Enabled = False
+                  ItemIndex = 0
                   TabOrder = 0
                   TabStop = False
+                  Text = 'Arial'
                   OnChange = cbNameFontDetalhesChange
                   Items.Strings = (
-                    '')
+                    'Arial'
+                    'Calibri'
+                    'Cambria'
+                    'Candara'
+                    'Comic Sans MS'
+                    'Consolas'
+                    'Courier New'
+                    'Georgia'
+                    'Impact'
+                    'Lucida Console'
+                    'Lucida Sans Unicode'
+                    'Microsoft Sans Serif'
+                    'Palatino Linotype'
+                    'Segoe UI'
+                    'Tahoma'
+                    'Times New Roman'
+                    'Trebuchet MS'
+                    'Verdana')
                 end
                 object cbSizeFontDetalhes: TComboBox
                   Left = 0
@@ -856,6 +892,7 @@ object formPrincipal: TformPrincipal
                   Align = alLeft
                   Style = csOwnerDrawFixed
                   Color = clWhite
+                  Enabled = False
                   ItemIndex = 9
                   TabOrder = 1
                   TabStop = False
@@ -921,6 +958,7 @@ object formPrincipal: TformPrincipal
                   TabStop = False
                   Align = alLeft
                   Caption = 'It'#225'lico'
+                  Enabled = False
                   TabOrder = 2
                   OnClick = chkItalicoDetalhesClick
                 end
@@ -932,6 +970,7 @@ object formPrincipal: TformPrincipal
                   TabStop = False
                   Align = alLeft
                   Caption = 'Negrito'
+                  Enabled = False
                   TabOrder = 3
                   OnClick = chkNegritoDetalhesClick
                 end

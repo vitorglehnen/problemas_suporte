@@ -123,24 +123,6 @@ object formImagensProblema: TformImagensProblema
         Height = 45
         Align = alRight
         TabOrder = 0
-        object lblQtdeImagens: TLabel
-          Left = 1
-          Top = 1
-          Width = 183
-          Height = 43
-          Align = alClient
-          Alignment = taCenter
-          Caption = 'Imagens: 0'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Tahoma'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Layout = tlCenter
-          ExplicitWidth = 83
-          ExplicitHeight = 18
-        end
       end
     end
     object Panel1: TPanel

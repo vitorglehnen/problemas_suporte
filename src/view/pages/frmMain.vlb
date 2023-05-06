@@ -107,7 +107,7 @@ Coordinates=390,212,104,58
 Coordinates=605,416,134,58
 
 []
-Coordinates=869,10,108,58
+Coordinates=532,221,96,36
 Visible=True
 
 [lblCodProblema]
@@ -121,12 +121,6 @@ Coordinates=532,1,111,58
 
 [pnlDetalhesProblema]
 Coordinates=145,512,138,58
-
-[SpeedButton1]
-Coordinates=532,221,96,36
-
-[SpeedButton2]
-Coordinates=83,335,96,36
 
 [lblDetalhesProblema]
 Coordinates=720,1,134,58
@@ -204,4 +198,7 @@ Coordinates=123,153,129,58
 
 [cbNameFontDetalhes]
 Coordinates=706,608,139,124
+
+[btnImagensProblema]
+Coordinates=83,335,96,36
 

@@ -19,7 +19,6 @@ type
     btnSalvarImagem: TSpeedButton;
     btnCancelarImagem: TSpeedButton;
     pnlQtdeImagens: TPanel;
-    lblQtdeImagens: TLabel;
     Panel1: TPanel;
     lblNmroImagem: TLabel;
     procedure FormKeyPress(Sender: TObject; var Key: Char);
@@ -39,6 +38,7 @@ type
   public
     { Public declarations }
     FListaImagens: TStringList;
+    procedure RecebeListaImagens(FLista: TStringList);
   end;
 
 var
@@ -110,7 +110,6 @@ begin
       imgProblema.Picture := nil;
     end;
 
-    lblQtdeImagens.Caption := 'Imagens: ' + IntToStr(FListaImagens.Count);
     lblNmroImagem.Caption := IntToStr(FPosicaoListaImagem + 1) + '/' + IntToStr(FListaImagens.Count);
   end;
 end;
@@ -176,8 +175,11 @@ begin
   btnRemoverImagem.Enabled := not btnRemoverImagem.Enabled;
 
   imgProblema.Enabled := not imgProblema.Enabled;
+end;
 
-  lblQtdeImagens.Caption := 'Imagens: ' + IntToStr(FListaImagens.Count);
+procedure TformImagensProblema.RecebeListaImagens(FLista: TStringList);
+begin
+  FListaImagens := FLista;
 end;
 
 end.
