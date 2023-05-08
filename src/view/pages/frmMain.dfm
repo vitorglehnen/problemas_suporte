@@ -457,13 +457,14 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Top = 20
             TabOrder = 1
+            ExplicitLeft = 2
+            ExplicitTop = 83
             object btnImagensProblema: TSpeedButton
               Left = 519
               Top = 24
               Width = 103
               Height = 34
               Caption = 'Imagens'
-              Enabled = False
               OnClick = btnImagensProblemaClick
             end
             object pnlModuloProblema: TPanel
@@ -841,7 +842,7 @@ object formPrincipal: TformPrincipal
                 Font.Name = 'Segoe UI'
                 Font.Style = [fsBold]
                 ParentFont = False
-                ExplicitTop = -6
+                ExplicitWidth = 137
               end
               object Panel1: TPanel
                 Left = 0

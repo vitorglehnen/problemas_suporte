@@ -22,6 +22,7 @@ type
     function CarregaDadosProblema(aTituloProblema: String): TDataSource;
     function BuscaTabelaProblemas : TDataSource;
     function BuscaQuantidadeProblemas : TDataSource;
+    function BuscaImagens(aCodigoProblema: Integer): TDataSource;
     procedure InsertProblema(aProblema: TProblema);
     procedure InsertImagem(aImagem: TImagemProblema);
     procedure UpdateProblema(aProblema: TProblema);
@@ -33,6 +34,12 @@ type
 implementation
 
 { TControllerProblemas }
+
+function TControllerProblema.BuscaImagens(
+  aCodigoProblema: Integer): TDataSource;
+begin
+  FDAOImagemProblema.BuscaImagens(aCodigoProblema);
+end;
 
 function TControllerProblema.BuscaQuantidadeProblemas: TDataSource;
 begin

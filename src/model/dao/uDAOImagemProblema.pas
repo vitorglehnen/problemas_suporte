@@ -13,6 +13,7 @@ type
     FDataSource: TDataSource;
   public
     procedure InsertImagem(aImagemProblema: TImagemProblema);
+    function BuscaImagens(aCodigoProblema: Integer): TDataSource;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -20,6 +21,21 @@ type
 implementation
 
 { TDAOImagemProblema }
+
+function TDAOImagemProblema.BuscaImagens(aCodigoProblema: Integer): TDataSource;
+begin
+  FQuery := FConn.CriarQuery;
+  FDataSource := FConn.CriarDataSource;
+
+  FQuery.SQL.Text := 'SELECT * FROM probimg ' +
+                     'WHERE cod_prob = :cod_prob ' +
+                     'ORDER BY seq_img';
+  FQuery.ParamByName('cod_prob').AsInteger := aCodigoProblema;
+  FQuery.Open;
+
+  FDataSource.DataSet := FQuery;
+  Result := FDataSource;
+end;
 
 constructor TDAOImagemProblema.Create;
 begin

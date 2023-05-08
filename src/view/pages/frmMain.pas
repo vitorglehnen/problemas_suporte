@@ -432,6 +432,18 @@ end;
 procedure TformPrincipal.btnImagensProblemaClick(Sender: TObject);
 begin
   var aCaminhoImagem: String;
+  var aImagens: TDataSource:= TDataSource.Create(nil);
+  var aImagem: String;
+  var aContador: Integer := 0;
+
+  aImagens := FControllerProblema.BuscaImagens(StrToInt(edtCodProblema.Text));
+
+  while aContador < aImagens.DataSet.RecordCount do
+  begin
+    FListaImagens.Add(aImagens.DataSet.FieldByName('imagem').Value);
+    aImagens.DataSet.FieldByName('imagem').Value;
+    aImagens.DataSet.Next;
+  end;
 
   if not Assigned(FFormImagensProblema) then
   begin
