@@ -15,7 +15,6 @@ object formImagensProblema: TformImagensProblema
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyPress = FormKeyPress
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlPrincipal: TPanel
@@ -46,11 +45,9 @@ object formImagensProblema: TformImagensProblema
       Height = 602
       Align = alRight
       Caption = '------->'
-      Enabled = False
       OnClick = btnProxImagemClick
-      ExplicitLeft = 825
-      ExplicitTop = 0
-      ExplicitHeight = 650
+      ExplicitLeft = 1068
+      ExplicitTop = 103
     end
     object btnAntImagem: TSpeedButton
       Left = 0

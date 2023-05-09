@@ -107,14 +107,11 @@ Coordinates=390,212,104,58
 Coordinates=605,416,134,58
 
 []
-Coordinates=532,221,96,36
+Coordinates=1006,386,129,58
 Visible=True
 
 [lblCodProblema]
 Coordinates=157,1,106,58
-
-[lblModuloProblema]
-Coordinates=1006,1,125,58
 
 [edtCodProblema]
 Coordinates=532,1,111,58
@@ -135,9 +132,6 @@ Visible=True
 [lblDataProblema]
 Coordinates=113,376,110,58
 
-[pnlModuloProblema]
-Coordinates=1006,386,129,58
-
 [lblChamadoProblema]
 Coordinates=0,0,138,58
 
@@ -153,9 +147,6 @@ Coordinates=281,87,143,58
 [pnlBodyModuloProblema]
 Coordinates=1015,78,158,58
 
-[cbModulo]
-Coordinates=12,77,101,124
-
 [pnlSolucaoProblema]
 Coordinates=1006,463,133,58
 
@@ -167,9 +158,6 @@ Coordinates=1431,56,137,36
 
 [pnlBodyDetalhesProblema]
 Coordinates=262,153,167,58
-
-[pnlImagensProblema]
-Coordinates=720,78,136,58
 
 [lblTituloProblema]
 Coordinates=138,77,115,58
@@ -198,7 +186,4 @@ Coordinates=123,153,129,58
 
 [cbNameFontDetalhes]
 Coordinates=706,608,139,124
-
-[btnImagensProblema]
-Coordinates=83,335,96,36
 

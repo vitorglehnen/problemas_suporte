@@ -98,13 +98,8 @@ type
     gridProblemas: TDBGrid;
     btnNovoModulo: TSpeedButton;
     btnEditarProblema: TSpeedButton;
-    pnlImagensProblema: TCard;
     pnlProblemas: TPanel;
     pnlBodyModuloProblema: TPanel;
-    btnImagensProblema: TSpeedButton;
-    pnlModuloProblema: TPanel;
-    lblModuloProblema: TLabel;
-    cbModulo: TComboBox;
     pnlBodySolucaoProblema: TPanel;
     pnlSolucaoProblema: TPanel;
     mmSolucaoProblema: TRichEdit;
@@ -133,12 +128,14 @@ type
     chkNegritoDetalhes: TCheckBox;
     chkItalicoSolucao: TCheckBox;
     chkNegritoSolucao: TCheckBox;
+    btnImagensProblema: TSpeedButton;
+    pnlModuloProblema: TPanel;
+    lblModuloProblema: TLabel;
+    cbModulo: TComboBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
     procedure gridModulosColExit(Sender: TObject);
-    procedure btnNovoModuloMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
     procedure btnCancelarModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btnSalvarModuloMouseDown(Sender: TObject; Button: TMouseButton;
@@ -175,7 +172,6 @@ type
     FControllerModulo: TControllerModulo;
     FControllerProblema: TControllerProblema;
     FEdicaoProblema: Boolean;
-    FListaImagens: TStringList;
 
     procedure EventoSalvarProblema;
     procedure EventoCadastrarProblema;
@@ -188,6 +184,7 @@ type
     procedure InverteCamposProblemas;
   public
     { Public declarations }
+    FListaImagens: TStringList;
   end;
 
 var
@@ -199,26 +196,6 @@ implementation
 
 uses
   uModulo, uImagemProblema;
-
-procedure TformPrincipal.EventoCadastrarProblema;
-begin
-  FEdicaoProblema := False;
-
-  InverteCamposProblemas;
-  InverteBotoesCrudProblemas;
-
-  edtTituloProblema.SetFocus;
-
-  edtTituloProblema.Clear;
-  edtChamadoProblema.Clear;
-  edtDataProblema.Text := DateToStr(date);
-  edtCodProblema.Clear;
-  cbModulo.ItemIndex := -1;
-  mmSolucaoProblema.Clear;
-  mmDetalhesProblema.Clear;
-
-  PreencheCbxModulos;
-end;
 
 procedure TformPrincipal.EventoSalvarProblema;
 begin
@@ -282,6 +259,7 @@ procedure TformPrincipal.FormCreate(Sender: TObject);
 begin
   FControllerProblema := TControllerProblema.Create;
   FControllerModulo := TControllerModulo.Create;
+  FListaImagens := TStringList.Create;
 
   CarregaGridModulos;
   CarregaGridProblemas;
@@ -289,6 +267,9 @@ end;
 
 procedure TformPrincipal.FormDestroy(Sender: TObject);
 begin
+  if Assigned(FFormImagensProblema) then
+    FFormImagensProblema.Free;
+
   FControllerProblema.Free;
   FControllerModulo.Free;
 end;
@@ -318,62 +299,6 @@ begin
   PreencheCbxModulos;
 
   pnlProblemas.Enabled := True;
-end;
-
-procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
-begin
-  CarregaGridProblemas;
-  CarregaDadosProblemas;
-end;
-
-procedure TformPrincipal.gridModulosColExit(Sender: TObject);
-begin
-  ShowMessage(gridModulos.Columns[0].Field.Value);
-end;
-
-procedure TformPrincipal.gridProblemasCellClick(Column: TColumn);
-begin
-  CarregaDadosProblemas;
-end;
-
-procedure TformPrincipal.InverteBotoesCrudModulos;
-begin
-  btnNovoModulo.Enabled := not btnNovoModulo.Enabled;
-  btnSalvarModulo.Enabled := not btnSalvarModulo.Enabled;
-  btnCancelarModulo.Enabled := not btnCancelarModulo.Enabled;
-
-  pnlProblemas.Enabled := not pnlProblemas.Enabled;
-  pnlBodyProblemas.Enabled := not pnlBodyProblemas.Enabled;
-end;
-
-procedure TformPrincipal.InverteBotoesCrudProblemas;
-begin
-  btnNovoProblema.Enabled := not btnNovoProblema.Enabled;
-  btnSalvarProblema.Enabled := not btnSalvarProblema.Enabled;
-  btnEditarProblema.Enabled := not btnEditarProblema.Enabled;
-  btnExcluirProblema.Enabled := not btnExcluirProblema.Enabled;
-  btnCancelarProblema.Enabled := not btnCancelarProblema.Enabled;
-
-  pnlTopSolucaoProblema.Enabled := not pnlTopSolucaoProblema.Enabled;
-  pnlBodyModulos.Enabled := not pnlBodyModulos.Enabled;
-end;
-
-procedure TformPrincipal.InverteCamposProblemas;
-begin
-  edtTituloProblema.ReadOnly := not edtTituloProblema.ReadOnly;
-  edtChamadoProblema.ReadOnly := not edtChamadoProblema.ReadOnly;
-  cbModulo.Enabled := not cbModulo.Enabled;
-  mmDetalhesProblema.ReadOnly := not mmDetalhesProblema.ReadOnly;
-  mmSolucaoProblema.ReadOnly := not mmSolucaoProblema.ReadOnly;
-  btnImagensProblema.Enabled := not btnImagensProblema.Enabled;
-  cbNameFontDetalhes.Enabled := not cbNameFontDetalhes.Enabled;
-  cbNameFontSolucao.Enabled := not cbNameFontSolucao.Enabled;
-  cbSizeFontDetalhes.Enabled := not cbSizeFontDetalhes.Enabled;
-  cbSizeFontSolucao.Enabled := not cbSizeFontSolucao.Enabled;
-  chkItalicoDetalhes.Enabled := not chkItalicoDetalhes.Enabled;
-  chkNegritoDetalhes.Enabled := not chkNegritoDetalhes.Enabled;
-  chkItalicoSolucao.Enabled := not chkItalicoSolucao.Enabled;
-  chkNegritoSolucao.Enabled := not chkNegritoSolucao.Enabled;
 end;
 
 procedure TformPrincipal.mmDetalhesProblemaEnter(Sender: TObject);
@@ -432,52 +357,19 @@ end;
 procedure TformPrincipal.btnImagensProblemaClick(Sender: TObject);
 begin
   var aCaminhoImagem: String;
-  var aImagens: TDataSet:= TDataSet.Create(nil);
-  var aImagem: String;
   var aContador: Integer := 0;
 
-  aImagens := FControllerProblema.BuscaImagens(StrToInt(edtCodProblema.Text)).DataSet;
-  showmessage(aImagens.FieldByName('imagem').Value);
-  while not aImagens.Eof do
-  begin
-    FListaImagens.Add(aImagens.FieldByName('imagem').Value);
-    showmessage(aImagens.FieldByName('imagem').Value);
-  end;
+  if FEdicaoProblema then
+    if edtCodProblema.Text = '' then
+       FListaImagens := FControllerProblema.BuscaImagens(StrToInt(edtCodProblema.text));
 
   if not Assigned(FFormImagensProblema) then
   begin
     FFormImagensProblema := TformImagensProblema.Create(nil);
-    //FFormImagensProblema.RecebeListaImagens(FListaImagens);
   end;
 
   FFormImagensProblema.ShowModal;
   FListaImagens := FFormImagensProblema.FListaImagens;
-end;
-
-procedure TformPrincipal.btnCancelarModuloMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  InverteBotoesCrudModulos;
-end;
-
-procedure TformPrincipal.btnCancelarProblemaMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  InverteBotoesCrudProblemas;
-end;
-
-procedure TformPrincipal.btnEditarModuloMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  InverteBotoesCrudModulos;
-end;
-
-procedure TformPrincipal.btnEditarProblemaClick(Sender: TObject);
-begin
-  FEdicaoProblema := True;
-
-  InverteBotoesCrudProblemas;
-  InverteCamposProblemas;
 end;
 
 procedure TformPrincipal.btnExcluirProblemaClick(Sender: TObject);
@@ -496,18 +388,6 @@ begin
     end;
   finally
     aProblema.Free;
-  end;
-end;
-
-procedure TformPrincipal.btnNovoModuloMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  //InverteBotoesCrudModulos;
-
-  with gridModulos do
-  begin
-    DataSource.DataSet.Insert;
-    SetFocus;
   end;
 end;
 
@@ -644,6 +524,108 @@ end;
 procedure TformPrincipal.chkNegritoSolucaoClick(Sender: TObject);
 begin
   mmSolucaoProblema.SetFocus;
+end;
+
+procedure TformPrincipal.btnCancelarModuloMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  InverteBotoesCrudModulos;
+end;
+
+procedure TformPrincipal.btnCancelarProblemaMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  InverteBotoesCrudProblemas;
+end;
+
+procedure TformPrincipal.btnEditarModuloMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  InverteBotoesCrudModulos;
+end;
+
+procedure TformPrincipal.btnEditarProblemaClick(Sender: TObject);
+begin
+  FEdicaoProblema := True;
+
+  InverteBotoesCrudProblemas;
+  InverteCamposProblemas;
+end;
+
+procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
+begin
+  CarregaGridProblemas;
+  CarregaDadosProblemas;
+end;
+
+procedure TformPrincipal.gridModulosColExit(Sender: TObject);
+begin
+  ShowMessage(gridModulos.Columns[0].Field.Value);
+end;
+
+procedure TformPrincipal.gridProblemasCellClick(Column: TColumn);
+begin
+  CarregaDadosProblemas;
+end;
+
+procedure TformPrincipal.InverteBotoesCrudModulos;
+begin
+  btnNovoModulo.Enabled := not btnNovoModulo.Enabled;
+  btnSalvarModulo.Enabled := not btnSalvarModulo.Enabled;
+  btnCancelarModulo.Enabled := not btnCancelarModulo.Enabled;
+
+  pnlProblemas.Enabled := not pnlProblemas.Enabled;
+  pnlBodyProblemas.Enabled := not pnlBodyProblemas.Enabled;
+end;
+
+procedure TformPrincipal.InverteBotoesCrudProblemas;
+begin
+  btnNovoProblema.Enabled := not btnNovoProblema.Enabled;
+  btnSalvarProblema.Enabled := not btnSalvarProblema.Enabled;
+  btnEditarProblema.Enabled := not btnEditarProblema.Enabled;
+  btnExcluirProblema.Enabled := not btnExcluirProblema.Enabled;
+  btnCancelarProblema.Enabled := not btnCancelarProblema.Enabled;
+
+  pnlTopSolucaoProblema.Enabled := not pnlTopSolucaoProblema.Enabled;
+  pnlBodyModulos.Enabled := not pnlBodyModulos.Enabled;
+end;
+
+procedure TformPrincipal.InverteCamposProblemas;
+begin
+  edtTituloProblema.ReadOnly := not edtTituloProblema.ReadOnly;
+  edtChamadoProblema.ReadOnly := not edtChamadoProblema.ReadOnly;
+  cbModulo.Enabled := not cbModulo.Enabled;
+  mmDetalhesProblema.ReadOnly := not mmDetalhesProblema.ReadOnly;
+  mmSolucaoProblema.ReadOnly := not mmSolucaoProblema.ReadOnly;
+  btnImagensProblema.Enabled := not btnImagensProblema.Enabled;
+  cbNameFontDetalhes.Enabled := not cbNameFontDetalhes.Enabled;
+  cbNameFontSolucao.Enabled := not cbNameFontSolucao.Enabled;
+  cbSizeFontDetalhes.Enabled := not cbSizeFontDetalhes.Enabled;
+  cbSizeFontSolucao.Enabled := not cbSizeFontSolucao.Enabled;
+  chkItalicoDetalhes.Enabled := not chkItalicoDetalhes.Enabled;
+  chkNegritoDetalhes.Enabled := not chkNegritoDetalhes.Enabled;
+  chkItalicoSolucao.Enabled := not chkItalicoSolucao.Enabled;
+  chkNegritoSolucao.Enabled := not chkNegritoSolucao.Enabled;
+end;
+
+procedure TformPrincipal.EventoCadastrarProblema;
+begin
+  FEdicaoProblema := False;
+
+  InverteCamposProblemas;
+  InverteBotoesCrudProblemas;
+
+  edtTituloProblema.SetFocus;
+
+  edtTituloProblema.Clear;
+  edtChamadoProblema.Clear;
+  edtDataProblema.Text := DateToStr(date);
+  edtCodProblema.Clear;
+  cbModulo.ItemIndex := -1;
+  mmSolucaoProblema.Clear;
+  mmDetalhesProblema.Clear;
+
+  PreencheCbxModulos;
 end;
 
 end.

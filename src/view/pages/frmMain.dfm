@@ -335,7 +335,6 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alLeft
               Caption = 'Novo'
-              OnMouseDown = btnNovoModuloMouseDown
               ExplicitLeft = 9
               ExplicitTop = 2
             end
@@ -450,7 +449,7 @@ object formPrincipal: TformPrincipal
             Left = 0
             Top = 82
             Width = 1034
-            Height = 100
+            Height = 126
             Align = alTop
             AutoSize = True
             BevelOuter = bvNone
@@ -458,22 +457,25 @@ object formPrincipal: TformPrincipal
             Padding.Top = 20
             TabOrder = 1
             object btnImagensProblema: TSpeedButton
-              Left = 519
-              Top = 24
-              Width = 103
+              Left = 191
+              Top = 25
+              Width = 115
               Height = 34
               Caption = 'Imagens'
+              Enabled = False
               OnClick = btnImagensProblemaClick
             end
             object pnlModuloProblema: TPanel
               Left = 30
               Top = 20
               Width = 135
-              Height = 80
+              Height = 106
               Align = alLeft
               AutoSize = True
               BevelOuter = bvNone
               TabOrder = 0
+              ExplicitLeft = 62
+              ExplicitTop = 31
               object lblModuloProblema: TLabel
                 Left = 0
                 Top = 0
@@ -504,25 +506,28 @@ object formPrincipal: TformPrincipal
           end
           object pnlBodySolucaoProblema: TPanel
             Left = 0
-            Top = 417
+            Top = 443
             Width = 1034
-            Height = 338
+            Height = 312
             Align = alClient
             AutoSize = True
             BevelOuter = bvNone
             Padding.Left = 30
             Padding.Right = 250
             TabOrder = 3
+            ExplicitTop = 417
+            ExplicitHeight = 338
             object pnlSolucaoProblema: TPanel
               Left = 30
               Top = 0
               Width = 754
-              Height = 338
+              Height = 312
               Align = alClient
               AutoSize = True
               BevelOuter = bvNone
               Padding.Bottom = 50
               TabOrder = 0
+              ExplicitHeight = 338
               object lblSolucaoProblema: TLabel
                 Left = 0
                 Top = 0
@@ -542,7 +547,7 @@ object formPrincipal: TformPrincipal
                 Left = 0
                 Top = 41
                 Width = 754
-                Height = 247
+                Height = 221
                 Align = alClient
                 Font.Charset = ANSI_CHARSET
                 Font.Color = clWindowText
@@ -555,6 +560,7 @@ object formPrincipal: TformPrincipal
                 TabOrder = 0
                 Zoom = 100
                 OnEnter = mmSolucaoProblemaEnter
+                ExplicitHeight = 247
               end
               object pnlTopSolucaoProblema: TPanel
                 Left = 0
@@ -808,7 +814,7 @@ object formPrincipal: TformPrincipal
           end
           object pnlBodyDetalhesProblema: TPanel
             Left = 0
-            Top = 182
+            Top = 208
             Width = 1034
             Height = 235
             Align = alTop
@@ -817,6 +823,7 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Right = 250
             TabOrder = 2
+            ExplicitTop = 182
             object pnlDetalhesProblema: TPanel
               Left = 30
               Top = 0
@@ -882,6 +889,8 @@ object formPrincipal: TformPrincipal
                     'Times New Roman'
                     'Trebuchet MS'
                     'Verdana')
+                  ExplicitLeft = 47
+                  ExplicitTop = -4
                 end
                 object cbSizeFontDetalhes: TComboBox
                   Left = 0
@@ -996,15 +1005,6 @@ object formPrincipal: TformPrincipal
             end
           end
         end
-      end
-      object pnlImagensProblema: TCard
-        Left = 1
-        Top = 1
-        Width = 1034
-        Height = 755
-        Caption = 'pnlImagensProblema'
-        CardIndex = 1
-        TabOrder = 1
       end
     end
   end

@@ -9,7 +9,7 @@ uses
   uDAOGridProblema,
   uDAOProblema,
   uImagemProblema,
-  uDAOImagemProblema;
+  uDAOImagemProblema, System.Classes;
 
 type
   TControllerProblema = class
@@ -17,12 +17,13 @@ type
     FDAOProblema: TDaoProblema;
     FDAOGridProblema: TDAOGridProblema;
     FDAOImagemProblema: TDAOImagemProblema;
+    FListaImagens: TStringList;
   public
     function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
     function CarregaDadosProblema(aTituloProblema: String): TDataSource;
     function BuscaTabelaProblemas : TDataSource;
     function BuscaQuantidadeProblemas : TDataSource;
-    function BuscaImagens(aCodigoProblema: Integer): TDataSource;
+    function BuscaImagens(aCodigoProblema: Integer): TStringList;
     procedure InsertProblema(aProblema: TProblema);
     procedure InsertImagem(aImagem: TImagemProblema);
     procedure UpdateProblema(aProblema: TProblema);
@@ -36,9 +37,20 @@ implementation
 { TControllerProblemas }
 
 function TControllerProblema.BuscaImagens(
-  aCodigoProblema: Integer): TDataSource;
+  aCodigoProblema: Integer): TStringList;
 begin
-  Result := FDAOImagemProblema.BuscaImagens(aCodigoProblema);
+  var aImagens: TDataSet := FDAOImagemProblema.BuscaImagens(aCodigoProblema).DataSet;
+  var aListaImagens: TStringList:= TStringList.Create;
+
+  FListaImagens := TStringList.Create;
+
+  while not aImagens.Eof do
+  begin
+    aListaImagens.Add(aImagens.FieldByName('imagem').Value);
+    aImagens.Next;
+  end;
+
+  Result := aListaImagens;
 end;
 
 function TControllerProblema.BuscaQuantidadeProblemas: TDataSource;
@@ -76,6 +88,7 @@ end;
 
 destructor TControllerProblema.Destroy;
 begin
+  FListaImagens.Free;
   FDAOProblema.Free;
   FDAOGridProblema.Free;
   FDAOImagemProblema.Free;

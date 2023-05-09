@@ -22,7 +22,6 @@ type
     Panel1: TPanel;
     lblNmroImagem: TLabel;
     procedure FormKeyPress(Sender: TObject; var Key: Char);
-    procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnAntImagemClick(Sender: TObject);
@@ -38,7 +37,6 @@ type
   public
     { Public declarations }
     FListaImagens: TStringList;
-    procedure RecebeListaImagens(FLista: TStringList);
   end;
 
 var
@@ -47,6 +45,8 @@ var
 implementation
 
 {$R *.dfm}
+
+uses frmMain;
 
 procedure TformImagensProblema.btnAddImagemClick(Sender: TObject);
 begin
@@ -145,8 +145,14 @@ end;
 procedure TformImagensProblema.FormCreate(Sender: TObject);
 begin
   FListaImagens:= TStringList.Create;
-  FPosicaoListaImagem := 0;
-  lblNmroImagem.Caption := IntToStr(FPosicaoListaImagem) + '/' + IntToStr(FListaImagens.Count);
+
+  if frmMain.formPrincipal.FListaImagens.Count > 1 then
+  begin
+    FListaImagens:= frmMain.formPrincipal.FListaImagens;
+    lblNmroImagem.Caption := IntToStr(FPosicaoListaImagem + 1) + '/' + IntToStr(FListaImagens.Count);
+    FPosicaoListaImagem := 0;
+    imgProblema.Picture.LoadFromFile(FListaImagens[FPosicaoListaImagem]);
+  end;
 end;
 
 procedure TformImagensProblema.FormDestroy(Sender: TObject);
@@ -162,11 +168,6 @@ begin
         imgProblema.Picture.Assign(Clipboard);
 end;
 
-procedure TformImagensProblema.FormShow(Sender: TObject);
-begin
-  //imgProblema.Picture.Assign(FListaImagens.Items[0]);
-end;
-
 procedure TformImagensProblema.InverteCrudImagem;
 begin
   btnAddImagem.Enabled := not btnAddImagem.Enabled;
@@ -175,11 +176,6 @@ begin
   btnRemoverImagem.Enabled := not btnRemoverImagem.Enabled;
 
   imgProblema.Enabled := not imgProblema.Enabled;
-end;
-
-procedure TformImagensProblema.RecebeListaImagens(FLista: TStringList);
-begin
-  FListaImagens := FLista;
 end;
 
 end.
