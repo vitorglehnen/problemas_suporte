@@ -38,7 +38,7 @@ implementation
 function TControllerProblema.BuscaImagens(
   aCodigoProblema: Integer): TDataSource;
 begin
-  FDAOImagemProblema.BuscaImagens(aCodigoProblema);
+  Result := FDAOImagemProblema.BuscaImagens(aCodigoProblema);
 end;
 
 function TControllerProblema.BuscaQuantidadeProblemas: TDataSource;

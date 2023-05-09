@@ -27,9 +27,7 @@ begin
   FQuery := FConn.CriarQuery;
   FDataSource := FConn.CriarDataSource;
 
-  FQuery.SQL.Text := 'SELECT * FROM probimg ' +
-                     'WHERE cod_prob = :cod_prob ' +
-                     'ORDER BY seq_img';
+  FQuery.SQL.Text := 'SELECT * FROM probimg WHERE cod_prob = :cod_prob ORDER BY seq_img';
   FQuery.ParamByName('cod_prob').AsInteger := aCodigoProblema;
   FQuery.Open;
 

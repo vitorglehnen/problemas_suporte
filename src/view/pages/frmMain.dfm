@@ -457,8 +457,6 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Top = 20
             TabOrder = 1
-            ExplicitLeft = 2
-            ExplicitTop = 83
             object btnImagensProblema: TSpeedButton
               Left = 519
               Top = 24
