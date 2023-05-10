@@ -462,7 +462,6 @@ object formPrincipal: TformPrincipal
               Width = 115
               Height = 34
               Caption = 'Imagens'
-              Enabled = False
               OnClick = btnImagensProblemaClick
             end
             object pnlModuloProblema: TPanel
@@ -474,8 +473,6 @@ object formPrincipal: TformPrincipal
               AutoSize = True
               BevelOuter = bvNone
               TabOrder = 0
-              ExplicitLeft = 62
-              ExplicitTop = 31
               object lblModuloProblema: TLabel
                 Left = 0
                 Top = 0
@@ -515,8 +512,6 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Right = 250
             TabOrder = 3
-            ExplicitTop = 417
-            ExplicitHeight = 338
             object pnlSolucaoProblema: TPanel
               Left = 30
               Top = 0
@@ -527,7 +522,6 @@ object formPrincipal: TformPrincipal
               BevelOuter = bvNone
               Padding.Bottom = 50
               TabOrder = 0
-              ExplicitHeight = 338
               object lblSolucaoProblema: TLabel
                 Left = 0
                 Top = 0
@@ -560,7 +554,6 @@ object formPrincipal: TformPrincipal
                 TabOrder = 0
                 Zoom = 100
                 OnEnter = mmSolucaoProblemaEnter
-                ExplicitHeight = 247
               end
               object pnlTopSolucaoProblema: TPanel
                 Left = 0
@@ -823,7 +816,6 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             Padding.Right = 250
             TabOrder = 2
-            ExplicitTop = 182
             object pnlDetalhesProblema: TPanel
               Left = 30
               Top = 0
@@ -889,8 +881,6 @@ object formPrincipal: TformPrincipal
                     'Times New Roman'
                     'Trebuchet MS'
                     'Verdana')
-                  ExplicitLeft = 47
-                  ExplicitTop = -4
                 end
                 object cbSizeFontDetalhes: TComboBox
                   Left = 0

@@ -144,14 +144,26 @@ end;
 
 procedure TformImagensProblema.FormCreate(Sender: TObject);
 begin
-  FListaImagens:= TStringList.Create;
+  if frmMain.formPrincipal.FEdicaoProblema = False then
+  begin
+    btnAddImagem.Enabled := False;
+    btnSalvarImagem.Enabled := False;
+    btnCancelarImagem.Enabled := False;
+    btnRemoverImagem.Enabled := False;
+  end;
 
-  if frmMain.formPrincipal.FListaImagens.Count > 1 then
+  if frmMain.formPrincipal.FListaImagens.Count > 0 then
   begin
     FListaImagens:= frmMain.formPrincipal.FListaImagens;
     lblNmroImagem.Caption := IntToStr(FPosicaoListaImagem + 1) + '/' + IntToStr(FListaImagens.Count);
     FPosicaoListaImagem := 0;
     imgProblema.Picture.LoadFromFile(FListaImagens[FPosicaoListaImagem]);
+  end
+  else
+  begin
+    lblNmroImagem.Caption := '0/0';
+    btnProxImagem.Enabled := False;
+    btnAntImagem.Enabled := False;
   end;
 end;
 

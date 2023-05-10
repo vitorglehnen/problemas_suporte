@@ -171,7 +171,6 @@ type
     FFormImagensProblema: TformImagensProblema;
     FControllerModulo: TControllerModulo;
     FControllerProblema: TControllerProblema;
-    FEdicaoProblema: Boolean;
 
     procedure EventoSalvarProblema;
     procedure EventoCadastrarProblema;
@@ -185,6 +184,7 @@ type
   public
     { Public declarations }
     FListaImagens: TStringList;
+    FEdicaoProblema: Boolean;
   end;
 
 var
@@ -252,6 +252,8 @@ begin
     end;
   end;
 
+  FEdicaoProblema := False;
+
   InverteCamposProblemas;
 end;
 
@@ -259,7 +261,6 @@ procedure TformPrincipal.FormCreate(Sender: TObject);
 begin
   FControllerProblema := TControllerProblema.Create;
   FControllerModulo := TControllerModulo.Create;
-  FListaImagens := TStringList.Create;
 
   CarregaGridModulos;
   CarregaGridProblemas;
@@ -359,9 +360,10 @@ begin
   var aCaminhoImagem: String;
   var aContador: Integer := 0;
 
-  if FEdicaoProblema then
-    if edtCodProblema.Text = '' then
-       FListaImagens := FControllerProblema.BuscaImagens(StrToInt(edtCodProblema.text));
+  FListaImagens:= TStringList.Create;
+
+  if edtCodProblema.Text <> '' then
+    FListaImagens := FControllerProblema.BuscaImagens(StrToInt(edtCodProblema.text));
 
   if not Assigned(FFormImagensProblema) then
   begin
@@ -452,6 +454,11 @@ begin
     mmSolucaoProblema.Lines.LoadFromStream(msSolucao);
 
     edtDataProblema.Text := aProblema.FieldByName('datacr').Value;
+
+    if FControllerProblema.BuscaImagens(StrToInt(edtCodProblema.Text)).Count > 0 then
+      btnImagensProblema.Enabled := True
+    else
+      btnImagensProblema.Enabled := False;
 
     msDetalhes.Free;
     msSolucao.Free;
@@ -597,7 +604,13 @@ begin
   cbModulo.Enabled := not cbModulo.Enabled;
   mmDetalhesProblema.ReadOnly := not mmDetalhesProblema.ReadOnly;
   mmSolucaoProblema.ReadOnly := not mmSolucaoProblema.ReadOnly;
-  btnImagensProblema.Enabled := not btnImagensProblema.Enabled;
+
+  ShowMessage(BoolToStr(FEdicaoProblema));
+  if (FControllerProblema.BuscaImagens(StrToInt(edtCodProblema.Text)).Count < 1) and (FEdicaoProblema = False) then
+    btnImagensProblema.Enabled := False
+  else
+    btnImagensProblema.Enabled := True;
+
   cbNameFontDetalhes.Enabled := not cbNameFontDetalhes.Enabled;
   cbNameFontSolucao.Enabled := not cbNameFontSolucao.Enabled;
   cbSizeFontDetalhes.Enabled := not cbSizeFontDetalhes.Enabled;
