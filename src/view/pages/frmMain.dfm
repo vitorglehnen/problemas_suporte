@@ -104,7 +104,7 @@ object formPrincipal: TformPrincipal
               Spacing = 2
               OnMouseDown = btnNovoProblemaMouseDown
               ExplicitLeft = 3
-              ExplicitTop = 5
+              ExplicitTop = -4
             end
             object btnSalvarProblema: TSpeedButton
               Left = 65
@@ -485,7 +485,7 @@ object formPrincipal: TformPrincipal
               TabOrder = 1
               object btnImagensProblema: TSpeedButton
                 Left = 191
-                Top = 25
+                Top = 20
                 Width = 115
                 Height = 34
                 Caption = 'Imagens'

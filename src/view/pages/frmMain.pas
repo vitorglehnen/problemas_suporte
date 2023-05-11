@@ -184,7 +184,6 @@ type
     procedure InverteCamposProblemas;
   public
     { Public declarations }
-    FListaImagens: TStringList;
     FEdicaoProblema: Boolean;
   end;
 
@@ -203,9 +202,6 @@ begin
   var aProblema: TProblema := TProblema.Create;
   var msDetalhes: TMemoryStream := TMemoryStream.Create;
   var msSolucao: TMemoryStream := TMemoryStream.Create;
-  var aImagemProblema: TImagemProblema := TImagemProblema.Create;
-  var aImagem: String;
-  var aContSequencia: Integer := 0;
 
   InverteBotoesCrudProblemas;
 
@@ -229,31 +225,14 @@ begin
       FControllerProblema.InsertProblema(aProblema);
     end;
 
-    if Assigned(FListaImagens) then
-    begin
-      while (aContSequencia < FListaImagens.Count) and (FListaImagens.Count > 0) do
-      begin
-        aImagemProblema.Sequencia := aContSequencia + 1;
-        aImagemProblema.Imagem := FListaImagens[aContSequencia];
-
-        FControllerProblema.InsertImagem(aImagemProblema);
-        aContSequencia := aContSequencia + 1;
-      end;
-    end;
-
   finally
     aProblema.Free;
     msDetalhes.Free;
     msSolucao.Free;
-    aImagemProblema.Free;
-
-    if Assigned(FFormImagensProblema) then
-    begin
-      FFormImagensProblema.free;
-    end;
   end;
 
   FEdicaoProblema := False;
+  btnImagensProblema.Enabled := True;
 
   InverteCamposProblemas;
 end;
@@ -269,9 +248,6 @@ end;
 
 procedure TformPrincipal.FormDestroy(Sender: TObject);
 begin
-  if Assigned(FFormImagensProblema) then
-    FFormImagensProblema.Free;
-
   FControllerProblema.Free;
   FControllerModulo.Free;
 end;
@@ -360,22 +336,13 @@ procedure TformPrincipal.btnImagensProblemaClick(Sender: TObject);
 begin
   var aCaminhoImagem: String;
   var aContador: Integer := 0;
-  var aImagensProblemas : TStringList := FControllerProblema.BuscaImagens(StrToInt(edtCodProblema.text));
 
-  FListaImagens:= TStringList.Create;
-
+  FFormImagensProblema := TformImagensProblema.Create(nil);
+  
   try
-    if edtCodProblema.Text <> '' then
-      FListaImagens := aImagensProblemas;
-
-    if not Assigned(FFormImagensProblema) then
-    begin
-      FFormImagensProblema := TformImagensProblema.Create(nil);
-    end;
-
     FFormImagensProblema.ShowModal;
   finally
-    aImagensProblemas.Free;
+    FFormImagensProblema.Free;
   end;
 end;
 
@@ -431,7 +398,6 @@ procedure TformPrincipal.CarregaDadosProblemas;
 var
    aNomeProblema: String;
    aProblema: TDataSet;
-   aImagensProblema: TStringList;
    cont: Integer;
    msDetalhes: TStream;
    msSolucao: TStream;
@@ -465,17 +431,6 @@ begin
     finally
       msDetalhes.Free;
       msSolucao.Free;
-    end;
-
-    aImagensProblema := FControllerProblema.BuscaImagens(StrToInt(edtCodProblema.Text));
-
-    try
-      if aImagensProblema.Count > 0 then
-        btnImagensProblema.Enabled := True
-      else
-        btnImagensProblema.Enabled := False;
-    finally
-      aImagensProblema.Free;
     end;
   end;
 end;
@@ -631,15 +586,6 @@ begin
   chkNegritoDetalhes.Enabled := not chkNegritoDetalhes.Enabled;
   chkItalicoSolucao.Enabled := not chkItalicoSolucao.Enabled;
   chkNegritoSolucao.Enabled := not chkNegritoSolucao.Enabled;
-
-  try
-    if (aImagensProblema.Count < 1) and (FEdicaoProblema = False) then
-      btnImagensProblema.Enabled := False
-  else
-    btnImagensProblema.Enabled := True;
-  finally
-    aImagensProblema.Free;
-  end;
 end;
 
 procedure TformPrincipal.EventoCadastrarProblema;
@@ -654,10 +600,10 @@ begin
   edtTituloProblema.Clear;
   edtChamadoProblema.Clear;
   edtDataProblema.Text := DateToStr(date);
-  edtCodProblema.Clear;
   cbModulo.ItemIndex := -1;
   mmSolucaoProblema.Clear;
   mmDetalhesProblema.Clear;
+  btnImagensProblema.Enabled := False;
 
   PreencheCbxModulos;
 end;

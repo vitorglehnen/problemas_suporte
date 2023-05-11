@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Clipbrd, Vcl.Buttons,
-  Vcl.StdCtrls, System.ImageList, Vcl.ImgList, pngimage, jpeg;
+  Vcl.StdCtrls, System.ImageList, Vcl.ImgList, pngimage, jpeg, uImagemProblema,
+  uControllerProblema;
 
 type
   TformImagensProblema = class(TForm)
@@ -18,7 +19,6 @@ type
     btnAddImagem: TSpeedButton;
     btnSalvarImagem: TSpeedButton;
     btnCancelarImagem: TSpeedButton;
-    pnlQtdeImagens: TPanel;
     Panel1: TPanel;
     lblNmroImagem: TLabel;
     procedure FormKeyPress(Sender: TObject; var Key: Char);
@@ -34,6 +34,7 @@ type
   private
     { Private declarations }
     FPosicaoListaImagem: Integer;
+    FControllerProblema: TControllerProblema;
   public
     { Public declarations }
     FListaImagens: TStringList;
@@ -118,19 +119,32 @@ procedure TformImagensProblema.btnSalvarImagemMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   var aImagemPNG : TPngImage := TPngImage.Create;
+  var aImagemProblema : TImagemProblema := TImagemProblema.Create;
   var aNomeImagem : String;
   var aCaminhoImagem : String;
 
-  aNomeImagem := FormatDateTime('dd-mm-yyyy.hh-nn-ss', Now) + '.png';
+  FControllerProblema := TControllerProblema.Create;
+
   aCaminhoImagem := 'C:\Problemas Suporte\Imagens\';
+  aNomeImagem := aCaminhoImagem + FormatDateTime('dd-mm-yyyy.hh-nn-ss', Now) + '.png';
 
   try
     aImagemPNG.Assign(imgProblema.Picture.Bitmap);
-    aImagemPNG.SaveToFile(aCaminhoImagem + aNomeImagem);
+    aImagemPNG.SaveToFile(aNomeImagem);
+    FListaImagens.Add(aNomeImagem);
 
-    FListaImagens.Add(aCaminhoImagem + aNomeImagem);
+    aImagemProblema.Imagem := aNomeImagem;
+    aImagemProblema.CodigoProblema := StrToInt(frmMain.formPrincipal.edtCodProblema.Text);
+    if FListaImagens = nil then
+      aImagemProblema.Sequencia := 1
+    else
+      aImagemProblema.Sequencia := FListaImagens.Count + 1;
+
+    FControllerProblema.InsertImagem(aImagemProblema);
   finally
     aImagemPNG.Free;
+    aImagemProblema.Free;
+    FControllerProblema.Free;
   end;
 
   InverteCrudImagem;
@@ -144,19 +158,16 @@ end;
 
 procedure TformImagensProblema.FormCreate(Sender: TObject);
 begin
-  FListaImagens := TStringList.Create;
+  FControllerProblema := TControllerProblema.Create;
 
-  if frmMain.formPrincipal.FEdicaoProblema = False then
-  begin
-    btnAddImagem.Enabled := False;
-    btnSalvarImagem.Enabled := False;
-    btnCancelarImagem.Enabled := False;
-    btnRemoverImagem.Enabled := False;
+  try
+    FListaImagens := FControllerProblema.BuscaImagens(StrToInt(frmMain.formPrincipal.edtCodProblema.Text));
+  finally
+    FControllerProblema.Free;
   end;
 
-  if frmMain.formPrincipal.FListaImagens.Count > 0 then
+  if FListaImagens.Count > 0 then
   begin
-    FListaImagens:= frmMain.formPrincipal.FListaImagens;
     lblNmroImagem.Caption := IntToStr(FPosicaoListaImagem + 1) + '/' + IntToStr(FListaImagens.Count);
     FPosicaoListaImagem := 0;
     imgProblema.Picture.LoadFromFile(FListaImagens[FPosicaoListaImagem]);

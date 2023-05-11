@@ -113,14 +113,6 @@ object formImagensProblema: TformImagensProblema
         Enabled = False
         ExplicitLeft = 81
       end
-      object pnlQtdeImagens: TPanel
-        Left = 964
-        Top = 6
-        Width = 185
-        Height = 45
-        Align = alRight
-        TabOrder = 0
-      end
     end
     object Panel1: TPanel
       Left = 0
