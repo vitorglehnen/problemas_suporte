@@ -116,7 +116,7 @@ object formPrincipal: TformPrincipal
               Enabled = False
               Spacing = 2
               OnMouseDown = btnSalvarProblemaMouseDown
-              ExplicitLeft = 71
+              ExplicitLeft = 59
               ExplicitTop = 5
             end
             object btnExcluirProblema: TSpeedButton
@@ -431,566 +431,602 @@ object formPrincipal: TformPrincipal
         Top = 1
         Width = 1034
         Height = 755
-        Caption = 'pnlCadastroProblema'
+        Caption = 'Painel problema'
         CardIndex = 0
         TabOrder = 0
-        object pnlProblemas: TPanel
+        object pnlEscolhaUmRegistro: TPanel
           Left = 0
           Top = 0
           Width = 1034
           Height = 755
           Align = alClient
-          AutoSize = True
-          BevelOuter = bvNone
-          Enabled = False
+          Caption = 'Selecione um registro'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -20
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
           TabOrder = 0
-          TabStop = True
-          object pnlBodyModuloProblema: TPanel
-            Left = 0
-            Top = 82
-            Width = 1034
-            Height = 126
-            Align = alTop
-            AutoSize = True
-            BevelOuter = bvNone
-            Padding.Left = 30
-            Padding.Top = 20
-            TabOrder = 1
-            object btnImagensProblema: TSpeedButton
-              Left = 191
-              Top = 25
-              Width = 115
-              Height = 34
-              Caption = 'Imagens'
-              OnClick = btnImagensProblemaClick
-            end
-            object pnlModuloProblema: TPanel
-              Left = 30
-              Top = 20
-              Width = 135
-              Height = 106
-              Align = alLeft
-              AutoSize = True
-              BevelOuter = bvNone
-              TabOrder = 0
-              object lblModuloProblema: TLabel
-                Left = 0
-                Top = 0
-                Width = 135
-                Height = 17
-                Align = alTop
-                Caption = 'Modulo do problema'
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -13
-                Font.Name = 'Segoe UI'
-                Font.Style = [fsBold]
-                ParentFont = False
-                ExplicitWidth = 131
-              end
-              object cbModulo: TComboBox
-                Left = 0
-                Top = 17
-                Width = 135
-                Height = 22
-                Align = alTop
-                Style = csOwnerDrawFixed
-                Color = clWhite
-                Enabled = False
-                TabOrder = 0
-              end
-            end
-          end
-          object pnlBodySolucaoProblema: TPanel
-            Left = 0
-            Top = 443
-            Width = 1034
-            Height = 312
+          ExplicitLeft = 392
+          ExplicitTop = 232
+          ExplicitWidth = 185
+          ExplicitHeight = 41
+          object pnlProblemas: TPanel
+            Left = 1
+            Top = 1
+            Width = 1032
+            Height = 753
             Align = alClient
             AutoSize = True
             BevelOuter = bvNone
-            Padding.Left = 30
-            Padding.Right = 250
-            TabOrder = 3
-            object pnlSolucaoProblema: TPanel
-              Left = 30
-              Top = 0
-              Width = 754
-              Height = 312
+            Enabled = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 0
+            TabStop = True
+            Visible = False
+            ExplicitLeft = 2
+            ExplicitTop = 2
+            object pnlBodyModuloProblema: TPanel
+              Left = 0
+              Top = 82
+              Width = 1032
+              Height = 126
+              Align = alTop
+              AutoSize = True
+              BevelOuter = bvNone
+              Padding.Left = 30
+              Padding.Top = 20
+              TabOrder = 1
+              object btnImagensProblema: TSpeedButton
+                Left = 191
+                Top = 25
+                Width = 115
+                Height = 34
+                Caption = 'Imagens'
+                OnClick = btnImagensProblemaClick
+              end
+              object pnlModuloProblema: TPanel
+                Left = 30
+                Top = 20
+                Width = 135
+                Height = 106
+                Align = alLeft
+                AutoSize = True
+                BevelOuter = bvNone
+                TabOrder = 0
+                object lblModuloProblema: TLabel
+                  Left = 0
+                  Top = 0
+                  Width = 135
+                  Height = 17
+                  Align = alTop
+                  Caption = 'Modulo do problema'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -13
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                  ExplicitWidth = 131
+                end
+                object cbModulo: TComboBox
+                  Left = 0
+                  Top = 17
+                  Width = 135
+                  Height = 22
+                  Align = alTop
+                  Style = csOwnerDrawFixed
+                  Color = clWhite
+                  Enabled = False
+                  TabOrder = 0
+                end
+              end
+            end
+            object pnlBodySolucaoProblema: TPanel
+              Left = 0
+              Top = 443
+              Width = 1032
+              Height = 310
               Align = alClient
               AutoSize = True
               BevelOuter = bvNone
-              Padding.Bottom = 50
-              TabOrder = 0
-              object lblSolucaoProblema: TLabel
-                Left = 0
+              Padding.Left = 30
+              Padding.Right = 250
+              TabOrder = 3
+              ExplicitWidth = 1034
+              ExplicitHeight = 312
+              object pnlSolucaoProblema: TPanel
+                Left = 30
                 Top = 0
-                Width = 754
-                Height = 17
-                Align = alTop
-                Caption = 'Solu'#231#227'o'
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clGreen
-                Font.Height = -13
-                Font.Name = 'Segoe UI'
-                Font.Style = [fsBold]
-                ParentFont = False
-                ExplicitWidth = 48
-              end
-              object mmSolucaoProblema: TRichEdit
-                Left = 0
-                Top = 41
-                Width = 754
-                Height = 221
+                Width = 752
+                Height = 310
                 Align = alClient
-                Font.Charset = ANSI_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'Tahoma'
-                Font.Style = []
-                ParentFont = False
-                ReadOnly = True
-                ScrollBars = ssVertical
-                TabOrder = 0
-                Zoom = 100
-                OnEnter = mmSolucaoProblemaEnter
-              end
-              object pnlTopSolucaoProblema: TPanel
-                Left = 0
-                Top = 17
-                Width = 754
-                Height = 24
-                Align = alTop
-                Alignment = taLeftJustify
+                AutoSize = True
                 BevelOuter = bvNone
-                Enabled = False
-                TabOrder = 1
-                object cbNameFontSolucao: TComboBox
-                  Left = 41
-                  Top = 0
-                  Width = 98
-                  Height = 22
-                  Align = alLeft
-                  Style = csOwnerDrawFixed
-                  Enabled = False
-                  ItemIndex = 0
-                  TabOrder = 0
-                  TabStop = False
-                  Text = 'Arial'
-                  OnChange = cbSizeFontSolucaoChange
-                  Items.Strings = (
-                    'Arial'
-                    'Calibri'
-                    'Cambria'
-                    'Candara'
-                    'Comic Sans MS'
-                    'Consolas'
-                    'Courier New'
-                    'Georgia'
-                    'Impact'
-                    'Lucida Console'
-                    'Lucida Sans Unicode'
-                    'Microsoft Sans Serif'
-                    'Palatino Linotype'
-                    'Segoe UI'
-                    'Tahoma'
-                    'Times New Roman'
-                    'Trebuchet MS'
-                    'Verdana')
-                end
-                object cbSizeFontSolucao: TComboBox
+                Padding.Bottom = 70
+                TabOrder = 0
+                ExplicitWidth = 754
+                ExplicitHeight = 312
+                object lblSolucaoProblema: TLabel
                   Left = 0
                   Top = 0
-                  Width = 41
-                  Height = 22
-                  Align = alLeft
-                  Style = csOwnerDrawFixed
-                  Enabled = False
-                  ItemIndex = 9
-                  TabOrder = 1
-                  TabStop = False
-                  Text = '10'
-                  OnChange = cbSizeFontSolucaoChange
-                  Items.Strings = (
-                    '1'
-                    '2'
-                    '3'
-                    '4'
-                    '5'
-                    '6'
-                    '7'
-                    '8'
-                    '9'
-                    '10'
-                    '11'
-                    '12'
-                    '13'
-                    '14'
-                    '15'
-                    '16'
-                    '17'
-                    '18'
-                    '19'
-                    '20'
-                    '21'
-                    '22'
-                    '23'
-                    '24'
-                    '25'
-                    '26'
-                    '27'
-                    '28'
-                    '29'
-                    '30'
-                    '31'
-                    '32'
-                    '33'
-                    '34'
-                    '35'
-                    '36'
-                    '37'
-                    '38'
-                    '39'
-                    '40'
-                    '41'
-                    '42'
-                    '43'
-                    '44'
-                    '45'
-                    '46'
-                    '47'
-                    '48'
-                    '49'
-                    '50')
-                end
-                object ActionToolBar2: TActionToolBar
-                  Left = 257
-                  Top = 0
-                  Width = 497
-                  Height = 24
-                  Align = alClient
-                  Caption = 'ActionToolBar2'
-                  Color = clMenuBar
-                  ColorMap.DisabledFontColor = 7171437
-                  ColorMap.HighlightColor = clWhite
-                  ColorMap.BtnSelectedFont = clBlack
-                  ColorMap.UnusedColor = clWhite
+                  Width = 752
+                  Height = 17
+                  Align = alTop
+                  Caption = 'Solu'#231#227'o'
                   Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clBlack
+                  Font.Color = clGreen
+                  Font.Height = -13
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                  ExplicitWidth = 48
+                end
+                object mmSolucaoProblema: TRichEdit
+                  Left = 0
+                  Top = 41
+                  Width = 752
+                  Height = 199
+                  Align = alClient
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = clWindowText
                   Font.Height = -11
                   Font.Name = 'Tahoma'
                   Font.Style = []
                   ParentFont = False
-                  Spacing = 0
+                  ReadOnly = True
+                  ScrollBars = ssVertical
+                  TabOrder = 0
+                  Zoom = 100
+                  OnEnter = mmSolucaoProblemaEnter
                 end
-                object chkItalicoSolucao: TCheckBox
-                  Left = 201
-                  Top = 0
-                  Width = 56
+                object pnlTopSolucaoProblema: TPanel
+                  Left = 0
+                  Top = 17
+                  Width = 752
                   Height = 24
-                  TabStop = False
-                  Align = alLeft
-                  Caption = 'It'#225'lico'
+                  Align = alTop
+                  Alignment = taLeftJustify
+                  BevelOuter = bvNone
                   Enabled = False
-                  TabOrder = 3
-                  OnClick = chkItalicoSolucaoClick
-                end
-                object chkNegritoSolucao: TCheckBox
-                  Left = 139
-                  Top = 0
-                  Width = 62
-                  Height = 24
-                  TabStop = False
-                  Align = alLeft
-                  Caption = 'Negrito'
-                  Enabled = False
-                  TabOrder = 4
-                  OnClick = chkNegritoSolucaoClick
+                  TabOrder = 1
+                  ExplicitWidth = 754
+                  object cbNameFontSolucao: TComboBox
+                    Left = 41
+                    Top = 0
+                    Width = 98
+                    Height = 22
+                    Align = alLeft
+                    Style = csOwnerDrawFixed
+                    Enabled = False
+                    ItemIndex = 0
+                    TabOrder = 0
+                    TabStop = False
+                    Text = 'Arial'
+                    OnChange = cbSizeFontSolucaoChange
+                    Items.Strings = (
+                      'Arial'
+                      'Calibri'
+                      'Cambria'
+                      'Candara'
+                      'Comic Sans MS'
+                      'Consolas'
+                      'Courier New'
+                      'Georgia'
+                      'Impact'
+                      'Lucida Console'
+                      'Lucida Sans Unicode'
+                      'Microsoft Sans Serif'
+                      'Palatino Linotype'
+                      'Segoe UI'
+                      'Tahoma'
+                      'Times New Roman'
+                      'Trebuchet MS'
+                      'Verdana')
+                  end
+                  object cbSizeFontSolucao: TComboBox
+                    Left = 0
+                    Top = 0
+                    Width = 41
+                    Height = 22
+                    Align = alLeft
+                    Style = csOwnerDrawFixed
+                    Enabled = False
+                    ItemIndex = 9
+                    TabOrder = 1
+                    TabStop = False
+                    Text = '10'
+                    OnChange = cbSizeFontSolucaoChange
+                    Items.Strings = (
+                      '1'
+                      '2'
+                      '3'
+                      '4'
+                      '5'
+                      '6'
+                      '7'
+                      '8'
+                      '9'
+                      '10'
+                      '11'
+                      '12'
+                      '13'
+                      '14'
+                      '15'
+                      '16'
+                      '17'
+                      '18'
+                      '19'
+                      '20'
+                      '21'
+                      '22'
+                      '23'
+                      '24'
+                      '25'
+                      '26'
+                      '27'
+                      '28'
+                      '29'
+                      '30'
+                      '31'
+                      '32'
+                      '33'
+                      '34'
+                      '35'
+                      '36'
+                      '37'
+                      '38'
+                      '39'
+                      '40'
+                      '41'
+                      '42'
+                      '43'
+                      '44'
+                      '45'
+                      '46'
+                      '47'
+                      '48'
+                      '49'
+                      '50')
+                  end
+                  object ActionToolBar2: TActionToolBar
+                    Left = 257
+                    Top = 0
+                    Width = 495
+                    Height = 24
+                    Align = alClient
+                    Caption = 'ActionToolBar2'
+                    Color = clMenuBar
+                    ColorMap.DisabledFontColor = 10461087
+                    ColorMap.HighlightColor = clWhite
+                    ColorMap.BtnSelectedFont = clBlack
+                    ColorMap.UnusedColor = clWhite
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clBlack
+                    Font.Height = -11
+                    Font.Name = 'Tahoma'
+                    Font.Style = []
+                    ParentFont = False
+                    Spacing = 0
+                  end
+                  object chkItalicoSolucao: TCheckBox
+                    Left = 201
+                    Top = 0
+                    Width = 56
+                    Height = 24
+                    TabStop = False
+                    Align = alLeft
+                    Caption = 'It'#225'lico'
+                    Enabled = False
+                    TabOrder = 3
+                    OnClick = chkItalicoSolucaoClick
+                  end
+                  object chkNegritoSolucao: TCheckBox
+                    Left = 139
+                    Top = 0
+                    Width = 62
+                    Height = 24
+                    TabStop = False
+                    Align = alLeft
+                    Caption = 'Negrito'
+                    Enabled = False
+                    TabOrder = 4
+                    OnClick = chkNegritoSolucaoClick
+                  end
                 end
               end
             end
-          end
-          object pnlTopProblema: TPanel
-            Left = 0
-            Top = 0
-            Width = 1034
-            Height = 82
-            Align = alTop
-            AutoSize = True
-            Padding.Top = 10
-            Padding.Bottom = 20
-            TabOrder = 0
-            object lblDataProblema: TLabel
-              Left = 633
-              Top = 11
-              Width = 36
-              Height = 21
-              Caption = 'Data'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -17
-              Font.Name = 'Tahoma'
-              Font.Style = []
-              ParentFont = False
-            end
-            object lblChamadoProblema: TLabel
-              Left = 519
-              Top = 11
-              Width = 69
-              Height = 21
-              Caption = 'Chamado'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -17
-              Font.Name = 'Tahoma'
-              Font.Style = []
-              ParentFont = False
-            end
-            object lblCodProblema: TLabel
-              Left = 752
-              Top = 25
-              Width = 33
-              Height = 13
-              Caption = 'C'#243'digo'
-            end
-            object lblTituloProblema: TLabel
-              Left = 30
-              Top = 13
-              Width = 42
-              Height = 21
-              Caption = 'T'#237'tulo'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -17
-              Font.Name = 'Tahoma'
-              Font.Style = []
-              ParentFont = False
-            end
-            object edtDataProblema: TMaskEdit
-              Left = 633
-              Top = 38
-              Width = 97
-              Height = 21
-              TabStop = False
-              EditMask = '!99/99/0000;1;_'
-              MaxLength = 10
-              ReadOnly = True
-              TabOrder = 2
-              Text = '  /  /    '
-            end
-            object edtChamadoProblema: TEdit
-              Tag = 1
-              Left = 519
-              Top = 38
-              Width = 81
-              Height = 21
-              NumbersOnly = True
-              ReadOnly = True
-              TabOrder = 1
-            end
-            object edtCodProblema: TEdit
-              Left = 752
-              Top = 38
-              Width = 73
-              Height = 21
-              Enabled = False
-              TabOrder = 3
-            end
-            object edtTituloProblema: TEdit
-              Left = 30
-              Top = 40
-              Width = 452
-              Height = 21
-              ReadOnly = True
-              TabOrder = 0
-            end
-          end
-          object pnlBodyDetalhesProblema: TPanel
-            Left = 0
-            Top = 208
-            Width = 1034
-            Height = 235
-            Align = alTop
-            AutoSize = True
-            BevelOuter = bvNone
-            Padding.Left = 30
-            Padding.Right = 250
-            TabOrder = 2
-            object pnlDetalhesProblema: TPanel
-              Left = 30
+            object pnlTopProblema: TPanel
+              Left = 0
               Top = 0
-              Width = 754
-              Height = 235
-              Align = alClient
+              Width = 1032
+              Height = 82
+              Align = alTop
               AutoSize = True
-              BevelOuter = bvNone
+              Padding.Top = 10
               Padding.Bottom = 20
               TabOrder = 0
-              object lblDetalhesProblema: TLabel
-                Left = 0
-                Top = 0
-                Width = 754
-                Height = 17
-                Align = alTop
-                Caption = 'Detalhes do problema'
+              object lblDataProblema: TLabel
+                Left = 633
+                Top = 11
+                Width = 36
+                Height = 21
+                Caption = 'Data'
                 Font.Charset = DEFAULT_CHARSET
-                Font.Color = clGreen
-                Font.Height = -13
-                Font.Name = 'Segoe UI'
-                Font.Style = [fsBold]
-                ParentFont = False
-                ExplicitWidth = 137
-              end
-              object Panel1: TPanel
-                Left = 0
-                Top = 17
-                Width = 754
-                Height = 24
-                Align = alTop
-                BevelOuter = bvNone
-                TabOrder = 0
-                object cbNameFontDetalhes: TComboBox
-                  Left = 41
-                  Top = 0
-                  Width = 98
-                  Height = 22
-                  Align = alLeft
-                  Style = csOwnerDrawFixed
-                  Enabled = False
-                  ItemIndex = 0
-                  TabOrder = 0
-                  TabStop = False
-                  Text = 'Arial'
-                  OnChange = cbNameFontDetalhesChange
-                  Items.Strings = (
-                    'Arial'
-                    'Calibri'
-                    'Cambria'
-                    'Candara'
-                    'Comic Sans MS'
-                    'Consolas'
-                    'Courier New'
-                    'Georgia'
-                    'Impact'
-                    'Lucida Console'
-                    'Lucida Sans Unicode'
-                    'Microsoft Sans Serif'
-                    'Palatino Linotype'
-                    'Segoe UI'
-                    'Tahoma'
-                    'Times New Roman'
-                    'Trebuchet MS'
-                    'Verdana')
-                end
-                object cbSizeFontDetalhes: TComboBox
-                  Left = 0
-                  Top = 0
-                  Width = 41
-                  Height = 22
-                  Align = alLeft
-                  Style = csOwnerDrawFixed
-                  Color = clWhite
-                  Enabled = False
-                  ItemIndex = 9
-                  TabOrder = 1
-                  TabStop = False
-                  Text = '10'
-                  OnChange = cbSizeFontDetalhesChange
-                  Items.Strings = (
-                    '1'
-                    '2'
-                    '3'
-                    '4'
-                    '5'
-                    '6'
-                    '7'
-                    '8'
-                    '9'
-                    '10'
-                    '11'
-                    '12'
-                    '13'
-                    '14'
-                    '15'
-                    '16'
-                    '17'
-                    '18'
-                    '19'
-                    '20'
-                    '21'
-                    '22'
-                    '23'
-                    '24'
-                    '25'
-                    '26'
-                    '27'
-                    '28'
-                    '29'
-                    '30'
-                    '31'
-                    '32'
-                    '33'
-                    '34'
-                    '35'
-                    '36'
-                    '37'
-                    '38'
-                    '39'
-                    '40'
-                    '41'
-                    '42'
-                    '43'
-                    '44'
-                    '45'
-                    '46'
-                    '47'
-                    '48'
-                    '49'
-                    '50')
-                end
-                object chkItalicoDetalhes: TCheckBox
-                  Left = 201
-                  Top = 0
-                  Width = 56
-                  Height = 24
-                  TabStop = False
-                  Align = alLeft
-                  Caption = 'It'#225'lico'
-                  Enabled = False
-                  TabOrder = 2
-                  OnClick = chkItalicoDetalhesClick
-                end
-                object chkNegritoDetalhes: TCheckBox
-                  Left = 139
-                  Top = 0
-                  Width = 62
-                  Height = 24
-                  TabStop = False
-                  Align = alLeft
-                  Caption = 'Negrito'
-                  Enabled = False
-                  TabOrder = 3
-                  OnClick = chkNegritoDetalhesClick
-                end
-              end
-              object mmDetalhesProblema: TRichEdit
-                Tag = 1
-                Left = 0
-                Top = 41
-                Width = 754
-                Height = 174
-                Align = alClient
-                Font.Charset = ANSI_CHARSET
                 Font.Color = clWindowText
-                Font.Height = -11
+                Font.Height = -17
                 Font.Name = 'Tahoma'
                 Font.Style = []
                 ParentFont = False
+              end
+              object lblChamadoProblema: TLabel
+                Left = 519
+                Top = 11
+                Width = 69
+                Height = 21
+                Caption = 'Chamado'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -17
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentFont = False
+              end
+              object lblCodProblema: TLabel
+                Left = 752
+                Top = 25
+                Width = 33
+                Height = 13
+                Caption = 'C'#243'digo'
+              end
+              object lblTituloProblema: TLabel
+                Left = 30
+                Top = 13
+                Width = 42
+                Height = 21
+                Caption = 'T'#237'tulo'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -17
+                Font.Name = 'Tahoma'
+                Font.Style = []
+                ParentFont = False
+              end
+              object edtDataProblema: TMaskEdit
+                Left = 633
+                Top = 38
+                Width = 97
+                Height = 21
+                TabStop = False
+                EditMask = '!99/99/0000;1;_'
+                MaxLength = 10
                 ReadOnly = True
-                ScrollBars = ssVertical
+                TabOrder = 2
+                Text = '  /  /    '
+              end
+              object edtChamadoProblema: TEdit
+                Tag = 1
+                Left = 519
+                Top = 38
+                Width = 81
+                Height = 21
+                NumbersOnly = True
+                ReadOnly = True
                 TabOrder = 1
-                Zoom = 100
-                OnEnter = mmDetalhesProblemaEnter
+              end
+              object edtCodProblema: TEdit
+                Left = 752
+                Top = 38
+                Width = 73
+                Height = 21
+                Enabled = False
+                TabOrder = 3
+              end
+              object edtTituloProblema: TEdit
+                Left = 30
+                Top = 40
+                Width = 452
+                Height = 21
+                ReadOnly = True
+                TabOrder = 0
+              end
+            end
+            object pnlBodyDetalhesProblema: TPanel
+              Left = 0
+              Top = 208
+              Width = 1032
+              Height = 235
+              Align = alTop
+              AutoSize = True
+              BevelOuter = bvNone
+              Padding.Left = 30
+              Padding.Right = 250
+              TabOrder = 2
+              ExplicitWidth = 1034
+              object pnlDetalhesProblema: TPanel
+                Left = 30
+                Top = 0
+                Width = 752
+                Height = 235
+                Align = alClient
+                AutoSize = True
+                BevelOuter = bvNone
+                Padding.Bottom = 20
+                TabOrder = 0
+                ExplicitWidth = 754
+                object lblDetalhesProblema: TLabel
+                  Left = 0
+                  Top = 0
+                  Width = 752
+                  Height = 17
+                  Align = alTop
+                  Caption = 'Detalhes do problema'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clGreen
+                  Font.Height = -13
+                  Font.Name = 'Segoe UI'
+                  Font.Style = [fsBold]
+                  ParentFont = False
+                  ExplicitWidth = 137
+                end
+                object Panel2: TPanel
+                  Left = 0
+                  Top = 17
+                  Width = 752
+                  Height = 24
+                  Align = alTop
+                  BevelOuter = bvNone
+                  TabOrder = 0
+                  ExplicitWidth = 754
+                  object cbNameFontDetalhes: TComboBox
+                    Left = 41
+                    Top = 0
+                    Width = 98
+                    Height = 22
+                    Align = alLeft
+                    Style = csOwnerDrawFixed
+                    Enabled = False
+                    ItemIndex = 0
+                    TabOrder = 0
+                    TabStop = False
+                    Text = 'Arial'
+                    OnChange = cbNameFontDetalhesChange
+                    Items.Strings = (
+                      'Arial'
+                      'Calibri'
+                      'Cambria'
+                      'Candara'
+                      'Comic Sans MS'
+                      'Consolas'
+                      'Courier New'
+                      'Georgia'
+                      'Impact'
+                      'Lucida Console'
+                      'Lucida Sans Unicode'
+                      'Microsoft Sans Serif'
+                      'Palatino Linotype'
+                      'Segoe UI'
+                      'Tahoma'
+                      'Times New Roman'
+                      'Trebuchet MS'
+                      'Verdana')
+                  end
+                  object cbSizeFontDetalhes: TComboBox
+                    Left = 0
+                    Top = 0
+                    Width = 41
+                    Height = 22
+                    Align = alLeft
+                    Style = csOwnerDrawFixed
+                    Color = clWhite
+                    Enabled = False
+                    ItemIndex = 9
+                    TabOrder = 1
+                    TabStop = False
+                    Text = '10'
+                    OnChange = cbSizeFontDetalhesChange
+                    Items.Strings = (
+                      '1'
+                      '2'
+                      '3'
+                      '4'
+                      '5'
+                      '6'
+                      '7'
+                      '8'
+                      '9'
+                      '10'
+                      '11'
+                      '12'
+                      '13'
+                      '14'
+                      '15'
+                      '16'
+                      '17'
+                      '18'
+                      '19'
+                      '20'
+                      '21'
+                      '22'
+                      '23'
+                      '24'
+                      '25'
+                      '26'
+                      '27'
+                      '28'
+                      '29'
+                      '30'
+                      '31'
+                      '32'
+                      '33'
+                      '34'
+                      '35'
+                      '36'
+                      '37'
+                      '38'
+                      '39'
+                      '40'
+                      '41'
+                      '42'
+                      '43'
+                      '44'
+                      '45'
+                      '46'
+                      '47'
+                      '48'
+                      '49'
+                      '50')
+                  end
+                  object chkItalicoDetalhes: TCheckBox
+                    Left = 201
+                    Top = 0
+                    Width = 56
+                    Height = 24
+                    TabStop = False
+                    Align = alLeft
+                    Caption = 'It'#225'lico'
+                    Enabled = False
+                    TabOrder = 2
+                    OnClick = chkItalicoDetalhesClick
+                  end
+                  object chkNegritoDetalhes: TCheckBox
+                    Left = 139
+                    Top = 0
+                    Width = 62
+                    Height = 24
+                    TabStop = False
+                    Align = alLeft
+                    Caption = 'Negrito'
+                    Enabled = False
+                    TabOrder = 3
+                    OnClick = chkNegritoDetalhesClick
+                  end
+                end
+                object mmDetalhesProblema: TRichEdit
+                  Tag = 1
+                  Left = 0
+                  Top = 41
+                  Width = 752
+                  Height = 174
+                  Align = alClient
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
+                  ReadOnly = True
+                  ScrollBars = ssVertical
+                  TabOrder = 1
+                  Zoom = 100
+                  OnEnter = mmDetalhesProblemaEnter
+                end
               end
             end
           end

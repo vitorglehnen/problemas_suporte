@@ -144,6 +144,8 @@ end;
 
 procedure TformImagensProblema.FormCreate(Sender: TObject);
 begin
+  FListaImagens := TStringList.Create;
+
   if frmMain.formPrincipal.FEdicaoProblema = False then
   begin
     btnAddImagem.Enabled := False;

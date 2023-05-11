@@ -42,8 +42,6 @@ begin
   var aImagens: TDataSet := FDAOImagemProblema.BuscaImagens(aCodigoProblema).DataSet;
   var aListaImagens: TStringList:= TStringList.Create;
 
-  FListaImagens := TStringList.Create;
-
   while not aImagens.Eof do
   begin
     aListaImagens.Add(aImagens.FieldByName('imagem').Value);
