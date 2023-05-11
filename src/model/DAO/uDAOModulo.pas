@@ -11,10 +11,11 @@ type
     FConn: TConexao;
     FQuery: TFDQuery;
     FDataSource: TDataSource;
+    procedure InsertModulo(aNomeModulo: String);
+    procedure UpdateModulo(aNomeModuloAnt, aNomeModuloAtt: String);
   public
     function BuscaTabelaModulos : TDataSource;
-    procedure InsertModulo(aNomeModulo:String);
-    procedure UpdateModulo(aNomeModuloAnt: String; aNomeModuloAtt: String);
+    procedure DeleteModulo(aModulo : TModulo);
     constructor Create;
     destructor Destroy; override;
   End;
@@ -37,6 +38,16 @@ constructor TDAOModulo.Create;
 begin
   FConn:= TConexao.Create;
   FDataSource:= TDataSource.Create(nil);
+end;
+
+procedure TDAOModulo.DeleteModulo(aModulo : TModulo);
+begin
+  FQuery := FConn.CriarQuery;
+
+  FQuery.SQL.Text := 'DELETE FROM modulos where nome = :nome';
+  FQuery.ParamByName('nome').AsString := aModulo.Nome;
+
+  FQuery.ExecSQL;
 end;
 
 destructor TDAOModulo.Destroy;

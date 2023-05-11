@@ -87,8 +87,20 @@ begin
   if Application.MessageBox('Deseja excluir esta imagem?',
       'Excluir imagem', +MB_ICONQUESTION + MB_YESNO) = MrYes then
   begin
-    DeleteFile(FListaImagens[FPosicaoListaImagem]);
-    FListaImagens.Delete(FPosicaoListaImagem);
+    var aImagem : TImagemProblema := TImagemProblema.Create;
+
+    FControllerProblema := TControllerProblema.Create;
+
+    try
+      aImagem.Sequencia := FPosicaoListaImagem;
+      aImagem.CodigoProblema := StrToInt(frmMain.formPrincipal.edtCodProblema.Text);
+      DeleteFile(FListaImagens[FPosicaoListaImagem]);
+      FControllerProblema.DeleteImagem(aImagem);
+      FListaImagens.Delete(FPosicaoListaImagem);
+    finally
+      aImagem.Free;
+      FControllerProblema.Free;
+    end;
 
     if (FPosicaoListaImagem = FListaImagens.Count) and (FListaImagens.Count <> 0) then
       FPosicaoListaImagem := FPosicaoListaImagem - 1;
@@ -104,14 +116,14 @@ begin
 
     if FListaImagens.Count > 0 then
     begin
+      lblNmroImagem.Caption := IntToStr(FPosicaoListaImagem + 1) + '/' + IntToStr(FListaImagens.Count);
       imgProblema.Picture.LoadFromFile(FListaImagens[FPosicaoListaImagem]);
     end
     else
     begin
+      lblNmroImagem.Caption := IntToStr(FPosicaoListaImagem) + '/' + IntToStr(FListaImagens.Count);
       imgProblema.Picture := nil;
     end;
-
-    lblNmroImagem.Caption := IntToStr(FPosicaoListaImagem + 1) + '/' + IntToStr(FListaImagens.Count);
   end;
 end;
 
@@ -123,10 +135,10 @@ begin
   var aNomeImagem : String;
   var aCaminhoImagem : String;
 
-  FControllerProblema := TControllerProblema.Create;
-
   aCaminhoImagem := 'C:\Problemas Suporte\Imagens\';
   aNomeImagem := aCaminhoImagem + FormatDateTime('dd-mm-yyyy.hh-nn-ss', Now) + '.png';
+
+  FControllerProblema := TControllerProblema.Create;
 
   try
     aImagemPNG.Assign(imgProblema.Picture.Bitmap);

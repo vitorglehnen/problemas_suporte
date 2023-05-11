@@ -202,6 +202,8 @@ object formPrincipal: TformPrincipal
                 BevelOuter = bvNone
                 Padding.Top = 10
                 TabOrder = 1
+                ExplicitLeft = 5
+                ExplicitTop = 38
                 object rdbtnFiltroPesqProblema: TRadioGroup
                   Left = 0
                   Top = 43
@@ -284,7 +286,7 @@ object formPrincipal: TformPrincipal
             Left = 1
             Top = 1
             Width = 239
-            Height = 76
+            Height = 75
             Align = alClient
             Alignment = taCenter
             Caption = 'M'#243'dulos'
@@ -295,39 +297,17 @@ object formPrincipal: TformPrincipal
             Font.Style = [fsBold]
             ParentFont = False
             Layout = tlCenter
-            ExplicitWidth = 62
-            ExplicitHeight = 18
+            ExplicitHeight = 82
           end
           object pnlBotaoCrudModulo: TPanel
             Left = 1
-            Top = 77
+            Top = 76
             Width = 239
             Height = 27
             Align = alBottom
             TabOrder = 0
-            object btnSalvarModulo: TSpeedButton
-              Left = 49
-              Top = 1
-              Width = 48
-              Height = 25
-              Align = alLeft
-              Caption = 'Salvar'
-              Enabled = False
-              OnMouseDown = btnSalvarModuloMouseDown
-              ExplicitTop = 5
-            end
-            object btnCancelarModulo: TSpeedButton
-              Left = 190
-              Top = 1
-              Width = 48
-              Height = 25
-              Align = alRight
-              Caption = 'Cancelar'
-              Enabled = False
-              OnMouseDown = btnCancelarModuloMouseDown
-              ExplicitLeft = 136
-              ExplicitTop = -4
-            end
+            ExplicitLeft = 6
+            ExplicitTop = 82
             object btnNovoModulo: TSpeedButton
               Left = 1
               Top = 1
@@ -335,26 +315,40 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alLeft
               Caption = 'Novo'
+              OnMouseDown = btnNovoModuloMouseDown
               ExplicitLeft = 9
               ExplicitTop = 2
+            end
+            object btnExcluirModulo: TSpeedButton
+              Left = 190
+              Top = 1
+              Width = 48
+              Height = 25
+              Align = alRight
+              Caption = 'Excluir'
+              OnClick = btnExcluirModuloClick
+              ExplicitLeft = 89
+              ExplicitTop = -4
             end
           end
           object pnlBodyPesqModulo: TPanel
             Left = 1
-            Top = 104
+            Top = 103
             Width = 239
-            Height = 152
+            Height = 153
             Align = alBottom
             Padding.Left = 8
             Padding.Top = 8
             Padding.Right = 8
             Padding.Bottom = 8
             TabOrder = 1
+            ExplicitLeft = -4
+            ExplicitTop = 120
             object pnlPesqModulo: TPanel
               Left = 9
               Top = 9
               Width = 221
-              Height = 46
+              Height = 35
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 0
@@ -364,8 +358,8 @@ object formPrincipal: TformPrincipal
                 Width = 221
                 Height = 13
                 Align = alTop
-                Caption = 'M'#243'dulo'
-                ExplicitWidth = 34
+                Caption = 'Pesquisa'
+                ExplicitWidth = 42
               end
               object edtPesqModulo: TEdit
                 Left = 0
@@ -374,7 +368,17 @@ object formPrincipal: TformPrincipal
                 Height = 21
                 Align = alTop
                 TabOrder = 0
+                ExplicitLeft = 4
+                ExplicitTop = 19
               end
+            end
+            object Panel1: TPanel
+              Left = -1
+              Top = 73
+              Width = 233
+              Height = 35
+              BevelOuter = bvNone
+              TabOrder = 1
             end
           end
         end
@@ -411,7 +415,7 @@ object formPrincipal: TformPrincipal
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
             OnCellClick = gridModulosCellClick
-            OnColExit = gridModulosColExit
+            OnKeyDown = gridModulosKeyDown
           end
         end
       end
@@ -448,10 +452,6 @@ object formPrincipal: TformPrincipal
           Font.Style = []
           ParentFont = False
           TabOrder = 0
-          ExplicitLeft = 392
-          ExplicitTop = 232
-          ExplicitWidth = 185
-          ExplicitHeight = 41
           object pnlProblemas: TPanel
             Left = 1
             Top = 1
@@ -470,8 +470,6 @@ object formPrincipal: TformPrincipal
             TabOrder = 0
             TabStop = True
             Visible = False
-            ExplicitLeft = 2
-            ExplicitTop = 2
             object pnlBodyModuloProblema: TPanel
               Left = 0
               Top = 82
@@ -539,8 +537,6 @@ object formPrincipal: TformPrincipal
               Padding.Left = 30
               Padding.Right = 250
               TabOrder = 3
-              ExplicitWidth = 1034
-              ExplicitHeight = 312
               object pnlSolucaoProblema: TPanel
                 Left = 30
                 Top = 0
@@ -551,8 +547,6 @@ object formPrincipal: TformPrincipal
                 BevelOuter = bvNone
                 Padding.Bottom = 70
                 TabOrder = 0
-                ExplicitWidth = 754
-                ExplicitHeight = 312
                 object lblSolucaoProblema: TLabel
                   Left = 0
                   Top = 0
@@ -596,7 +590,6 @@ object formPrincipal: TformPrincipal
                   BevelOuter = bvNone
                   Enabled = False
                   TabOrder = 1
-                  ExplicitWidth = 754
                   object cbNameFontSolucao: TComboBox
                     Left = 41
                     Top = 0
@@ -703,7 +696,7 @@ object formPrincipal: TformPrincipal
                     Align = alClient
                     Caption = 'ActionToolBar2'
                     Color = clMenuBar
-                    ColorMap.DisabledFontColor = 10461087
+                    ColorMap.DisabledFontColor = 7171437
                     ColorMap.HighlightColor = clWhite
                     ColorMap.BtnSelectedFont = clBlack
                     ColorMap.UnusedColor = clWhite
@@ -848,7 +841,6 @@ object formPrincipal: TformPrincipal
               Padding.Left = 30
               Padding.Right = 250
               TabOrder = 2
-              ExplicitWidth = 1034
               object pnlDetalhesProblema: TPanel
                 Left = 30
                 Top = 0
@@ -859,7 +851,6 @@ object formPrincipal: TformPrincipal
                 BevelOuter = bvNone
                 Padding.Bottom = 20
                 TabOrder = 0
-                ExplicitWidth = 754
                 object lblDetalhesProblema: TLabel
                   Left = 0
                   Top = 0
@@ -883,7 +874,6 @@ object formPrincipal: TformPrincipal
                   Align = alTop
                   BevelOuter = bvNone
                   TabOrder = 0
-                  ExplicitWidth = 754
                   object cbNameFontDetalhes: TComboBox
                     Left = 41
                     Top = 0

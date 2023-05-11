@@ -26,6 +26,7 @@ type
     function BuscaImagens(aCodigoProblema: Integer): TStringList;
     procedure InsertProblema(aProblema: TProblema);
     procedure InsertImagem(aImagem: TImagemProblema);
+    procedure DeleteImagem(aImagemProblema: TImagemProblema);
     procedure UpdateProblema(aProblema: TProblema);
     procedure DeleteProblema(aProblema: TProblema);
     constructor Create;
@@ -77,6 +78,11 @@ begin
   FDAOProblema := TDAOProblema.Create;
   FDAOGridProblema := TDAOGridProblema.Create;
   FDAOImagemProblema := TDAOImagemProblema.Create;
+end;
+
+procedure TControllerProblema.DeleteImagem(aImagemProblema: TImagemProblema);
+begin
+  FDAOImagemProblema.DeleteImagem(aImagemProblema);
 end;
 
 procedure TControllerProblema.DeleteProblema(aProblema: TProblema);

@@ -80,7 +80,8 @@ object formImagensProblema: TformImagensProblema
         Align = alLeft
         Caption = 'Remover'
         OnClick = btnRemoverImagemClick
-        ExplicitLeft = 81
+        ExplicitLeft = 219
+        ExplicitTop = 7
       end
       object btnAddImagem: TSpeedButton
         Left = 6

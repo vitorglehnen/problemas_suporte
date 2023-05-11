@@ -67,8 +67,6 @@ type
     btnSalvarProblema: TSpeedButton;
     btnExcluirProblema: TSpeedButton;
     btnCancelarProblema: TSpeedButton;
-    btnSalvarModulo: TSpeedButton;
-    btnCancelarModulo: TSpeedButton;
     lblTituloProblemas: TLabel;
     lblTituloModulo: TLabel;
     lblTotalDeProblemas: TLabel;
@@ -133,15 +131,14 @@ type
     chkItalicoDetalhes: TCheckBox;
     chkNegritoDetalhes: TCheckBox;
     mmDetalhesProblema: TRichEdit;
+    Panel1: TPanel;
+    btnExcluirModulo: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
-    procedure gridModulosColExit(Sender: TObject);
     procedure btnCancelarModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btnSalvarModuloMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure btnEditarModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btnNovoProblemaMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -166,6 +163,11 @@ type
     procedure chkItalicoDetalhesClick(Sender: TObject);
     procedure chkNegritoSolucaoClick(Sender: TObject);
     procedure chkItalicoSolucaoClick(Sender: TObject);
+    procedure btnNovoModuloMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure gridModulosKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure btnExcluirModuloClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -179,7 +181,6 @@ type
     procedure CarregaDadosProblemas;
     procedure CarregaGridModulos;
     procedure PreencheCbxModulos;
-    procedure InverteBotoesCrudModulos;
     procedure InverteBotoesCrudProblemas;
     procedure InverteCamposProblemas;
   public
@@ -346,6 +347,23 @@ begin
   end;
 end;
 
+procedure TformPrincipal.btnExcluirModuloClick(Sender: TObject);
+begin
+  if Application.MessageBox('Deseja excluir este registro?',
+      'Excluir módulo', +MB_ICONQUESTION + MB_YESNO) = MrYes then
+  begin
+    var aModulo : TModulo := TModulo.Create;
+
+    try
+      aModulo.Nome := gridModulos.Columns[0].Field.Value;
+      FControllerModulo.DeleteModulo(aModulo)
+    finally
+      aModulo.Free;
+      CarregaGridModulos;
+    end;
+  end;
+end;
+
 procedure TformPrincipal.btnExcluirProblemaClick(Sender: TObject);
 begin
   var
@@ -360,9 +378,19 @@ begin
       CarregaGridProblemas;
       CarregaDadosProblemas;
     end;
+
+    if gridProblemas.DataSource.DataSet.RecordCount < 1 then
+      pnlProblemas.Visible := False;
   finally
     aProblema.Free;
   end;
+end;
+
+procedure TformPrincipal.btnNovoModuloMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  gridModulos.DataSource.DataSet.Append;
+  gridModulos.SetFocus;
 end;
 
 procedure TformPrincipal.btnNovoProblemaMouseDown(Sender: TObject;
@@ -375,7 +403,6 @@ procedure TformPrincipal.btnSalvarModuloMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   CarregaGridModulos;
-  InverteBotoesCrudModulos;
 end;
 
 procedure TformPrincipal.btnSalvarProblemaMouseDown(Sender: TObject;
@@ -403,10 +430,10 @@ var
    msSolucao: TStream;
 begin
   cont := 0;
-  pnlProblemas.Visible := True;
 
   if gridProblemas.DataSource.DataSet.RecordCount > 0 then
   begin
+    pnlProblemas.Visible := True;
     aNomeProblema := gridProblemas.Columns[0].Field.Value;
     aProblema := FControllerProblema.CarregaDadosProblema
       (aNomeProblema).DataSet;
@@ -506,7 +533,7 @@ end;
 procedure TformPrincipal.btnCancelarModuloMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  InverteBotoesCrudModulos;
+  gridModulos.SetFocus;
 end;
 
 procedure TformPrincipal.btnCancelarProblemaMouseDown(Sender: TObject;
@@ -515,12 +542,9 @@ begin
   InverteBotoesCrudProblemas;
 
   CarregaDadosProblemas;
-end;
 
-procedure TformPrincipal.btnEditarModuloMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-begin
-  InverteBotoesCrudModulos;
+  if gridProblemas.DataSource.DataSet.RecordCount < 1 then
+    pnlProblemas.Visible := False;
 end;
 
 procedure TformPrincipal.btnEditarProblemaClick(Sender: TObject);
@@ -537,24 +561,19 @@ begin
   CarregaDadosProblemas;
 end;
 
-procedure TformPrincipal.gridModulosColExit(Sender: TObject);
+procedure TformPrincipal.gridModulosKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
 begin
-  ShowMessage(gridModulos.Columns[0].Field.Value);
+  if Key = VK_RETURN then
+  begin
+    gridModulos.DataSource.DataSet.First;
+    pnlPrincipal.SetFocus;
+  end;
 end;
 
 procedure TformPrincipal.gridProblemasCellClick(Column: TColumn);
 begin
   CarregaDadosProblemas;
-end;
-
-procedure TformPrincipal.InverteBotoesCrudModulos;
-begin
-  btnNovoModulo.Enabled := not btnNovoModulo.Enabled;
-  btnSalvarModulo.Enabled := not btnSalvarModulo.Enabled;
-  btnCancelarModulo.Enabled := not btnCancelarModulo.Enabled;
-
-  pnlProblemas.Enabled := not pnlProblemas.Enabled;
-  pnlBodyProblemas.Enabled := not pnlBodyProblemas.Enabled;
 end;
 
 procedure TformPrincipal.InverteBotoesCrudProblemas;
@@ -571,8 +590,6 @@ end;
 
 procedure TformPrincipal.InverteCamposProblemas;
 begin
-  var aImagensProblema : TStringList := FControllerProblema.BuscaImagens(StrToInt(edtCodProblema.Text));
-
   edtTituloProblema.ReadOnly := not edtTituloProblema.ReadOnly;
   edtChamadoProblema.ReadOnly := not edtChamadoProblema.ReadOnly;
   cbModulo.Enabled := not cbModulo.Enabled;
@@ -590,6 +607,7 @@ end;
 
 procedure TformPrincipal.EventoCadastrarProblema;
 begin
+  pnlProblemas.Visible := True;
   FEdicaoProblema := False;
 
   InverteCamposProblemas;

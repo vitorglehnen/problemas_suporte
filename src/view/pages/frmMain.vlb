@@ -82,12 +82,6 @@ Coordinates=537,280,103,58
 [gridModulos]
 Coordinates=795,552,85,36
 
-[btnCancelarModulo]
-Coordinates=659,552,126,36
-
-[btnSalvarModulo]
-Coordinates=538,552,111,36
-
 [btnExcluirProblema]
 Coordinates=402,552,126,36
 
@@ -107,6 +101,6 @@ Coordinates=390,212,104,58
 Coordinates=605,416,134,58
 
 []
-Coordinates=532,78,93,58
+Coordinates=659,552,126,36
 Visible=True
 

@@ -14,6 +14,7 @@ type
   public
     procedure InsertImagem(aImagemProblema: TImagemProblema);
     function BuscaImagens(aCodigoProblema: Integer): TDataSource;
+    procedure DeleteImagem(aImagemProblema: TImagemProblema);
     constructor Create;
     destructor Destroy; override;
   end;
@@ -38,6 +39,17 @@ end;
 constructor TDAOImagemProblema.Create;
 begin
   FConn := TConexao.Create;
+end;
+
+procedure TDAOImagemProblema.DeleteImagem(aImagemProblema: TImagemProblema);
+begin
+  FQuery := FConn.CriarQuery;
+
+  FQuery.SQL.Text := 'DELETE FROM probimg WHERE seq_img = :seq_img and cod_prob = :cod_prob';
+  FQuery.ParamByName('seq_img').AsInteger := aImagemProblema.Sequencia;
+  FQuery.ParamByName('cod_prob').AsInteger := aImagemProblema.CodigoProblema;
+
+  FQuery.ExecSQL;
 end;
 
 destructor TDAOImagemProblema.Destroy;

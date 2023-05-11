@@ -11,13 +11,15 @@ type
     FDAOModulo: TDAOModulo;
   public
     function BuscaTabelaModulos: TDataSource;
-    procedure InsertModulo(aNomeModulo:String);
-    procedure UpdateModulo(aNomeModuloAnt: String; aNomeModuloAtt: String);
+    procedure DeleteModulo(aModulo : TModulo);
     constructor Create;
     destructor Destroy; override;
   end;
 
 implementation
+
+uses
+  Vcl.Dialogs;
 
 { TControllerModulo }
 
@@ -31,21 +33,19 @@ begin
   FDAOModulo := TDAOModulo.Create;
 end;
 
+procedure TControllerModulo.DeleteModulo(aModulo : TModulo);
+begin
+  try
+    FDAOModulo.DeleteModulo(aModulo);
+  except
+    MessageDlg('Não é possível excluir um módulo com problemas vinculados!', mtInformation, [mbOK], 0);
+  end;
+end;
+
 destructor TControllerModulo.Destroy;
 begin
   FDAOModulo.Free;
   inherited;
-end;
-
-procedure TControllerModulo.InsertModulo(aNomeModulo: String);
-begin
-  FDAOModulo.InsertModulo(aNomeModulo);
-end;
-
-procedure TControllerModulo.UpdateModulo(aNomeModuloAnt,
-  aNomeModuloAtt: String);
-begin
-  FDAOModulo.UpdateModulo(aNomeModuloAnt, aNomeModuloAtt);
 end;
 
 end.
