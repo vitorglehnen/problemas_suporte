@@ -58,7 +58,7 @@ uses
   Vcl.ToolWin,
   Vcl.ActnCtrls,
   Vcl.BandActn,
-  frmImagensProblema;
+  frmImagensProblema, uControllerGridModulo;
 
 type
   TformPrincipal = class(TForm)
@@ -174,6 +174,7 @@ type
     FFormImagensProblema: TformImagensProblema;
     FControllerModulo: TControllerModulo;
     FControllerProblema: TControllerProblema;
+    FControllerGridModulo: TControllerGridModulo;
 
     procedure EventoSalvarProblema;
     procedure EventoCadastrarProblema;
@@ -241,7 +242,7 @@ end;
 procedure TformPrincipal.FormCreate(Sender: TObject);
 begin
   FControllerProblema := TControllerProblema.Create;
-  FControllerModulo := TControllerModulo.Create;
+  FControllerGridModulo := TControllerGridModulo.Create;
 
   CarregaGridModulos;
   CarregaGridProblemas;
@@ -250,7 +251,7 @@ end;
 procedure TformPrincipal.FormDestroy(Sender: TObject);
 begin
   FControllerProblema.Free;
-  FControllerModulo.Free;
+  FControllerGridModulo.Free;
 end;
 
 procedure TformPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
@@ -316,15 +317,17 @@ end;
 
 procedure TformPrincipal.PreencheCbxModulos;
 begin
-  var
-  aNomeModulos := FControllerModulo.BuscaTabelaModulos.DataSet;
+  var aNomeModulos : TDataSet := TControllerModulo.Create.BuscaTabelaModulos.DataSet;
 
-  cbModulo.Clear;
-
-  while not aNomeModulos.Eof do
-  begin
-    cbModulo.items.Add(aNomeModulos.FieldByName('nome').Value);
-    aNomeModulos.Next;
+  try
+    cbModulo.Clear;
+    while not aNomeModulos.Eof do
+    begin
+      cbModulo.items.Add(aNomeModulos.FieldByName('nome').Value);
+      aNomeModulos.Next;
+    end;
+  finally
+    aNomeModulos.Free;
   end;
 end;
 
@@ -356,7 +359,7 @@ begin
 
     try
       aModulo.Nome := gridModulos.Columns[0].Field.Value;
-      FControllerModulo.DeleteModulo(aModulo)
+      FControllerGridModulo.DeleteModulo(aModulo)
     finally
       aModulo.Free;
       CarregaGridModulos;
@@ -433,6 +436,8 @@ begin
 
   if gridProblemas.DataSource.DataSet.RecordCount > 0 then
   begin
+    PreencheCbxModulos;
+
     pnlProblemas.Visible := True;
     aNomeProblema := gridProblemas.Columns[0].Field.Value;
     aProblema := FControllerProblema.CarregaDadosProblema
@@ -467,9 +472,9 @@ begin
   var
     aNomeModulo: String;
 
-  if FControllerModulo.BuscaTabelaModulos.DataSet.RecordCount > 0 then
+  if FControllerGridModulo.BuscaTabelaModulos.DataSet.RecordCount > 0 then
   begin
-    gridModulos.DataSource := FControllerModulo.BuscaTabelaModulos;
+    gridModulos.DataSource := FControllerGridModulo.BuscaTabelaModulos;
     gridModulos.DataSource.DataSet.First;
     aNomeModulo := gridModulos.Columns[0].Field.Value;
   end;
@@ -540,6 +545,7 @@ procedure TformPrincipal.btnCancelarProblemaMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   InverteBotoesCrudProblemas;
+  InverteCamposProblemas;
 
   CarregaDadosProblemas;
 

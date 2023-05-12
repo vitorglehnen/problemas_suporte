@@ -11,7 +11,6 @@ type
     FDAOModulo: TDAOModulo;
   public
     function BuscaTabelaModulos: TDataSource;
-    procedure DeleteModulo(aModulo : TModulo);
     constructor Create;
     destructor Destroy; override;
   end;
@@ -31,15 +30,6 @@ end;
 constructor TControllerModulo.Create;
 begin
   FDAOModulo := TDAOModulo.Create;
-end;
-
-procedure TControllerModulo.DeleteModulo(aModulo : TModulo);
-begin
-  try
-    FDAOModulo.DeleteModulo(aModulo);
-  except
-    MessageDlg('Não é possível excluir um módulo com problemas vinculados!', mtInformation, [mbOK], 0);
-  end;
 end;
 
 destructor TControllerModulo.Destroy;

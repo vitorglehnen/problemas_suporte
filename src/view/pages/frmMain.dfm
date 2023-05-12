@@ -202,8 +202,6 @@ object formPrincipal: TformPrincipal
                 BevelOuter = bvNone
                 Padding.Top = 10
                 TabOrder = 1
-                ExplicitLeft = 5
-                ExplicitTop = 38
                 object rdbtnFiltroPesqProblema: TRadioGroup
                   Left = 0
                   Top = 43
@@ -297,7 +295,8 @@ object formPrincipal: TformPrincipal
             Font.Style = [fsBold]
             ParentFont = False
             Layout = tlCenter
-            ExplicitHeight = 82
+            ExplicitWidth = 62
+            ExplicitHeight = 18
           end
           object pnlBotaoCrudModulo: TPanel
             Left = 1
@@ -306,8 +305,6 @@ object formPrincipal: TformPrincipal
             Height = 27
             Align = alBottom
             TabOrder = 0
-            ExplicitLeft = 6
-            ExplicitTop = 82
             object btnNovoModulo: TSpeedButton
               Left = 1
               Top = 1
@@ -342,8 +339,6 @@ object formPrincipal: TformPrincipal
             Padding.Right = 8
             Padding.Bottom = 8
             TabOrder = 1
-            ExplicitLeft = -4
-            ExplicitTop = 120
             object pnlPesqModulo: TPanel
               Left = 9
               Top = 9
@@ -368,8 +363,6 @@ object formPrincipal: TformPrincipal
                 Height = 21
                 Align = alTop
                 TabOrder = 0
-                ExplicitLeft = 4
-                ExplicitTop = 19
               end
             end
             object Panel1: TPanel
