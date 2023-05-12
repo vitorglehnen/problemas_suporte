@@ -295,8 +295,7 @@ object formPrincipal: TformPrincipal
             Font.Style = [fsBold]
             ParentFont = False
             Layout = tlCenter
-            ExplicitWidth = 62
-            ExplicitHeight = 18
+            ExplicitTop = 2
           end
           object pnlBotaoCrudModulo: TPanel
             Left = 1
@@ -305,6 +304,7 @@ object formPrincipal: TformPrincipal
             Height = 27
             Align = alBottom
             TabOrder = 0
+            ExplicitTop = 77
             object btnNovoModulo: TSpeedButton
               Left = 1
               Top = 1
@@ -339,6 +339,7 @@ object formPrincipal: TformPrincipal
             Padding.Right = 8
             Padding.Bottom = 8
             TabOrder = 1
+            ExplicitTop = 104
             object pnlPesqModulo: TPanel
               Left = 9
               Top = 9

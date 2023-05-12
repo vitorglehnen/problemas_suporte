@@ -45,6 +45,7 @@ end;
 destructor TControllerGridModulo.Destroy;
 begin
   FDAOModulo.Free;
+
   inherited;
 end;
 

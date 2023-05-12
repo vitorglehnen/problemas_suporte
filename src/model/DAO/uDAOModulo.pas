@@ -27,6 +27,7 @@ implementation
 function TDAOModulo.BuscaTabelaModulos : TDataSource;
 begin
   FQuery:= FConn.CriarQuery;
+  FDataSource:= FConn.CriarDataSource;
   
   FQuery.Open('SELECT nome FROM modulos ORDER BY nome');
   FDataSource.DataSet := FQuery;

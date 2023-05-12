@@ -210,6 +210,8 @@ begin
   try
     mmDetalhesProblema.Lines.SaveToStream(msDetalhes);
     mmSolucaoProblema.Lines.SaveToStream(msSolucao);
+
+    aProblema.Codigo := StrToInt(edtCodProblema.Text);
     aProblema.Titulo := edtTituloProblema.Text;
     aProblema.Modulo := cbModulo.Text;
     aProblema.Chamado := edtChamadoProblema.Text;
@@ -217,15 +219,9 @@ begin
     aProblema.Solucao := msSolucao;
 
     if FEdicaoProblema then
-    begin
-      aProblema.Codigo := StrToInt(edtCodProblema.Text);
-
-      FControllerProblema.UpdateProblema(aProblema);
-    end
+      FControllerProblema.UpdateProblema(aProblema)
     else
-    begin
       FControllerProblema.InsertProblema(aProblema);
-    end;
 
   finally
     aProblema.Free;
@@ -237,21 +233,6 @@ begin
   btnImagensProblema.Enabled := True;
 
   InverteCamposProblemas;
-end;
-
-procedure TformPrincipal.FormCreate(Sender: TObject);
-begin
-  FControllerProblema := TControllerProblema.Create;
-  FControllerGridModulo := TControllerGridModulo.Create;
-
-  CarregaGridModulos;
-  CarregaGridProblemas;
-end;
-
-procedure TformPrincipal.FormDestroy(Sender: TObject);
-begin
-  FControllerProblema.Free;
-  FControllerGridModulo.Free;
 end;
 
 procedure TformPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
@@ -342,7 +323,7 @@ begin
   var aContador: Integer := 0;
 
   FFormImagensProblema := TformImagensProblema.Create(nil);
-  
+
   try
     FFormImagensProblema.ShowModal;
   finally
@@ -434,7 +415,7 @@ var
 begin
   cont := 0;
 
-  if gridProblemas.DataSource.DataSet.RecordCount > 0 then
+  if Assigned(gridProblemas.DataSource) then
   begin
     PreencheCbxModulos;
 
@@ -485,19 +466,34 @@ begin
   var
     aNomeModulo: String := gridModulos.columns[0].Field.value;
 
-  if rdbtnFiltroPesqProblema.ItemIndex = 0 then
-  begin
-    pnlBodyModulos.Visible := False;
+  case rdbtnFiltroPesqProblema.ItemIndex of
+    0:
+    begin
+      pnlBodyModulos.Visible := False;
+      gridProblemas.DataSource := FControllerProblema.BuscaTabelaProblemas;
+    end;
+    1:
+    begin
+      pnlBodyModulos.Visible := True;
 
-    gridProblemas.DataSource := FControllerProblema.BuscaTabelaProblemas;
-  end
-  else if rdbtnFiltroPesqProblema.ItemIndex = 1 then
-  begin
-    pnlBodyModulos.Visible := True;
-
-    gridProblemas.DataSource :=
+      gridProblemas.DataSource :=
       FControllerProblema.BuscaTabelaProblemasPorModulo(aNomeModulo);
+    end;
   end;
+end;
+
+procedure TformPrincipal.FormCreate(Sender: TObject);
+begin
+  FControllerProblema := TControllerProblema.Create;
+  FControllerGridModulo := TControllerGridModulo.Create;
+
+  CarregaGridModulos;
+end;
+
+procedure TformPrincipal.FormDestroy(Sender: TObject);
+begin
+  FControllerProblema.Free;
+  FControllerGridModulo.Free;
 end;
 
 procedure TformPrincipal.cbNameFontDetalhesChange(Sender: TObject);
