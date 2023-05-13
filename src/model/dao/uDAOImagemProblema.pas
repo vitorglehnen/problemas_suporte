@@ -48,10 +48,10 @@ procedure TDAOImagemProblema.DeleteImagem(aImagemProblema: TImagemProblema);
 begin
   FQuery := FConn.CriarQuery;
 
-  FQuery.SQL.Text := 'DELETE FROM probimg WHERE seq_img = :seq_img and cod_prob = :cod_prob';
+  FQuery.SQL.Text := 'DELETE FROM probimg WHERE imagem = :imagem and cod_prob = :cod_prob';
 
-  FQuery.ParamByName('seq_img').AsInteger := aImagemProblema.Sequencia;
   FQuery.ParamByName('cod_prob').AsInteger := aImagemProblema.CodigoProblema;
+  FQuery.ParamByName('imagem').AsString := aImagemProblema.Imagem;
 
   FQuery.ExecSQL;
 end;

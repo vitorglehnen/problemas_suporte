@@ -92,7 +92,7 @@ begin
     FControllerProblema := TControllerProblema.Create;
 
     try
-      aImagem.Sequencia := FPosicaoListaImagem + 1;
+      aImagem.Imagem := FListaImagens[FPosicaoListaImagem];
       aImagem.CodigoProblema := StrToInt(frmMain.formPrincipal.edtCodProblema.Text);
 
       DeleteFile(FListaImagens[FPosicaoListaImagem]);
@@ -148,8 +148,6 @@ begin
 
     aImagemProblema.Imagem := aNomeImagem;
     aImagemProblema.CodigoProblema := StrToInt(frmMain.formPrincipal.edtCodProblema.Text);
-
-    aImagemProblema.Sequencia := FListaImagens.Count;
 
     FControllerProblema.InsertImagem(aImagemProblema);
   finally
