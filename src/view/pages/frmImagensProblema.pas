@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Clipbrd, Vcl.Buttons,
   Vcl.StdCtrls, System.ImageList, Vcl.ImgList, pngimage, jpeg, uImagemProblema,
-  uControllerProblema;
+  uControllerProblema, ShellApi;
 
 type
   TformImagensProblema = class(TForm)
@@ -31,6 +31,7 @@ type
     procedure btnProxImagemClick(Sender: TObject);
     procedure btnAddImagemClick(Sender: TObject);
     procedure btnRemoverImagemClick(Sender: TObject);
+    procedure imgProblemaDblClick(Sender: TObject);
   private
     { Private declarations }
     FPosicaoListaImagem: Integer;
@@ -197,9 +198,16 @@ end;
 procedure TformImagensProblema.FormKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = ^V then
-    if imgProblema.Enabled then
+    if btnSalvarImagem.Enabled then
       if Clipboard.HasFormat(cf_bitmap) then
         imgProblema.Picture.Assign(Clipboard);
+end;
+
+procedure TformImagensProblema.imgProblemaDblClick(Sender: TObject);
+begin
+  var aImagem : String := FListaImagens[FPosicaoListaImagem];
+
+  ShellExecute(Handle, 'open', PWideChar(aImagem), nil, nil, SW_SHOWNORMAL);
 end;
 
 procedure TformImagensProblema.InverteCrudImagem;
@@ -208,8 +216,6 @@ begin
   btnSalvarImagem.Enabled := not btnSalvarImagem.Enabled;
   btnCancelarImagem.Enabled := not btnCancelarImagem.Enabled;
   btnRemoverImagem.Enabled := not btnRemoverImagem.Enabled;
-
-  imgProblema.Enabled := not imgProblema.Enabled;
 end;
 
 end.

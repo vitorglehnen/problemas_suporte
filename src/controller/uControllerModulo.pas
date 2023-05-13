@@ -27,7 +27,16 @@ uses
 
 function TControllerModulo.BuscaModulos: TStringList;
 begin
-  var aModulos : TDataset :=
+  var aModulos : TDataset := FDAOGridModulo.BuscaModulos.DataSet;
+  var aListaModulos: TStringList := TStringList.Create;
+
+  while not aModulos.Eof do
+  begin
+    aListaModulos.Add(aModulos.FieldByName('nome').Value);
+    aModulos.Next;
+  end;
+
+  Result := aListaModulos;
 end;
 
 function TControllerModulo.BuscaTabelaModulos: TDataSource;
@@ -38,6 +47,7 @@ end;
 constructor TControllerModulo.Create;
 begin
   FDAOModulo := TDAOModulo.Create;
+  FDAOGridModulo := TDAOGridModulo.Create;
 end;
 
 procedure TControllerModulo.DeleteModulo(aModulo: TModulo);
@@ -52,6 +62,7 @@ end;
 destructor TControllerModulo.Destroy;
 begin
   FDAOModulo.Free;
+  FDAOGridModulo.Free;
   inherited;
 end;
 

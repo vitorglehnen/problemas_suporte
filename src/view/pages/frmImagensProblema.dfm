@@ -33,7 +33,7 @@ object formImagensProblema: TformImagensProblema
       Align = alClient
       AutoSize = True
       Center = True
-      Enabled = False
+      OnDblClick = imgProblemaDblClick
       ExplicitLeft = 87
       ExplicitTop = 136
       ExplicitHeight = 564

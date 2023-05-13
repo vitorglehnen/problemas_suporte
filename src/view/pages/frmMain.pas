@@ -462,8 +462,6 @@ begin
     gridModulos.DataSource.DataSet.First;
     aNomeModulo := gridModulos.Columns[0].Field.Value;
   end;
-
-  gridModulos.DataSource.DataSet.BeforePost :=
 end;
 
 procedure TformPrincipal.CarregaGridProblemas;
@@ -493,6 +491,7 @@ begin
   FControllerModulo := TControllerModulo.Create;
 
   CarregaGridModulos;
+  CarregaGridProblemas;
 end;
 
 procedure TformPrincipal.FormDestroy(Sender: TObject);
