@@ -115,7 +115,7 @@ object formPrincipal: TformPrincipal
               Caption = 'Salvar(F4)'
               Enabled = False
               Spacing = 2
-              OnMouseDown = btnSalvarProblemaMouseDown
+              OnClick = btnSalvarProblemaClick
               ExplicitLeft = 59
               ExplicitTop = 5
             end
@@ -422,7 +422,6 @@ object formPrincipal: TformPrincipal
       ActiveCard = pnlCadastroProblema
       AutoSize = True
       TabOrder = 1
-      OnExit = cardPanelProblemasExit
       object pnlCadastroProblema: TCard
         Left = 1
         Top = 1

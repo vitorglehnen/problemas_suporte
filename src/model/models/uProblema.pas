@@ -3,7 +3,7 @@ unit uProblema;
 interface
 
 uses
-  System.Classes;
+  System.Classes, Vcl.Dialogs;
 
 type
   TProblema = class
@@ -25,8 +25,18 @@ type
     property Solucao: TStream read FSolucao write FSolucao;
     property Data: TDate read FData write FData;
     property Hora: TTime read FHora write FHora;
+
+    function ValidaDados: Boolean;
   end;
 
 implementation
+
+{ TProblema }
+
+function TProblema.ValidaDados: Boolean;
+begin
+  Result := (length(Titulo) > 0) and
+            (length(Modulo) > 0);
+end;
 
 end.

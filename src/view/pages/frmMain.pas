@@ -144,12 +144,9 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure btnCancelarProblemaMouseDown(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure btnSalvarProblemaMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
     procedure rdbtnFiltroPesqProblemaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure gridProblemasCellClick(Column: TColumn);
-    procedure cardPanelProblemasExit(Sender: TObject);
     procedure btnEditarProblemaClick(Sender: TObject);
     procedure btnExcluirProblemaClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -168,6 +165,7 @@ type
     procedure gridModulosKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure btnExcluirModuloClick(Sender: TObject);
+    procedure btnSalvarProblemaClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -183,7 +181,6 @@ type
     procedure PreencheCbxModulos;
     procedure InverteBotoesCrudProblemas;
     procedure InverteCamposProblemas;
-    procedure SalvarAlteracaoModulo;
   public
     { Public declarations }
     FEdicaoProblema: Boolean;
@@ -205,34 +202,44 @@ begin
   var msDetalhes: TMemoryStream := TMemoryStream.Create;
   var msSolucao: TMemoryStream := TMemoryStream.Create;
 
-  InverteBotoesCrudProblemas;
-
   try
     mmDetalhesProblema.Lines.SaveToStream(msDetalhes);
     mmSolucaoProblema.Lines.SaveToStream(msSolucao);
 
-    aProblema.Codigo := StrToInt(edtCodProblema.Text);
     aProblema.Titulo := edtTituloProblema.Text;
     aProblema.Modulo := cbModulo.Text;
     aProblema.Chamado := edtChamadoProblema.Text;
     aProblema.Detalhes := msDetalhes;
     aProblema.Solucao := msSolucao;
 
-    if FEdicaoProblema then
-      FControllerProblema.UpdateProblema(aProblema)
-    else
-      FControllerProblema.InsertProblema(aProblema);
+    if aProblema.ValidaDados then
+    begin
+      if FEdicaoProblema then
+      begin
+        aProblema.Codigo := StrToInt(edtCodProblema.Text);
+        FControllerProblema.UpdateProblema(aProblema);
+      end
+      else
+      begin
+        FControllerProblema.InsertProblema(aProblema);
+      end;
 
+      FEdicaoProblema := False;
+      btnImagensProblema.Enabled := True;
+      InverteCamposProblemas;
+      InverteBotoesCrudProblemas;
+      CarregaGridProblemas;
+    end
+    else
+    begin
+      MessageBox(0, PChar('Preencha os dados obrigatórios!'),
+      'Dados obrigatórios', MB_ICONWARNING or MB_OK);
+    end;
   finally
     aProblema.Free;
     msDetalhes.Free;
     msSolucao.Free;
   end;
-
-  FEdicaoProblema := False;
-  btnImagensProblema.Enabled := True;
-
-  InverteCamposProblemas;
 end;
 
 procedure TformPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
@@ -255,6 +262,9 @@ begin
   cardPanelProblemas.ActiveCard := pnlCadastroProblema;
   lblTotalDeProblemas.Caption := lblTotalDeProblemas.Caption + inttostr(FControllerProblema.BuscaTabelaProblemas.DataSet.RecordCount);
   pnlProblemas.Enabled := True;
+
+  CarregaGridModulos;
+  CarregaGridProblemas;
 end;
 
 procedure TformPrincipal.mmDetalhesProblemaEnter(Sender: TObject);
@@ -313,11 +323,6 @@ end;
 procedure TformPrincipal.rdbtnFiltroPesqProblemaClick(Sender: TObject);
 begin
   CarregaGridProblemas;
-end;
-
-procedure TformPrincipal.SalvarAlteracaoModulo;
-begin
-  ShowMessage('sim');
 end;
 
 procedure TformPrincipal.btnImagensProblemaClick(Sender: TObject);
@@ -392,20 +397,9 @@ begin
   CarregaGridModulos;
 end;
 
-procedure TformPrincipal.btnSalvarProblemaMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+procedure TformPrincipal.btnSalvarProblemaClick(Sender: TObject);
 begin
   EventoSalvarProblema;
-end;
-
-procedure TformPrincipal.cardPanelProblemasExit(Sender: TObject);
-begin
-  if not btnNovoProblema.Enabled then
-  begin
-    MessageBox(0, PChar('Salve ou cancele antes de continuar!'),
-      'Cadastro de problemas', MB_ICONWARNING or MB_OK);
-    pnlProblemas.SetFocus;
-  end;
 end;
 
 procedure TformPrincipal.CarregaDadosProblemas;
@@ -489,9 +483,6 @@ procedure TformPrincipal.FormCreate(Sender: TObject);
 begin
   FControllerProblema := TControllerProblema.Create;
   FControllerModulo := TControllerModulo.Create;
-
-  CarregaGridModulos;
-  CarregaGridProblemas;
 end;
 
 procedure TformPrincipal.FormDestroy(Sender: TObject);
@@ -623,6 +614,7 @@ begin
 
   edtTituloProblema.Clear;
   edtChamadoProblema.Clear;
+  edtCodProblema.Clear;
   edtDataProblema.Text := DateToStr(date);
   cbModulo.ItemIndex := -1;
   mmSolucaoProblema.Clear;
