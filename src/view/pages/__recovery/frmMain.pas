@@ -337,7 +337,7 @@ end;
 procedure TformPrincipal.btnExcluirModuloClick(Sender: TObject);
 begin
   if Application.MessageBox('Deseja excluir este registro?',
-      'Excluir módulo', +MB_ICONQUESTION + MB_YESNO) = MrYes then
+      'Excluir mÃ³dulo', +MB_ICONQUESTION + MB_YESNO) = MrYes then
   begin
     var aModulo : TModulo := TModulo.Create;
 
@@ -462,8 +462,6 @@ begin
     gridModulos.DataSource.DataSet.First;
     aNomeModulo := gridModulos.Columns[0].Field.Value;
   end;
-
-  gridModulos.DataSource.DataSet.BeforePost :=
 end;
 
 procedure TformPrincipal.CarregaGridProblemas;

@@ -8,12 +8,12 @@ uses
   uDAOModulo in 'src\model\DAO\uDAOModulo.pas',
   uDAOGridProblema in 'src\model\DAO\uDAOGridProblema.pas',
   uControllerProblema in 'src\controller\uControllerProblema.pas',
-  uControllerGridModulo in 'src\controller\uControllerGridModulo.pas',
   uDAOProblema in 'src\model\DAO\uDAOProblema.pas',
   frmImagensProblema in 'src\view\pages\frmImagensProblema.pas' {formImagensProblema},
   uImagemProblema in 'src\model\models\uImagemProblema.pas',
   uDAOImagemProblema in 'src\model\dao\uDAOImagemProblema.pas',
-  uControllerModulo in 'src\controller\uControllerModulo.pas';
+  uControllerModulo in 'src\controller\uControllerModulo.pas',
+  uDAOGridModulo in 'src\model\DAO\uDAOGridModulo.pas';
 
 {$R *.res}
 begin
