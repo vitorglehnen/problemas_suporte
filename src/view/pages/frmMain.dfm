@@ -6,7 +6,7 @@ object formPrincipal: TformPrincipal
   BorderStyle = bsSingle
   Caption = 'Problemas Suporte'
   ClientHeight = 759
-  ClientWidth = 1550
+  ClientWidth = 1549
   Color = clBtnFace
   DockSite = True
   Font.Charset = DEFAULT_CHARSET
@@ -18,7 +18,6 @@ object formPrincipal: TformPrincipal
   OldCreateOrder = False
   Position = poScreenCenter
   PrintScale = poPrintToFit
-  WindowState = wsMaximized
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
@@ -28,11 +27,12 @@ object formPrincipal: TformPrincipal
   object pnlPrincipal: TPanel
     Left = 0
     Top = 0
-    Width = 1550
+    Width = 1549
     Height = 759
     Align = alClient
     AutoSize = True
     TabOrder = 0
+    ExplicitWidth = 1550
     object pnlBodyModulosProblemas: TPanel
       Left = 1
       Top = 1
@@ -75,16 +75,16 @@ object formPrincipal: TformPrincipal
             ExplicitHeight = 18
           end
           object lblTotalDeProblemas: TLabel
-            Left = 5
-            Top = 12
-            Width = 95
-            Height = 12
-            Caption = 'Total de problemas: '
+            Left = 6
+            Top = 1
+            Width = 35
+            Height = 13
+            Caption = 'Total: '
             Color = clMedGray
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBtnText
-            Font.Height = -9
-            Font.Name = 'Segoe UI Light'
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Tahoma'
             Font.Style = [fsBold]
             ParentColor = False
             ParentFont = False
@@ -103,6 +103,12 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alLeft
               Caption = 'Novo(F3)'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clGreen
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
               Spacing = 2
               OnMouseDown = btnNovoProblemaMouseDown
               ExplicitLeft = 3
@@ -116,6 +122,12 @@ object formPrincipal: TformPrincipal
               Align = alLeft
               Caption = 'Salvar(F4)'
               Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clGreen
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
               Spacing = 2
               OnClick = btnSalvarProblemaClick
               ExplicitLeft = 59
@@ -128,6 +140,12 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alRight
               Caption = 'Excluir'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMaroon
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
               Spacing = 2
               OnClick = btnExcluirProblemaClick
               ExplicitLeft = 146
@@ -141,6 +159,12 @@ object formPrincipal: TformPrincipal
               Align = alRight
               Caption = 'Cancelar'
               Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMaroon
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
               Spacing = 2
               OnMouseDown = btnCancelarProblemaMouseDown
               ExplicitLeft = 174
@@ -292,7 +316,7 @@ object formPrincipal: TformPrincipal
             Alignment = taCenter
             Caption = 'M'#243'dulos'
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
+            Font.Color = clGreen
             Font.Height = -15
             Font.Name = 'Tahoma'
             Font.Style = [fsBold]
@@ -420,24 +444,26 @@ object formPrincipal: TformPrincipal
     object cardPanelProblemas: TCardPanel
       Left = 513
       Top = 1
-      Width = 1036
+      Width = 1035
       Height = 757
       Align = alClient
       ActiveCard = pnlCadastroProblema
       AutoSize = True
       TabOrder = 1
+      ExplicitWidth = 1036
       object pnlCadastroProblema: TCard
         Left = 1
         Top = 1
-        Width = 1034
+        Width = 1033
         Height = 755
         Caption = 'Painel problema'
         CardIndex = 0
         TabOrder = 0
+        ExplicitWidth = 1034
         object pnlEscolhaUmRegistro: TPanel
           Left = 0
           Top = 0
-          Width = 1034
+          Width = 1033
           Height = 755
           Align = alClient
           Caption = 'Selecione um registro'
@@ -448,10 +474,11 @@ object formPrincipal: TformPrincipal
           Font.Style = []
           ParentFont = False
           TabOrder = 0
+          ExplicitWidth = 1034
           object pnlProblemas: TPanel
             Left = 1
             Top = 1
-            Width = 1032
+            Width = 1031
             Height = 753
             Align = alClient
             AutoSize = True
@@ -466,10 +493,11 @@ object formPrincipal: TformPrincipal
             TabOrder = 0
             TabStop = True
             Visible = False
+            ExplicitWidth = 1032
             object pnlBodyModuloProblema: TPanel
               Left = 0
-              Top = 82
-              Width = 1032
+              Top = 75
+              Width = 1031
               Height = 126
               Align = alTop
               AutoSize = True
@@ -477,12 +505,21 @@ object formPrincipal: TformPrincipal
               Padding.Left = 30
               Padding.Top = 20
               TabOrder = 1
+              ExplicitLeft = 1
+              ExplicitTop = 69
+              ExplicitWidth = 1032
               object btnImagensProblema: TSpeedButton
-                Left = 191
-                Top = 20
+                Left = 857
+                Top = 25
                 Width = 115
                 Height = 34
                 Caption = 'Imagens'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clGreen
+                Font.Height = -11
+                Font.Name = 'Tahoma'
+                Font.Style = [fsBold]
+                ParentFont = False
                 OnClick = btnImagensProblemaClick
               end
               object pnlModuloProblema: TPanel
@@ -500,14 +537,14 @@ object formPrincipal: TformPrincipal
                   Width = 135
                   Height = 17
                   Align = alTop
-                  Caption = 'Modulo do problema'
+                  Caption = '*&Modulo do problema'
                   Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clWindowText
+                  Font.Color = clGreen
                   Font.Height = -13
                   Font.Name = 'Segoe UI'
                   Font.Style = [fsBold]
                   ParentFont = False
-                  ExplicitWidth = 131
+                  ExplicitWidth = 137
                 end
                 object cbModulo: TComboBox
                   Left = 0
@@ -519,50 +556,56 @@ object formPrincipal: TformPrincipal
                   Color = clWhite
                   Enabled = False
                   TabOrder = 0
+                  ExplicitTop = 8
                 end
               end
             end
             object pnlBodySolucaoProblema: TPanel
               Left = 0
-              Top = 443
-              Width = 1032
-              Height = 310
+              Top = 436
+              Width = 1031
+              Height = 317
               Align = alClient
               AutoSize = True
               BevelOuter = bvNone
               Padding.Left = 30
-              Padding.Right = 250
               TabOrder = 3
+              ExplicitLeft = 2
+              ExplicitTop = 442
+              ExplicitWidth = 1032
               object pnlSolucaoProblema: TPanel
                 Left = 30
                 Top = 0
-                Width = 752
-                Height = 310
+                Width = 1001
+                Height = 317
                 Align = alClient
                 AutoSize = True
                 BevelOuter = bvNone
-                Padding.Bottom = 70
+                Padding.Right = 60
+                Padding.Bottom = 50
                 TabOrder = 0
+                ExplicitWidth = 752
+                ExplicitHeight = 321
                 object lblSolucaoProblema: TLabel
                   Left = 0
                   Top = 0
-                  Width = 752
+                  Width = 941
                   Height = 17
                   Align = alTop
-                  Caption = 'Solu'#231#227'o'
+                  Caption = '*&Solu'#231#227'o'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clGreen
                   Font.Height = -13
                   Font.Name = 'Segoe UI'
                   Font.Style = [fsBold]
                   ParentFont = False
-                  ExplicitWidth = 48
+                  ExplicitWidth = 54
                 end
                 object mmSolucaoProblema: TRichEdit
                   Left = 0
                   Top = 41
-                  Width = 752
-                  Height = 199
+                  Width = 941
+                  Height = 226
                   Align = alClient
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
@@ -575,18 +618,21 @@ object formPrincipal: TformPrincipal
                   TabOrder = 0
                   Zoom = 100
                   OnEnter = mmSolucaoProblemaEnter
-                  ExplicitHeight = 201
+                  ExplicitTop = 45
+                  ExplicitWidth = 985
+                  ExplicitHeight = 276
                 end
                 object pnlTopSolucaoProblema: TPanel
                   Left = 0
                   Top = 17
-                  Width = 752
+                  Width = 941
                   Height = 24
                   Align = alTop
                   Alignment = taLeftJustify
                   BevelOuter = bvNone
                   Enabled = False
                   TabOrder = 1
+                  ExplicitWidth = 752
                   object cbNameFontSolucao: TComboBox
                     Left = 41
                     Top = 0
@@ -688,7 +734,7 @@ object formPrincipal: TformPrincipal
                   object ActionToolBar2: TActionToolBar
                     Left = 257
                     Top = 0
-                    Width = 495
+                    Width = 684
                     Height = 24
                     Align = alClient
                     Caption = 'ActionToolBar2'
@@ -704,6 +750,7 @@ object formPrincipal: TformPrincipal
                     Font.Style = []
                     ParentFont = False
                     Spacing = 0
+                    ExplicitWidth = 495
                   end
                   object chkItalicoSolucao: TCheckBox
                     Left = 201
@@ -735,62 +782,69 @@ object formPrincipal: TformPrincipal
             object pnlTopProblema: TPanel
               Left = 0
               Top = 0
-              Width = 1032
-              Height = 82
+              Width = 1031
+              Height = 75
               Align = alTop
               AutoSize = True
               Padding.Top = 10
               Padding.Bottom = 20
               TabOrder = 0
+              ExplicitWidth = 1032
               object lblDataProblema: TLabel
                 Left = 633
                 Top = 11
-                Width = 36
-                Height = 21
-                Caption = 'Data'
+                Width = 31
+                Height = 16
+                Caption = '&Data'
                 Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -17
+                Font.Color = clBlack
+                Font.Height = -13
                 Font.Name = 'Tahoma'
-                Font.Style = []
+                Font.Style = [fsBold]
                 ParentFont = False
               end
               object lblChamadoProblema: TLabel
                 Left = 519
                 Top = 11
-                Width = 69
-                Height = 21
-                Caption = 'Chamado'
+                Width = 59
+                Height = 16
+                Caption = '&Chamado'
                 Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -17
+                Font.Color = clBlack
+                Font.Height = -13
                 Font.Name = 'Tahoma'
-                Font.Style = []
+                Font.Style = [fsBold]
                 ParentFont = False
               end
               object lblCodProblema: TLabel
                 Left = 752
-                Top = 25
-                Width = 33
-                Height = 13
-                Caption = 'C'#243'digo'
+                Top = 11
+                Width = 43
+                Height = 16
+                Caption = '&C'#243'digo'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clBlack
+                Font.Height = -13
+                Font.Name = 'Tahoma'
+                Font.Style = [fsBold]
+                ParentFont = False
               end
               object lblTituloProblema: TLabel
                 Left = 30
-                Top = 13
-                Width = 42
-                Height = 21
-                Caption = 'T'#237'tulo'
+                Top = 11
+                Width = 43
+                Height = 16
+                Caption = '*&T'#237'tulo'
                 Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -17
+                Font.Color = clBlack
+                Font.Height = -13
                 Font.Name = 'Tahoma'
-                Font.Style = []
+                Font.Style = [fsBold]
                 ParentFont = False
               end
               object edtDataProblema: TMaskEdit
                 Left = 633
-                Top = 38
+                Top = 27
                 Width = 97
                 Height = 21
                 TabStop = False
@@ -803,7 +857,7 @@ object formPrincipal: TformPrincipal
               object edtChamadoProblema: TEdit
                 Tag = 1
                 Left = 519
-                Top = 38
+                Top = 27
                 Width = 81
                 Height = 21
                 NumbersOnly = True
@@ -812,7 +866,7 @@ object formPrincipal: TformPrincipal
               end
               object edtCodProblema: TEdit
                 Left = 752
-                Top = 38
+                Top = 27
                 Width = 73
                 Height = 21
                 Enabled = False
@@ -820,7 +874,7 @@ object formPrincipal: TformPrincipal
               end
               object edtTituloProblema: TEdit
                 Left = 30
-                Top = 40
+                Top = 33
                 Width = 452
                 Height = 21
                 ReadOnly = True
@@ -829,48 +883,52 @@ object formPrincipal: TformPrincipal
             end
             object pnlBodyDetalhesProblema: TPanel
               Left = 0
-              Top = 208
-              Width = 1032
+              Top = 201
+              Width = 1031
               Height = 235
               Align = alTop
               AutoSize = True
               BevelOuter = bvNone
               Padding.Left = 30
-              Padding.Right = 250
               TabOrder = 2
+              ExplicitTop = 197
+              ExplicitWidth = 1032
               object pnlDetalhesProblema: TPanel
                 Left = 30
                 Top = 0
-                Width = 752
+                Width = 1001
                 Height = 235
                 Align = alClient
                 AutoSize = True
                 BevelOuter = bvNone
+                Padding.Right = 60
                 Padding.Bottom = 20
                 TabOrder = 0
+                ExplicitWidth = 752
                 object lblDetalhesProblema: TLabel
                   Left = 0
                   Top = 0
-                  Width = 752
+                  Width = 941
                   Height = 17
                   Align = alTop
-                  Caption = 'Detalhes do problema'
+                  Caption = '*&Detalhes do problema'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clGreen
                   Font.Height = -13
                   Font.Name = 'Segoe UI'
                   Font.Style = [fsBold]
                   ParentFont = False
-                  ExplicitWidth = 137
+                  ExplicitWidth = 143
                 end
                 object Panel2: TPanel
                   Left = 0
                   Top = 17
-                  Width = 752
+                  Width = 941
                   Height = 24
                   Align = alTop
                   BevelOuter = bvNone
                   TabOrder = 0
+                  ExplicitWidth = 752
                   object cbNameFontDetalhes: TComboBox
                     Left = 41
                     Top = 0
@@ -999,7 +1057,7 @@ object formPrincipal: TformPrincipal
                   Tag = 1
                   Left = 0
                   Top = 41
-                  Width = 752
+                  Width = 941
                   Height = 174
                   Align = alClient
                   Font.Charset = ANSI_CHARSET
@@ -1013,6 +1071,8 @@ object formPrincipal: TformPrincipal
                   TabOrder = 1
                   Zoom = 100
                   OnEnter = mmDetalhesProblemaEnter
+                  ExplicitTop = 45
+                  ExplicitWidth = 982
                 end
               end
             end
