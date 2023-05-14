@@ -8,6 +8,7 @@ object formPrincipal: TformPrincipal
   ClientHeight = 759
   ClientWidth = 1550
   Color = clBtnFace
+  DockSite = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -16,6 +17,7 @@ object formPrincipal: TformPrincipal
   KeyPreview = True
   OldCreateOrder = False
   Position = poScreenCenter
+  PrintScale = poPrintToFit
   WindowState = wsMaximized
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -249,7 +251,7 @@ object formPrincipal: TformPrincipal
             GradientEndColor = clBtnFace
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -12
+            Font.Height = -13
             Font.Name = 'Tahoma'
             Font.Style = []
             Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -262,6 +264,7 @@ object formPrincipal: TformPrincipal
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
             OnCellClick = gridProblemasCellClick
+            OnDrawColumnCell = gridProblemasDrawColumnCell
           end
         end
       end
@@ -396,10 +399,10 @@ object formPrincipal: TformPrincipal
             GradientEndColor = clBtnFace
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -14
+            Font.Height = -13
             Font.Name = 'Tahoma'
             Font.Style = []
-            Options = [dgEditing, dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+            Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
@@ -408,6 +411,7 @@ object formPrincipal: TformPrincipal
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
             OnCellClick = gridModulosCellClick
+            OnDrawColumnCell = gridModulosDrawColumnCell
             OnKeyDown = gridModulosKeyDown
           end
         end
@@ -571,6 +575,7 @@ object formPrincipal: TformPrincipal
                   TabOrder = 0
                   Zoom = 100
                   OnEnter = mmSolucaoProblemaEnter
+                  ExplicitHeight = 201
                 end
                 object pnlTopSolucaoProblema: TPanel
                   Left = 0

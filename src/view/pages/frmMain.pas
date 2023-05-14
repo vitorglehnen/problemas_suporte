@@ -166,6 +166,10 @@ type
       Shift: TShiftState);
     procedure btnExcluirModuloClick(Sender: TObject);
     procedure btnSalvarProblemaClick(Sender: TObject);
+    procedure gridModulosDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure gridProblemasDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
 
   private
     { Private declarations }
@@ -558,6 +562,19 @@ begin
   CarregaDadosProblemas;
 end;
 
+procedure TformPrincipal.gridModulosDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  if State = [] then
+  begin
+    if gridModulos.DataSource.DataSet.RecNo mod 2 = 1 then
+      gridModulos.Canvas.Brush.Color := clWhite
+    else
+      gridModulos.Canvas.Brush.Color := clBtnFace;
+  end;
+  gridModulos.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+
 procedure TformPrincipal.gridModulosKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
@@ -571,6 +588,19 @@ end;
 procedure TformPrincipal.gridProblemasCellClick(Column: TColumn);
 begin
   CarregaDadosProblemas;
+end;
+
+procedure TformPrincipal.gridProblemasDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  if State = [] then
+  begin
+    if gridProblemas.DataSource.DataSet.RecNo mod 2 = 1 then
+      gridProblemas.Canvas.Brush.Color := clWhite
+    else
+      gridProblemas.Canvas.Brush.Color := clBtnFace;
+  end;
+  gridProblemas.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
 procedure TformPrincipal.InverteBotoesCrudProblemas;
