@@ -131,8 +131,9 @@ type
     chkItalicoDetalhes: TCheckBox;
     chkNegritoDetalhes: TCheckBox;
     mmDetalhesProblema: TRichEdit;
-    Panel1: TPanel;
     btnExcluirModulo: TSpeedButton;
+    edtModulo: TEdit;
+    lblModulo: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
@@ -451,14 +452,13 @@ end;
 
 procedure TformPrincipal.CarregaGridModulos;
 begin
-  var aNomeModulo: String;
   var aTabelaModulos: TDataSource := FControllerModulo.BuscaTabelaModulos;
 
   if aTabelaModulos.DataSet.RecordCount > 0 then
   begin
     gridModulos.DataSource := aTabelaModulos;
     gridModulos.DataSource.DataSet.First;
-    aNomeModulo := gridModulos.Columns[0].Field.Value;
+    edtModulo.Text := gridModulos.Columns[0].Field.Value;
   end;
 end;
 
@@ -480,6 +480,11 @@ begin
       gridProblemas.DataSource :=
       FControllerProblema.BuscaTabelaProblemasPorModulo(aNomeModulo);
     end;
+  end;
+
+  if gridModulos.DataSource.DataSet.RecordCount > 0 then
+  begin
+    edtModulo.Text := gridModulos.Columns[0].Field.Value;
   end;
 end;
 
