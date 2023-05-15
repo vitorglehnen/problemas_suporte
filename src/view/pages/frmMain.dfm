@@ -353,6 +353,17 @@ object formPrincipal: TformPrincipal
               ExplicitLeft = 89
               ExplicitTop = -4
             end
+            object btnCancelarModulo: TSpeedButton
+              Left = 142
+              Top = 1
+              Width = 48
+              Height = 25
+              Align = alRight
+              Caption = 'Cancelar'
+              Enabled = False
+              OnMouseDown = btnCancelarMouseDown
+              ExplicitTop = 5
+            end
           end
           object pnlBodyPesqModulo: TPanel
             Left = 1
@@ -409,6 +420,7 @@ object formPrincipal: TformPrincipal
               Height = 21
               Enabled = False
               TabOrder = 1
+              OnExit = edtModuloExit
             end
           end
         end
@@ -447,6 +459,7 @@ object formPrincipal: TformPrincipal
             TitleFont.Style = []
             OnCellClick = gridModulosCellClick
             OnDrawColumnCell = gridModulosDrawColumnCell
+            OnDblClick = gridModulosDblClick
             OnKeyDown = gridModulosKeyDown
           end
         end

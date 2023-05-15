@@ -134,6 +134,7 @@ type
     btnExcluirModulo: TSpeedButton;
     edtModulo: TEdit;
     lblModulo: TLabel;
+    btnCancelarModulo: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
@@ -171,6 +172,10 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure gridProblemasDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure gridModulosDblClick(Sender: TObject);
+    procedure edtModuloExit(Sender: TObject);
+    procedure btnCancelarMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
 
   private
     { Private declarations }
@@ -186,6 +191,7 @@ type
     procedure PreencheCbxModulos;
     procedure InverteBotoesCrudProblemas;
     procedure InverteCamposProblemas;
+    procedure InverteBotoesCrudModulos;
   public
     { Public declarations }
     FEdicaoProblema: Boolean;
@@ -535,10 +541,30 @@ begin
   mmSolucaoProblema.SetFocus;
 end;
 
+procedure TformPrincipal.edtModuloExit(Sender: TObject);
+begin
+  if edtModulo.Text = gridModulos.Columns[0].Field.Value then
+  begin
+    edtModulo.Enabled := False;
+  end
+  else
+  begin
+    ShowMessage('Salve ou cancele antes de continuar');
+    edtModulo.SetFocus;
+  end;
+end;
+
 procedure TformPrincipal.btnCancelarModuloMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   gridModulos.SetFocus;
+end;
+
+procedure TformPrincipal.btnCancelarMouseDown(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  edtModulo.Enabled := False;
+  InverteBotoesCrudModulos;
 end;
 
 procedure TformPrincipal.btnCancelarProblemaMouseDown(Sender: TObject;
@@ -565,6 +591,16 @@ procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
 begin
   CarregaGridProblemas;
   CarregaDadosProblemas;
+end;
+
+procedure TformPrincipal.gridModulosDblClick(Sender: TObject);
+begin
+  InverteBotoesCrudModulos;
+  edtModulo.Enabled := True;
+  edtModulo.SetFocus;
+
+  pnlBodyProblemas.Enabled := False;
+  pnlProblemas.Enabled := False;
 end;
 
 procedure TformPrincipal.gridModulosDrawColumnCell(Sender: TObject;
@@ -606,6 +642,13 @@ begin
       gridProblemas.Canvas.Brush.Color := clBtnFace;
   end;
   gridProblemas.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+
+procedure TformPrincipal.InverteBotoesCrudModulos;
+begin
+  btnNovoModulo.Enabled := not btnNovoModulo.Enabled;
+  btnCancelarModulo.Enabled := not btnCancelarModulo.Enabled;
+  btnExcluirModulo.Enabled := not btnExcluirModulo.Enabled;
 end;
 
 procedure TformPrincipal.InverteBotoesCrudProblemas;
