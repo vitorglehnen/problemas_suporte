@@ -47,7 +47,7 @@ begin
   FDataSource := FConn.CriarDataSource;
 
   FQuery.SQL.Text := 'SELECT titulo FROM problemas ' +
-       'WHERE cod_prob = :cod_prob';
+       'WHERE cod_prob like %:cod_prob%';
 //       'cod_mod = (SELECT m.cod_mod FROM modulos m WHERE m.nome = :nome_mod) OR ' +
 //       'titulo = :titulo OR ' +
 //       'chamado = :chamado OR ' +
