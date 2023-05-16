@@ -14,6 +14,7 @@ type
   public
     function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
     function BuscaTabelaProblemas : TDataSource;
+    function BuscaTabelaProblemasPorFiltro(aProblema: TProblema): TDataSource;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -31,6 +32,37 @@ begin
   FDataSource := FConn.CriarDataSource;
 
   FQuery.SQL.Text := 'SELECT titulo FROM PROBLEMAS ORDER BY TITULO';
+  FQuery.Open;
+  FQuery.FetchAll;
+
+  FDataSource.DataSet := FQuery;
+
+  Result := FDataSource;
+end;
+
+function TDAOGridProblema.BuscaTabelaProblemasPorFiltro(
+  aProblema: TProblema): TDataSource;
+begin
+  FQuery := FConn.CriarQuery;
+  FDataSource := FConn.CriarDataSource;
+
+  FQuery.SQL.Text := 'SELECT titulo FROM problemas ' +
+       'WHERE cod_prob = :cod_prob';
+//       'cod_mod = (SELECT m.cod_mod FROM modulos m WHERE m.nome = :nome_mod) OR ' +
+//       'titulo = :titulo OR ' +
+//       'chamado = :chamado OR ' +
+//       'detalhes = :detalhes OR ' +
+//       'solucao = :solucao OR ' +
+//       'datacr = :datacr';
+
+  FQuery.ParamByName('cod_prob').AsInteger := aProblema.Codigo;
+//  FQuery.ParamByName('nome_mod').AsString := aProblema.Modulo;
+//  FQuery.ParamByName('titulo').AsString := aProblema.Titulo;
+//  FQuery.ParamByName('chamado').AsString := aProblema.Chamado;
+//  FQuery.ParamByName('detalhes').AsStream := aProblema.Detalhes;
+//  FQuery.ParamByName('solucao').AsStream := aProblema.Solucao;
+//  FQuery.ParamByName('datacr').AsDate := aProblema.Data;
+
   FQuery.Open;
   FQuery.FetchAll;
 
