@@ -218,8 +218,6 @@ object formPrincipal: TformPrincipal
                 Align = alTop
                 TabOrder = 0
                 OnChange = edtPesqProblemaChange
-                ExplicitLeft = -4
-                ExplicitTop = 17
               end
               object pnlFiltroPesqProblema: TPanel
                 Left = 0
@@ -250,14 +248,11 @@ object formPrincipal: TformPrincipal
                   Width = 113
                   Height = 21
                   Style = csDropDownList
-                  ItemIndex = 1
                   TabOrder = 1
-                  Text = 'Titulo'
                   Items.Strings = (
                     'C'#243'digo'
                     'Titulo'
                     'Chamado'
-                    'Modulo'
                     'Detalhes'
                     'Solu'#231#227'o')
                 end

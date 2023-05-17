@@ -46,9 +46,9 @@ begin
   FQuery := FConn.CriarQuery;
   FDataSource := FConn.CriarDataSource;
 
-  FQuery.SQL.Text := 'SELECT titulo FROM problemas ' +
-       'WHERE CAST(cod_prob AS VARCHAR(10)) like :cod_prob || ''%''';
-//       'cod_mod = (SELECT m.cod_mod FROM modulos m WHERE m.nome = :nome_mod) OR ' +
+  FQuery.SQL.Text := 'SELECT titulo FROM problemas WHERE ' +
+       'CAST(cod_prob AS VARCHAR(10)) like :cod_prob || ''%''' +
+       'OR UPPER(titulo) like UPPER(:titulo) || ''%''';
 //       'titulo = :titulo OR ' +
 //       'chamado = :chamado OR ' +
 //       'detalhes = :detalhes OR ' +
@@ -56,8 +56,7 @@ begin
 //       'datacr = :datacr';
 
   FQuery.ParamByName('cod_prob').AsInteger := aProblema.Codigo;
-//  FQuery.ParamByName('nome_mod').AsString := aProblema.Modulo;
-//  FQuery.ParamByName('titulo').AsString := aProblema.Titulo;
+  FQuery.ParamByName('titulo').AsString := aProblema.Titulo;
 //  FQuery.ParamByName('chamado').AsString := aProblema.Chamado;
 //  FQuery.ParamByName('detalhes').AsStream := aProblema.Detalhes;
 //  FQuery.ParamByName('solucao').AsStream := aProblema.Solucao;
