@@ -533,16 +533,20 @@ begin
   var aProblema := TProblema.Create;
 
   try
-    case cbFiltroPesqProblema.ItemIndex of
-    0: aProblema.Codigo := StrToInt(edtPesqProblema.Text);
-    1: aProblema.Titulo := edtPesqProblema.Text;
-    2: aProblema.Chamado := edtPesqProblema.Text;
-    3: aProblema.Modulo := edtPesqProblema.Text;
-    4: ;//aProblema.Detalhes := edtPesqProblema.Text;
-    5: ;//aProblema.Detalhes := edtPesqProblema.Text;
-    end;
-
-    FControllerProblema.BuscaTabelaProblemasPorFiltro(aProblema);
+    if Length(edtPesqProblema.Text) > 0 then
+    begin
+      case cbFiltroPesqProblema.ItemIndex of
+        0: aProblema.Codigo := StrToInt(edtPesqProblema.Text);
+        1: aProblema.Titulo := edtPesqProblema.Text;
+        2: aProblema.Chamado := edtPesqProblema.Text;
+        3: aProblema.Modulo := edtPesqProblema.Text;
+        4: ;//aProblema.Detalhes := edtPesqProblema.Text;
+        5: ;//aProblema.Detalhes := edtPesqProblema.Text;
+      end;
+      FControllerProblema.BuscaTabelaProblemasPorFiltro(aProblema);
+    end
+    else
+      CarregaGridProblemas;
   finally
     aProblema.Free;
   end;

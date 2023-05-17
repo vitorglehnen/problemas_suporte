@@ -218,6 +218,8 @@ object formPrincipal: TformPrincipal
                 Align = alTop
                 TabOrder = 0
                 OnChange = edtPesqProblemaChange
+                ExplicitLeft = -4
+                ExplicitTop = 17
               end
               object pnlFiltroPesqProblema: TPanel
                 Left = 0
@@ -341,8 +343,6 @@ object formPrincipal: TformPrincipal
             Height = 27
             Align = alBottom
             TabOrder = 0
-            ExplicitLeft = -2
-            ExplicitTop = 80
             object btnNovoModulo: TSpeedButton
               Left = 1
               Top = 1
