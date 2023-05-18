@@ -46,17 +46,25 @@ begin
   FQuery := FConn.CriarQuery;
   FDataSource := FConn.CriarDataSource;
 
-  FQuery.SQL.Text := 'SELECT titulo FROM problemas WHERE ' +
-       'CAST(cod_prob AS VARCHAR(10)) like :cod_prob || ''%''' +
-       'OR UPPER(titulo) like UPPER(:titulo) || ''%''';
+  FQuery.SQL.Clear;
+  FQuery.SQL.Add('SELECT titulo FROM problemas WHERE');
+
+  if (Length(IntToStr(aProblema.Codigo)) > 0) then
+  begin
+    FQuery.SQL.Add('CAST(cod_prob AS VARCHAR(10)) like :cod_prob || ''%''');
+    FQuery.ParamByName('cod_prob').AsInteger := aProblema.Codigo;
+  end;
+
+  //FQuery.SQL.add('OR UPPER(titulo) like UPPER(:titulo) || ''%''');
+
 //       'titulo = :titulo OR ' +
 //       'chamado = :chamado OR ' +
 //       'detalhes = :detalhes OR ' +
 //       'solucao = :solucao OR ' +
 //       'datacr = :datacr';
 
-  FQuery.ParamByName('cod_prob').AsInteger := aProblema.Codigo;
-  FQuery.ParamByName('titulo').AsString := aProblema.Titulo;
+
+//  FQuery.ParamByName('titulo').AsString := aProblema.Titulo;
 //  FQuery.ParamByName('chamado').AsString := aProblema.Chamado;
 //  FQuery.ParamByName('detalhes').AsStream := aProblema.Detalhes;
 //  FQuery.ParamByName('solucao').AsStream := aProblema.Solucao;

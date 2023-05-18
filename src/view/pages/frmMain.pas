@@ -542,6 +542,7 @@ begin
         3: ;//aProblema.Detalhes := edtPesqProblema.Text;
         4: ;//aProblema.Detalhes := edtPesqProblema.Text;
       end;
+      ShowMessage(IntToStr(Length(IntToStr(aProblema.Codigo))));
       FControllerProblema.BuscaTabelaProblemasPorFiltro(aProblema);
     end
     else
