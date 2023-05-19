@@ -100,19 +100,11 @@ type
     pnlProblemas: TPanel;
     pnlBodyModuloProblema: TPanel;
     btnImagensProblema: TSpeedButton;
-    pnlModuloProblema: TPanel;
-    lblModuloProblema: TLabel;
-    cbModulo: TComboBox;
     pnlBodySolucaoProblema: TPanel;
     pnlSolucaoProblema: TPanel;
     lblSolucaoProblema: TLabel;
     mmSolucaoProblema: TRichEdit;
     pnlTopSolucaoProblema: TPanel;
-    cbNameFontSolucao: TComboBox;
-    cbSizeFontSolucao: TComboBox;
-    ActionToolBar2: TActionToolBar;
-    chkItalicoSolucao: TCheckBox;
-    chkNegritoSolucao: TCheckBox;
     pnlTopProblema: TPanel;
     lblDataProblema: TLabel;
     lblChamadoProblema: TLabel;
@@ -125,13 +117,21 @@ type
     pnlBodyDetalhesProblema: TPanel;
     pnlDetalhesProblema: TPanel;
     lblDetalhesProblema: TLabel;
-    Panel2: TPanel;
+    pnlTopMmDetalhes: TPanel;
     cbNameFontDetalhes: TComboBox;
     cbSizeFontDetalhes: TComboBox;
     chkItalicoDetalhes: TCheckBox;
     chkNegritoDetalhes: TCheckBox;
     mmDetalhesProblema: TRichEdit;
     btnExcluirModulo: TSpeedButton;
+    pnlModuloProblema: TPanel;
+    lblModuloProblema: TLabel;
+    cbModulo: TComboBox;
+    pnlTopMmSolucao: TPanel;
+    chkItalicoSolucao: TCheckBox;
+    chkNegritoSolucao: TCheckBox;
+    cbNameFontSolucao: TComboBox;
+    cbSizeFontSolucao: TComboBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
@@ -542,8 +542,7 @@ begin
         3: ;//aProblema.Detalhes := edtPesqProblema.Text;
         4: ;//aProblema.Detalhes := edtPesqProblema.Text;
       end;
-      ShowMessage(IntToStr(Length(IntToStr(aProblema.Codigo))));
-      FControllerProblema.BuscaTabelaProblemasPorFiltro(aProblema);
+      FControllerProblema.BuscaTabelaProblemasPorFiltro(aProblema, cbFiltroPesqProblema.Text);
     end
     else
       CarregaGridProblemas;

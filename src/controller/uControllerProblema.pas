@@ -24,7 +24,7 @@ type
     function BuscaTabelaProblemas : TDataSource;
     function BuscaQuantidadeProblemas : TDataSource;
     function BuscaImagens(aCodigoProblema: Integer): TStringList;
-    function BuscaTabelaProblemasPorFiltro(aProblema: TProblema): TDataSource;
+    function BuscaTabelaProblemasPorFiltro(aProblema: TProblema; aFiltro: String): TDataSource;
     procedure InsertProblema(aProblema: TProblema);
     procedure InsertImagem(aImagem: TImagemProblema);
     procedure DeleteImagem(aImagemProblema: TImagemProblema);
@@ -64,9 +64,9 @@ begin
 end;
 
 function TControllerProblema.BuscaTabelaProblemasPorFiltro(
-  aProblema: TProblema): TDataSource;
+  aProblema: TProblema; aFiltro: String): TDataSource;
 begin
-  Result := FDAOGridProblema.BuscaTabelaProblemasPorFiltro(aProblema);
+  Result := FDAOGridProblema.BuscaTabelaProblemasPorFiltro(aProblema, aFiltro);
 end;
 
 function TControllerProblema.BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;

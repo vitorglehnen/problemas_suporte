@@ -248,13 +248,13 @@ object formPrincipal: TformPrincipal
                   Width = 113
                   Height = 21
                   Style = csDropDownList
+                  ItemIndex = 0
                   TabOrder = 1
+                  Text = 'C'#243'digo'
                   Items.Strings = (
                     'C'#243'digo'
-                    'Titulo'
-                    'Chamado'
-                    'Detalhes'
-                    'Solu'#231#227'o')
+                    'T'#237'tulo'
+                    'Chamado')
                 end
               end
             end
@@ -500,10 +500,10 @@ object formPrincipal: TformPrincipal
               Padding.Top = 20
               TabOrder = 1
               object btnImagensProblema: TSpeedButton
-                Left = 857
-                Top = 25
+                Left = 190
+                Top = 20
                 Width = 115
-                Height = 34
+                Height = 53
                 Caption = 'Imagens'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clGreen
@@ -522,6 +522,8 @@ object formPrincipal: TformPrincipal
                 AutoSize = True
                 BevelOuter = bvNone
                 TabOrder = 0
+                ExplicitLeft = 71
+                ExplicitTop = 14
                 object lblModuloProblema: TLabel
                   Left = 0
                   Top = 0
@@ -614,147 +616,146 @@ object formPrincipal: TformPrincipal
                   BevelOuter = bvNone
                   Enabled = False
                   TabOrder = 1
-                  object cbNameFontSolucao: TComboBox
-                    Left = 41
-                    Top = 0
-                    Width = 98
-                    Height = 22
-                    Align = alLeft
-                    Style = csOwnerDrawFixed
-                    Enabled = False
-                    ItemIndex = 0
-                    TabOrder = 0
-                    TabStop = False
-                    Text = 'Arial'
-                    OnChange = cbSizeFontSolucaoChange
-                    Items.Strings = (
-                      'Arial'
-                      'Calibri'
-                      'Cambria'
-                      'Candara'
-                      'Comic Sans MS'
-                      'Consolas'
-                      'Courier New'
-                      'Georgia'
-                      'Impact'
-                      'Lucida Console'
-                      'Lucida Sans Unicode'
-                      'Microsoft Sans Serif'
-                      'Palatino Linotype'
-                      'Segoe UI'
-                      'Tahoma'
-                      'Times New Roman'
-                      'Trebuchet MS'
-                      'Verdana')
-                  end
-                  object cbSizeFontSolucao: TComboBox
+                  object pnlTopMmSolucao: TPanel
                     Left = 0
                     Top = 0
-                    Width = 41
-                    Height = 22
-                    Align = alLeft
-                    Style = csOwnerDrawFixed
-                    Enabled = False
-                    ItemIndex = 9
-                    TabOrder = 1
-                    TabStop = False
-                    Text = '10'
-                    OnChange = cbSizeFontSolucaoChange
-                    Items.Strings = (
-                      '1'
-                      '2'
-                      '3'
-                      '4'
-                      '5'
-                      '6'
-                      '7'
-                      '8'
-                      '9'
-                      '10'
-                      '11'
-                      '12'
-                      '13'
-                      '14'
-                      '15'
-                      '16'
-                      '17'
-                      '18'
-                      '19'
-                      '20'
-                      '21'
-                      '22'
-                      '23'
-                      '24'
-                      '25'
-                      '26'
-                      '27'
-                      '28'
-                      '29'
-                      '30'
-                      '31'
-                      '32'
-                      '33'
-                      '34'
-                      '35'
-                      '36'
-                      '37'
-                      '38'
-                      '39'
-                      '40'
-                      '41'
-                      '42'
-                      '43'
-                      '44'
-                      '45'
-                      '46'
-                      '47'
-                      '48'
-                      '49'
-                      '50')
-                  end
-                  object ActionToolBar2: TActionToolBar
-                    Left = 257
-                    Top = 0
-                    Width = 684
+                    Width = 941
                     Height = 24
                     Align = alClient
-                    Caption = 'ActionToolBar2'
-                    Color = clMenuBar
-                    ColorMap.DisabledFontColor = 7171437
-                    ColorMap.HighlightColor = clWhite
-                    ColorMap.BtnSelectedFont = clBlack
-                    ColorMap.UnusedColor = clWhite
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clBlack
-                    Font.Height = -11
-                    Font.Name = 'Tahoma'
-                    Font.Style = []
-                    ParentFont = False
-                    Spacing = 0
-                  end
-                  object chkItalicoSolucao: TCheckBox
-                    Left = 201
-                    Top = 0
-                    Width = 56
-                    Height = 24
-                    TabStop = False
-                    Align = alLeft
-                    Caption = 'It'#225'lico'
-                    Enabled = False
-                    TabOrder = 3
-                    OnClick = chkItalicoSolucaoClick
-                  end
-                  object chkNegritoSolucao: TCheckBox
-                    Left = 139
-                    Top = 0
-                    Width = 62
-                    Height = 24
-                    TabStop = False
-                    Align = alLeft
-                    Caption = 'Negrito'
-                    Enabled = False
-                    TabOrder = 4
-                    OnClick = chkNegritoSolucaoClick
+                    BevelOuter = bvNone
+                    TabOrder = 0
+                    ExplicitLeft = 16
+                    ExplicitTop = 6
+                    ExplicitWidth = 185
+                    ExplicitHeight = 41
+                    object chkItalicoSolucao: TCheckBox
+                      Left = 201
+                      Top = 0
+                      Width = 56
+                      Height = 24
+                      TabStop = False
+                      Align = alLeft
+                      Caption = 'It'#225'lico'
+                      Enabled = False
+                      TabOrder = 0
+                      OnClick = chkItalicoSolucaoClick
+                      ExplicitLeft = 241
+                      ExplicitTop = 6
+                    end
+                    object chkNegritoSolucao: TCheckBox
+                      Left = 139
+                      Top = 0
+                      Width = 62
+                      Height = 24
+                      TabStop = False
+                      Align = alLeft
+                      Caption = 'Negrito'
+                      Enabled = False
+                      TabOrder = 1
+                      OnClick = chkNegritoSolucaoClick
+                    end
+                    object cbNameFontSolucao: TComboBox
+                      Left = 41
+                      Top = 0
+                      Width = 98
+                      Height = 22
+                      Align = alLeft
+                      Style = csOwnerDrawFixed
+                      Enabled = False
+                      ItemIndex = 0
+                      TabOrder = 2
+                      TabStop = False
+                      Text = 'Arial'
+                      OnChange = cbSizeFontSolucaoChange
+                      Items.Strings = (
+                        'Arial'
+                        'Calibri'
+                        'Cambria'
+                        'Candara'
+                        'Comic Sans MS'
+                        'Consolas'
+                        'Courier New'
+                        'Georgia'
+                        'Impact'
+                        'Lucida Console'
+                        'Lucida Sans Unicode'
+                        'Microsoft Sans Serif'
+                        'Palatino Linotype'
+                        'Segoe UI'
+                        'Tahoma'
+                        'Times New Roman'
+                        'Trebuchet MS'
+                        'Verdana')
+                      ExplicitLeft = 35
+                      ExplicitTop = -4
+                    end
+                    object cbSizeFontSolucao: TComboBox
+                      Left = 0
+                      Top = 0
+                      Width = 41
+                      Height = 22
+                      Align = alLeft
+                      Style = csOwnerDrawFixed
+                      Enabled = False
+                      ItemIndex = 9
+                      TabOrder = 3
+                      TabStop = False
+                      Text = '10'
+                      OnChange = cbSizeFontSolucaoChange
+                      Items.Strings = (
+                        '1'
+                        '2'
+                        '3'
+                        '4'
+                        '5'
+                        '6'
+                        '7'
+                        '8'
+                        '9'
+                        '10'
+                        '11'
+                        '12'
+                        '13'
+                        '14'
+                        '15'
+                        '16'
+                        '17'
+                        '18'
+                        '19'
+                        '20'
+                        '21'
+                        '22'
+                        '23'
+                        '24'
+                        '25'
+                        '26'
+                        '27'
+                        '28'
+                        '29'
+                        '30'
+                        '31'
+                        '32'
+                        '33'
+                        '34'
+                        '35'
+                        '36'
+                        '37'
+                        '38'
+                        '39'
+                        '40'
+                        '41'
+                        '42'
+                        '43'
+                        '44'
+                        '45'
+                        '46'
+                        '47'
+                        '48'
+                        '49'
+                        '50')
+                      ExplicitLeft = 8
+                      ExplicitTop = 2
+                    end
                   end
                 end
               end
@@ -896,7 +897,7 @@ object formPrincipal: TformPrincipal
                   ParentFont = False
                   ExplicitWidth = 143
                 end
-                object Panel2: TPanel
+                object pnlTopMmDetalhes: TPanel
                   Left = 0
                   Top = 17
                   Width = 941

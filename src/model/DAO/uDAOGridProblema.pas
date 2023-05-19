@@ -14,7 +14,7 @@ type
   public
     function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
     function BuscaTabelaProblemas : TDataSource;
-    function BuscaTabelaProblemasPorFiltro(aProblema: TProblema): TDataSource;
+    function BuscaTabelaProblemasPorFiltro(aProblema: TProblema; aFiltro: String): TDataSource;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -41,7 +41,7 @@ begin
 end;
 
 function TDAOGridProblema.BuscaTabelaProblemasPorFiltro(
-  aProblema: TProblema): TDataSource;
+  aProblema: TProblema; aFiltro: String): TDataSource;
 begin
   FQuery := FConn.CriarQuery;
   FDataSource := FConn.CriarDataSource;
@@ -49,26 +49,21 @@ begin
   FQuery.SQL.Clear;
   FQuery.SQL.Add('SELECT titulo FROM problemas WHERE');
 
-  if (Length(IntToStr(aProblema.Codigo)) > 0) then
+  if aFiltro = 'Código' then
   begin
     FQuery.SQL.Add('CAST(cod_prob AS VARCHAR(10)) like :cod_prob || ''%''');
     FQuery.ParamByName('cod_prob').AsInteger := aProblema.Codigo;
+  end
+  else if aFiltro = 'Título' then
+  begin
+    FQuery.SQL.Add('UPPER(titulo) like UPPER(:titulo) || ''%''');
+    FQuery.ParamByName('titulo').AsString := aProblema.Titulo;
+  end
+  else if aFiltro = 'Chamado' then
+  begin
+    FQuery.SQL.Add('chamado like ''%'' || :chamado || ''%''');
+    FQuery.ParamByName('chamado').AsString := aProblema.Chamado;
   end;
-
-  //FQuery.SQL.add('OR UPPER(titulo) like UPPER(:titulo) || ''%''');
-
-//       'titulo = :titulo OR ' +
-//       'chamado = :chamado OR ' +
-//       'detalhes = :detalhes OR ' +
-//       'solucao = :solucao OR ' +
-//       'datacr = :datacr';
-
-
-//  FQuery.ParamByName('titulo').AsString := aProblema.Titulo;
-//  FQuery.ParamByName('chamado').AsString := aProblema.Chamado;
-//  FQuery.ParamByName('detalhes').AsStream := aProblema.Detalhes;
-//  FQuery.ParamByName('solucao').AsStream := aProblema.Solucao;
-//  FQuery.ParamByName('datacr').AsDate := aProblema.Data;
 
   FQuery.Open;
   FQuery.FetchAll;
