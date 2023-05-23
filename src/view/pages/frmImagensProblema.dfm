@@ -114,6 +114,17 @@ object formImagensProblema: TformImagensProblema
         Enabled = False
         ExplicitLeft = 81
       end
+      object btnSelecionarImagem: TSpeedButton
+        Left = 282
+        Top = 6
+        Width = 69
+        Height = 45
+        Align = alLeft
+        Caption = 'Procurar'
+        Enabled = False
+        OnClick = btnSelecionarImagemClick
+        ExplicitLeft = 288
+      end
     end
     object Panel1: TPanel
       Left = 0

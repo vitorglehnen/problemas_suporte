@@ -14,6 +14,7 @@ type
   public
     procedure InsertImagem(aImagemProblema: TImagemProblema);
     function BuscaImagens(aCodigoProblema: Integer): TDataSource;
+    function BuscaProxCodigo: String;
     procedure DeleteImagem(aImagemProblema: TImagemProblema);
     constructor Create;
     destructor Destroy; override;
@@ -37,6 +38,18 @@ begin
 
   FDataSource.DataSet := FQuery;
   Result := FDataSource;
+end;
+
+function TDAOImagemProblema.BuscaProxCodigo: String;
+begin
+  FQuery := FConn.CriarQuery;
+  FDataSource := FConn.CriarDataSource;
+
+  FQuery.SQL.Text := 'SELECT NEXT VALUE FOR GEN_PROBIMG_ID FROM RDB$DATABASE';
+  FQuery.Open;
+
+  FDataSource.DataSet := FQuery;
+  Result := FDataSource.DataSet.Fields[0].Value;
 end;
 
 constructor TDAOImagemProblema.Create;

@@ -1,4 +1,6 @@
 program ProblemasSuporte;
+
+
 uses
   Vcl.Forms,
   frmMain in 'src\view\pages\frmMain.pas' {formPrincipal},

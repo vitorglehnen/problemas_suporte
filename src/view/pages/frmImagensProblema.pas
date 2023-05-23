@@ -21,6 +21,7 @@ type
     btnCancelarImagem: TSpeedButton;
     Panel1: TPanel;
     lblNmroImagem: TLabel;
+    btnSelecionarImagem: TSpeedButton;
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -32,6 +33,7 @@ type
     procedure btnAddImagemClick(Sender: TObject);
     procedure btnRemoverImagemClick(Sender: TObject);
     procedure imgProblemaDblClick(Sender: TObject);
+    procedure btnSelecionarImagemClick(Sender: TObject);
   private
     { Private declarations }
     FPosicaoListaImagem: Integer;
@@ -68,6 +70,27 @@ begin
     btnAntImagem.Enabled := False;
 
   lblNmroImagem.Caption := IntToStr(FPosicaoListaImagem + 1) + '/' + IntToStr(FListaImagens.Count)
+end;
+
+procedure TformImagensProblema.btnSelecionarImagemClick(Sender: TObject);
+begin
+  var aSaveDialog := TSaveDialog.Create(nil);
+  var aBitMap := TBitMap.Create;
+  var aPng := TPngImage.Create;
+
+  aSaveDialog.Filter := 'Arquivos PNG (*.png)|*.png';
+  try
+    if aSaveDialog.Execute then
+    begin
+      aPng.LoadFromFile(aSaveDialog.FileName);
+      aBitMap.Assign(aPng);
+      imgProblema.Picture.Assign(aBitMap);
+    end;
+  finally
+    aSaveDialog.Free;
+    aPng.Free;
+    aBitmap.Free
+  end;
 end;
 
 procedure TformImagensProblema.btnProxImagemClick(Sender: TObject);
@@ -137,10 +160,14 @@ begin
   var aNomeImagem : String;
   var aCaminhoImagem : String;
 
-  aCaminhoImagem := 'C:\Problemas Suporte\Imagens\';
-  aNomeImagem := aCaminhoImagem + FormatDateTime('dd-mm-yyyy.hh-nn-ss', Now) + '.png';
-
   FControllerProblema := TControllerProblema.Create;
+
+  aCaminhoImagem := 'C:\Problemas Suporte\Imagens\';
+  aNomeImagem := aCaminhoImagem +
+                  FControllerProblema.BuscaProxCodigoImagem +
+                  ' ' +
+                  FormatDateTime('dd-mm-yyyy.hh-nn-ss', Now) +
+                  '.png';
 
   try
     aImagemPNG.Assign(imgProblema.Picture.Bitmap);
@@ -216,6 +243,7 @@ begin
   btnSalvarImagem.Enabled := not btnSalvarImagem.Enabled;
   btnCancelarImagem.Enabled := not btnCancelarImagem.Enabled;
   btnRemoverImagem.Enabled := not btnRemoverImagem.Enabled;
+  btnSelecionarImagem.Enabled := not btnSelecionarImagem.Enabled;
 end;
 
 end.

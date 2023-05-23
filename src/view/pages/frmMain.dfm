@@ -241,6 +241,8 @@ object formPrincipal: TformPrincipal
                     'Somente do m'#243'dulo')
                   TabOrder = 0
                   OnClick = rdbtnFiltroPesqProblemaClick
+                  ExplicitLeft = 5
+                  ExplicitTop = 47
                 end
                 object cbFiltroPesqProblema: TComboBox
                   Left = 0
@@ -248,9 +250,9 @@ object formPrincipal: TformPrincipal
                   Width = 113
                   Height = 21
                   Style = csDropDownList
-                  ItemIndex = 0
+                  ItemIndex = 1
                   TabOrder = 1
-                  Text = 'C'#243'digo'
+                  Text = 'T'#237'tulo'
                   Items.Strings = (
                     'C'#243'digo'
                     'T'#237'tulo'
@@ -424,7 +426,7 @@ object formPrincipal: TformPrincipal
             Font.Height = -13
             Font.Name = 'Tahoma'
             Font.Style = []
-            Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgTitleClick, dgTitleHotTrack]
+            Options = [dgEditing, dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
@@ -522,8 +524,6 @@ object formPrincipal: TformPrincipal
                 AutoSize = True
                 BevelOuter = bvNone
                 TabOrder = 0
-                ExplicitLeft = 71
-                ExplicitTop = 14
                 object lblModuloProblema: TLabel
                   Left = 0
                   Top = 0
@@ -624,10 +624,6 @@ object formPrincipal: TformPrincipal
                     Align = alClient
                     BevelOuter = bvNone
                     TabOrder = 0
-                    ExplicitLeft = 16
-                    ExplicitTop = 6
-                    ExplicitWidth = 185
-                    ExplicitHeight = 41
                     object chkItalicoSolucao: TCheckBox
                       Left = 201
                       Top = 0
@@ -639,8 +635,6 @@ object formPrincipal: TformPrincipal
                       Enabled = False
                       TabOrder = 0
                       OnClick = chkItalicoSolucaoClick
-                      ExplicitLeft = 241
-                      ExplicitTop = 6
                     end
                     object chkNegritoSolucao: TCheckBox
                       Left = 139
@@ -686,8 +680,6 @@ object formPrincipal: TformPrincipal
                         'Times New Roman'
                         'Trebuchet MS'
                         'Verdana')
-                      ExplicitLeft = 35
-                      ExplicitTop = -4
                     end
                     object cbSizeFontSolucao: TComboBox
                       Left = 0
@@ -753,8 +745,6 @@ object formPrincipal: TformPrincipal
                         '48'
                         '49'
                         '50')
-                      ExplicitLeft = 8
-                      ExplicitTop = 2
                     end
                   end
                 end

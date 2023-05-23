@@ -14,7 +14,7 @@ type
   public
     function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
     function BuscaTabelaProblemas : TDataSource;
-    function BuscaTabelaProblemasPorFiltro(aProblema: TProblema; aFiltro: String): TDataSource;
+    function BuscaTabelaProblemasPorFiltro(aProblema: TProblema; aColuna: String; aFiltro: String): TDataSource;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -40,8 +40,7 @@ begin
   Result := FDataSource;
 end;
 
-function TDAOGridProblema.BuscaTabelaProblemasPorFiltro(
-  aProblema: TProblema; aFiltro: String): TDataSource;
+function TDAOGridProblema.BuscaTabelaProblemasPorFiltro(aProblema: TProblema; aColuna: String; aFiltro: String): TDataSource;
 begin
   FQuery := FConn.CriarQuery;
   FDataSource := FConn.CriarDataSource;
@@ -49,17 +48,23 @@ begin
   FQuery.SQL.Clear;
   FQuery.SQL.Add('SELECT titulo FROM problemas WHERE');
 
-  if aFiltro = 'Código' then
+  if aFiltro = 'Módulo' then
+  begin
+    FQuery.SQL.Add('cod_mod = (SELECT cod_mod FROM modulos WHERE nome = :modulo) AND');
+    FQuery.ParamByName('modulo').AsString := aProblema.Modulo;
+  end;
+
+  if aColuna = 'Código' then
   begin
     FQuery.SQL.Add('CAST(cod_prob AS VARCHAR(10)) like :cod_prob || ''%''');
     FQuery.ParamByName('cod_prob').AsInteger := aProblema.Codigo;
   end
-  else if aFiltro = 'Título' then
+  else if aColuna = 'Título' then
   begin
     FQuery.SQL.Add('UPPER(titulo) like UPPER(:titulo) || ''%''');
     FQuery.ParamByName('titulo').AsString := aProblema.Titulo;
   end
-  else if aFiltro = 'Chamado' then
+  else if aColuna = 'Chamado' then
   begin
     FQuery.SQL.Add('chamado like ''%'' || :chamado || ''%''');
     FQuery.ParamByName('chamado').AsString := aProblema.Chamado;

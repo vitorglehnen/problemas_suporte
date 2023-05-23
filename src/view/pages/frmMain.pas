@@ -386,7 +386,7 @@ procedure TformPrincipal.btnNovoModuloMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   gridModulos.DataSource.DataSet.Insert;
-  //gridModulos.SetFocus;
+  gridModulos.SetFocus;
 end;
 
 procedure TformPrincipal.btnNovoProblemaMouseDown(Sender: TObject;
@@ -531,18 +531,26 @@ end;
 procedure TformPrincipal.edtPesqProblemaChange(Sender: TObject);
 begin
   var aProblema := TProblema.Create;
+  var aFiltro: String;
 
   try
+    case rdbtnFiltroPesqProblema.ItemIndex of
+      0: aFiltro := 'Geral';
+      1: aFiltro := 'Módulo';
+    end;
+
     if Length(edtPesqProblema.Text) > 0 then
     begin
       case cbFiltroPesqProblema.ItemIndex of
         0: aProblema.Codigo := StrToInt(edtPesqProblema.Text);
         1: aProblema.Titulo := edtPesqProblema.Text;
         2: aProblema.Chamado := edtPesqProblema.Text;
-        3: ;//aProblema.Detalhes := edtPesqProblema.Text;
-        4: ;//aProblema.Detalhes := edtPesqProblema.Text;
       end;
-      FControllerProblema.BuscaTabelaProblemasPorFiltro(aProblema, cbFiltroPesqProblema.Text);
+
+      aProblema.Modulo := gridModulos.Columns[0].Field.Value;
+      FControllerProblema.BuscaTabelaProblemasPorFiltro(aProblema,
+                                                        cbFiltroPesqProblema.Text,
+                                                        aFiltro);
     end
     else
       CarregaGridProblemas;
@@ -634,6 +642,8 @@ begin
 
   pnlTopSolucaoProblema.Enabled := not pnlTopSolucaoProblema.Enabled;
   pnlBodyModulos.Enabled := not pnlBodyModulos.Enabled;
+  pnlGridProblemas.Enabled := not pnlGridProblemas.Enabled;
+  pnlBodyPesqProblema.Enabled := not pnlBodyPesqProblema.Enabled;
 end;
 
 procedure TformPrincipal.InverteCamposProblemas;
@@ -662,7 +672,6 @@ begin
   InverteBotoesCrudProblemas;
 
   edtTituloProblema.SetFocus;
-
   edtTituloProblema.Clear;
   edtChamadoProblema.Clear;
   edtCodProblema.Clear;
