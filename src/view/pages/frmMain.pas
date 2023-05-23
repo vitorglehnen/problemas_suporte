@@ -596,6 +596,12 @@ end;
 procedure TformPrincipal.gridModulosDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
+  with gridModulos.Columns[0] do
+  begin
+    Title.Font.Style := [fsBold];
+    Title.Font.Size := 9;
+  end;
+
   if State = [] then
   begin
     if gridModulos.DataSource.DataSet.RecNo mod 2 = 1 then
@@ -604,6 +610,20 @@ begin
       gridModulos.Canvas.Brush.Color := clBtnFace;
   end;
   gridModulos.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+
+   // Verifique se a linha está selecionada
+  if gdSelected in State then
+  begin
+    // Altere a cor de fundo da célula quando a linha estiver selecionada
+    gridModulos.Canvas.Brush.Color := $00FEF1E7;
+    gridModulos.Canvas.Font.Color := clBlack;
+    gridModulos.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  end
+  else
+  begin
+    // Mantenha a cor padrão quando a linha não estiver selecionada
+    gridModulos.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  end;
 end;
 
 procedure TformPrincipal.gridModulosKeyDown(Sender: TObject; var Key: Word;
@@ -624,6 +644,12 @@ end;
 procedure TformPrincipal.gridProblemasDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
+  with gridProblemas.Columns[0] do
+  begin
+    Title.Font.Style := [fsBold];
+    Title.Font.Size := 9;
+  end;
+
   if State = [] then
   begin
     if gridProblemas.DataSource.DataSet.RecNo mod 2 = 1 then
