@@ -34,6 +34,7 @@ type
     procedure btnRemoverImagemClick(Sender: TObject);
     procedure imgProblemaDblClick(Sender: TObject);
     procedure btnSelecionarImagemClick(Sender: TObject);
+    procedure btnCancelarImagemClick(Sender: TObject);
   private
     { Private declarations }
     FPosicaoListaImagem: Integer;
@@ -70,6 +71,14 @@ begin
     btnAntImagem.Enabled := False;
 
   lblNmroImagem.Caption := IntToStr(FPosicaoListaImagem + 1) + '/' + IntToStr(FListaImagens.Count)
+end;
+
+procedure TformImagensProblema.btnCancelarImagemClick(Sender: TObject);
+begin
+  InverteCrudImagem;
+
+  if FListaImagens.Count > 0 then
+    imgProblema.Picture.LoadFromFile(FListaImagens[FPosicaoListaImagem]);
 end;
 
 procedure TformImagensProblema.btnSelecionarImagemClick(Sender: TObject);
@@ -212,6 +221,12 @@ begin
   else
   begin
     lblNmroImagem.Caption := '0/0';
+    btnProxImagem.Enabled := False;
+    btnAntImagem.Enabled := False;
+  end;
+
+  if FListaImagens.Count = 1 then
+  begin
     btnProxImagem.Enabled := False;
     btnAntImagem.Enabled := False;
   end;

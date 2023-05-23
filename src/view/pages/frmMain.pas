@@ -232,7 +232,9 @@ begin
       btnImagensProblema.Enabled := True;
       InverteCamposProblemas;
       InverteBotoesCrudProblemas;
-      CarregaGridProblemas;
+      edtCodProblema.Text := FControllerProblema.
+                                  CarregaDadosProblema(edtTituloProblema.Text).
+                                  DataSet.FieldByName('cod_prob').Value;
     end
     else
     begin

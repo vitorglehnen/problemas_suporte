@@ -241,8 +241,6 @@ object formPrincipal: TformPrincipal
                     'Somente do m'#243'dulo')
                   TabOrder = 0
                   OnClick = rdbtnFiltroPesqProblemaClick
-                  ExplicitLeft = 5
-                  ExplicitTop = 47
                 end
                 object cbFiltroPesqProblema: TComboBox
                   Left = 0
@@ -314,6 +312,7 @@ object formPrincipal: TformPrincipal
           Width = 241
           Height = 257
           Align = alTop
+          ParentBackground = False
           TabOrder = 0
           object lblTituloModulo: TLabel
             Left = 1

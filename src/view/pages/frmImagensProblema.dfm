@@ -59,8 +59,7 @@ object formImagensProblema: TformImagensProblema
       Enabled = False
       OnClick = btnAntImagemClick
       ExplicitLeft = -6
-      ExplicitTop = 57
-      ExplicitHeight = 643
+      ExplicitTop = 103
     end
     object pnlTopImagem: TPanel
       Left = 0
@@ -112,7 +111,8 @@ object formImagensProblema: TformImagensProblema
         Align = alLeft
         Caption = 'Cancelar'
         Enabled = False
-        ExplicitLeft = 81
+        OnClick = btnCancelarImagemClick
+        ExplicitLeft = 138
       end
       object btnSelecionarImagem: TSpeedButton
         Left = 282
