@@ -152,8 +152,8 @@ object formImagensProblema: TformImagensProblema
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
-        ExplicitLeft = 2
-        ExplicitTop = 0
+        ExplicitWidth = 24
+        ExplicitHeight = 19
       end
     end
   end

@@ -354,7 +354,8 @@ object formPrincipal: TformPrincipal
             ParentColor = False
             ParentFont = False
             Layout = tlCenter
-            ExplicitTop = -4
+            ExplicitWidth = 62
+            ExplicitHeight = 18
           end
           object pnlBotaoCrudModulo: TPanel
             Left = 1
@@ -403,8 +404,6 @@ object formPrincipal: TformPrincipal
             Padding.Bottom = 8
             ParentBackground = False
             TabOrder = 1
-            ExplicitLeft = -2
-            ExplicitTop = 109
             object pnlPesqModulo: TPanel
               Left = 9
               Top = 9
