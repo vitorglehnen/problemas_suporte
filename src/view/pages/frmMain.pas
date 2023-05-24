@@ -206,6 +206,7 @@ begin
     msDetalhes: TMemoryStream := TMemoryStream.Create;
   var
     msSolucao: TMemoryStream := TMemoryStream.Create;
+
   try
     mmDetalhesProblema.Lines.SaveToStream(msDetalhes);
     mmSolucaoProblema.Lines.SaveToStream(msSolucao);
@@ -214,6 +215,7 @@ begin
     aProblema.Chamado := edtChamadoProblema.Text;
     aProblema.Detalhes := msDetalhes;
     aProblema.Solucao := msSolucao;
+
     if aProblema.ValidaDados then
     begin
       if FEdicaoProblema then
@@ -308,6 +310,7 @@ begin
     aListaModulos: TStringList;
   var
     aCont: Integer := 0;
+
   try
     aListaModulos := FControllerModulo.BuscaModulos;
     cbModulo.Clear;
@@ -361,6 +364,7 @@ procedure TformPrincipal.btnExcluirProblemaClick(Sender: TObject);
 begin
   var
     aProblema: TProblema := TProblema.Create;
+
   try
     if Application.MessageBox('Deseja excluir este registro?',
       'Excluir problema', +MB_ICONQUESTION + MB_YESNO) = MrYes then
@@ -705,6 +709,7 @@ begin
   mmSolucaoProblema.Clear;
   mmDetalhesProblema.Clear;
   btnImagensProblema.Enabled := False;
+  btnImagensProblema.Caption := 'Imagens (0)';
   PreencheCbxModulos;
 end;
 

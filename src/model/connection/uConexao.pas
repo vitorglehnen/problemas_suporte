@@ -56,8 +56,8 @@ begin
     FConn.Params.DriverID := 'FB';
     FConn.Params.Database := ArqINI.ReadString('Conexão', 'CaminhoDoBanco',
       'C:\Problemas Suporte\DBPROB.FDB');
-    FConn.Params.UserName := 'SYSDBA';
-    FConn.Params.Password := 'masterkey';
+    FConn.Params.UserName := ArqINI.ReadString('Conexão', 'Username', 'SYSDBA');
+    FConn.Params.Password := ArqINI.ReadString('Conexão', 'Password', 'masterkey');
     FConn.LoginPrompt := False;
 
     FConn.Connected;
@@ -80,13 +80,16 @@ procedure TConexao.CriarConnectIniFile;
 var
   ArqINI: TIniFIle;
 begin
-  if not FileExists('C:\Problemas Suporte\') then
+  if not FileExists('C:\Problemas Suporte\Connect.ini') then
   begin
     ArqINI := TIniFIle.Create(ExtractFilePath(ParamStr(0)) + NOME_ARQ_INI);
     try
       ArqINI.WriteString('Conexão', 'CaminhoDoBanco',
         'C:\Problemas Suporte\DBPROB.FDB');
       ArqINI.WriteString('Conexão', 'DriverID', 'FB');
+      ArqINI.WriteString('Conexão', 'Username', 'SYSDBA');
+      ArqINI.WriteString('Conexão', 'Password', 'masterkey');
+      ArqINI.WriteString('Imagens', 'CaminhoDaPasta', 'C:\Problemas Suporte\Imagens\');
     finally
       ArqINI.Free;
     end;
