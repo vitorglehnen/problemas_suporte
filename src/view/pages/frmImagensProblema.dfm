@@ -1,7 +1,7 @@
 object formImagensProblema: TformImagensProblema
   Left = 0
   Top = 0
-  Caption = 'formImagensProblema'
+  Caption = 'Imagens do problema'
   ClientHeight = 700
   ClientWidth = 1150
   Color = clBtnFace
@@ -67,9 +67,11 @@ object formImagensProblema: TformImagensProblema
       Width = 1150
       Height = 57
       Align = alTop
+      Color = 16708071
       Padding.Left = 5
       Padding.Top = 5
       Padding.Bottom = 5
+      ParentBackground = False
       TabOrder = 0
       object btnRemoverImagem: TSpeedButton
         Left = 213
@@ -132,6 +134,8 @@ object formImagensProblema: TformImagensProblema
       Width = 1150
       Height = 41
       Align = alTop
+      Color = 16775668
+      ParentBackground = False
       TabOrder = 1
       object lblNmroImagem: TLabel
         Left = 1
@@ -148,8 +152,8 @@ object formImagensProblema: TformImagensProblema
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
-        ExplicitWidth = 24
-        ExplicitHeight = 19
+        ExplicitLeft = 2
+        ExplicitTop = 0
       end
     end
   end

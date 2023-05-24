@@ -3,10 +3,26 @@ unit frmImagensProblema;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Clipbrd, Vcl.Buttons,
-  Vcl.StdCtrls, System.ImageList, Vcl.ImgList, pngimage, jpeg, uImagemProblema,
-  uControllerProblema, ShellApi;
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.ExtCtrls,
+  Vcl.Clipbrd,
+  Vcl.Buttons,
+  Vcl.StdCtrls,
+  System.ImageList,
+  Vcl.ImgList,
+  pngimage,
+  jpeg,
+  uImagemProblema,
+  uControllerProblema,
+  ShellApi;
 
 type
   TformImagensProblema = class(TForm)
@@ -78,27 +94,51 @@ begin
   InverteCrudImagem;
 
   if FListaImagens.Count > 0 then
-    imgProblema.Picture.LoadFromFile(FListaImagens[FPosicaoListaImagem]);
+    imgProblema.Picture.LoadFromFile(FListaImagens[FPosicaoListaImagem])
+  else
+    imgProblema.Picture := nil;
 end;
 
 procedure TformImagensProblema.btnSelecionarImagemClick(Sender: TObject);
 begin
   var aSaveDialog := TSaveDialog.Create(nil);
   var aBitMap := TBitMap.Create;
-  var aPng := TPngImage.Create;
+  var aPng : TPngImage;
+  var aJpeg : TJPEGImage;
 
-  aSaveDialog.Filter := 'Arquivos PNG (*.png)|*.png';
+  aSaveDialog.Filter := 'Arquivos PNG (*.png)|*.png|' +
+                        'Arquivos JPEG (*.jpg, *.jpeg)|*.jpg; *.jpg';
   try
     if aSaveDialog.Execute then
     begin
-      aPng.LoadFromFile(aSaveDialog.FileName);
-      aBitMap.Assign(aPng);
+      if aSaveDialog.FilterIndex = 1 then
+      begin
+        aPng := TPngImage.Create;
+
+        try
+          aPng.LoadFromFile(aSaveDialog.FileName);
+          aBitMap.Assign(aPng);
+        finally
+          aPng.Free;
+        end;
+      end
+      else if aSaveDialog.FilterIndex = 2 then
+      begin
+        aJpeg := TJPEGImage.Create;
+
+        try
+          aJpeg.LoadFromFile(aSaveDialog.FileName);
+          aBitMap.Assign(aJpeg);
+        finally
+          aJpeg.Free;
+        end;
+      end;
+
       imgProblema.Picture.Assign(aBitMap);
     end;
   finally
     aSaveDialog.Free;
-    aPng.Free;
-    aBitmap.Free
+    aBitmap.Free;
   end;
 end;
 

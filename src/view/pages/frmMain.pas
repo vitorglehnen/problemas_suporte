@@ -455,17 +455,18 @@ procedure TformPrincipal.CarregaGridModulos;
 begin
   var aTabelaModulos: TDataSource := FControllerModulo.BuscaTabelaModulos;
 
-  if aTabelaModulos.DataSet.RecordCount > 0 then
-  begin
-    gridModulos.DataSource := aTabelaModulos;
-    gridModulos.DataSource.DataSet.First;
-  end;
+  gridModulos.DataSource := aTabelaModulos;
+  gridModulos.DataSource.DataSet.First;
 end;
 
 procedure TformPrincipal.CarregaGridProblemas;
 begin
-  var
-    aNomeModulo: String := gridModulos.columns[0].Field.value;
+  var aNomeModulo: String;
+
+  if Assigned(gridModulos.DataSource) and (gridModulos.DataSource.DataSet.RecordCount > 0) then
+    aNomeModulo := gridModulos.columns[0].Field.value
+  else
+    aNomeModulo := '';
 
   case rdbtnFiltroPesqProblema.ItemIndex of
     0:
@@ -609,20 +610,19 @@ begin
     else
       gridModulos.Canvas.Brush.Color := clBtnFace;
   end;
-  gridModulos.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 
-   // Verifique se a linha está selecionada
-  if gdSelected in State then
+  with gridModulos do
   begin
-    // Altere a cor de fundo da célula quando a linha estiver selecionada
-    gridModulos.Canvas.Brush.Color := $00FEF1E7;
-    gridModulos.Canvas.Font.Color := clBlack;
-    gridModulos.DefaultDrawColumnCell(Rect, DataCol, Column, State);
-  end
-  else
-  begin
-    // Mantenha a cor padrão quando a linha não estiver selecionada
-    gridModulos.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+    if gdSelected in State then
+    begin
+      Canvas.Brush.Color := $00FFF9F4;
+      Canvas.Font.Color := clBlack;
+      Canvas.Font.Size := 9;
+      Canvas.Font.Style := [fsBold];
+      DefaultDrawColumnCell(Rect, DataCol, Column, State);
+    end
+    else
+      DefaultDrawColumnCell(Rect, DataCol, Column, State);
   end;
 end;
 
@@ -657,7 +657,20 @@ begin
     else
       gridProblemas.Canvas.Brush.Color := clBtnFace;
   end;
-  gridProblemas.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+
+  with gridProblemas do
+  begin
+    if gdSelected in State then
+    begin
+      Canvas.Brush.Color := $00FFF9F4;
+      Canvas.Font.Color := clBlack;
+      Canvas.Font.Size := 9;
+      Canvas.Font.Style := [fsBold];
+      DefaultDrawColumnCell(Rect, DataCol, Column, State);
+    end
+    else
+      DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  end;
 end;
 
 procedure TformPrincipal.InverteBotoesCrudProblemas;

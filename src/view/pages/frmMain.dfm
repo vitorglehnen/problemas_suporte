@@ -57,8 +57,6 @@ object formPrincipal: TformPrincipal
           Color = 16708071
           ParentBackground = False
           TabOrder = 0
-          ExplicitLeft = -3
-          ExplicitTop = -5
           object lblTituloProblemas: TLabel
             Left = 1
             Top = 1
@@ -236,8 +234,6 @@ object formPrincipal: TformPrincipal
                 Align = alTop
                 TabOrder = 0
                 OnChange = edtPesqProblemaChange
-                ExplicitLeft = -4
-                ExplicitTop = 17
               end
               object pnlFiltroPesqProblema: TPanel
                 Left = 0
@@ -248,8 +244,6 @@ object formPrincipal: TformPrincipal
                 BevelOuter = bvNone
                 Padding.Top = 10
                 TabOrder = 1
-                ExplicitLeft = 5
-                ExplicitTop = 38
                 object rdbtnFiltroPesqProblema: TRadioGroup
                   Left = 0
                   Top = 43
@@ -269,8 +263,6 @@ object formPrincipal: TformPrincipal
                   ParentFont = False
                   TabOrder = 0
                   OnClick = rdbtnFiltroPesqProblemaClick
-                  ExplicitLeft = -4
-                  ExplicitTop = 47
                 end
                 object cbFiltroPesqProblema: TComboBox
                   Left = 0
@@ -374,8 +366,6 @@ object formPrincipal: TformPrincipal
             Color = 16708071
             ParentBackground = False
             TabOrder = 0
-            ExplicitLeft = -2
-            ExplicitTop = 80
             object btnNovoModulo: TSpeedButton
               Left = 1
               Top = 1
@@ -414,7 +404,7 @@ object formPrincipal: TformPrincipal
             ParentBackground = False
             TabOrder = 1
             ExplicitLeft = -2
-            ExplicitTop = 100
+            ExplicitTop = 109
             object pnlPesqModulo: TPanel
               Left = 9
               Top = 9
@@ -445,8 +435,6 @@ object formPrincipal: TformPrincipal
                 Height = 21
                 Align = alTop
                 TabOrder = 0
-                ExplicitLeft = -8
-                ExplicitTop = 19
               end
             end
           end
@@ -602,7 +590,6 @@ object formPrincipal: TformPrincipal
                   Color = clWhite
                   Enabled = False
                   TabOrder = 0
-                  ExplicitTop = 23
                 end
               end
             end
@@ -659,9 +646,6 @@ object formPrincipal: TformPrincipal
                   TabOrder = 0
                   Zoom = 100
                   OnEnter = mmSolucaoProblemaEnter
-                  ExplicitLeft = 88
-                  ExplicitTop = 41
-                  ExplicitHeight = 232
                 end
                 object pnlTopSolucaoProblema: TPanel
                   Left = 0
@@ -673,7 +657,6 @@ object formPrincipal: TformPrincipal
                   BevelOuter = bvNone
                   Enabled = False
                   TabOrder = 1
-                  ExplicitTop = 17
                   object pnlTopMmSolucao: TPanel
                     Left = 0
                     Top = 0
@@ -682,7 +665,6 @@ object formPrincipal: TformPrincipal
                     Align = alClient
                     BevelOuter = bvNone
                     TabOrder = 0
-                    ExplicitTop = -6
                     object chkItalicoSolucao: TCheckBox
                       Left = 201
                       Top = 0
@@ -956,7 +938,6 @@ object formPrincipal: TformPrincipal
                   Align = alTop
                   BevelOuter = bvNone
                   TabOrder = 0
-                  ExplicitTop = 17
                   object cbNameFontDetalhes: TComboBox
                     Left = 41
                     Top = 0
@@ -989,8 +970,6 @@ object formPrincipal: TformPrincipal
                       'Times New Roman'
                       'Trebuchet MS'
                       'Verdana')
-                    ExplicitLeft = 47
-                    ExplicitTop = -4
                   end
                   object cbSizeFontDetalhes: TComboBox
                     Left = 0
@@ -1101,8 +1080,6 @@ object formPrincipal: TformPrincipal
                   TabOrder = 1
                   Zoom = 100
                   OnEnter = mmDetalhesProblemaEnter
-                  ExplicitTop = 41
-                  ExplicitHeight = 174
                 end
               end
             end
