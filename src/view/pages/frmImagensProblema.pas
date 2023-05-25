@@ -249,9 +249,9 @@ begin
   if FListaImagens.Count > 1 then
     btnProxImagem.Enabled := True;
 
-  imgProblema.Picture.LoadFromFile(FCaminhoImagem + FListaImagens[FPosicaoListaImagem]);
+  imgProblema.Picture.LoadFromFile(FCaminhoImagem + FListaImagens[FListaImagens.Count - 1]);
 
-  lblNmroImagem.Caption := (IntToStr(FPosicaoListaImagem + 1)) + '/' +
+  lblNmroImagem.Caption := (IntToStr(FListaImagens.Count - 1)) + '/' +
     IntToStr(FListaImagens.Count);
 end;
 
@@ -307,6 +307,7 @@ procedure TformImagensProblema.imgProblemaDblClick(Sender: TObject);
 begin
   var
     aImagem: String := FCaminhoImagem + FListaImagens[FPosicaoListaImagem];
+
   ShellExecute(Handle, 'open', PWideChar(aImagem), nil, nil, SW_SHOWNORMAL);
 end;
 
