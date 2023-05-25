@@ -673,8 +673,8 @@ begin
   InverteCrudProblemas;
   InverteCamposProblemas;
 
-  edtTituloProblema.SetFocus;
   pnlProblemas.Visible := True;
+  edtTituloProblema.SetFocus;
 
   edtTituloProblema.Clear;
   edtChamadoProblema.Clear;

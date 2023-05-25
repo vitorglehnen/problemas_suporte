@@ -24,19 +24,28 @@ object formImagensProblema: TformImagensProblema
     Height = 700
     Align = alClient
     BevelOuter = bvNone
+    Caption = 'Clique em adicionar'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 0
     object imgProblema: TImage
       Left = 81
       Top = 98
       Width = 988
       Height = 602
+      ParentCustomHint = False
       Align = alClient
       AutoSize = True
       Center = True
+      ParentShowHint = False
+      ShowHint = True
       OnDblClick = imgProblemaDblClick
       ExplicitLeft = 87
-      ExplicitTop = 136
-      ExplicitHeight = 564
+      ExplicitTop = 103
     end
     object btnProxImagem: TSpeedButton
       Left = 1069
@@ -66,13 +75,30 @@ object formImagensProblema: TformImagensProblema
       Top = 0
       Width = 1150
       Height = 57
+      ParentCustomHint = False
       Align = alTop
+      BiDiMode = bdLeftToRight
       Color = 16708071
+      Ctl3D = True
+      DoubleBuffered = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
       Padding.Left = 5
       Padding.Top = 5
       Padding.Bottom = 5
+      ParentBiDiMode = False
       ParentBackground = False
+      ParentCtl3D = False
+      ParentDoubleBuffered = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = False
       TabOrder = 0
+      ExplicitLeft = -1
+      ExplicitTop = -5
       object btnRemoverImagem: TSpeedButton
         Left = 213
         Top = 6
@@ -80,6 +106,12 @@ object formImagensProblema: TformImagensProblema
         Height = 45
         Align = alLeft
         Caption = 'Remover'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
         OnClick = btnRemoverImagemClick
         ExplicitLeft = 219
       end
@@ -89,7 +121,13 @@ object formImagensProblema: TformImagensProblema
         Width = 69
         Height = 45
         Align = alLeft
-        Caption = 'Adcionar'
+        Caption = 'Adicionar'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
         OnClick = btnAddImagemClick
         ExplicitLeft = 0
       end
@@ -101,6 +139,12 @@ object formImagensProblema: TformImagensProblema
         Align = alLeft
         Caption = 'Salvar'
         Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
         OnMouseDown = btnSalvarImagemMouseDown
         ExplicitLeft = 69
       end
@@ -112,6 +156,12 @@ object formImagensProblema: TformImagensProblema
         Align = alLeft
         Caption = 'Cancelar'
         Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
         OnClick = btnCancelarImagemClick
         ExplicitLeft = 138
       end
@@ -123,6 +173,12 @@ object formImagensProblema: TformImagensProblema
         Align = alLeft
         Caption = 'Procurar'
         Enabled = False
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
         OnClick = btnSelecionarImagemClick
         ExplicitLeft = 288
       end
@@ -133,8 +189,22 @@ object formImagensProblema: TformImagensProblema
       Width = 1150
       Height = 41
       Align = alTop
+      BiDiMode = bdLeftToRight
       Color = 16775668
+      Ctl3D = True
+      DoubleBuffered = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentBiDiMode = False
       ParentBackground = False
+      ParentCtl3D = False
+      ParentDoubleBuffered = False
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = False
       TabOrder = 1
       object lblNmroImagem: TLabel
         Left = 1

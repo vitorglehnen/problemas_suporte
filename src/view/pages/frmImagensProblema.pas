@@ -78,6 +78,7 @@ procedure TformImagensProblema.btnAddImagemClick(Sender: TObject);
 begin
   InverteCrudImagem;
   imgProblema.Picture := nil;
+  pnlPrincipal.Caption := 'Cole aqui sua imagem ou clique em procurar';
 end;
 
 procedure TformImagensProblema.btnAntImagemClick(Sender: TObject);
@@ -153,9 +154,6 @@ begin
   finally
     aArqINI.Free;
   end;
-
-  FNomeImagem := FControllerProblema.BuscaProxCodigoImagem +
-    ' ' + FormatDateTime('dd-mm-yyyy', Now) + '.png';
 end;
 
 procedure TformImagensProblema.btnProxImagemClick(Sender: TObject);
@@ -227,6 +225,9 @@ begin
 
   FControllerProblema := TControllerProblema.Create;
 
+  FNomeImagem := FControllerProblema.BuscaProxCodigoImagem +
+    ' ' + FormatDateTime('dd-mm-yyyy', Now) + '.png';
+
   try
     aImagemPNG.Assign(imgProblema.Picture.Bitmap);
     aImagemPNG.SaveToFile(FCaminhoImagem + FNomeImagem);
@@ -249,10 +250,12 @@ begin
   if FListaImagens.Count > 1 then
     btnProxImagem.Enabled := True;
 
-  imgProblema.Picture.LoadFromFile(FCaminhoImagem + FListaImagens[FListaImagens.Count - 1]);
+  imgProblema.Picture.LoadFromFile(FCaminhoImagem + FListaImagens[FPosicaoListaImagem]);
 
-  lblNmroImagem.Caption := (IntToStr(FListaImagens.Count - 1)) + '/' +
+  lblNmroImagem.Caption := (IntToStr(FPosicaoListaImagem + 1)) + '/' +
     IntToStr(FListaImagens.Count);
+
+  pnlPrincipal.Caption := 'Clique em adicionar';
 end;
 
 procedure TformImagensProblema.FormCreate(Sender: TObject);
@@ -319,5 +322,4 @@ begin
   btnRemoverImagem.Enabled := not btnRemoverImagem.Enabled;
   btnSelecionarImagem.Enabled := not btnSelecionarImagem.Enabled;
 end;
-
 end.
