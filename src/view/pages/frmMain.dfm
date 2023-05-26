@@ -367,26 +367,16 @@ object formPrincipal: TformPrincipal
             Color = 16708071
             ParentBackground = False
             TabOrder = 0
-            object btnNovoModulo: TSpeedButton
+            object navigDsModulos: TDBNavigator
               Left = 1
               Top = 1
-              Width = 48
+              Width = 237
               Height = 25
-              Align = alLeft
-              Caption = 'Novo'
-              OnMouseDown = btnNovoModuloMouseDown
-              ExplicitLeft = 9
-              ExplicitTop = 2
-            end
-            object btnExcluirModulo: TSpeedButton
-              Left = 190
-              Top = 1
-              Width = 48
-              Height = 25
-              Align = alRight
-              Caption = 'Excluir'
-              OnClick = btnExcluirModuloClick
-              ExplicitLeft = 89
+              DataSource = dsModulos
+              VisibleButtons = [nbInsert, nbDelete, nbPost, nbCancel]
+              Align = alClient
+              TabOrder = 0
+              ExplicitLeft = -1
               ExplicitTop = -4
             end
           end
@@ -455,6 +445,7 @@ object formPrincipal: TformPrincipal
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
+            DataSource = dsModulos
             DrawingStyle = gdsGradient
             GradientEndColor = clBtnFace
             Font.Charset = DEFAULT_CHARSET
@@ -1086,5 +1077,9 @@ object formPrincipal: TformPrincipal
         end
       end
     end
+  end
+  object dsModulos: TDataSource
+    Left = 19
+    Top = 218
   end
 end

@@ -97,8 +97,6 @@ object formImagensProblema: TformImagensProblema
       ParentShowHint = False
       ShowHint = False
       TabOrder = 0
-      ExplicitLeft = -1
-      ExplicitTop = -5
       object btnRemoverImagem: TSpeedButton
         Left = 213
         Top = 6

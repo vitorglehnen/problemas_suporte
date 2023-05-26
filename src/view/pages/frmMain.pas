@@ -8,6 +8,8 @@ uses
   System.SysUtils,
   System.Variants,
   System.Classes,
+  System.Actions,
+  System.Generics.Collections,
   Vcl.Graphics,
   Vcl.Controls,
   Vcl.Forms,
@@ -17,48 +19,31 @@ uses
   Vcl.ExtCtrls,
   Vcl.StdCtrls,
   Vcl.DBCtrls,
-  FireDAC.Stan.Intf,
-  FireDAC.Stan.Option,
-  FireDAC.Stan.Error,
-  FireDAC.UI.Intf,
-  FireDAC.Phys.Intf,
-  FireDAC.Stan.Def,
-  FireDAC.Stan.Pool,
-  FireDAC.Stan.Async,
-  FireDAC.Phys,
-  FireDAC.Phys.MySQL,
-  FireDAC.Phys.MySQLDef,
-  FireDAC.VCLUI.Wait,
-  FireDAC.Stan.Param,
-  FireDAC.DatS,
-  FireDAC.DApt.Intf,
-  FireDAC.DApt,
-  FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client,
   Vcl.Buttons,
   Vcl.Mask,
   Vcl.WinXPanels,
   Vcl.FileCtrl,
   Vcl.Clipbrd,
-  jpeg,
-  pngimage,
-  System.Generics.Collections,
-  Data.DB,
-  Data.DBXCommon,
-  Vcl.ComCtrls,
-  uControllerModulo,
-  uControllerProblema,
-  uProblema,
   Vcl.ExtActns,
   Vcl.StdActns,
-  System.Actions,
   Vcl.ActnList,
   Vcl.PlatformDefaultStyleActnCtrls,
   Vcl.ActnMan,
   Vcl.ToolWin,
   Vcl.ActnCtrls,
   Vcl.BandActn,
-  frmImagensProblema;
+  Vcl.ComCtrls,
+  Data.DB,
+  uControllerModulo,
+  uControllerProblema,
+  uProblema,
+  jpeg,
+  pngimage,
+
+  frmImagensProblema, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client;
 
 type
   TformPrincipal = class(TForm)
@@ -94,7 +79,6 @@ type
     rdbtnFiltroPesqProblema: TRadioGroup;
     cbFiltroPesqProblema: TComboBox;
     gridProblemas: TDBGrid;
-    btnNovoModulo: TSpeedButton;
     btnEditarProblema: TSpeedButton;
     pnlEscolhaUmRegistro: TPanel;
     pnlProblemas: TPanel;
@@ -123,7 +107,6 @@ type
     chkItalicoDetalhes: TCheckBox;
     chkNegritoDetalhes: TCheckBox;
     mmDetalhesProblema: TRichEdit;
-    btnExcluirModulo: TSpeedButton;
     pnlModuloProblema: TPanel;
     lblModuloProblema: TLabel;
     cbModulo: TComboBox;
@@ -132,6 +115,8 @@ type
     chkNegritoSolucao: TCheckBox;
     cbNameFontSolucao: TComboBox;
     cbSizeFontSolucao: TComboBox;
+    dsModulos: TDataSource;
+    navigDsModulos: TDBNavigator;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
@@ -432,10 +417,10 @@ end;
 
 procedure TformPrincipal.CarregaGridModulos;
 begin
-  var
-    aTabelaModulos: TDataSource := FControllerModulo.BuscaTabelaModulos;
-  gridModulos.DataSource := aTabelaModulos;
-  gridModulos.DataSource.DataSet.First;
+  var aTabelaModulos: TDataSource := FControllerModulo.BuscaTabelaModulos;
+
+  dsModulos.DataSet := aTabelaModulos.DataSet;
+  dsModulos.DataSet.First;
 end;
 
 procedure TformPrincipal.CarregaGridProblemas;
