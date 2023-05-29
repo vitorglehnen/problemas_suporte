@@ -99,97 +99,18 @@ object formPrincipal: TformPrincipal
             Height = 27
             Align = alBottom
             TabOrder = 0
-            object btnNovoProblema: TSpeedButton
+            object DBNavigator1: TDBNavigator
               Left = 1
               Top = 1
-              Width = 64
+              Width = 265
               Height = 25
-              Align = alLeft
-              Caption = 'Novo(F3)'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clGreen
-              Font.Height = -11
-              Font.Name = 'Tahoma'
-              Font.Style = []
-              ParentFont = False
-              Spacing = 2
-              OnMouseDown = btnNovoProblemaMouseDown
-              ExplicitLeft = 3
-              ExplicitTop = 5
-            end
-            object btnSalvarProblema: TSpeedButton
-              Left = 65
-              Top = 1
-              Width = 55
-              Height = 25
-              Align = alLeft
-              Caption = 'Salvar(F4)'
-              Enabled = False
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clGreen
-              Font.Height = -11
-              Font.Name = 'Tahoma'
-              Font.Style = []
-              ParentFont = False
-              Spacing = 2
-              OnClick = btnSalvarProblemaClick
-              ExplicitLeft = 59
-              ExplicitTop = 5
-            end
-            object btnExcluirProblema: TSpeedButton
-              Left = 218
-              Top = 1
-              Width = 48
-              Height = 25
-              Align = alRight
-              Caption = 'Excluir'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clMaroon
-              Font.Height = -11
-              Font.Name = 'Tahoma'
-              Font.Style = []
-              ParentFont = False
-              Spacing = 2
-              OnClick = btnExcluirProblemaClick
-              ExplicitLeft = 146
-              ExplicitTop = -4
-            end
-            object btnCancelarProblema: TSpeedButton
-              Left = 168
-              Top = 1
-              Width = 50
-              Height = 25
-              Align = alRight
-              Caption = 'Cancelar'
-              Enabled = False
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clMaroon
-              Font.Height = -11
-              Font.Name = 'Tahoma'
-              Font.Style = []
-              ParentFont = False
-              Spacing = 2
-              OnMouseDown = btnCancelarProblemaMouseDown
-              ExplicitLeft = 162
-              ExplicitTop = -4
-            end
-            object btnEditarProblema: TSpeedButton
-              Left = 120
-              Top = 1
-              Width = 48
-              Height = 25
+              DataSource = dsProblemas
+              VisibleButtons = [nbInsert, nbDelete, nbPost, nbCancel]
               Align = alClient
-              Caption = 'Editar'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Tahoma'
-              Font.Style = []
-              ParentFont = False
-              Spacing = 2
-              OnClick = btnEditarProblemaClick
-              ExplicitLeft = 126
-              ExplicitTop = 5
+              TabOrder = 0
+              ExplicitLeft = 88
+              ExplicitTop = 0
+              ExplicitWidth = 240
             end
           end
           object pnlBodyPesqProblema: TPanel
@@ -367,7 +288,7 @@ object formPrincipal: TformPrincipal
             Color = 16708071
             ParentBackground = False
             TabOrder = 0
-            object navigDsModulos: TDBNavigator
+            object navDsModulos: TDBNavigator
               Left = 1
               Top = 1
               Width = 237
@@ -377,7 +298,7 @@ object formPrincipal: TformPrincipal
               Align = alClient
               TabOrder = 0
               ExplicitLeft = -1
-              ExplicitTop = -4
+              ExplicitTop = 5
             end
           end
           object pnlBodyPesqModulo: TPanel
@@ -533,7 +454,7 @@ object formPrincipal: TformPrincipal
               Padding.Top = 20
               TabOrder = 1
               object btnImagensProblema: TSpeedButton
-                Left = 190
+                Left = 205
                 Top = 20
                 Width = 115
                 Height = 53
@@ -549,16 +470,17 @@ object formPrincipal: TformPrincipal
               object pnlModuloProblema: TPanel
                 Left = 30
                 Top = 20
-                Width = 135
+                Width = 169
                 Height = 106
                 Align = alLeft
                 AutoSize = True
                 BevelOuter = bvNone
                 TabOrder = 0
+                ExplicitTop = 14
                 object lblModuloProblema: TLabel
                   Left = 0
                   Top = 0
-                  Width = 135
+                  Width = 169
                   Height = 15
                   Align = alTop
                   Caption = '*&M'#243'dulo'
@@ -570,15 +492,15 @@ object formPrincipal: TformPrincipal
                   ParentFont = False
                   ExplicitWidth = 47
                 end
-                object cbModulo: TComboBox
+                object cbModulo: TDBComboBox
                   Left = 0
-                  Top = 15
-                  Width = 135
-                  Height = 22
-                  Align = alTop
-                  Style = csOwnerDrawFixed
-                  Color = clWhite
-                  Enabled = False
+                  Top = 16
+                  Width = 113
+                  Height = 21
+                  DataField = 'modulo'
+                  DataSource = dsProblemas
+                  Items.Strings = (
+                    '79')
                   TabOrder = 0
                 end
               end
@@ -619,24 +541,6 @@ object formPrincipal: TformPrincipal
                   ParentFont = False
                   ExplicitWidth = 48
                 end
-                object mmSolucaoProblema: TRichEdit
-                  Left = 0
-                  Top = 39
-                  Width = 941
-                  Height = 234
-                  Align = alClient
-                  Font.Charset = ANSI_CHARSET
-                  Font.Color = clWindowText
-                  Font.Height = -11
-                  Font.Name = 'Tahoma'
-                  Font.Style = []
-                  ParentFont = False
-                  ReadOnly = True
-                  ScrollBars = ssVertical
-                  TabOrder = 0
-                  Zoom = 100
-                  OnEnter = mmSolucaoProblemaEnter
-                end
                 object pnlTopSolucaoProblema: TPanel
                   Left = 0
                   Top = 15
@@ -646,7 +550,7 @@ object formPrincipal: TformPrincipal
                   Alignment = taLeftJustify
                   BevelOuter = bvNone
                   Enabled = False
-                  TabOrder = 1
+                  TabOrder = 0
                   object pnlTopMmSolucao: TPanel
                     Left = 0
                     Top = 0
@@ -665,7 +569,6 @@ object formPrincipal: TformPrincipal
                       Caption = 'It'#225'lico'
                       Enabled = False
                       TabOrder = 0
-                      OnClick = chkItalicoSolucaoClick
                     end
                     object chkNegritoSolucao: TCheckBox
                       Left = 139
@@ -677,7 +580,6 @@ object formPrincipal: TformPrincipal
                       Caption = 'Negrito'
                       Enabled = False
                       TabOrder = 1
-                      OnClick = chkNegritoSolucaoClick
                     end
                     object cbNameFontSolucao: TComboBox
                       Left = 41
@@ -691,7 +593,6 @@ object formPrincipal: TformPrincipal
                       TabOrder = 2
                       TabStop = False
                       Text = 'Arial'
-                      OnChange = cbSizeFontSolucaoChange
                       Items.Strings = (
                         'Arial'
                         'Calibri'
@@ -724,7 +625,6 @@ object formPrincipal: TformPrincipal
                       TabOrder = 3
                       TabStop = False
                       Text = '10'
-                      OnChange = cbSizeFontSolucaoChange
                       Items.Strings = (
                         '1'
                         '2'
@@ -778,6 +678,26 @@ object formPrincipal: TformPrincipal
                         '50')
                     end
                   end
+                end
+                object mmSolucaoProblema: TDBRichEdit
+                  Left = 0
+                  Top = 39
+                  Width = 941
+                  Height = 234
+                  Align = alClient
+                  DataField = 'solucao'
+                  DataSource = dsProblemas
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  TabOrder = 1
+                  Zoom = 100
+                  ExplicitLeft = 256
+                  ExplicitTop = 136
+                  ExplicitWidth = 185
+                  ExplicitHeight = 89
                 end
               end
             end
@@ -845,43 +765,41 @@ object formPrincipal: TformPrincipal
                 Font.Style = [fsBold]
                 ParentFont = False
               end
-              object edtDataProblema: TMaskEdit
-                Left = 633
+              object edtTituloProblema: TDBEdit
+                Left = 28
                 Top = 27
-                Width = 97
+                Width = 454
                 Height = 21
-                TabStop = False
-                EditMask = '!99/99/0000;1;_'
-                MaxLength = 10
-                ReadOnly = True
-                TabOrder = 2
-                Text = '  /  /    '
+                DataField = 'titulo'
+                DataSource = dsProblemas
+                TabOrder = 0
               end
-              object edtChamadoProblema: TEdit
-                Tag = 1
-                Left = 519
+              object edtChamadoProblema: TDBEdit
+                Left = 520
                 Top = 27
                 Width = 81
                 Height = 21
-                NumbersOnly = True
-                ReadOnly = True
+                DataField = 'chamado'
+                DataSource = dsProblemas
                 TabOrder = 1
               end
-              object edtCodProblema: TEdit
+              object edtCodProblema: TDBEdit
                 Left = 752
                 Top = 27
                 Width = 73
                 Height = 21
-                Enabled = False
-                TabOrder = 3
+                DataField = 'cod_prob'
+                DataSource = dsProblemas
+                TabOrder = 2
               end
-              object edtTituloProblema: TEdit
-                Left = 30
+              object edtDataProblema: TDBEdit
+                Left = 632
                 Top = 27
-                Width = 452
+                Width = 97
                 Height = 21
-                ReadOnly = True
-                TabOrder = 0
+                DataField = 'datacr'
+                DataSource = dsProblemas
+                TabOrder = 3
               end
             end
             object pnlBodyDetalhesProblema: TPanel
@@ -940,7 +858,6 @@ object formPrincipal: TformPrincipal
                     TabOrder = 0
                     TabStop = False
                     Text = 'Arial'
-                    OnChange = cbNameFontDetalhesChange
                     Items.Strings = (
                       'Arial'
                       'Calibri'
@@ -974,7 +891,6 @@ object formPrincipal: TformPrincipal
                     TabOrder = 1
                     TabStop = False
                     Text = '10'
-                    OnChange = cbSizeFontDetalhesChange
                     Items.Strings = (
                       '1'
                       '2'
@@ -1037,7 +953,6 @@ object formPrincipal: TformPrincipal
                     Caption = 'It'#225'lico'
                     Enabled = False
                     TabOrder = 2
-                    OnClick = chkItalicoDetalhesClick
                   end
                   object chkNegritoDetalhes: TCheckBox
                     Left = 139
@@ -1049,27 +964,27 @@ object formPrincipal: TformPrincipal
                     Caption = 'Negrito'
                     Enabled = False
                     TabOrder = 3
-                    OnClick = chkNegritoDetalhesClick
                   end
                 end
-                object mmDetalhesProblema: TRichEdit
-                  Tag = 1
+                object mmDetalhesProblema: TDBRichEdit
                   Left = 0
                   Top = 39
                   Width = 941
                   Height = 176
                   Align = alClient
+                  DataField = 'detalhes'
+                  DataSource = dsProblemas
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
                   Font.Height = -11
                   Font.Name = 'Tahoma'
                   Font.Style = []
-                  ParentFont = False
-                  ReadOnly = True
-                  ScrollBars = ssVertical
                   TabOrder = 1
                   Zoom = 100
-                  OnEnter = mmDetalhesProblemaEnter
+                  ExplicitLeft = 144
+                  ExplicitTop = 120
+                  ExplicitWidth = 185
+                  ExplicitHeight = 89
                 end
               end
             end
@@ -1081,5 +996,9 @@ object formPrincipal: TformPrincipal
   object dsModulos: TDataSource
     Left = 19
     Top = 218
+  end
+  object dsProblemas: TDataSource
+    Left = 451
+    Top = 210
   end
 end
