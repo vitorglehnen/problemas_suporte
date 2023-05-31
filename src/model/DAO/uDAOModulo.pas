@@ -2,7 +2,8 @@ unit uDAOModulo;
 
 interface
 
-uses uConexao, uModulo, FireDAC.Comp.Client, Vcl.Dialogs, System.Generics.Collections,
+uses uConexao, uModulo, FireDAC.Comp.Client, Vcl.Dialogs,
+  System.Generics.Collections,
   Vcl.DBCtrls, DBClient, Data.DB;
 
 type
@@ -12,8 +13,9 @@ type
     FQuery: TFDQuery;
     FDataSource: TDataSource;
   public
-    function BuscaTabelaModulos : TDataSource;
-    procedure DeleteModulo(aModulo : TModulo);
+    function BuscaModulos: TDataSource;
+    function BuscaCodigoModulo(aNomeModulo: String): TDataSource;
+    procedure DeleteModulo(aModulo: TModulo);
     constructor Create;
     destructor Destroy; override;
   End;
@@ -21,13 +23,28 @@ type
 implementation
 
 { TDAOModulo }
-
-function TDAOModulo.BuscaTabelaModulos : TDataSource;
+function TDAOModulo.BuscaCodigoModulo(aNomeModulo: String): TDataSource;
 begin
-  FQuery:= FConn.CriarQuery;
-  FDataSource:= FConn.CriarDataSource;
-  
+  FQuery := FConn.CriarQuery;
+  FDataSource := FConn.CriarDataSource;
+
+  FQuery.SQL.Clear;
+  FQuery.SQL.Add('SELECT cod_mod FROM modulos WHERE nome = :nome');
+  FQuery.ParamByName('nome').AsString := aNomeModulo;
+  FQuery.Open;
+
+  FDataSource.DataSet := FQuery;
+
+  Result := FDataSource;
+end;
+
+function TDAOModulo.BuscaModulos: TDataSource;
+begin
+  FQuery := FConn.CriarQuery;
+  FDataSource := FConn.CriarDataSource;
+
   FQuery.Open('SELECT nome FROM modulos ORDER BY nome');
+
   FDataSource.DataSet := FQuery;
 
   Result := FDataSource;
@@ -35,14 +52,15 @@ end;
 
 constructor TDAOModulo.Create;
 begin
-  FConn:= TConexao.Create;
+  FConn := TConexao.Create;
 end;
 
-procedure TDAOModulo.DeleteModulo(aModulo : TModulo);
+procedure TDAOModulo.DeleteModulo(aModulo: TModulo);
 begin
   FQuery := FConn.CriarQuery;
 
   FQuery.SQL.Text := 'DELETE FROM modulos where nome = :nome';
+
   FQuery.ParamByName('nome').AsString := aModulo.Nome;
 
   FQuery.ExecSQL;

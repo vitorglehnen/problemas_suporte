@@ -83,7 +83,7 @@ Coordinates=390,212,104,58
 Coordinates=605,416,134,58
 
 []
-Coordinates=1071,1,114,58
+Coordinates=1155,78,155,58
 Visible=True
 
 [pnlBodyDetalhesProblema]
@@ -92,35 +92,17 @@ Coordinates=1223,1,167,58
 [pnlModuloProblema]
 Coordinates=281,87,129,58
 
-[chkNegritoSolucao]
-Coordinates=994,309,123,58
-
-[chkItalicoDetalhes]
-Coordinates=426,1,119,58
-
 [pnlBodySolucaoProblema]
 Coordinates=908,155,162,58
 
-[pnlTopSolucaoProblema]
-Coordinates=1155,78,155,58
-
 [lblDataProblema]
 Coordinates=172,315,110,58
-
-[cbNameFontSolucao]
-Coordinates=33,315,134,124
-
-[chkItalicoSolucao]
-Coordinates=720,1,115,58
 
 [lblModuloProblema]
 Coordinates=1006,463,125,58
 
 [dsModulos]
 Coordinates=35,173,77,36
-
-[chkNegritoDetalhes]
-Coordinates=994,386,127,58
 
 [pnlDetalhesProblema]
 Coordinates=0,0,138,58
@@ -131,32 +113,14 @@ Coordinates=1159,232,158,58
 [lblTituloProblema]
 Coordinates=157,1,115,58
 
-[navDsModulos]
-Coordinates=12,77,99,58
-
-[cbSizeFontDetalhes]
-Coordinates=720,78,130,124
-
-[cbNameFontDetalhes]
-Coordinates=748,512,139,124
-
 [lblCodProblema]
 Coordinates=971,78,106,58
 
 [pnlSolucaoProblema]
 Coordinates=398,315,133,58
 
-[pnlTopMmSolucao]
-Coordinates=1006,540,121,58
-
-[cbSizeFontSolucao]
-Coordinates=253,153,125,124
-
 [pnlTopProblema]
 Coordinates=848,221,109,58
-
-[pnlTopMmDetalhes]
-Coordinates=720,221,126,58
 
 [lblSolucaoProblema]
 Coordinates=114,153,129,58
@@ -175,8 +139,4 @@ Coordinates=182,477,93,58
 
 [btnImagensProblema]
 Coordinates=321,587,136,36
-
-[DBNavigator1]
-Coordinates=222,587,94,58
-Visible=True
 

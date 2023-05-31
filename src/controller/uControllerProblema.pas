@@ -26,6 +26,7 @@ type
     function BuscaImagens(aCodigoProblema: Integer): TStringList;
     function BuscaTabelaProblemasPorFiltro(aProblema: TProblema; aColuna: String; aFiltro: String): TDataSource;
     function BuscaProxCodigoImagem: String;
+    function BuscaProximoCodigoProblema: Integer;
     procedure InsertProblema(aProblema: TProblema);
     procedure InsertImagem(aImagem: TImagemProblema);
     procedure DeleteImagem(aImagemProblema: TImagemProblema);
@@ -57,6 +58,11 @@ end;
 function TControllerProblema.BuscaProxCodigoImagem: String;
 begin
   Result := FDAOImagemProblema.BuscaProxCodigo;
+end;
+
+function TControllerProblema.BuscaProximoCodigoProblema: Integer;
+begin
+  Result := FDAOProblema.BuscaProximoCodigo.DataSet.FieldByName('gen_id').AsInteger;
 end;
 
 function TControllerProblema.BuscaQuantidadeProblemas: TDataSource;

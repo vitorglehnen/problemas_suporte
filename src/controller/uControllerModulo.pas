@@ -13,7 +13,8 @@ type
   public
     function BuscaTabelaModulos: TDataSource;
     function BuscaModulos: TStringList;
-    procedure DeleteModulo(aModulo : TModulo);
+    function BuscaCodigoModulo(aNomeModulo: String): Integer;
+    procedure DeleteModulo(aModulo: TModulo);
     constructor Create;
     destructor Destroy; override;
   end;
@@ -24,11 +25,20 @@ uses
   Vcl.Dialogs;
 
 { TControllerModulo }
+function TControllerModulo.BuscaCodigoModulo(aNomeModulo: String): Integer;
+begin
+  var aCodigoModulo : Integer := FDAOModulo.BuscaCodigoModulo(aNomeModulo)
+        .DataSet.FieldByName('cod_mod').AsInteger;
+
+  Result := aCodigoModulo;
+end;
 
 function TControllerModulo.BuscaModulos: TStringList;
 begin
-  var aModulos : TDataset := FDAOGridModulo.BuscaModulos.DataSet;
-  var aListaModulos: TStringList := TStringList.Create;
+  var
+    aModulos: TDataset := FDAOModulo.BuscaModulos.DataSet;
+  var
+    aListaModulos: TStringList := TStringList.Create;
 
   while not aModulos.Eof do
   begin
@@ -41,7 +51,7 @@ end;
 
 function TControllerModulo.BuscaTabelaModulos: TDataSource;
 begin
-  Result := FDAOModulo.BuscaTabelaModulos;
+  Result := FDAOGridModulo.BuscaTabelaModulos;
 end;
 
 constructor TControllerModulo.Create;
@@ -55,7 +65,8 @@ begin
   try
     FDAOModulo.DeleteModulo(aModulo);
   except
-    MessageDlg('Não é possível excluir um módulo com problemas vinculados!', mtInformation, [mbOK], 0);
+    MessageDlg('Não é possível excluir um módulo com problemas vinculados!',
+      mtInformation, [mbOK], 0);
   end;
 end;
 

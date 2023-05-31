@@ -13,6 +13,7 @@ type
     FDataSource: TDataSource;
   public
     function CarregaDadosProblema(aTituloProblema: String): TDataSource;
+    function BuscaProximoCodigo : TDataSource;
     procedure InsertProblema(aProblema: TProblema);
     procedure UpdateProblema(aProblema: TProblema);
     procedure DeleteProblema(aProblema: TProblema);
@@ -24,6 +25,20 @@ type
 implementation
 
 { TDAOProblema }
+
+function TDAOProblema.BuscaProximoCodigo: TDataSource;
+begin
+  FQuery:= FConn.CriarQuery;
+  FDataSource:= FConn.CriarDataSource;
+
+  FQuery.SQL.Clear;
+  FQuery.SQL.Add('SELECT GEN_ID(gen_problemas_id, 1) FROM RDB$DATABASE');
+  FQuery.Open;
+
+  FDataSource.DataSet := FQuery;
+
+  Result := FDataSource;
+end;
 
 function TDAOProblema.BuscaQuantidadeProblemas: TDataSource;
 begin
@@ -44,7 +59,7 @@ begin
   FQuery := FConn.CriarQuery;
   FDataSource := FConn.CriarDataSource;
 
-  FQuery.SQL.Text := 'SELECT p.cod_prob, m.nome as modulo, p.titulo, p.chamado, p.detalhes, p.solucao, p.datacr, p.horacr FROM problemas p JOIN modulos m on p.cod_mod = m.cod_mod WHERE p.titulo = :TituloProblema';
+  FQuery.SQL.Text := 'SELECT p.cod_prob, p.cod_mod, p.titulo, p.chamado, p.detalhes, p.solucao, p.datacr, p.horacr FROM problemas p WHERE p.titulo = :TituloProblema';
   FQuery.ParamByName('TituloProblema').AsString := aTituloProblema;
   FQuery.Open;
 

@@ -99,18 +99,78 @@ object formPrincipal: TformPrincipal
             Height = 27
             Align = alBottom
             TabOrder = 0
-            object DBNavigator1: TDBNavigator
+            object btnExcluirProblema: TSpeedButton
+              Left = 218
+              Top = 1
+              Width = 48
+              Height = 25
+              Align = alRight
+              Caption = 'Excluir'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMaroon
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              Spacing = 2
+              OnClick = btnExcluirProblemaClick
+              ExplicitLeft = 146
+              ExplicitTop = -4
+            end
+            object btnCancelarProblema: TSpeedButton
+              Left = 168
+              Top = 1
+              Width = 50
+              Height = 25
+              Align = alRight
+              Caption = 'Cancelar'
+              Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMaroon
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              Spacing = 2
+              OnClick = btnCancelarProblemaClick
+              ExplicitLeft = 162
+              ExplicitTop = -4
+            end
+            object btnSalvarProblema: TSpeedButton
+              Left = 65
+              Top = 1
+              Width = 55
+              Height = 25
+              Align = alLeft
+              Caption = 'Salvar(F4)'
+              Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clGreen
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              Spacing = 2
+              OnClick = btnSalvarProblemaClick
+              ExplicitTop = 5
+            end
+            object btnNovoProblema: TSpeedButton
               Left = 1
               Top = 1
-              Width = 265
+              Width = 64
               Height = 25
-              DataSource = dsProblemas
-              VisibleButtons = [nbInsert, nbDelete, nbPost, nbCancel]
-              Align = alClient
-              TabOrder = 0
-              ExplicitLeft = 88
-              ExplicitTop = 0
-              ExplicitWidth = 240
+              Align = alLeft
+              Caption = 'Novo(F3)'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clGreen
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              Spacing = 2
+              OnClick = btnNovoProblemaClick
+              ExplicitLeft = -5
+              ExplicitTop = 5
             end
           end
           object pnlBodyPesqProblema: TPanel
@@ -288,17 +348,25 @@ object formPrincipal: TformPrincipal
             Color = 16708071
             ParentBackground = False
             TabOrder = 0
-            object navDsModulos: TDBNavigator
+            object btnExcluirModulo: TSpeedButton
+              Left = 190
+              Top = 1
+              Width = 48
+              Height = 25
+              Align = alRight
+              Caption = 'Excluir'
+              ExplicitLeft = 89
+              ExplicitTop = -4
+            end
+            object btnNovoModulo: TSpeedButton
               Left = 1
               Top = 1
-              Width = 237
+              Width = 48
               Height = 25
-              DataSource = dsModulos
-              VisibleButtons = [nbInsert, nbDelete, nbPost, nbCancel]
-              Align = alClient
-              TabOrder = 0
-              ExplicitLeft = -1
-              ExplicitTop = 5
+              Align = alLeft
+              Caption = 'Novo'
+              ExplicitLeft = 9
+              ExplicitTop = 2
             end
           end
           object pnlBodyPesqModulo: TPanel
@@ -446,7 +514,7 @@ object formPrincipal: TformPrincipal
               Left = 0
               Top = 69
               Width = 1031
-              Height = 126
+              Height = 168
               Align = alTop
               AutoSize = True
               BevelOuter = bvNone
@@ -455,7 +523,7 @@ object formPrincipal: TformPrincipal
               TabOrder = 1
               object btnImagensProblema: TSpeedButton
                 Left = 205
-                Top = 20
+                Top = 34
                 Width = 115
                 Height = 53
                 Caption = 'Imagens'
@@ -471,12 +539,11 @@ object formPrincipal: TformPrincipal
                 Left = 30
                 Top = 20
                 Width = 169
-                Height = 106
+                Height = 148
                 Align = alLeft
                 AutoSize = True
                 BevelOuter = bvNone
                 TabOrder = 0
-                ExplicitTop = 14
                 object lblModuloProblema: TLabel
                   Left = 0
                   Top = 0
@@ -492,24 +559,21 @@ object formPrincipal: TformPrincipal
                   ParentFont = False
                   ExplicitWidth = 47
                 end
-                object cbModulo: TDBComboBox
+                object cbModulo: TComboBox
                   Left = 0
-                  Top = 16
+                  Top = 20
                   Width = 113
                   Height = 21
-                  DataField = 'modulo'
-                  DataSource = dsProblemas
-                  Items.Strings = (
-                    '79')
                   TabOrder = 0
+                  Text = 'cbModulo'
                 end
               end
             end
             object pnlBodySolucaoProblema: TPanel
               Left = 0
-              Top = 430
+              Top = 472
               Width = 1031
-              Height = 323
+              Height = 281
               Align = alClient
               AutoSize = True
               BevelOuter = bvNone
@@ -519,7 +583,7 @@ object formPrincipal: TformPrincipal
                 Left = 30
                 Top = 0
                 Width = 1001
-                Height = 323
+                Height = 281
                 Align = alClient
                 AutoSize = True
                 BevelOuter = bvNone
@@ -541,149 +605,11 @@ object formPrincipal: TformPrincipal
                   ParentFont = False
                   ExplicitWidth = 48
                 end
-                object pnlTopSolucaoProblema: TPanel
+                object mmSolucaoProblema: TDBRichEdit
                   Left = 0
                   Top = 15
                   Width = 941
-                  Height = 24
-                  Align = alTop
-                  Alignment = taLeftJustify
-                  BevelOuter = bvNone
-                  Enabled = False
-                  TabOrder = 0
-                  object pnlTopMmSolucao: TPanel
-                    Left = 0
-                    Top = 0
-                    Width = 941
-                    Height = 24
-                    Align = alClient
-                    BevelOuter = bvNone
-                    TabOrder = 0
-                    object chkItalicoSolucao: TCheckBox
-                      Left = 201
-                      Top = 0
-                      Width = 56
-                      Height = 24
-                      TabStop = False
-                      Align = alLeft
-                      Caption = 'It'#225'lico'
-                      Enabled = False
-                      TabOrder = 0
-                    end
-                    object chkNegritoSolucao: TCheckBox
-                      Left = 139
-                      Top = 0
-                      Width = 62
-                      Height = 24
-                      TabStop = False
-                      Align = alLeft
-                      Caption = 'Negrito'
-                      Enabled = False
-                      TabOrder = 1
-                    end
-                    object cbNameFontSolucao: TComboBox
-                      Left = 41
-                      Top = 0
-                      Width = 98
-                      Height = 22
-                      Align = alLeft
-                      Style = csOwnerDrawFixed
-                      Enabled = False
-                      ItemIndex = 0
-                      TabOrder = 2
-                      TabStop = False
-                      Text = 'Arial'
-                      Items.Strings = (
-                        'Arial'
-                        'Calibri'
-                        'Cambria'
-                        'Candara'
-                        'Comic Sans MS'
-                        'Consolas'
-                        'Courier New'
-                        'Georgia'
-                        'Impact'
-                        'Lucida Console'
-                        'Lucida Sans Unicode'
-                        'Microsoft Sans Serif'
-                        'Palatino Linotype'
-                        'Segoe UI'
-                        'Tahoma'
-                        'Times New Roman'
-                        'Trebuchet MS'
-                        'Verdana')
-                    end
-                    object cbSizeFontSolucao: TComboBox
-                      Left = 0
-                      Top = 0
-                      Width = 41
-                      Height = 22
-                      Align = alLeft
-                      Style = csOwnerDrawFixed
-                      Enabled = False
-                      ItemIndex = 9
-                      TabOrder = 3
-                      TabStop = False
-                      Text = '10'
-                      Items.Strings = (
-                        '1'
-                        '2'
-                        '3'
-                        '4'
-                        '5'
-                        '6'
-                        '7'
-                        '8'
-                        '9'
-                        '10'
-                        '11'
-                        '12'
-                        '13'
-                        '14'
-                        '15'
-                        '16'
-                        '17'
-                        '18'
-                        '19'
-                        '20'
-                        '21'
-                        '22'
-                        '23'
-                        '24'
-                        '25'
-                        '26'
-                        '27'
-                        '28'
-                        '29'
-                        '30'
-                        '31'
-                        '32'
-                        '33'
-                        '34'
-                        '35'
-                        '36'
-                        '37'
-                        '38'
-                        '39'
-                        '40'
-                        '41'
-                        '42'
-                        '43'
-                        '44'
-                        '45'
-                        '46'
-                        '47'
-                        '48'
-                        '49'
-                        '50')
-                    end
-                  end
-                end
-                object mmSolucaoProblema: TDBRichEdit
-                  Left = 0
-                  Top = 39
-                  Width = 941
-                  Height = 234
+                  Height = 216
                   Align = alClient
                   DataField = 'solucao'
                   DataSource = dsProblemas
@@ -692,12 +618,8 @@ object formPrincipal: TformPrincipal
                   Font.Height = -11
                   Font.Name = 'Tahoma'
                   Font.Style = []
-                  TabOrder = 1
+                  TabOrder = 0
                   Zoom = 100
-                  ExplicitLeft = 256
-                  ExplicitTop = 136
-                  ExplicitWidth = 185
-                  ExplicitHeight = 89
                 end
               end
             end
@@ -792,19 +714,19 @@ object formPrincipal: TformPrincipal
                 DataSource = dsProblemas
                 TabOrder = 2
               end
-              object edtDataProblema: TDBEdit
+              object dtProblema: TDateTimePicker
                 Left = 632
                 Top = 27
                 Width = 97
                 Height = 21
-                DataField = 'datacr'
-                DataSource = dsProblemas
+                Date = 45076.000000000000000000
+                Time = 0.848554212963790600
                 TabOrder = 3
               end
             end
             object pnlBodyDetalhesProblema: TPanel
               Left = 0
-              Top = 195
+              Top = 237
               Width = 1031
               Height = 235
               Align = alTop
@@ -838,139 +760,11 @@ object formPrincipal: TformPrincipal
                   ParentFont = False
                   ExplicitWidth = 127
                 end
-                object pnlTopMmDetalhes: TPanel
+                object mmDetalhesProblema: TDBRichEdit
                   Left = 0
                   Top = 15
                   Width = 941
-                  Height = 24
-                  Align = alTop
-                  BevelOuter = bvNone
-                  TabOrder = 0
-                  object cbNameFontDetalhes: TComboBox
-                    Left = 41
-                    Top = 0
-                    Width = 98
-                    Height = 22
-                    Align = alLeft
-                    Style = csOwnerDrawFixed
-                    Enabled = False
-                    ItemIndex = 0
-                    TabOrder = 0
-                    TabStop = False
-                    Text = 'Arial'
-                    Items.Strings = (
-                      'Arial'
-                      'Calibri'
-                      'Cambria'
-                      'Candara'
-                      'Comic Sans MS'
-                      'Consolas'
-                      'Courier New'
-                      'Georgia'
-                      'Impact'
-                      'Lucida Console'
-                      'Lucida Sans Unicode'
-                      'Microsoft Sans Serif'
-                      'Palatino Linotype'
-                      'Segoe UI'
-                      'Tahoma'
-                      'Times New Roman'
-                      'Trebuchet MS'
-                      'Verdana')
-                  end
-                  object cbSizeFontDetalhes: TComboBox
-                    Left = 0
-                    Top = 0
-                    Width = 41
-                    Height = 22
-                    Align = alLeft
-                    Style = csOwnerDrawFixed
-                    Color = clWhite
-                    Enabled = False
-                    ItemIndex = 9
-                    TabOrder = 1
-                    TabStop = False
-                    Text = '10'
-                    Items.Strings = (
-                      '1'
-                      '2'
-                      '3'
-                      '4'
-                      '5'
-                      '6'
-                      '7'
-                      '8'
-                      '9'
-                      '10'
-                      '11'
-                      '12'
-                      '13'
-                      '14'
-                      '15'
-                      '16'
-                      '17'
-                      '18'
-                      '19'
-                      '20'
-                      '21'
-                      '22'
-                      '23'
-                      '24'
-                      '25'
-                      '26'
-                      '27'
-                      '28'
-                      '29'
-                      '30'
-                      '31'
-                      '32'
-                      '33'
-                      '34'
-                      '35'
-                      '36'
-                      '37'
-                      '38'
-                      '39'
-                      '40'
-                      '41'
-                      '42'
-                      '43'
-                      '44'
-                      '45'
-                      '46'
-                      '47'
-                      '48'
-                      '49'
-                      '50')
-                  end
-                  object chkItalicoDetalhes: TCheckBox
-                    Left = 201
-                    Top = 0
-                    Width = 56
-                    Height = 24
-                    TabStop = False
-                    Align = alLeft
-                    Caption = 'It'#225'lico'
-                    Enabled = False
-                    TabOrder = 2
-                  end
-                  object chkNegritoDetalhes: TCheckBox
-                    Left = 139
-                    Top = 0
-                    Width = 62
-                    Height = 24
-                    TabStop = False
-                    Align = alLeft
-                    Caption = 'Negrito'
-                    Enabled = False
-                    TabOrder = 3
-                  end
-                end
-                object mmDetalhesProblema: TDBRichEdit
-                  Left = 0
-                  Top = 39
-                  Width = 941
-                  Height = 176
+                  Height = 200
                   Align = alClient
                   DataField = 'detalhes'
                   DataSource = dsProblemas
@@ -979,12 +773,8 @@ object formPrincipal: TformPrincipal
                   Font.Height = -11
                   Font.Name = 'Tahoma'
                   Font.Style = []
-                  TabOrder = 1
+                  TabOrder = 0
                   Zoom = 100
-                  ExplicitLeft = 144
-                  ExplicitTop = 120
-                  ExplicitWidth = 185
-                  ExplicitHeight = 89
                 end
               end
             end

@@ -2,7 +2,8 @@ unit uDAOGridModulo;
 
 interface
 
-uses uConexao, uModulo, FireDAC.Comp.Client, Vcl.Dialogs, System.Generics.Collections,
+uses uConexao, uModulo, FireDAC.Comp.Client, Vcl.Dialogs,
+  System.Generics.Collections,
   Vcl.DBCtrls, DBClient, Data.DB;
 
 type
@@ -12,7 +13,7 @@ type
     FQuery: TFDQuery;
     FDataSource: TDataSource;
   public
-    function BuscaModulos : TDataSource;
+    function BuscaTabelaModulos: TDataSource;
     constructor Create;
     destructor Destroy; override;
   End;
@@ -21,20 +22,18 @@ implementation
 
 { TDAOModulo }
 
-function TDAOGridModulo.BuscaModulos : TDataSource;
+function TDAOGridModulo.BuscaTabelaModulos: TDataSource;
 begin
-  FQuery:= FConn.CriarQuery;
-  FDataSource:= FConn.CriarDataSource;
-
+  FQuery := FConn.CriarQuery;
+  FDataSource := FConn.CriarDataSource;
   FQuery.Open('SELECT nome FROM modulos ORDER BY nome');
   FDataSource.DataSet := FQuery;
-
   Result := FDataSource;
 end;
 
 constructor TDAOGridModulo.Create;
 begin
-  FConn:= TConexao.Create;
+  FConn := TConexao.Create;
 end;
 
 destructor TDAOGridModulo.Destroy;

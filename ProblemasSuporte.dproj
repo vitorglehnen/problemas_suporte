@@ -1,6 +1,6 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{FD4071D4-B6E8-42AC-9353-5DA32AE9E50C}</ProjectGuid>
+        <ProjectGuid>{19206A03-146C-495B-AD02-07BE33D24553}</ProjectGuid>
         <ProjectVersion>19.2</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <Base>True</Base>
@@ -87,7 +87,7 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <Icon_MainIcon>ico.ico</Icon_MainIcon>
         <BRCC_OutputDir>C:\Problemas Suporte\</BRCC_OutputDir>
-        <DCC_ExeOutput>C:\Users\vitor\OneDrive\Área de Trabalho\Pb\</DCC_ExeOutput>
+        <DCC_ExeOutput>C:\Problemas Suporte\</DCC_ExeOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>

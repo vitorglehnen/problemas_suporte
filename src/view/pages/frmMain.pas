@@ -82,7 +82,6 @@ type
     pnlBodySolucaoProblema: TPanel;
     pnlSolucaoProblema: TPanel;
     lblSolucaoProblema: TLabel;
-    pnlTopSolucaoProblema: TPanel;
     pnlTopProblema: TPanel;
     lblDataProblema: TLabel;
     lblChamadoProblema: TLabel;
@@ -91,29 +90,24 @@ type
     pnlBodyDetalhesProblema: TPanel;
     pnlDetalhesProblema: TPanel;
     lblDetalhesProblema: TLabel;
-    pnlTopMmDetalhes: TPanel;
-    cbNameFontDetalhes: TComboBox;
-    cbSizeFontDetalhes: TComboBox;
-    chkItalicoDetalhes: TCheckBox;
-    chkNegritoDetalhes: TCheckBox;
     pnlModuloProblema: TPanel;
     lblModuloProblema: TLabel;
-    pnlTopMmSolucao: TPanel;
-    chkItalicoSolucao: TCheckBox;
-    chkNegritoSolucao: TCheckBox;
-    cbNameFontSolucao: TComboBox;
-    cbSizeFontSolucao: TComboBox;
     dsModulos: TDataSource;
-    navDsModulos: TDBNavigator;
-    DBNavigator1: TDBNavigator;
     dsProblemas: TDataSource;
     edtTituloProblema: TDBEdit;
     edtChamadoProblema: TDBEdit;
     edtCodProblema: TDBEdit;
     mmDetalhesProblema: TDBRichEdit;
     mmSolucaoProblema: TDBRichEdit;
-    cbModulo: TDBComboBox;
-    edtDataProblema: TDBEdit;
+    btnExcluirProblema: TSpeedButton;
+    btnCancelarProblema: TSpeedButton;
+    btnSalvarProblema: TSpeedButton;
+    btnNovoProblema: TSpeedButton;
+    btnExcluirModulo: TSpeedButton;
+    btnNovoModulo: TSpeedButton;
+    cbModulo: TComboBox;
+    dtProblema: TDateTimePicker;
+
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
@@ -125,8 +119,6 @@ type
     procedure btnExcluirProblemaClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btnImagensProblemaClick(Sender: TObject);
-    procedure mmSolucaoProblemaEnter(Sender: TObject);
-    procedure mmDetalhesProblemaEnter(Sender: TObject);
     procedure btnNovoModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure gridModulosKeyDown(Sender: TObject; var Key: Word;
@@ -137,16 +129,21 @@ type
     procedure gridProblemasDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure edtPesqProblemaChange(Sender: TObject);
+    procedure btnNovoProblemaClick(Sender: TObject);
+    procedure btnSalvarProblemaClick(Sender: TObject);
+    procedure btnCancelarProblemaClick(Sender: TObject);
   private
     { Private declarations }
     FFormImagensProblema: TformImagensProblema;
     FControllerModulo: TControllerModulo;
     FControllerProblema: TControllerProblema;
+
     procedure CarregaGridProblemas;
     procedure CarregaDadosProblemas;
     procedure CarregaGridModulos;
     procedure PreencheCbxModulos;
-    procedure teste(DataSet: TDataSet);
+    procedure InverteBotoesCrudProblema;
+    procedure DsProblemasBeforePost(TDataSet: TDataSet);
   public
     { Public declarations }
     FEdicaoProblema: Boolean;
@@ -185,40 +182,6 @@ begin
   CarregaGridProblemas;
 end;
 
-procedure TformPrincipal.mmDetalhesProblemaEnter(Sender: TObject);
-begin
-  with mmDetalhesProblema do
-  begin
-    SelAttributes.Style := [];
-    SelStart := Length(mmDetalhesProblema.Text);
-    SelAttributes.Size := StrToInt(cbSizeFontDetalhes.Text);
-    SelAttributes.Name := cbNameFontDetalhes.Text;
-    if chkNegritoDetalhes.Checked then
-      SelAttributes.Style := [fsBold];
-    if chkItalicoDetalhes.Checked then
-      SelAttributes.Style := [fsItalic];
-    if chkNegritoDetalhes.Checked and chkItalicoDetalhes.Checked then
-      SelAttributes.Style := [fsItalic, fsBold];
-  end;
-end;
-
-procedure TformPrincipal.mmSolucaoProblemaEnter(Sender: TObject);
-begin
-  with mmSolucaoProblema do
-  begin
-    SelAttributes.Style := [];
-    SelStart := Length(mmSolucaoProblema.Text);
-    SelAttributes.Size := StrToInt(cbSizeFontSolucao.Text);
-    SelAttributes.Name := cbNameFontSolucao.Text;
-    if chkNegritoSolucao.Checked then
-      SelAttributes.Style := [fsBold];
-    if chkItalicoSolucao.Checked then
-      SelAttributes.Style := [fsItalic];
-    if chkNegritoSolucao.Checked and chkItalicoSolucao.Checked then
-      SelAttributes.Style := [fsItalic, fsBold];
-  end;
-end;
-
 procedure TformPrincipal.PreencheCbxModulos;
 begin
   var
@@ -244,11 +207,6 @@ begin
   CarregaGridProblemas;
 end;
 
-procedure TformPrincipal.teste(DataSet: TDataSet);
-begin
-  ShowMessage('oi');
-end;
-
 procedure TformPrincipal.btnImagensProblemaClick(Sender: TObject);
 begin
   var
@@ -261,6 +219,13 @@ begin
   finally
     FFormImagensProblema.Free;
   end;
+end;
+
+procedure TformPrincipal.btnCancelarProblemaClick(Sender: TObject);
+begin
+  InverteBotoesCrudProblema;
+
+  dsProblemas.DataSet.Cancel;
 end;
 
 procedure TformPrincipal.btnExcluirModuloClick(Sender: TObject);
@@ -314,7 +279,7 @@ begin
   if Assigned(gridProblemas.DataSource) and
     (gridProblemas.DataSource.DataSet.RecordCount > 0) then
   begin
-    //PreencheCbxModulos;
+    PreencheCbxModulos;
     pnlProblemas.Visible := True;
     aNomeProblema := gridProblemas.Columns[0].Field.Value;
     dsProblemas.DataSet := FControllerProblema.CarregaDadosProblema
@@ -359,6 +324,17 @@ begin
     IntToStr(gridProblemas.DataSource.DataSet.RecordCount);
 end;
 
+procedure TformPrincipal.DsProblemasBeforePost(TDataSet: TDataSet);
+begin
+  dsProblemas.DataSet.FieldByName('cod_mod').AsInteger := FControllerModulo.BuscaCodigoModulo(cbModulo.Text);
+  dsProblemas.DataSet.FieldByName('datacr').AsDatetime := dtProblema.Date;
+  dsProblemas.DataSet.FieldByName('horacr').AsDatetime := Now;
+
+  showmessage(IntToStr(FControllerProblema.BuscaProximoCodigoProblema));
+  if edtCodProblema.Text = '' then
+    dsProblemas.DataSet.FieldByName('cod_prob').AsInteger := FControllerProblema.BuscaProximoCodigoProblema;
+end;
+
 procedure TformPrincipal.edtPesqProblemaChange(Sender: TObject);
 begin
   var aProblema := TProblema.Create;
@@ -396,10 +372,29 @@ begin
   gridModulos.SetFocus;
 end;
 
+procedure TformPrincipal.btnNovoProblemaClick(Sender: TObject);
+begin
+  InverteBotoesCrudProblema;
+
+  pnlProblemas.Visible := True;
+  edtTituloProblema.SetFocus;
+  PreencheCbxModulos;
+
+  dsProblemas.DataSet.Insert;
+end;
+
 procedure TformPrincipal.btnSalvarModuloMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   CarregaGridModulos;
+end;
+
+procedure TformPrincipal.btnSalvarProblemaClick(Sender: TObject);
+begin
+  InverteBotoesCrudProblema;
+
+  showmessage(IntToStr(FControllerProblema.BuscaProximoCodigoProblema));
+  dsProblemas.DataSet.Post;
 end;
 
 procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
@@ -483,10 +478,21 @@ begin
   end;
 end;
 
+procedure TformPrincipal.InverteBotoesCrudProblema;
+begin
+  btnNovoProblema.Enabled := not btnNovoProblema.Enabled;
+  btnSalvarProblema.Enabled := not btnSalvarProblema.Enabled;
+  btnExcluirProblema.Enabled := not btnExcluirProblema.Enabled;
+  btnCancelarProblema.Enabled := not btnCancelarProblema.Enabled;
+end;
+
 procedure TformPrincipal.FormCreate(Sender: TObject);
 begin
   FControllerProblema := TControllerProblema.Create;
   FControllerModulo := TControllerModulo.Create;
+
+  dsProblemas.DataSet := FControllerProblema.CarregaDadosProblema(' ').DataSet;
+  dsProblemas.DataSet.BeforePost := DsProblemasBeforePost;
 end;
 
 procedure TformPrincipal.FormDestroy(Sender: TObject);
