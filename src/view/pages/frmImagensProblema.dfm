@@ -207,8 +207,8 @@ object formImagensProblema: TformImagensProblema
       object lblNmroImagem: TLabel
         Left = 1
         Top = 1
-        Width = 1148
-        Height = 39
+        Width = 24
+        Height = 19
         Align = alClient
         Alignment = taCenter
         Caption = '1/5'
@@ -219,8 +219,6 @@ object formImagensProblema: TformImagensProblema
         Font.Style = []
         ParentFont = False
         Layout = tlCenter
-        ExplicitWidth = 24
-        ExplicitHeight = 19
       end
     end
   end

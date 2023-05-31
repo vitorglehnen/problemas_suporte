@@ -25,13 +25,9 @@ type
     function BuscaQuantidadeProblemas : TDataSource;
     function BuscaImagens(aCodigoProblema: Integer): TStringList;
     function BuscaTabelaProblemasPorFiltro(aProblema: TProblema; aColuna: String; aFiltro: String): TDataSource;
-    function BuscaProxCodigoImagem: String;
-    function BuscaProximoCodigoProblema: Integer;
-    procedure InsertProblema(aProblema: TProblema);
+    function BuscaProximoCodigoImagem: String;
     procedure InsertImagem(aImagem: TImagemProblema);
     procedure DeleteImagem(aImagemProblema: TImagemProblema);
-    procedure UpdateProblema(aProblema: TProblema);
-    procedure DeleteProblema(aProblema: TProblema);
     constructor Create;
     destructor Destroy; override;
   end;
@@ -55,14 +51,9 @@ begin
   Result := aListaImagens;
 end;
 
-function TControllerProblema.BuscaProxCodigoImagem: String;
+function TControllerProblema.BuscaProximoCodigoImagem: String;
 begin
-  Result := FDAOImagemProblema.BuscaProxCodigo;
-end;
-
-function TControllerProblema.BuscaProximoCodigoProblema: Integer;
-begin
-  Result := FDAOProblema.BuscaProximoCodigo.DataSet.FieldByName('gen_id').AsInteger;
+  Result := FDAOImagemProblema.BuscaProximoCodigo;
 end;
 
 function TControllerProblema.BuscaQuantidadeProblemas: TDataSource;
@@ -104,11 +95,6 @@ begin
   FDAOImagemProblema.DeleteImagem(aImagemProblema);
 end;
 
-procedure TControllerProblema.DeleteProblema(aProblema: TProblema);
-begin
-  FDAOProblema.DeleteProblema(aProblema);
-end;
-
 destructor TControllerProblema.Destroy;
 begin
   FListaImagens.Free;
@@ -121,16 +107,6 @@ end;
 procedure TControllerProblema.InsertImagem(aImagem: TImagemProblema);
 begin
   FDAOImagemProblema.InsertImagem(aImagem);
-end;
-
-procedure TControllerProblema.InsertProblema(aProblema: TProblema);
-begin
-  FDAOProblema.InsertProblema(aProblema);
-end;
-
-procedure TControllerProblema.UpdateProblema(aProblema: TProblema);
-begin
-  FDAOProblema.UpdateProblema(aProblema);
 end;
 
 end.

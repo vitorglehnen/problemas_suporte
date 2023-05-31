@@ -132,6 +132,7 @@ type
     procedure btnNovoProblemaClick(Sender: TObject);
     procedure btnSalvarProblemaClick(Sender: TObject);
     procedure btnCancelarProblemaClick(Sender: TObject);
+    procedure btnNovoModuloClick(Sender: TObject);
   private
     { Private declarations }
     FFormImagensProblema: TformImagensProblema;
@@ -255,7 +256,6 @@ begin
       'Excluir problema', +MB_ICONQUESTION + MB_YESNO) = MrYes then
     begin
       aProblema.Codigo := StrToInt(edtCodProblema.Text);
-      FControllerProblema.DeleteProblema(aProblema);
       CarregaGridProblemas;
       CarregaDadosProblemas;
     end;
@@ -326,13 +326,10 @@ end;
 
 procedure TformPrincipal.DsProblemasBeforePost(TDataSet: TDataSet);
 begin
+  dsProblemas.DataSet.FieldByName('datacr').AsDateTime := Now;
+  dsProblemas.DataSet.FieldByName('horacr').AsDateTime := Now;
+  dsProblemas.DataSet.FieldByName('cod_prob').AsInteger := 555;
   dsProblemas.DataSet.FieldByName('cod_mod').AsInteger := FControllerModulo.BuscaCodigoModulo(cbModulo.Text);
-  dsProblemas.DataSet.FieldByName('datacr').AsDatetime := dtProblema.Date;
-  dsProblemas.DataSet.FieldByName('horacr').AsDatetime := Now;
-
-  showmessage(IntToStr(FControllerProblema.BuscaProximoCodigoProblema));
-  if edtCodProblema.Text = '' then
-    dsProblemas.DataSet.FieldByName('cod_prob').AsInteger := FControllerProblema.BuscaProximoCodigoProblema;
 end;
 
 procedure TformPrincipal.edtPesqProblemaChange(Sender: TObject);
@@ -365,6 +362,11 @@ begin
   end;
 end;
 
+procedure TformPrincipal.btnNovoModuloClick(Sender: TObject);
+begin
+  dsModulos.DataSet.Insert;
+end;
+
 procedure TformPrincipal.btnNovoModuloMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
@@ -380,7 +382,7 @@ begin
   edtTituloProblema.SetFocus;
   PreencheCbxModulos;
 
-  dsProblemas.DataSet.Insert;
+  dsProblemas.DataSet.Append;
 end;
 
 procedure TformPrincipal.btnSalvarModuloMouseDown(Sender: TObject;
@@ -393,7 +395,6 @@ procedure TformPrincipal.btnSalvarProblemaClick(Sender: TObject);
 begin
   InverteBotoesCrudProblema;
 
-  showmessage(IntToStr(FControllerProblema.BuscaProximoCodigoProblema));
   dsProblemas.DataSet.Post;
 end;
 

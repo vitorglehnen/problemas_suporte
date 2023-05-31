@@ -14,7 +14,7 @@ type
   public
     procedure InsertImagem(aImagemProblema: TImagemProblema);
     function BuscaImagens(aCodigoProblema: Integer): TDataSource;
-    function BuscaProxCodigo: String;
+    function BuscaProximoCodigo: String;
     procedure DeleteImagem(aImagemProblema: TImagemProblema);
     constructor Create;
     destructor Destroy; override;
@@ -40,7 +40,7 @@ begin
   Result := FDataSource;
 end;
 
-function TDAOImagemProblema.BuscaProxCodigo: String;
+function TDAOImagemProblema.BuscaProximoCodigo: String;
 begin
   FQuery := FConn.CriarQuery;
   FDataSource := FConn.CriarDataSource;

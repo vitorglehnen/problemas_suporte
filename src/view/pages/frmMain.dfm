@@ -365,6 +365,7 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alLeft
               Caption = 'Novo'
+              OnClick = btnNovoModuloClick
               ExplicitLeft = 9
               ExplicitTop = 2
             end
@@ -712,6 +713,7 @@ object formPrincipal: TformPrincipal
                 Height = 21
                 DataField = 'cod_prob'
                 DataSource = dsProblemas
+                Enabled = False
                 TabOrder = 2
               end
               object dtProblema: TDateTimePicker
@@ -721,6 +723,7 @@ object formPrincipal: TformPrincipal
                 Height = 21
                 Date = 45076.000000000000000000
                 Time = 0.848554212963790600
+                Enabled = False
                 TabOrder = 3
               end
             end

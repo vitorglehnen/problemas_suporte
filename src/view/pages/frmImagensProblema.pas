@@ -225,7 +225,7 @@ begin
 
   FControllerProblema := TControllerProblema.Create;
 
-  FNomeImagem := FControllerProblema.BuscaProxCodigoImagem +
+  FNomeImagem := FControllerProblema.BuscaProximoCodigoImagem +
     ' ' + FormatDateTime('dd-mm-yyyy', Now) + '.png';
 
   try
