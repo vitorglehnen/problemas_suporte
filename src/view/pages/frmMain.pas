@@ -107,6 +107,17 @@ type
     btnNovoModulo: TSpeedButton;
     cbModulo: TComboBox;
     dtProblema: TDateTimePicker;
+    ActionManager1: TActionManager;
+    ActionToolBar1: TActionToolBar;
+    FormatRichEditBold1: TRichEditBold;
+    FormatRichEditItalic1: TRichEditItalic;
+    FormatRichEditUnderline1: TRichEditUnderline;
+    FormatRichEditStrikeOut1: TRichEditStrikeOut;
+    FormatRichEditBullets1: TRichEditBullets;
+    FormatRichEditAlignLeft1: TRichEditAlignLeft;
+    FormatRichEditAlignRight1: TRichEditAlignRight;
+    FormatRichEditAlignCenter1: TRichEditAlignCenter;
+    edtCodModulo: TDBEdit;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -133,6 +144,7 @@ type
     procedure btnSalvarProblemaClick(Sender: TObject);
     procedure btnCancelarProblemaClick(Sender: TObject);
     procedure btnNovoModuloClick(Sender: TObject);
+    procedure cbModuloChange(Sender: TObject);
   private
     { Private declarations }
     FFormImagensProblema: TformImagensProblema;
@@ -143,8 +155,14 @@ type
     procedure CarregaDadosProblemas;
     procedure CarregaGridModulos;
     procedure PreencheCbxModulos;
-    procedure InverteBotoesCrudProblema;
+    procedure InverteCrudProblema;
+
     procedure DsProblemasBeforePost(TDataSet: TDataSet);
+    procedure DsProblemasAfterOpen(TDataSet: TDataSet);
+    procedure DsProblemasAfterEdit(TDataSet: TDataSet);
+    procedure DsProblemasAfterPost(TDataSet: TDataSet);
+    procedure DsProblemasAfterInsert(TDataSet: TDataSet);
+
   public
     { Public declarations }
     FEdicaoProblema: Boolean;
@@ -163,14 +181,21 @@ uses
 procedure TformPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-//  if Key = VK_F3 then
-//    if btnNovoProblema.Enabled then
-//      if pnlProblemas.Enabled then
-//        EventoCadastrarProblema;
-//  if Key = VK_F4 then
-//    if btnNovoProblema.Enabled = False then
-//      if pnlProblemas.Enabled then
-//        EventoSalvarProblema;
+   if Key = VK_F3 then
+     if btnNovoProblema.Enabled then
+        dsProblemas.DataSet.Insert;
+
+   if Key = VK_F4 then
+    if btnSalvarProblema.Enabled then
+      dsProblemas.DataSet.Post;
+
+   if Key = VK_F5 then
+    if btnNovoProblema.Enabled then
+      CarregaGridProblemas;
+
+   if Key = VK_F6 then
+    if btnCancelarProblema.Enabled then
+      dsProblemas.DataSet.Delete;
 end;
 
 procedure TformPrincipal.FormShow(Sender: TObject);
@@ -224,9 +249,11 @@ end;
 
 procedure TformPrincipal.btnCancelarProblemaClick(Sender: TObject);
 begin
-  InverteBotoesCrudProblema;
+  InverteCrudProblema;
 
   dsProblemas.DataSet.Cancel;
+
+  CarregaDadosProblemas;
 end;
 
 procedure TformPrincipal.btnExcluirModuloClick(Sender: TObject);
@@ -248,30 +275,21 @@ end;
 
 procedure TformPrincipal.btnExcluirProblemaClick(Sender: TObject);
 begin
-  var
-    aProblema: TProblema := TProblema.Create;
-
-  try
-    if Application.MessageBox('Deseja excluir este registro?',
-      'Excluir problema', +MB_ICONQUESTION + MB_YESNO) = MrYes then
-    begin
-      aProblema.Codigo := StrToInt(edtCodProblema.Text);
-      CarregaGridProblemas;
-      CarregaDadosProblemas;
-    end;
-    if gridProblemas.DataSource.DataSet.RecordCount < 1 then
-      pnlProblemas.Visible := False;
-  finally
-    aProblema.Free;
+  if Application.MessageBox('Deseja excluir este registro?', 'Excluir problema',
+    +MB_ICONQUESTION + MB_YESNO) = MrYes then
+  begin
+    dsProblemas.DataSet.Delete;
+    CarregaGridProblemas;
+    CarregaDadosProblemas;
   end;
+  if gridProblemas.DataSource.DataSet.RecordCount < 1 then
+    pnlProblemas.Visible := False;
 end;
 
 procedure TformPrincipal.CarregaDadosProblemas;
 var
   aNomeProblema: String;
   cont: Integer;
-  msDetalhes: TStream;
-  msSolucao: TStream;
   aListaImagens: TStringList;
 begin
   cont := 0;
@@ -280,6 +298,7 @@ begin
     (gridProblemas.DataSource.DataSet.RecordCount > 0) then
   begin
     PreencheCbxModulos;
+
     pnlProblemas.Visible := True;
     aNomeProblema := gridProblemas.Columns[0].Field.Value;
     dsProblemas.DataSet := FControllerProblema.CarregaDadosProblema
@@ -289,7 +308,8 @@ end;
 
 procedure TformPrincipal.CarregaGridModulos;
 begin
-  var aTabelaModulos: TDataSource := FControllerModulo.BuscaTabelaModulos;
+  var
+    aTabelaModulos: TDataSource := FControllerModulo.BuscaTabelaModulos;
 
   dsModulos.DataSet := aTabelaModulos.DataSet;
   dsModulos.DataSet.First;
@@ -324,42 +344,86 @@ begin
     IntToStr(gridProblemas.DataSource.DataSet.RecordCount);
 end;
 
+procedure TformPrincipal.cbModuloChange(Sender: TObject);
+begin
+  var aCodigoModulo : Integer := FControllerModulo.BuscaCodigoModulo(cbModulo.Text);
+
+  if IntToStr(aCodigoModulo) <> IntToStr(dsProblemas.DataSet.FieldByName('cod_mod').AsInteger) then
+  begin
+    dsProblemas.DataSet.Edit;
+    edtCodModulo.Text := IntToStr(aCodigoModulo);
+  end;
+end;
+
+procedure TformPrincipal.DsProblemasAfterEdit(TDataSet: TDataSet);
+begin
+  InverteCrudProblema;
+end;
+
+procedure TformPrincipal.DsProblemasAfterInsert(TDataSet: TDataSet);
+begin
+  InverteCrudProblema;
+
+  pnlProblemas.Visible := True;
+  edtTituloProblema.SetFocus;
+  PreencheCbxModulos;
+end;
+
+procedure TformPrincipal.DsProblemasAfterOpen(TDataSet: TDataSet);
+begin
+  while cbModulo.Text <> FControllerModulo.BuscaNomeModulo
+    (StrToInt(edtCodModulo.Text)) do
+  begin
+    cbModulo.ItemIndex := cbModulo.ItemIndex + 1;
+  end;
+end;
+
+procedure TformPrincipal.DsProblemasAfterPost(TDataSet: TDataSet);
+begin
+  InverteCrudProblema;
+end;
+
 procedure TformPrincipal.DsProblemasBeforePost(TDataSet: TDataSet);
 begin
   dsProblemas.DataSet.FieldByName('datacr').AsDateTime := Now;
   dsProblemas.DataSet.FieldByName('horacr').AsDateTime := Now;
-  dsProblemas.DataSet.FieldByName('cod_prob').AsInteger := 555;
-  dsProblemas.DataSet.FieldByName('cod_mod').AsInteger := FControllerModulo.BuscaCodigoModulo(cbModulo.Text);
+  dsProblemas.DataSet.FieldByName('cod_prob').AsInteger :=
+    FControllerProblema.BuscaProximoCodigoProblema;
+  dsProblemas.DataSet.FieldByName('cod_mod').AsInteger :=
+    FControllerModulo.BuscaCodigoModulo(cbModulo.Text);
 end;
 
 procedure TformPrincipal.edtPesqProblemaChange(Sender: TObject);
 begin
-  var aProblema := TProblema.Create;
-  var aFiltro: String;
+  var
+  aProblema := TProblema.Create;
+  var
+    aFiltro: String;
 
-  try
-    case rdbtnFiltroPesqProblema.ItemIndex of
-      0: aFiltro := 'Geral';
-      1: aFiltro := 'Módulo';
-    end;
+    try case rdbtnFiltroPesqProblema.ItemIndex of 0: aFiltro := 'Geral';
+    1: aFiltro := 'Módulo';
+end;
 
-    if Length(edtPesqProblema.Text) > 0 then
-    begin
-      case cbFiltroPesqProblema.ItemIndex of
-        0: aProblema.Codigo := StrToInt(edtPesqProblema.Text);
-        1: aProblema.Titulo := edtPesqProblema.Text;
-        2: aProblema.Chamado := edtPesqProblema.Text;
-      end;
-      aProblema.Modulo := gridModulos.Columns[0].Field.Value;
-      FControllerProblema.BuscaTabelaProblemasPorFiltro(aProblema,
-        cbFiltroPesqProblema.Text, aFiltro);
-    end
-    else
-      CarregaGridProblemas;
-
-  finally
-      aProblema.Free;
+if Length(edtPesqProblema.Text) > 0 then
+begin
+  case cbFiltroPesqProblema.ItemIndex of
+    0:
+      aProblema.Codigo := StrToInt(edtPesqProblema.Text);
+    1:
+      aProblema.Titulo := edtPesqProblema.Text;
+    2:
+      aProblema.Chamado := edtPesqProblema.Text;
   end;
+  aProblema.Modulo := gridModulos.Columns[0].Field.Value;
+  FControllerProblema.BuscaTabelaProblemasPorFiltro(aProblema,
+    cbFiltroPesqProblema.Text, aFiltro);
+end
+else
+  CarregaGridProblemas;
+
+finally
+  aProblema.Free;
+end;
 end;
 
 procedure TformPrincipal.btnNovoModuloClick(Sender: TObject);
@@ -376,12 +440,6 @@ end;
 
 procedure TformPrincipal.btnNovoProblemaClick(Sender: TObject);
 begin
-  InverteBotoesCrudProblema;
-
-  pnlProblemas.Visible := True;
-  edtTituloProblema.SetFocus;
-  PreencheCbxModulos;
-
   dsProblemas.DataSet.Append;
 end;
 
@@ -393,8 +451,6 @@ end;
 
 procedure TformPrincipal.btnSalvarProblemaClick(Sender: TObject);
 begin
-  InverteBotoesCrudProblema;
-
   dsProblemas.DataSet.Post;
 end;
 
@@ -479,12 +535,17 @@ begin
   end;
 end;
 
-procedure TformPrincipal.InverteBotoesCrudProblema;
+procedure TformPrincipal.InverteCrudProblema;
 begin
   btnNovoProblema.Enabled := not btnNovoProblema.Enabled;
   btnSalvarProblema.Enabled := not btnSalvarProblema.Enabled;
   btnExcluirProblema.Enabled := not btnExcluirProblema.Enabled;
   btnCancelarProblema.Enabled := not btnCancelarProblema.Enabled;
+
+  pnlBodyModulos.Enabled := not pnlBodyModulos.Enabled;
+
+  pnlGridProblemas.Enabled := not pnlGridProblemas.Enabled;
+  pnlBodyPesqProblema.Enabled := not pnlBodyPesqProblema.Enabled;
 end;
 
 procedure TformPrincipal.FormCreate(Sender: TObject);
@@ -493,7 +554,12 @@ begin
   FControllerModulo := TControllerModulo.Create;
 
   dsProblemas.DataSet := FControllerProblema.CarregaDadosProblema(' ').DataSet;
+
   dsProblemas.DataSet.BeforePost := DsProblemasBeforePost;
+  dsProblemas.DataSet.AfterOpen := DsProblemasAfterOpen;
+  dsProblemas.DataSet.AfterEdit := DsProblemasAfterEdit;
+  dsProblemas.DataSet.AfterPost := DsProblemasAfterPost;
+  dsProblemas.DataSet.AfterInsert := DsProblemasAfterInsert;
 end;
 
 procedure TformPrincipal.FormDestroy(Sender: TObject);

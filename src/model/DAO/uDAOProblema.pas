@@ -14,7 +14,6 @@ type
   public
     function CarregaDadosProblema(aTituloProblema: String): TDataSource;
     function BuscaQuantidadeProblemas: TDataSource;
-    function BuscaProximoCodigoProblema: Integer;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -22,17 +21,6 @@ type
 implementation
 
 { TDAOProblema }
-
-function TDAOProblema.BuscaProximoCodigoProblema: Integer;
-begin
-  FQuery:= FConn.CriarQuery;
-
-  FQuery.SQL.Clear;
-  FQuery.SQL.Add('SELECT GEN_ID(GEN_PROBLEMAS_ID, 0) FROM RDB$DATABASE');
-  FQuery.Open;
-
-  Result := ;
-end;
 
 function TDAOProblema.BuscaQuantidadeProblemas: TDataSource;
 begin

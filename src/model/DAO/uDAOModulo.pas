@@ -14,6 +14,7 @@ type
     FDataSource: TDataSource;
   public
     function BuscaModulos: TDataSource;
+    function BuscaNomeModulo(aCodigoModulo: Integer): TDataSource;
     function BuscaCodigoModulo(aNomeModulo: String): TDataSource;
     procedure DeleteModulo(aModulo: TModulo);
     constructor Create;
@@ -44,6 +45,20 @@ begin
   FDataSource := FConn.CriarDataSource;
 
   FQuery.Open('SELECT nome FROM modulos ORDER BY nome');
+
+  FDataSource.DataSet := FQuery;
+
+  Result := FDataSource;
+end;
+
+function TDAOModulo.BuscaNomeModulo(aCodigoModulo: Integer): TDataSource;
+begin
+  FQuery := FConn.CriarQuery;
+  FDataSource := FConn.CriarDataSource;
+
+  FQuery.SQL.Text := 'SELECT nome FROM modulos WHERE cod_mod = :cod_mod';
+  FQuery.ParamByName('cod_mod').AsInteger := aCodigoModulo;
+  FQuery.Open;
 
   FDataSource.DataSet := FQuery;
 

@@ -15,7 +15,8 @@ uses
   uImagemProblema in 'src\model\models\uImagemProblema.pas',
   uDAOImagemProblema in 'src\model\dao\uDAOImagemProblema.pas',
   uControllerModulo in 'src\controller\uControllerModulo.pas',
-  uDAOGridModulo in 'src\model\DAO\uDAOGridModulo.pas';
+  uDAOGridModulo in 'src\model\DAO\uDAOGridModulo.pas',
+  uDAOProblemaAux in 'src\model\DAO\uDAOProblemaAux.pas';
 
 {$R *.res}
 begin

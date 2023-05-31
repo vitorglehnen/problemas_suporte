@@ -13,6 +13,7 @@ type
   public
     function BuscaTabelaModulos: TDataSource;
     function BuscaModulos: TStringList;
+    function BuscaNomeModulo(aCodigoModulo: Integer): String;
     function BuscaCodigoModulo(aNomeModulo: String): Integer;
     procedure DeleteModulo(aModulo: TModulo);
     constructor Create;
@@ -47,6 +48,11 @@ begin
   end;
 
   Result := aListaModulos;
+end;
+
+function TControllerModulo.BuscaNomeModulo(aCodigoModulo: Integer): String;
+begin
+  Result := FDAOModulo.BuscaNomeModulo(aCodigoModulo).DataSet.FieldByName('nome').Value;
 end;
 
 function TControllerModulo.BuscaTabelaModulos: TDataSource;

@@ -74,8 +74,8 @@ object formPrincipal: TformPrincipal
             ParentColor = False
             ParentFont = False
             Layout = tlCenter
-            ExplicitWidth = 79
-            ExplicitHeight = 18
+            ExplicitLeft = 4
+            ExplicitTop = -4
           end
           object lblTotalDeProblemas: TLabel
             Left = 5
@@ -100,9 +100,9 @@ object formPrincipal: TformPrincipal
             Align = alBottom
             TabOrder = 0
             object btnExcluirProblema: TSpeedButton
-              Left = 218
+              Left = 199
               Top = 1
-              Width = 48
+              Width = 67
               Height = 25
               Align = alRight
               Caption = 'Excluir'
@@ -114,16 +114,15 @@ object formPrincipal: TformPrincipal
               ParentFont = False
               Spacing = 2
               OnClick = btnExcluirProblemaClick
-              ExplicitLeft = 146
-              ExplicitTop = -4
+              ExplicitLeft = 218
             end
             object btnCancelarProblema: TSpeedButton
-              Left = 168
+              Left = 132
               Top = 1
-              Width = 50
+              Width = 67
               Height = 25
               Align = alRight
-              Caption = 'Cancelar'
+              Caption = 'Cancelar(F6)'
               Enabled = False
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clMaroon
@@ -133,13 +132,12 @@ object formPrincipal: TformPrincipal
               ParentFont = False
               Spacing = 2
               OnClick = btnCancelarProblemaClick
-              ExplicitLeft = 162
-              ExplicitTop = -4
+              ExplicitLeft = 144
             end
             object btnSalvarProblema: TSpeedButton
-              Left = 65
+              Left = 68
               Top = 1
-              Width = 55
+              Width = 67
               Height = 25
               Align = alLeft
               Caption = 'Salvar(F4)'
@@ -152,12 +150,11 @@ object formPrincipal: TformPrincipal
               ParentFont = False
               Spacing = 2
               OnClick = btnSalvarProblemaClick
-              ExplicitTop = 5
             end
             object btnNovoProblema: TSpeedButton
               Left = 1
               Top = 1
-              Width = 64
+              Width = 67
               Height = 25
               Align = alLeft
               Caption = 'Novo(F3)'
@@ -169,8 +166,6 @@ object formPrincipal: TformPrincipal
               ParentFont = False
               Spacing = 2
               OnClick = btnNovoProblemaClick
-              ExplicitLeft = -5
-              ExplicitTop = 5
             end
           end
           object pnlBodyPesqProblema: TPanel
@@ -523,7 +518,7 @@ object formPrincipal: TformPrincipal
               Padding.Top = 20
               TabOrder = 1
               object btnImagensProblema: TSpeedButton
-                Left = 205
+                Left = 349
                 Top = 34
                 Width = 115
                 Height = 53
@@ -539,7 +534,7 @@ object formPrincipal: TformPrincipal
               object pnlModuloProblema: TPanel
                 Left = 30
                 Top = 20
-                Width = 169
+                Width = 209
                 Height = 148
                 Align = alLeft
                 AutoSize = True
@@ -548,7 +543,7 @@ object formPrincipal: TformPrincipal
                 object lblModuloProblema: TLabel
                   Left = 0
                   Top = 0
-                  Width = 169
+                  Width = 209
                   Height = 15
                   Align = alTop
                   Caption = '*&M'#243'dulo'
@@ -561,12 +556,23 @@ object formPrincipal: TformPrincipal
                   ExplicitWidth = 47
                 end
                 object cbModulo: TComboBox
-                  Left = 0
-                  Top = 20
-                  Width = 113
+                  Left = 63
+                  Top = 17
+                  Width = 137
                   Height = 21
+                  Style = csDropDownList
+                  Color = clWhite
+                  TabOrder = 1
+                  OnChange = cbModuloChange
+                end
+                object edtCodModulo: TDBEdit
+                  Left = 0
+                  Top = 17
+                  Width = 57
+                  Height = 21
+                  DataField = 'cod_mod'
+                  DataSource = dsProblemas
                   TabOrder = 0
-                  Text = 'cbModulo'
                 end
               end
             end
@@ -765,9 +771,9 @@ object formPrincipal: TformPrincipal
                 end
                 object mmDetalhesProblema: TDBRichEdit
                   Left = 0
-                  Top = 15
+                  Top = 38
                   Width = 941
-                  Height = 200
+                  Height = 177
                   Align = alClient
                   DataField = 'detalhes'
                   DataSource = dsProblemas
@@ -778,6 +784,28 @@ object formPrincipal: TformPrincipal
                   Font.Style = []
                   TabOrder = 0
                   Zoom = 100
+                  ExplicitTop = 15
+                  ExplicitHeight = 200
+                end
+                object ActionToolBar1: TActionToolBar
+                  Left = 0
+                  Top = 15
+                  Width = 941
+                  Height = 23
+                  ActionManager = ActionManager1
+                  Caption = 'ActionToolBar1'
+                  Color = clMenuBar
+                  ColorMap.DisabledFontColor = 10461087
+                  ColorMap.HighlightColor = clWhite
+                  ColorMap.BtnSelectedFont = clBlack
+                  ColorMap.UnusedColor = clWhite
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clBlack
+                  Font.Height = -11
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  ParentFont = False
+                  Spacing = 0
                 end
               end
             end
@@ -793,5 +821,104 @@ object formPrincipal: TformPrincipal
   object dsProblemas: TDataSource
     Left = 451
     Top = 210
+  end
+  object ActionManager1: TActionManager
+    ActionBars = <
+      item
+        Items = <
+          item
+            Action = FormatRichEditItalic1
+            ImageIndex = 29
+            ShortCut = 16457
+          end
+          item
+            Action = FormatRichEditUnderline1
+            ImageIndex = 28
+            ShortCut = 16469
+          end
+          item
+            Action = FormatRichEditStrikeOut1
+            ImageIndex = 44
+          end
+          item
+            Action = FormatRichEditBullets1
+            ImageIndex = 38
+          end
+          item
+            Action = FormatRichEditAlignLeft1
+            ImageIndex = 35
+          end
+          item
+            Action = FormatRichEditAlignRight1
+            ImageIndex = 36
+          end
+          item
+            Action = FormatRichEditAlignCenter1
+            ImageIndex = 37
+          end>
+        ActionBar = ActionToolBar1
+      end>
+    Left = 593
+    Top = 376
+    StyleName = 'Platform Default'
+    object FormatRichEditBold1: TRichEditBold
+      Category = 'Format'
+      AutoCheck = True
+      Caption = '&Bold'
+      Hint = 'Bold'
+      ImageIndex = 31
+      ShortCut = 16450
+    end
+    object FormatRichEditItalic1: TRichEditItalic
+      Category = 'Format'
+      AutoCheck = True
+      Caption = '&Italic'
+      Hint = 'Italic'
+      ImageIndex = 29
+      ShortCut = 16457
+    end
+    object FormatRichEditUnderline1: TRichEditUnderline
+      Category = 'Format'
+      AutoCheck = True
+      Caption = '&Underline'
+      Hint = 'Underline'
+      ImageIndex = 28
+      ShortCut = 16469
+    end
+    object FormatRichEditStrikeOut1: TRichEditStrikeOut
+      Category = 'Format'
+      AutoCheck = True
+      Caption = '&Strikeout'
+      Hint = 'Strikeout'
+      ImageIndex = 44
+    end
+    object FormatRichEditBullets1: TRichEditBullets
+      Category = 'Format'
+      AutoCheck = True
+      Caption = '&Bullets'
+      Hint = 'Bullets|Inserts a bullet on the current line'
+      ImageIndex = 38
+    end
+    object FormatRichEditAlignLeft1: TRichEditAlignLeft
+      Category = 'Format'
+      AutoCheck = True
+      Caption = 'Align &Left'
+      Hint = 'Align Left|Aligns text at the left indent'
+      ImageIndex = 35
+    end
+    object FormatRichEditAlignRight1: TRichEditAlignRight
+      Category = 'Format'
+      AutoCheck = True
+      Caption = 'Align &Right'
+      Hint = 'Align Right|Aligns text at the right indent'
+      ImageIndex = 36
+    end
+    object FormatRichEditAlignCenter1: TRichEditAlignCenter
+      Category = 'Format'
+      AutoCheck = True
+      Caption = '&Center'
+      Hint = 'Center|Centers text between margins'
+      ImageIndex = 37
+    end
   end
 end

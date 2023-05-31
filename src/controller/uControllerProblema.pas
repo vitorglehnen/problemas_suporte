@@ -9,7 +9,9 @@ uses
   uDAOGridProblema,
   uDAOProblema,
   uImagemProblema,
-  uDAOImagemProblema, System.Classes;
+  uDAOImagemProblema,
+  System.Classes,
+  uDAOProblemaAux;
 
 type
   TControllerProblema = class
@@ -17,6 +19,7 @@ type
     FDAOProblema: TDaoProblema;
     FDAOGridProblema: TDAOGridProblema;
     FDAOImagemProblema: TDAOImagemProblema;
+    FDAOProblemaAux: TDAOProblemaAux;
     FListaImagens: TStringList;
   public
     function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
@@ -26,6 +29,7 @@ type
     function BuscaImagens(aCodigoProblema: Integer): TStringList;
     function BuscaTabelaProblemasPorFiltro(aProblema: TProblema; aColuna: String; aFiltro: String): TDataSource;
     function BuscaProximoCodigoImagem: String;
+    function BuscaProximoCodigoProblema: Integer;
     procedure InsertImagem(aImagem: TImagemProblema);
     procedure DeleteImagem(aImagemProblema: TImagemProblema);
     constructor Create;
@@ -54,6 +58,11 @@ end;
 function TControllerProblema.BuscaProximoCodigoImagem: String;
 begin
   Result := FDAOImagemProblema.BuscaProximoCodigo;
+end;
+
+function TControllerProblema.BuscaProximoCodigoProblema: Integer;
+begin
+  Result := FDAOProblemaAux.BuscaProximoCodigoProblema;
 end;
 
 function TControllerProblema.BuscaQuantidadeProblemas: TDataSource;
@@ -88,6 +97,7 @@ begin
   FDAOProblema := TDAOProblema.Create;
   FDAOGridProblema := TDAOGridProblema.Create;
   FDAOImagemProblema := TDAOImagemProblema.Create;
+  FDAOProblemaAux := TDAOProblemaAux.Create;
 end;
 
 procedure TControllerProblema.DeleteImagem(aImagemProblema: TImagemProblema);
@@ -101,6 +111,7 @@ begin
   FDAOProblema.Free;
   FDAOGridProblema.Free;
   FDAOImagemProblema.Free;
+  FDAOProblemaAux.Free;
   inherited;
 end;
 
