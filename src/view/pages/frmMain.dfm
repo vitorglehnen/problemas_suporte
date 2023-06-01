@@ -74,8 +74,8 @@ object formPrincipal: TformPrincipal
             ParentColor = False
             ParentFont = False
             Layout = tlCenter
-            ExplicitLeft = 4
-            ExplicitTop = -4
+            ExplicitWidth = 79
+            ExplicitHeight = 18
           end
           object lblTotalDeProblemas: TLabel
             Left = 5
@@ -100,9 +100,9 @@ object formPrincipal: TformPrincipal
             Align = alBottom
             TabOrder = 0
             object btnExcluirProblema: TSpeedButton
-              Left = 199
+              Left = 201
               Top = 1
-              Width = 67
+              Width = 65
               Height = 25
               Align = alRight
               Caption = 'Excluir'
@@ -114,15 +114,15 @@ object formPrincipal: TformPrincipal
               ParentFont = False
               Spacing = 2
               OnClick = btnExcluirProblemaClick
-              ExplicitLeft = 218
+              ExplicitLeft = 200
             end
             object btnCancelarProblema: TSpeedButton
-              Left = 132
+              Left = 134
               Top = 1
               Width = 67
               Height = 25
               Align = alRight
-              Caption = 'Cancelar(F6)'
+              Caption = 'Cancelar(F4)'
               Enabled = False
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clMaroon
@@ -135,12 +135,12 @@ object formPrincipal: TformPrincipal
               ExplicitLeft = 144
             end
             object btnSalvarProblema: TSpeedButton
-              Left = 68
+              Left = 66
               Top = 1
               Width = 67
               Height = 25
               Align = alLeft
-              Caption = 'Salvar(F4)'
+              Caption = 'Salvar(F3)'
               Enabled = False
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
@@ -150,14 +150,15 @@ object formPrincipal: TformPrincipal
               ParentFont = False
               Spacing = 2
               OnClick = btnSalvarProblemaClick
+              ExplicitLeft = 68
             end
             object btnNovoProblema: TSpeedButton
               Left = 1
               Top = 1
-              Width = 67
+              Width = 65
               Height = 25
               Align = alLeft
-              Caption = 'Novo(F3)'
+              Caption = 'Novo(F2)'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
               Font.Height = -11
@@ -220,6 +221,8 @@ object formPrincipal: TformPrincipal
                 BevelOuter = bvNone
                 Padding.Top = 10
                 TabOrder = 1
+                ExplicitLeft = 5
+                ExplicitTop = 38
                 object rdbtnFiltroPesqProblema: TRadioGroup
                   Left = 0
                   Top = 43
@@ -408,6 +411,29 @@ object formPrincipal: TformPrincipal
               ExplicitLeft = 9
               ExplicitTop = 2
             end
+            object btnCancelarModulo: TSpeedButton
+              Left = 142
+              Top = 1
+              Width = 48
+              Height = 25
+              Align = alRight
+              Caption = 'Cancelar'
+              Enabled = False
+              OnClick = btnCancelarModuloClick
+              ExplicitLeft = 136
+              ExplicitTop = 5
+            end
+            object btnSalvarModulo: TButton
+              Left = 49
+              Top = 1
+              Width = 48
+              Height = 25
+              Align = alLeft
+              Caption = 'Salvar'
+              Enabled = False
+              TabOrder = 0
+              OnClick = btnSalvarModuloClick
+            end
           end
           object pnlBodyPesqModulo: TPanel
             Left = 1
@@ -455,6 +481,15 @@ object formPrincipal: TformPrincipal
                 TabOrder = 0
               end
             end
+            object edtNomeModulo: TDBEdit
+              Left = 9
+              Top = 72
+              Width = 221
+              Height = 21
+              DataField = 'nome'
+              DataSource = dsModulos
+              TabOrder = 1
+            end
           end
         end
         object pnlGridModulos: TPanel
@@ -484,6 +519,7 @@ object formPrincipal: TformPrincipal
             Font.Style = []
             Options = [dgEditing, dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
+            ReadOnly = True
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
@@ -616,6 +652,7 @@ object formPrincipal: TformPrincipal
                   Height = 21
                   DataField = 'cod_mod'
                   DataSource = dsProblemas
+                  Enabled = False
                   TabOrder = 0
                 end
               end
@@ -748,7 +785,7 @@ object formPrincipal: TformPrincipal
                 TabOrder = 0
               end
               object edtChamadoProblema: TDBEdit
-                Left = 520
+                Left = 519
                 Top = 27
                 Width = 81
                 Height = 21
@@ -838,7 +875,7 @@ object formPrincipal: TformPrincipal
   end
   object dsModulos: TDataSource
     Left = 19
-    Top = 218
+    Top = 210
   end
   object dsProblemas: TDataSource
     Left = 451
