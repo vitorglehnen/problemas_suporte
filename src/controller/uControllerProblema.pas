@@ -25,7 +25,6 @@ type
     function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
     function CarregaDadosProblema(aTituloProblema: String): TDataSource;
     function BuscaTabelaProblemas : TDataSource;
-    function BuscaQuantidadeProblemas : TDataSource;
     function BuscaImagens(aCodigoProblema: Integer): TStringList;
     function BuscaTabelaProblemasPorFiltro(aProblema: TProblema; aColuna: String; aFiltro: String): TDataSource;
     function BuscaProximoCodigoImagem: String;
@@ -63,11 +62,6 @@ end;
 function TControllerProblema.BuscaProximoCodigoProblema: Integer;
 begin
   Result := FDAOProblemaAux.BuscaProximoCodigoProblema;
-end;
-
-function TControllerProblema.BuscaQuantidadeProblemas: TDataSource;
-begin
-  FDAOProblema.BuscaQuantidadeProblemas;
 end;
 
 function TControllerProblema.BuscaTabelaProblemas: TDataSource;

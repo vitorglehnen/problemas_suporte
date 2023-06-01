@@ -13,7 +13,6 @@ type
     FDataSource: TDataSource;
   public
     function CarregaDadosProblema(aTituloProblema: String): TDataSource;
-    function BuscaQuantidadeProblemas: TDataSource;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -21,19 +20,6 @@ type
 implementation
 
 { TDAOProblema }
-
-function TDAOProblema.BuscaQuantidadeProblemas: TDataSource;
-begin
-  FQuery:= FConn.CriarQuery;
-  FDataSource:= FConn.CriarDataSource;
-
-  FQuery.SQL.Text := 'SELECT COUNT(*) FROM problemas';
-  FQuery.Open;
-
-  FDataSource.DataSet := FQuery;
-
-  Result := FDataSource;
-end;
 
 function TDAOProblema.CarregaDadosProblema(
   aTituloProblema: String): TDataSource;

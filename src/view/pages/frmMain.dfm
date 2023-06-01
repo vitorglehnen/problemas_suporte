@@ -257,6 +257,50 @@ object formPrincipal: TformPrincipal
               end
             end
           end
+          object btnAtualizarGridProblemas: TBitBtn
+            Left = 5
+            Top = 50
+            Width = 41
+            Height = 21
+            Glyph.Data = {
+              42040000424D4204000000000000420000002800000010000000100000000100
+              20000300000000040000760000007600000000000000000000000000FF0000FF
+              0000FF0000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000EC9B6142ED9D
+              6191ED9C61B6D37C4DE9D57E4ED0DB8553710000000000000000000000000000
+              000000000000000000000000000000000000E8A25D0BED9C60C1ED9C61FFED9C
+              61FFED9C61FFCC7347FFCC7347FFCC7347FFD37C4CEEDC875533000000000000
+              00000000000000000000000000000000000000000000ED9C618EED9C61FFED9C
+              61BAEE9C6184D68150BCD37D4DEBCC7447FFCC7347FFCE7749FCD98757350000
+              00000000000000000000FF808002ED9B615400000000FF808002EB9E61320000
+              0000000000000000000000000000DC865365CF774AFDCC7347FFD37B4CEF0000
+              00000000000000000000ED9C618EED9C61FFEC9B626B00000000000000000000
+              000000000000000000000000000000000000DC865365CC7347FFCC7347FFDB85
+              537100000000EC9D606DED9C61FFED9C61FFED9C61FBEE9D6249000000000000
+              00000000000000000000000000000000000000000000D37C4CEACC7347FFD57E
+              4ED000000000ED9C6198EC9C61EAED9C61FFED9C61CFED9C617E000000000000
+              000000000000000000000000000000000000DC865365D47E4EE3CC7347FFD17A
+              4BF5D985527900000000ED9C61B6ED9C61FFEC9D607A00000000000000000000
+              000000000000000000000000000000000000D57F4FCFCC7347FFCC7347FFCC73
+              47FFD37C4DEA00000000EE9B6292ED9C61FFEC9D61B300000000000000000000
+              000000000000000000000000000000000000DF806008D37C4DEACC7347FFD279
+              4BF7DC84581D00000000EC9C5F43ED9C61FFED9C61FDEC9A6035000000000000
+              00000000000000000000000000000000000000000000D68F5C19D37C4CEADF89
+              5238000000000000000000000000ED9C60C1ED9C61FFED9C61E5EC9A60350000
+              0000000000000000000000000000DB875162DB84527A00000000000000000000
+              0000000000000000000000000000ED9B641CED9B61E4ED9C61FFED9C61FDEC9D
+              61B3EC9B617BD78150BAD37C4DE9CC7347FFCE7548FEDC875257000000000000
+              000000000000000000000000000000000000ED9B641CED9C61C2ED9C61FFED9C
+              61FFED9C61FFCC7347FFCC7347FFCC7347FFD27B4DF0DA865337000000000000
+              0000000000000000000000000000000000000000000000000000EC9C5F43EE9D
+              6094ED9C61B5D37C4DEAD78050D0D98552730000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              0000000000000000000000000000000000000000000000000000000000000000
+              000000000000}
+            TabOrder = 2
+            OnClick = btnAtualizarGridProblemasClick
+          end
         end
         object pnlGridProblemas: TPanel
           Left = 0
@@ -522,7 +566,7 @@ object formPrincipal: TformPrincipal
                 Top = 34
                 Width = 115
                 Height = 53
-                Caption = 'Imagens'
+                Caption = 'Imagens (0)'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Height = -11
@@ -771,9 +815,9 @@ object formPrincipal: TformPrincipal
                 end
                 object mmDetalhesProblema: TDBRichEdit
                   Left = 0
-                  Top = 38
+                  Top = 15
                   Width = 941
-                  Height = 177
+                  Height = 200
                   Align = alClient
                   DataField = 'detalhes'
                   DataSource = dsProblemas
@@ -784,28 +828,6 @@ object formPrincipal: TformPrincipal
                   Font.Style = []
                   TabOrder = 0
                   Zoom = 100
-                  ExplicitTop = 15
-                  ExplicitHeight = 200
-                end
-                object ActionToolBar1: TActionToolBar
-                  Left = 0
-                  Top = 15
-                  Width = 941
-                  Height = 23
-                  ActionManager = ActionManager1
-                  Caption = 'ActionToolBar1'
-                  Color = clMenuBar
-                  ColorMap.DisabledFontColor = 10461087
-                  ColorMap.HighlightColor = clWhite
-                  ColorMap.BtnSelectedFont = clBlack
-                  ColorMap.UnusedColor = clWhite
-                  Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clBlack
-                  Font.Height = -11
-                  Font.Name = 'Tahoma'
-                  Font.Style = []
-                  ParentFont = False
-                  Spacing = 0
                 end
               end
             end
@@ -821,104 +843,5 @@ object formPrincipal: TformPrincipal
   object dsProblemas: TDataSource
     Left = 451
     Top = 210
-  end
-  object ActionManager1: TActionManager
-    ActionBars = <
-      item
-        Items = <
-          item
-            Action = FormatRichEditItalic1
-            ImageIndex = 29
-            ShortCut = 16457
-          end
-          item
-            Action = FormatRichEditUnderline1
-            ImageIndex = 28
-            ShortCut = 16469
-          end
-          item
-            Action = FormatRichEditStrikeOut1
-            ImageIndex = 44
-          end
-          item
-            Action = FormatRichEditBullets1
-            ImageIndex = 38
-          end
-          item
-            Action = FormatRichEditAlignLeft1
-            ImageIndex = 35
-          end
-          item
-            Action = FormatRichEditAlignRight1
-            ImageIndex = 36
-          end
-          item
-            Action = FormatRichEditAlignCenter1
-            ImageIndex = 37
-          end>
-        ActionBar = ActionToolBar1
-      end>
-    Left = 593
-    Top = 376
-    StyleName = 'Platform Default'
-    object FormatRichEditBold1: TRichEditBold
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Bold'
-      Hint = 'Bold'
-      ImageIndex = 31
-      ShortCut = 16450
-    end
-    object FormatRichEditItalic1: TRichEditItalic
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Italic'
-      Hint = 'Italic'
-      ImageIndex = 29
-      ShortCut = 16457
-    end
-    object FormatRichEditUnderline1: TRichEditUnderline
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Underline'
-      Hint = 'Underline'
-      ImageIndex = 28
-      ShortCut = 16469
-    end
-    object FormatRichEditStrikeOut1: TRichEditStrikeOut
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Strikeout'
-      Hint = 'Strikeout'
-      ImageIndex = 44
-    end
-    object FormatRichEditBullets1: TRichEditBullets
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Bullets'
-      Hint = 'Bullets|Inserts a bullet on the current line'
-      ImageIndex = 38
-    end
-    object FormatRichEditAlignLeft1: TRichEditAlignLeft
-      Category = 'Format'
-      AutoCheck = True
-      Caption = 'Align &Left'
-      Hint = 'Align Left|Aligns text at the left indent'
-      ImageIndex = 35
-    end
-    object FormatRichEditAlignRight1: TRichEditAlignRight
-      Category = 'Format'
-      AutoCheck = True
-      Caption = 'Align &Right'
-      Hint = 'Align Right|Aligns text at the right indent'
-      ImageIndex = 36
-    end
-    object FormatRichEditAlignCenter1: TRichEditAlignCenter
-      Category = 'Format'
-      AutoCheck = True
-      Caption = '&Center'
-      Hint = 'Center|Centers text between margins'
-      ImageIndex = 37
-    end
   end
 end
