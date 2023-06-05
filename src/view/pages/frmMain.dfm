@@ -571,6 +571,7 @@ object formPrincipal: TformPrincipal
             Width = 1031
             Height = 753
             Align = alClient
+            Anchors = []
             AutoSize = True
             BevelOuter = bvNone
             Color = 16708071
@@ -589,9 +590,9 @@ object formPrincipal: TformPrincipal
               Left = 0
               Top = 69
               Width = 1031
-              Height = 168
+              Height = 108
               Align = alTop
-              AutoSize = True
+              Anchors = []
               BevelOuter = bvNone
               Padding.Left = 30
               Padding.Top = 20
@@ -614,11 +615,12 @@ object formPrincipal: TformPrincipal
                 Left = 30
                 Top = 20
                 Width = 209
-                Height = 148
+                Height = 88
                 Align = alLeft
                 AutoSize = True
                 BevelOuter = bvNone
                 TabOrder = 0
+                ExplicitHeight = 148
                 object lblModuloProblema: TLabel
                   Left = 0
                   Top = 0
@@ -658,25 +660,29 @@ object formPrincipal: TformPrincipal
             end
             object pnlBodySolucaoProblema: TPanel
               Left = 0
-              Top = 472
+              Top = 354
               Width = 1031
-              Height = 281
+              Height = 399
               Align = alClient
+              Anchors = []
               AutoSize = True
               BevelOuter = bvNone
               Padding.Left = 30
               TabOrder = 3
+              ExplicitTop = 412
+              ExplicitHeight = 341
               object pnlSolucaoProblema: TPanel
                 Left = 30
                 Top = 0
                 Width = 1001
-                Height = 281
+                Height = 399
                 Align = alClient
                 AutoSize = True
                 BevelOuter = bvNone
                 Padding.Right = 60
                 Padding.Bottom = 50
                 TabOrder = 0
+                ExplicitHeight = 281
                 object lblSolucaoProblema: TLabel
                   Left = 0
                   Top = 0
@@ -690,24 +696,25 @@ object formPrincipal: TformPrincipal
                   Font.Name = 'Segoe UI'
                   Font.Style = [fsBold]
                   ParentFont = False
-                  ExplicitTop = -6
+                  ExplicitWidth = 43
                 end
                 object mmSolucaoProblema: TDBRichEdit
                   Left = 0
                   Top = 15
                   Width = 941
-                  Height = 216
+                  Height = 334
                   Align = alClient
                   DataField = 'solucao'
                   DataSource = dsProblemas
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
-                  Font.Height = -11
+                  Font.Height = -12
                   Font.Name = 'Tahoma'
                   Font.Style = []
+                  ScrollBars = ssVertical
                   TabOrder = 0
                   Zoom = 100
-                  ExplicitTop = 21
+                  ExplicitHeight = 276
                 end
               end
             end
@@ -717,12 +724,15 @@ object formPrincipal: TformPrincipal
               Width = 1031
               Height = 69
               Align = alTop
+              Anchors = []
               AutoSize = True
               Color = 16708071
               Padding.Top = 10
               Padding.Bottom = 20
               ParentBackground = False
               TabOrder = 0
+              ExplicitLeft = 1
+              ExplicitTop = 7
               object lblDataProblema: TLabel
                 Left = 633
                 Top = 11
@@ -816,10 +826,11 @@ object formPrincipal: TformPrincipal
             end
             object pnlBodyDetalhesProblema: TPanel
               Left = 0
-              Top = 237
+              Top = 177
               Width = 1031
-              Height = 235
+              Height = 177
               Align = alTop
+              Anchors = []
               AutoSize = True
               BevelOuter = bvNone
               Padding.Left = 30
@@ -828,9 +839,8 @@ object formPrincipal: TformPrincipal
                 Left = 30
                 Top = 0
                 Width = 1001
-                Height = 235
-                Align = alClient
-                AutoSize = True
+                Height = 177
+                Align = alTop
                 BevelOuter = bvNone
                 Padding.Right = 60
                 Padding.Bottom = 20
@@ -854,17 +864,20 @@ object formPrincipal: TformPrincipal
                   Left = 0
                   Top = 15
                   Width = 941
-                  Height = 200
+                  Height = 142
                   Align = alClient
                   DataField = 'detalhes'
                   DataSource = dsProblemas
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
-                  Font.Height = -11
+                  Font.Height = -12
                   Font.Name = 'Tahoma'
                   Font.Style = []
+                  ScrollBars = ssVertical
                   TabOrder = 0
                   Zoom = 100
+                  ExplicitTop = 21
+                  ExplicitHeight = 200
                 end
               end
             end

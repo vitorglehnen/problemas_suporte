@@ -162,8 +162,10 @@ type
     procedure DsProblemasAfterPost(TDataSet: TDataSet);
     procedure DsProblemasAfterInsert(TDataSet: TDataSet);
     procedure DsProblemasAfterCancel(TDataSet: TDataSet);
+    procedure DsProblemasAfterScroll(TDataSet: TDataSet);
 
     procedure DsModulosBeforeEdit(TDataSet: TDataSet);
+    procedure DsModulosAfterScroll(TDataSet: TDataSet);
 
   public
     { Public declarations }
@@ -336,8 +338,7 @@ end;
 
 procedure TformPrincipal.CarregaGridModulos;
 begin
-  var
-    aTabelaModulos: TDataSource := FControllerModulo.BuscaTabelaModulos('');
+  var aTabelaModulos: TDataSource := FControllerModulo.BuscaTabelaModulos(edtPesqModulo.Text);
 
   dsModulos.DataSet := aTabelaModulos.DataSet;
   dsModulos.DataSet.First;
@@ -345,8 +346,7 @@ end;
 
 procedure TformPrincipal.CarregaGridProblemas;
 begin
-  var
-    aNomeModulo: String;
+  var aNomeModulo: String;
 
   if Assigned(gridModulos.DataSource) and
     (gridModulos.DataSource.DataSet.RecordCount > 0) then
@@ -384,6 +384,11 @@ begin
     dsProblemas.DataSet.Edit;
     edtCodModulo.Text := IntToStr(aCodigoModulo);
   end;
+end;
+
+procedure TformPrincipal.DsModulosAfterScroll(TDataSet: TDataSet);
+begin
+  CarregaGridProblemas;
 end;
 
 procedure TformPrincipal.DsModulosBeforeEdit(TDataSet: TDataSet);
@@ -434,6 +439,11 @@ begin
   btnImagensProblema.Enabled := True;
 end;
 
+procedure TformPrincipal.DsProblemasAfterScroll(TDataSet: TDataSet);
+begin
+  //CarregaDadosProblemas;
+end;
+
 procedure TformPrincipal.DsProblemasBeforePost(TDataSet: TDataSet);
 begin
   if dsProblemas.DataSet.State = dsInsert then
@@ -449,7 +459,7 @@ end;
 
 procedure TformPrincipal.edtPesqModuloChange(Sender: TObject);
 begin
-  dsModulos.DataSet := FControllerModulo.BuscaTabelaModulos(edtPesqModulo.Text).DataSet;
+  CarregaGridModulos;
 end;
 
 procedure TformPrincipal.edtPesqProblemaChange(Sender: TObject);
@@ -627,8 +637,10 @@ begin
   dsProblemas.DataSet.AfterPost := DsProblemasAfterPost;
   dsProblemas.DataSet.AfterInsert := DsProblemasAfterInsert;
   dsProblemas.DataSet.AfterCancel := DsProblemasAfterCancel;
+  dsProblemas.DataSet.AfterScroll := DsProblemasAfterScroll;
 
   dsModulos.DataSet.BeforeEdit := DsModulosBeforeEdit;
+  dsModulos.DataSet.AfterScroll := DsModulosAfterScroll;
 end;
 
 procedure TformPrincipal.FormDestroy(Sender: TObject);

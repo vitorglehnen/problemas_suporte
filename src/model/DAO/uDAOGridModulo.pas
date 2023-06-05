@@ -13,7 +13,7 @@ type
     FQuery: TFDQuery;
     FDataSource: TDataSource;
   public
-    function BuscaTabelaModulos(aNomeModulo: String): TDataSource; overload;
+    function BuscaTabelaModulos(aNomeModulo: String): TDataSource;
     constructor Create;
     destructor Destroy; override;
   End;
