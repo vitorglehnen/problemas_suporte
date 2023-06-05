@@ -13,7 +13,7 @@ type
     FQuery: TFDQuery;
     FDataSource: TDataSource;
   public
-    function BuscaTabelaModulos: TDataSource;
+    function BuscaTabelaModulos(aNomeModulo: String): TDataSource; overload;
     constructor Create;
     destructor Destroy; override;
   End;
@@ -22,11 +22,15 @@ implementation
 
 { TDAOModulo }
 
-function TDAOGridModulo.BuscaTabelaModulos: TDataSource;
+function TDAOGridModulo.BuscaTabelaModulos(aNomeModulo: String): TDataSource;
 begin
   FQuery := FConn.CriarQuery;
   FDataSource := FConn.CriarDataSource;
-  FQuery.Open('SELECT nome FROM modulos ORDER BY nome');
+
+  FQuery.SQL.Text := 'SELECT nome FROM modulos WHERE nome like UPPER(:nome) || ''%'' ORDER BY nome';
+  FQuery.ParamByName('nome').AsString := aNomeModulo;
+  FQuery.Open();
+
   FDataSource.DataSet := FQuery;
   Result := FDataSource;
 end;

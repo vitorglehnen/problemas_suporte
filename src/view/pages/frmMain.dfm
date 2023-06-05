@@ -221,8 +221,6 @@ object formPrincipal: TformPrincipal
                 BevelOuter = bvNone
                 Padding.Top = 10
                 TabOrder = 1
-                ExplicitLeft = 5
-                ExplicitTop = 38
                 object rdbtnFiltroPesqProblema: TRadioGroup
                   Left = 0
                   Top = 43
@@ -479,6 +477,7 @@ object formPrincipal: TformPrincipal
                 Height = 21
                 Align = alTop
                 TabOrder = 0
+                OnChange = edtPesqModuloChange
               end
             end
             object edtNomeModulo: TDBEdit
@@ -684,14 +683,14 @@ object formPrincipal: TformPrincipal
                   Width = 941
                   Height = 15
                   Align = alTop
-                  Caption = '*&Solu'#231#227'o'
+                  Caption = '&Solu'#231#227'o'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clBlack
                   Font.Height = -12
                   Font.Name = 'Segoe UI'
                   Font.Style = [fsBold]
                   ParentFont = False
-                  ExplicitWidth = 48
+                  ExplicitTop = -6
                 end
                 object mmSolucaoProblema: TDBRichEdit
                   Left = 0
@@ -708,6 +707,7 @@ object formPrincipal: TformPrincipal
                   Font.Style = []
                   TabOrder = 0
                   Zoom = 100
+                  ExplicitTop = 21
                 end
               end
             end
@@ -841,14 +841,14 @@ object formPrincipal: TformPrincipal
                   Width = 941
                   Height = 15
                   Align = alTop
-                  Caption = '*&Detalhes do problema'
+                  Caption = '&Detalhes do problema'
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clBlack
                   Font.Height = -12
                   Font.Name = 'Segoe UI'
                   Font.Style = [fsBold]
                   ParentFont = False
-                  ExplicitWidth = 127
+                  ExplicitWidth = 122
                 end
                 object mmDetalhesProblema: TDBRichEdit
                   Left = 0

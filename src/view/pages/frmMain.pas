@@ -142,6 +142,7 @@ type
     procedure btnAtualizarGridProblemasClick(Sender: TObject);
     procedure btnSalvarModuloClick(Sender: TObject);
     procedure btnCancelarModuloClick(Sender: TObject);
+    procedure edtPesqModuloChange(Sender: TObject);
   private
     { Private declarations }
     FFormImagensProblema: TformImagensProblema;
@@ -153,6 +154,7 @@ type
     procedure CarregaGridModulos;
     procedure PreencheCbxModulos;
     procedure InverteCrudProblema;
+    procedure SalvarProblema;
 
     procedure DsProblemasBeforePost(TDataSet: TDataSet);
     procedure DsProblemasAfterOpen(TDataSet: TDataSet);
@@ -187,7 +189,7 @@ begin
 
   if Key = VK_F3 then
     if btnSalvarProblema.Enabled then
-      dsProblemas.DataSet.Post;
+      SalvarProblema;
 
   if Key = VK_F4 then
     if btnCancelarProblema.Enabled then
@@ -229,6 +231,28 @@ end;
 procedure TformPrincipal.rdbtnFiltroPesqProblemaClick(Sender: TObject);
 begin
   CarregaGridProblemas;
+end;
+
+procedure TformPrincipal.SalvarProblema;
+begin
+  var aProblema : TProblema := TProblema.Create;
+
+  try
+    aProblema.Titulo := edtTituloProblema.Text;
+    aProblema.Modulo := edtCodModulo.Text;
+
+    if not aProblema.ValidaDados then
+    begin
+      showMessage('Preencha os dados obrigatórios!');
+      exit;
+    end
+    else
+    begin
+      dsProblemas.DataSet.Post;
+    end;
+  finally
+    aProblema.Free;
+  end;
 end;
 
 procedure TformPrincipal.btnImagensProblemaClick(Sender: TObject);
@@ -312,7 +336,8 @@ end;
 
 procedure TformPrincipal.CarregaGridModulos;
 begin
-  var aTabelaModulos: TDataSource := FControllerModulo.BuscaTabelaModulos;
+  var
+    aTabelaModulos: TDataSource := FControllerModulo.BuscaTabelaModulos('');
 
   dsModulos.DataSet := aTabelaModulos.DataSet;
   dsModulos.DataSet.First;
@@ -320,7 +345,8 @@ end;
 
 procedure TformPrincipal.CarregaGridProblemas;
 begin
-  var aNomeModulo: String;
+  var
+    aNomeModulo: String;
 
   if Assigned(gridModulos.DataSource) and
     (gridModulos.DataSource.DataSet.RecordCount > 0) then
@@ -421,6 +447,11 @@ begin
   end;
 end;
 
+procedure TformPrincipal.edtPesqModuloChange(Sender: TObject);
+begin
+  dsModulos.DataSet := FControllerModulo.BuscaTabelaModulos(edtPesqModulo.Text).DataSet;
+end;
+
 procedure TformPrincipal.edtPesqProblemaChange(Sender: TObject);
 begin
   var
@@ -428,30 +459,30 @@ begin
   var
     aFiltro: String;
 
-    try case rdbtnFiltroPesqProblema.ItemIndex of 0: aFiltro := 'Geral';
-    1: aFiltro := 'Módulo';
-end;
+  try
+    case rdbtnFiltroPesqProblema.ItemIndex of
+      0: aFiltro := 'Geral';
+      1: aFiltro := 'Módulo';
+    end;
 
-if Length(edtPesqProblema.Text) > 0 then
-begin
-  case cbFiltroPesqProblema.ItemIndex of
-    0:
-      aProblema.Codigo := StrToInt(edtPesqProblema.Text);
-    1:
-      aProblema.Titulo := edtPesqProblema.Text;
-    2:
-      aProblema.Chamado := edtPesqProblema.Text;
+    if Length(edtPesqProblema.Text) > 0 then
+    begin
+      case cbFiltroPesqProblema.ItemIndex of
+        0: aProblema.Codigo := StrToInt(edtPesqProblema.Text);
+        1: aProblema.Titulo := edtPesqProblema.Text;
+        2: aProblema.Chamado := edtPesqProblema.Text;
+      end;
+
+      aProblema.Modulo := gridModulos.Columns[0].Field.Value;
+      FControllerProblema.BuscaTabelaProblemasPorFiltro(aProblema,
+        cbFiltroPesqProblema.Text, aFiltro);
+    end
+    else
+      CarregaGridProblemas;
+
+  finally
+    aProblema.Free;
   end;
-  aProblema.Modulo := gridModulos.Columns[0].Field.Value;
-  FControllerProblema.BuscaTabelaProblemasPorFiltro(aProblema,
-    cbFiltroPesqProblema.Text, aFiltro);
-end
-else
-  CarregaGridProblemas;
-
-finally
-  aProblema.Free;
-end;
 end;
 
 procedure TformPrincipal.btnNovoModuloClick(Sender: TObject);
@@ -484,7 +515,7 @@ end;
 
 procedure TformPrincipal.btnSalvarProblemaClick(Sender: TObject);
 begin
-  dsProblemas.DataSet.Post;
+  SalvarProblema;
 end;
 
 procedure TformPrincipal.gridModulosCellClick(Column: TColumn);

@@ -11,7 +11,7 @@ type
     FDAOModulo: TDAOModulo;
     FDAOGridModulo: TDAOGridModulo;
   public
-    function BuscaTabelaModulos: TDataSource;
+    function BuscaTabelaModulos(aNomeModulo: String): TDataSource;
     function BuscaModulos: TStringList;
     function BuscaNomeModulo(aCodigoModulo: Integer): String;
     function BuscaCodigoModulo(aNomeModulo: String): Integer;
@@ -55,9 +55,9 @@ begin
   Result := FDAOModulo.BuscaNomeModulo(aCodigoModulo).DataSet.FieldByName('nome').Value;
 end;
 
-function TControllerModulo.BuscaTabelaModulos: TDataSource;
+function TControllerModulo.BuscaTabelaModulos(aNomeModulo: String): TDataSource;
 begin
-  Result := FDAOGridModulo.BuscaTabelaModulos;
+  Result := FDAOGridModulo.BuscaTabelaModulos(aNomeModulo);
 end;
 
 constructor TControllerModulo.Create;

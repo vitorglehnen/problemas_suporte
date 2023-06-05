@@ -61,7 +61,7 @@ begin
   end
   else if aColuna = 'Título' then
   begin
-    FQuery.SQL.Add('UPPER(titulo) like UPPER(:titulo) || ''%''');
+    FQuery.SQL.Add('UPPER(titulo) like ''%'' || UPPER(:titulo) || ''%''');
     FQuery.ParamByName('titulo').AsString := aProblema.Titulo;
   end
   else if aColuna = 'Chamado' then
