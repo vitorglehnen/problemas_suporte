@@ -395,8 +395,15 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alRight
               Caption = 'Excluir'
-              ExplicitLeft = 89
-              ExplicitTop = -4
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMaroon
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              OnClick = btnExcluirModuloClick
+              ExplicitLeft = 191
+              ExplicitTop = 0
             end
             object btnNovoModulo: TSpeedButton
               Left = 1
@@ -405,6 +412,12 @@ object formPrincipal: TformPrincipal
               Height = 25
               Align = alLeft
               Caption = 'Novo'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clGreen
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
               OnClick = btnNovoModuloClick
               ExplicitLeft = 9
               ExplicitTop = 2
@@ -417,6 +430,12 @@ object formPrincipal: TformPrincipal
               Align = alRight
               Caption = 'Cancelar'
               Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clMaroon
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
               OnClick = btnCancelarModuloClick
               ExplicitLeft = 136
               ExplicitTop = 5
@@ -429,6 +448,12 @@ object formPrincipal: TformPrincipal
               Align = alLeft
               Caption = 'Salvar'
               Enabled = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clGreen
+              Font.Height = -11
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
               TabOrder = 0
               OnClick = btnSalvarModuloClick
             end
@@ -620,7 +645,6 @@ object formPrincipal: TformPrincipal
                 AutoSize = True
                 BevelOuter = bvNone
                 TabOrder = 0
-                ExplicitHeight = 148
                 object lblModuloProblema: TLabel
                   Left = 0
                   Top = 0
@@ -669,8 +693,6 @@ object formPrincipal: TformPrincipal
               BevelOuter = bvNone
               Padding.Left = 30
               TabOrder = 3
-              ExplicitTop = 412
-              ExplicitHeight = 341
               object pnlSolucaoProblema: TPanel
                 Left = 30
                 Top = 0
@@ -682,7 +704,6 @@ object formPrincipal: TformPrincipal
                 Padding.Right = 60
                 Padding.Bottom = 50
                 TabOrder = 0
-                ExplicitHeight = 281
                 object lblSolucaoProblema: TLabel
                   Left = 0
                   Top = 0
@@ -714,7 +735,6 @@ object formPrincipal: TformPrincipal
                   ScrollBars = ssVertical
                   TabOrder = 0
                   Zoom = 100
-                  ExplicitHeight = 276
                 end
               end
             end
@@ -731,8 +751,6 @@ object formPrincipal: TformPrincipal
               Padding.Bottom = 20
               ParentBackground = False
               TabOrder = 0
-              ExplicitLeft = 1
-              ExplicitTop = 7
               object lblDataProblema: TLabel
                 Left = 633
                 Top = 11
@@ -876,8 +894,6 @@ object formPrincipal: TformPrincipal
                   ScrollBars = ssVertical
                   TabOrder = 0
                   Zoom = 100
-                  ExplicitTop = 21
-                  ExplicitHeight = 200
                 end
               end
             end
