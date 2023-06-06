@@ -16,11 +16,10 @@ uses
   FireDAC.Comp.Client,
   FireDAC.Phys.MySQLDef,
   FireDAC.Phys.FB,
-  System.SysUtils,
   FireDAC.DApt,
   FireDAC.VCLUI.Wait,
   System.IniFiles,
-  Vcl.Dialogs;
+  Vcl.Dialogs, System.SysUtils;
 
 type
   TConexao = class
@@ -28,6 +27,7 @@ type
     FConn: TFDConnection;
     FQuery: TFDQuery;
     FDataSource: TDataSource;
+    FExeDir: String;
 
     procedure ConfigConexao;
     procedure CriarConnectIniFile;
@@ -45,24 +45,29 @@ const
 
 implementation
 
+uses
+  Vcl.Forms;
+
 { TConexao }
 
 procedure TConexao.ConfigConexao;
 var
-  ArqINI: TIniFIle;
+  ArqINIConexao: TIniFIle;
 begin
-  ArqINI := TIniFIle.Create('C:\Problemas Suporte\Connect.ini');
+  ArqINIConexao := TIniFIle.Create(FExeDir + NOME_ARQ_INI);
   try
     FConn.Params.DriverID := 'FB';
-    FConn.Params.Database := ArqINI.ReadString('Conexão', 'CaminhoDoBanco',
+    FConn.Params.Database := ArqINIConexao.ReadString('Conexão', 'CaminhoDoBanco',
       'C:\Problemas Suporte\DBPROB.FDB');
-    FConn.Params.UserName := ArqINI.ReadString('Conexão', 'Username', 'SYSDBA');
-    FConn.Params.Password := ArqINI.ReadString('Conexão', 'Password', 'masterkey');
+    FConn.Params.UserName := ArqINIConexao.ReadString('Conexão', 'Username', 'SYSDBA');
+    FConn.Params.Password := ArqINIConexao.ReadString('Conexão', 'Password', 'masterkey');
+    FConn.Params.Values['Server'] := ArqINIConexao.ReadString('Conexão', 'Server', 'localhost');
+    FConn.Params.Values['Port'] := ArqINIConexao.ReadString('Conexão', 'Port', '44680');
     FConn.LoginPrompt := False;
 
     FConn.Connected;
   finally
-    ArqINI.Free;
+    ArqINIConexao.Free;
   end;
 end;
 
@@ -71,6 +76,7 @@ begin
   FConn := TFDConnection.Create(nil);
   FQuery := TFDQuery.Create(nil);
   FDataSource := TDataSource.Create(nil);
+  FExeDir := ExtractFilePath(Application.ExeName);
 
   CriarConnectIniFile;
   ConfigConexao;
@@ -80,7 +86,7 @@ procedure TConexao.CriarConnectIniFile;
 var
   ArqINI: TIniFIle;
 begin
-  if not FileExists('C:\Problemas Suporte\Connect.ini') then
+  if not FileExists(FExeDir + NOME_ARQ_INI) then
   begin
     ArqINI := TIniFIle.Create(ExtractFilePath(ParamStr(0)) + NOME_ARQ_INI);
     try
@@ -89,6 +95,8 @@ begin
       ArqINI.WriteString('Conexão', 'DriverID', 'FB');
       ArqINI.WriteString('Conexão', 'Username', 'SYSDBA');
       ArqINI.WriteString('Conexão', 'Password', 'masterkey');
+      ArqINI.WriteString('Conexão', 'Server', 'localhost');
+      ArqINI.WriteString('Conexão', 'Port', '44680');
       ArqINI.WriteString('Imagens', 'CaminhoDaPasta', 'C:\Problemas Suporte\Imagens\');
     finally
       ArqINI.Free;
