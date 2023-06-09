@@ -44,7 +44,7 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, FireDAC.UI.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
-  FireDAC.Phys, FireDAC.VCLUI.Wait;
+  FireDAC.Phys, FireDAC.VCLUI.Wait, frmRichEditTelaCheia;
 
 type
   TformPrincipal = class(TForm)
@@ -144,9 +144,13 @@ type
     procedure btnSalvarModuloClick(Sender: TObject);
     procedure btnCancelarModuloClick(Sender: TObject);
     procedure edtPesqModuloChange(Sender: TObject);
+    procedure mmDetalhesProblemaDblClick(Sender: TObject);
+    procedure mmSolucaoProblemaDblClick(Sender: TObject);
   private
     { Private declarations }
     FFormImagensProblema: TformImagensProblema;
+    FFormRichEditTelaCheia : TFormRichEditTelaCheia;
+
     FControllerModulo: TControllerModulo;
     FControllerProblema: TControllerProblema;
 
@@ -483,9 +487,7 @@ begin
     dsProblemas.DataSet.FieldByName('datacr').AsDateTime := Now;
     dsProblemas.DataSet.FieldByName('horacr').AsDateTime := Now;
     dsProblemas.DataSet.FieldByName('cod_prob').AsInteger :=
-      FControllerProblema.BuscaProximoCodigoProblema;
-    dsProblemas.DataSet.FieldByName('cod_mod').AsInteger :=
-      FControllerModulo.BuscaCodigoModulo(cbModulo.Text);
+      FControllerProblema.BuscaProximoCodigoProblema + 1;
   end;
 end;
 
@@ -659,6 +661,28 @@ begin
 
   pnlGridProblemas.Enabled := not pnlGridProblemas.Enabled;
   pnlBodyPesqProblema.Enabled := not pnlBodyPesqProblema.Enabled;
+end;
+
+procedure TformPrincipal.mmDetalhesProblemaDblClick(Sender: TObject);
+begin
+  FFormRichEditTelaCheia := TFormRichEditTelaCheia.Create(nil, mmDetalhesProblema.Text, 'Detalhes');
+
+  try
+    FFormRichEditTelaCheia.ShowModal;
+  finally
+    FFormRichEditTelaCheia.Free;
+  end;
+end;
+
+procedure TformPrincipal.mmSolucaoProblemaDblClick(Sender: TObject);
+begin
+  FFormRichEditTelaCheia := TFormRichEditTelaCheia.Create(nil, mmSolucaoProblema.Text, 'Solução');
+
+  try
+    FFormRichEditTelaCheia.ShowModal;
+  finally
+    FFormRichEditTelaCheia.Free;
+  end;
 end;
 
 procedure TformPrincipal.NovoProblema;

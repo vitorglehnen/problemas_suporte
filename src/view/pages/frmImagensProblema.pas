@@ -290,7 +290,6 @@ begin
     btnProxImagem.Enabled := False;
     btnAntImagem.Enabled := False;
   end;
-
 end;
 
 procedure TformImagensProblema.FormDestroy(Sender: TObject);

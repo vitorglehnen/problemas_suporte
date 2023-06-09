@@ -735,6 +735,7 @@ object formPrincipal: TformPrincipal
                   ScrollBars = ssVertical
                   TabOrder = 0
                   Zoom = 100
+                  OnDblClick = mmSolucaoProblemaDblClick
                 end
               end
             end
@@ -894,6 +895,9 @@ object formPrincipal: TformPrincipal
                   ScrollBars = ssVertical
                   TabOrder = 0
                   Zoom = 100
+                  OnDblClick = mmDetalhesProblemaDblClick
+                  ExplicitLeft = -2
+                  ExplicitTop = 6
                 end
               end
             end
