@@ -111,8 +111,8 @@ type
     edtCodModulo: TDBEdit;
     btnAtualizarGridProblemas: TBitBtn;
     edtNomeModulo: TDBEdit;
-    btnSalvarModulo: TButton;
     btnCancelarModulo: TSpeedButton;
+    btnSalvarModulo: TSpeedButton;
 
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);

@@ -437,10 +437,9 @@ object formPrincipal: TformPrincipal
               Font.Style = []
               ParentFont = False
               OnClick = btnCancelarModuloClick
-              ExplicitLeft = 136
               ExplicitTop = 5
             end
-            object btnSalvarModulo: TButton
+            object btnSalvarModulo: TSpeedButton
               Left = 49
               Top = 1
               Width = 48
@@ -454,8 +453,6 @@ object formPrincipal: TformPrincipal
               Font.Name = 'Tahoma'
               Font.Style = []
               ParentFont = False
-              TabOrder = 0
-              OnClick = btnSalvarModuloClick
             end
           end
           object pnlBodyPesqModulo: TPanel
@@ -896,8 +893,6 @@ object formPrincipal: TformPrincipal
                   TabOrder = 0
                   Zoom = 100
                   OnDblClick = mmDetalhesProblemaDblClick
-                  ExplicitLeft = -2
-                  ExplicitTop = 6
                 end
               end
             end
