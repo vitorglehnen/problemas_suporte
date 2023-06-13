@@ -167,6 +167,8 @@ object formPrincipal: TformPrincipal
               ParentFont = False
               Spacing = 2
               OnClick = btnNovoProblemaClick
+              ExplicitLeft = 3
+              ExplicitTop = 0
             end
           end
           object pnlBodyPesqProblema: TPanel

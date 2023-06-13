@@ -12,9 +12,9 @@ object formImagensProblema: TformImagensProblema
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
-  OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyPress = FormKeyPress
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlPrincipal: TPanel
@@ -44,7 +44,7 @@ object formImagensProblema: TformImagensProblema
       ParentShowHint = False
       ShowHint = True
       OnDblClick = imgProblemaDblClick
-      ExplicitLeft = 87
+      ExplicitLeft = 75
       ExplicitTop = 103
     end
     object btnProxImagem: TSpeedButton
@@ -55,7 +55,7 @@ object formImagensProblema: TformImagensProblema
       Align = alRight
       Caption = '------->'
       OnClick = btnProxImagemClick
-      ExplicitLeft = 1068
+      ExplicitLeft = 1075
       ExplicitTop = 103
     end
     object btnAntImagem: TSpeedButton
@@ -67,7 +67,7 @@ object formImagensProblema: TformImagensProblema
       Caption = '<-------'
       Enabled = False
       OnClick = btnAntImagemClick
-      ExplicitLeft = -6
+      ExplicitLeft = 1
       ExplicitTop = 103
     end
     object pnlTopImagem: TPanel
@@ -143,7 +143,7 @@ object formImagensProblema: TformImagensProblema
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        OnMouseDown = btnSalvarImagemMouseDown
+        OnClick = btnSalvarImagemClick
         ExplicitLeft = 69
       end
       object btnCancelarImagem: TSpeedButton

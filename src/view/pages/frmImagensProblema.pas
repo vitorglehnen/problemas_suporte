@@ -20,10 +20,11 @@ uses
   Vcl.ImgList,
   pngimage,
   jpeg,
-  uImagemProblema,
-  uControllerProblema,
   ShellApi,
-  System.IniFiles;
+  System.IniFiles,
+
+  uImagemProblema,
+  uControllerProblema;
 
 type
   TformImagensProblema = class(TForm)
@@ -40,29 +41,35 @@ type
     lblNmroImagem: TLabel;
     btnSelecionarImagem: TSpeedButton;
     procedure FormKeyPress(Sender: TObject; var Key: Char);
-    procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnAntImagemClick(Sender: TObject);
     procedure InverteCrudImagem;
-    procedure btnSalvarImagemMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
     procedure btnProxImagemClick(Sender: TObject);
     procedure btnAddImagemClick(Sender: TObject);
     procedure btnRemoverImagemClick(Sender: TObject);
     procedure imgProblemaDblClick(Sender: TObject);
     procedure btnSelecionarImagemClick(Sender: TObject);
     procedure btnCancelarImagemClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnSalvarImagemClick(Sender: TObject);
   private
     { Private declarations }
+    FCodProblema: Integer;
     FPosicaoListaImagem: Integer;
-    FControllerProblema: TControllerProblema;
-
-    procedure ConfigImagem;
-  public
-    { Public declarations }
     FListaImagens: TStringList;
     FCaminhoImagem: String;
     FNomeImagem: String;
+
+    FControllerProblema: TControllerProblema;
+
+    procedure ConfigParamsImagem;
+    procedure InserirImagem;
+  public
+    { Public declarations }
+
+    procedure AtualizaPosicaoImagens;
+
+    constructor Create(AOwner: TComponent; aCodProblema: String);
   end;
 
 var
@@ -74,28 +81,40 @@ implementation
 
 uses frmMain;
 
-procedure TformImagensProblema.btnAddImagemClick(Sender: TObject);
+constructor TformImagensProblema.Create(AOwner: TComponent;
+  aCodProblema: String);
 begin
-  InverteCrudImagem;
-  imgProblema.Picture := nil;
-  pnlPrincipal.Caption := 'Cole aqui sua imagem ou clique em procurar';
+  inherited Create(AOwner);
+
+  FCodProblema := StrToInt(aCodProblema);
+  FPosicaoListaImagem := 0;
+  FControllerProblema := TControllerProblema.Create;
+
+  ConfigParamsImagem;
+
+  try
+    FListaImagens := FControllerProblema.BuscaImagens(FCodProblema);
+  finally
+    FControllerProblema.Free;
+  end;
 end;
 
-procedure TformImagensProblema.btnAntImagemClick(Sender: TObject);
+procedure TformImagensProblema.AtualizaPosicaoImagens;
 begin
-  btnProxImagem.Enabled := True;
-  FPosicaoListaImagem := FPosicaoListaImagem - 1;
-  imgProblema.Picture.LoadFromFile(FCaminhoImagem + FListaImagens[FPosicaoListaImagem]);
+  if FListaImagens.Count > 0 then
+    lblNmroImagem.Caption := IntToStr(FPosicaoListaImagem + 1) + '/' + IntToStr(FListaImagens.Count)
+  else
+    lblNmroImagem.Caption := '0' + '/' + '0';
 
   if FPosicaoListaImagem = 0 then
-    btnAntImagem.Enabled := False;
-  lblNmroImagem.Caption := IntToStr(FPosicaoListaImagem + 1) + '/' +
-    IntToStr(FListaImagens.Count)
-end;
+    btnAntImagem.Enabled := False
+  else
+    btnAntImagem.Enabled := True;
 
-procedure TformImagensProblema.btnCancelarImagemClick(Sender: TObject);
-begin
-  InverteCrudImagem;
+  if ((FPosicaoListaImagem + 1) = FListaImagens.Count) or (FListaImagens.Count = 0) then
+    btnProxImagem.Enabled := False
+  else
+    btnProxImagem.Enabled := True;
 
   if FListaImagens.Count > 0 then
     imgProblema.Picture.LoadFromFile(FCaminhoImagem + FListaImagens[FPosicaoListaImagem])
@@ -109,8 +128,9 @@ begin
   var aBitMap := TBitMap.Create;
   var aPng: TPngImage;
   var aJpeg: TJPEGImage;
-        aSaveDialog.Filter := 'Arquivos PNG (*.png)|*.png|' +
-          'Arquivos JPEG (*.jpg, *.jpeg)|*.jpg; *.jpg';
+
+  aSaveDialog.Filter := 'Arquivos PNG (*.png)|*.png|' +
+    'Arquivos JPEG (*.jpg, *.jpeg)|*.jpg; *.jpg';
 
   try
     if aSaveDialog.Execute then
@@ -145,7 +165,7 @@ begin
   end;
 end;
 
-procedure TformImagensProblema.ConfigImagem;
+procedure TformImagensProblema.ConfigParamsImagem;
 begin
   var aArqINI : TIniFile := TIniFIle.Create('C:\Problemas Suporte\Connect.ini');
 
@@ -156,17 +176,16 @@ begin
   end;
 end;
 
+procedure TformImagensProblema.FormShow(Sender: TObject);
+begin
+  AtualizaPosicaoImagens;
+end;
+
 procedure TformImagensProblema.btnProxImagemClick(Sender: TObject);
 begin
   btnAntImagem.Enabled := True;
   FPosicaoListaImagem := FPosicaoListaImagem + 1;
-  imgProblema.Picture.LoadFromFile(FCaminhoImagem + FListaImagens[FPosicaoListaImagem]);
-
-  if FPosicaoListaImagem = FListaImagens.Count - 1 then
-    btnProxImagem.Enabled := False;
-
-  lblNmroImagem.Caption := IntToStr(FPosicaoListaImagem + 1) + '/' +
-    IntToStr(FListaImagens.Count)
+  AtualizaPosicaoImagens;
 end;
 
 procedure TformImagensProblema.btnRemoverImagemClick(Sender: TObject);
@@ -174,51 +193,43 @@ begin
   if Application.MessageBox('Deseja excluir esta imagem?', 'Excluir imagem',
     +MB_ICONQUESTION + MB_YESNO) = MrYes then
   begin
-    var
-      aImagem: TImagemProblema := TImagemProblema.Create;
+    var aImagem: TImagemProblema := TImagemProblema.Create;
+
     FControllerProblema := TControllerProblema.Create;
     try
       aImagem.Imagem := FListaImagens[FPosicaoListaImagem];
-      aImagem.CodigoProblema :=
-        StrToInt(frmMain.formPrincipal.edtCodProblema.Text);
+      aImagem.CodigoProblema := FCodProblema;
+
       DeleteFile(FCaminhoImagem + FListaImagens[FPosicaoListaImagem]);
       FControllerProblema.DeleteImagem(aImagem);
       FListaImagens.Delete(FPosicaoListaImagem);
+
+      dec(FPosicaoListaImagem);
     finally
       aImagem.Free;
       FControllerProblema.Free;
     end;
-
-    if (FPosicaoListaImagem = FListaImagens.Count) and (FListaImagens.Count <> 0)
-    then
-      FPosicaoListaImagem := FPosicaoListaImagem - 1;
-
-    if FListaImagens.Count <= 1 then
-    begin
-      btnAntImagem.Enabled := False;
-      btnProxImagem.Enabled := False;
-    end;
-
-    if FPosicaoListaImagem = FListaImagens.Count - 1 then
-      btnProxImagem.Enabled := False;
-
-    if FListaImagens.Count > 0 then
-    begin
-      lblNmroImagem.Caption := IntToStr(FPosicaoListaImagem + 1) + '/' +
-        IntToStr(FListaImagens.Count);
-      imgProblema.Picture.LoadFromFile(FCaminhoImagem + FListaImagens[FPosicaoListaImagem]);
-    end
-    else
-    begin
-      lblNmroImagem.Caption := IntToStr(FPosicaoListaImagem) + '/' +
-        IntToStr(FListaImagens.Count);
-      imgProblema.Picture := nil;
-    end;
   end;
+
+  AtualizaPosicaoImagens;
 end;
 
-procedure TformImagensProblema.btnSalvarImagemMouseDown(Sender: TObject;
-  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+procedure TformImagensProblema.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = ^V then
+    if btnSalvarImagem.Enabled then
+      if Clipboard.HasFormat(cf_bitmap) then
+        imgProblema.Picture.Assign(Clipboard);
+end;
+
+procedure TformImagensProblema.imgProblemaDblClick(Sender: TObject);
+begin
+  var aImagem: String := FCaminhoImagem + FListaImagens[FPosicaoListaImagem];
+
+  ShellExecute(Handle, 'open', PWideChar(aImagem), nil, nil, SW_SHOWNORMAL);
+end;
+
+procedure TformImagensProblema.InserirImagem;
 begin
   var aImagemPNG: TPngImage := TPngImage.Create;
   var aImagemProblema: TImagemProblema := TImagemProblema.Create;
@@ -246,71 +257,39 @@ begin
   end;
 
   InverteCrudImagem;
-
-  if FListaImagens.Count > 1 then
-    btnProxImagem.Enabled := True;
-
-  imgProblema.Picture.LoadFromFile(FCaminhoImagem + FListaImagens[FPosicaoListaImagem]);
-
-  lblNmroImagem.Caption := (IntToStr(FPosicaoListaImagem + 1)) + '/' +
-    IntToStr(FListaImagens.Count);
-
+  FPosicaoListaImagem := FListaImagens.Count - 1;
+  AtualizaPosicaoImagens;
   pnlPrincipal.Caption := 'Clique em adicionar';
 end;
 
-procedure TformImagensProblema.FormCreate(Sender: TObject);
+procedure TformImagensProblema.btnAddImagemClick(Sender: TObject);
 begin
-  FControllerProblema := TControllerProblema.Create;
+  InverteCrudImagem;
+  imgProblema.Picture := nil;
+  pnlPrincipal.Caption := 'Cole aqui sua imagem ou clique em procurar';
+end;
 
-  ConfigImagem;
+procedure TformImagensProblema.btnAntImagemClick(Sender: TObject);
+begin
+  btnProxImagem.Enabled := True;
+  FPosicaoListaImagem := FPosicaoListaImagem - 1;
+  AtualizaPosicaoImagens;
+end;
 
-  try
-    FListaImagens := FControllerProblema.BuscaImagens
-      (StrToInt(frmMain.formPrincipal.edtCodProblema.Text));
-  finally
-    FControllerProblema.Free;
-  end;
+procedure TformImagensProblema.btnCancelarImagemClick(Sender: TObject);
+begin
+  InverteCrudImagem;
+  AtualizaPosicaoImagens;
+end;
 
-  if FListaImagens.Count > 0 then
-  begin
-    lblNmroImagem.Caption := IntToStr(FPosicaoListaImagem + 1) + '/' +
-      IntToStr(FListaImagens.Count);
-    FPosicaoListaImagem := 0;
-    imgProblema.Picture.LoadFromFile(FCaminhoImagem + FListaImagens[FPosicaoListaImagem]);
-  end
-  else
-  begin
-    lblNmroImagem.Caption := '0/0';
-    btnProxImagem.Enabled := False;
-    btnAntImagem.Enabled := False;
-  end;
-
-  if FListaImagens.Count = 1 then
-  begin
-    btnProxImagem.Enabled := False;
-    btnAntImagem.Enabled := False;
-  end;
+procedure TformImagensProblema.btnSalvarImagemClick(Sender: TObject);
+begin
+  InserirImagem;
 end;
 
 procedure TformImagensProblema.FormDestroy(Sender: TObject);
 begin
   FListaImagens.Free;
-end;
-
-procedure TformImagensProblema.FormKeyPress(Sender: TObject; var Key: Char);
-begin
-  if Key = ^V then
-    if btnSalvarImagem.Enabled then
-      if Clipboard.HasFormat(cf_bitmap) then
-        imgProblema.Picture.Assign(Clipboard);
-end;
-
-procedure TformImagensProblema.imgProblemaDblClick(Sender: TObject);
-begin
-  var
-    aImagem: String := FCaminhoImagem + FListaImagens[FPosicaoListaImagem];
-
-  ShellExecute(Handle, 'open', PWideChar(aImagem), nil, nil, SW_SHOWNORMAL);
 end;
 
 procedure TformImagensProblema.InverteCrudImagem;
@@ -321,4 +300,5 @@ begin
   btnRemoverImagem.Enabled := not btnRemoverImagem.Enabled;
   btnSelecionarImagem.Enabled := not btnSelecionarImagem.Enabled;
 end;
+
 end.

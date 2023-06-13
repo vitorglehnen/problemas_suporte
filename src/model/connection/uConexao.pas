@@ -61,7 +61,7 @@ begin
       'C:\Problemas Suporte\DBPROB.FDB');
     FConn.Params.UserName := ArqINIConexao.ReadString('Conexão', 'Username', 'SYSDBA');
     FConn.Params.Password := ArqINIConexao.ReadString('Conexão', 'Password', 'masterkey');
-    FConn.Params.Values['Server'] := ArqINIConexao.ReadString('Conexão', 'Server', 'localhost');
+    //FConn.Params.Values['Server'] := ArqINIConexao.ReadString('Conexão', 'Server', 'localhost');
     FConn.Params.Values['Port'] := ArqINIConexao.ReadString('Conexão', 'Port', '44680');
     FConn.LoginPrompt := False;
 

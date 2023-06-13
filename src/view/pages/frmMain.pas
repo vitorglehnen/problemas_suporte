@@ -34,17 +34,31 @@ uses
   Vcl.BandActn,
   Vcl.ComCtrls,
   Data.DB,
+  jpeg,
+  pngimage,
+  FireDAC.Stan.Intf,
+  FireDAC.Stan.Option,
+  FireDAC.Stan.Param,
+  FireDAC.Stan.Error,
+  FireDAC.DatS,
+  FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf,
+  FireDAC.Stan.Async,
+  FireDAC.DApt,
+  FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client,
+  FireDAC.UI.Intf,
+  FireDAC.Stan.Def,
+  FireDAC.Stan.Pool,
+  FireDAC.Phys,
+  FireDAC.VCLUI.Wait,
+
   uControllerModulo,
   uControllerProblema,
   uProblema,
-  jpeg,
-  pngimage,
 
-  frmImagensProblema, FireDAC.Stan.Intf, FireDAC.Stan.Option,
-  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
-  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, FireDAC.UI.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
-  FireDAC.Phys, FireDAC.VCLUI.Wait, frmRichEditTelaCheia;
+  frmImagensProblema,
+  frmRichEditTelaCheia;
 
 type
   TformPrincipal = class(TForm)
@@ -114,17 +128,6 @@ type
     btnCancelarModulo: TSpeedButton;
     btnSalvarModulo: TSpeedButton;
 
-    procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
-    procedure gridModulosCellClick(Column: TColumn);
-    procedure btnSalvarModuloMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure rdbtnFiltroPesqProblemaClick(Sender: TObject);
-    procedure FormShow(Sender: TObject);
-    procedure gridProblemasCellClick(Column: TColumn);
-    procedure btnExcluirProblemaClick(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure btnImagensProblemaClick(Sender: TObject);
     procedure btnNovoModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure gridModulosKeyDown(Sender: TObject; var Key: Word;
@@ -134,6 +137,17 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure gridProblemasDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure btnSalvarModuloMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure gridModulosCellClick(Column: TColumn);
+    procedure rdbtnFiltroPesqProblemaClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure gridProblemasCellClick(Column: TColumn);
+    procedure btnExcluirProblemaClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure btnImagensProblemaClick(Sender: TObject);
     procedure edtPesqProblemaChange(Sender: TObject);
     procedure btnNovoProblemaClick(Sender: TObject);
     procedure btnSalvarProblemaClick(Sender: TObject);
@@ -155,21 +169,26 @@ type
     FControllerProblema: TControllerProblema;
 
     procedure CarregaGridProblemas;
-    procedure CarregaDadosProblemas;
     procedure CarregaGridModulos;
+    procedure CarregaDadosProblemas;
     procedure PreencheCbxModulos;
     procedure InverteCrudProblema;
     procedure InverteCrudModulo;
+
     procedure SalvarProblema;
     procedure NovoProblema;
+    procedure CancelarProblema;
+    procedure ExcluirProblema;
 
-    procedure DsProblemasBeforePost(TDataSet: TDataSet);
+    procedure DsProblemasEventos;
+    procedure DsModulosEventos;
+
     procedure DsProblemasAfterOpen(TDataSet: TDataSet);
     procedure DsProblemasAfterEdit(TDataSet: TDataSet);
     procedure DsProblemasAfterPost(TDataSet: TDataSet);
     procedure DsProblemasAfterInsert(TDataSet: TDataSet);
     procedure DsProblemasAfterCancel(TDataSet: TDataSet);
-    procedure DsProblemasAfterScroll(TDataSet: TDataSet);
+    procedure DsProblemasBeforePost(TDataSet: TDataSet);
 
     procedure DsModulosAfterScroll(TDataSet: TDataSet);
     procedure DsModulosAfterInsert(TDataSet: TDataset);
@@ -209,14 +228,6 @@ begin
   if Key = VK_F5 then
     if btnNovoProblema.Enabled then
       CarregaGridProblemas;
-end;
-
-procedure TformPrincipal.FormShow(Sender: TObject);
-begin
-  edtPesqModulo.SetFocus;
-  cardPanelProblemas.ActiveCard := pnlCadastroProblema;
-
-  pnlProblemas.Enabled := True;
 end;
 
 procedure TformPrincipal.PreencheCbxModulos;
@@ -269,11 +280,10 @@ end;
 
 procedure TformPrincipal.btnImagensProblemaClick(Sender: TObject);
 begin
-  var
-    aCaminhoImagem: String;
-  var
-    aContador: Integer := 0;
-  FFormImagensProblema := TformImagensProblema.Create(nil);
+  var aCaminhoImagem: String;
+  var aContador: Integer := 0;
+
+  FFormImagensProblema := TformImagensProblema.Create(nil, edtCodProblema.Text);
   try
     FFormImagensProblema.ShowModal;
   finally
@@ -293,11 +303,7 @@ end;
 
 procedure TformPrincipal.btnCancelarProblemaClick(Sender: TObject);
 begin
-  InverteCrudProblema;
-
-  dsProblemas.DataSet.Cancel;
-
-  CarregaDadosProblemas;
+  CancelarProblema;
 end;
 
 procedure TformPrincipal.btnExcluirModuloClick(Sender: TObject);
@@ -312,15 +318,14 @@ end;
 
 procedure TformPrincipal.btnExcluirProblemaClick(Sender: TObject);
 begin
-  if Application.MessageBox('Deseja excluir este registro?', 'Excluir problema',
-    +MB_ICONQUESTION + MB_YESNO) = MrYes then
-  begin
-    dsProblemas.DataSet.Delete;
-    CarregaGridProblemas;
-    CarregaDadosProblemas;
-  end;
-  if gridProblemas.DataSource.DataSet.RecordCount < 1 then
-    pnlProblemas.Visible := False;
+  ExcluirProblema;
+end;
+
+procedure TformPrincipal.CancelarProblema;
+begin
+  dsProblemas.DataSet.Cancel;
+
+  CarregaDadosProblemas;
 end;
 
 procedure TformPrincipal.CarregaDadosProblemas;
@@ -408,6 +413,15 @@ begin
     CarregaGridProblemas;
 end;
 
+procedure TformPrincipal.DsModulosEventos;
+begin
+  dsModulos.DataSet.AfterScroll := DsModulosAfterScroll;
+  dsModulos.DataSet.AfterInsert := DsModulosAfterInsert;
+  dsModulos.DataSet.AfterPost := DsModulosAfterPost;
+  dsModulos.DataSet.AfterCancel := DsModulosAfterCancel;
+  dsModulos.DataSet.AfterEdit := DsModulosAfterEdit;
+end;
+
 procedure TformPrincipal.DsModulosAfterCancel(TDataSet: TDataset);
 begin
   pnlGridModulos.Enabled := True;
@@ -475,11 +489,6 @@ begin
   btnImagensProblema.Enabled := True;
 end;
 
-procedure TformPrincipal.DsProblemasAfterScroll(TDataSet: TDataSet);
-begin
-  //CarregaDadosProblemas;
-end;
-
 procedure TformPrincipal.DsProblemasBeforePost(TDataSet: TDataSet);
 begin
   if dsProblemas.DataSet.State = dsInsert then
@@ -489,6 +498,16 @@ begin
     dsProblemas.DataSet.FieldByName('cod_prob').AsInteger :=
       FControllerProblema.BuscaProximoCodigoProblema + 1;
   end;
+end;
+
+procedure TformPrincipal.DsProblemasEventos;
+begin
+  dsProblemas.DataSet.BeforePost := DsProblemasBeforePost;
+  dsProblemas.DataSet.AfterOpen := DsProblemasAfterOpen;
+  dsProblemas.DataSet.AfterEdit := DsProblemasAfterEdit;
+  dsProblemas.DataSet.AfterPost := DsProblemasAfterPost;
+  dsProblemas.DataSet.AfterInsert := DsProblemasAfterInsert;
+  dsProblemas.DataSet.AfterCancel := DsProblemasAfterCancel;
 end;
 
 procedure TformPrincipal.edtPesqModuloChange(Sender: TObject);
@@ -527,6 +546,19 @@ begin
   finally
     aProblema.Free;
   end;
+end;
+
+procedure TformPrincipal.ExcluirProblema;
+begin
+  if Application.MessageBox('Deseja excluir este registro?', 'Excluir problema',
+    +MB_ICONQUESTION + MB_YESNO) = MrYes then
+  begin
+    dsProblemas.DataSet.Delete;
+    CarregaGridProblemas;
+    CarregaDadosProblemas;
+  end;
+  if gridProblemas.DataSource.DataSet.RecordCount < 1 then
+    pnlProblemas.Visible := False;
 end;
 
 procedure TformPrincipal.btnNovoModuloClick(Sender: TObject);
@@ -699,20 +731,18 @@ begin
   CarregaGridProblemas;
   CarregaDadosProblemas;
 
-  dsProblemas.DataSet.BeforePost := DsProblemasBeforePost;
-  dsProblemas.DataSet.AfterOpen := DsProblemasAfterOpen;
-  dsProblemas.DataSet.AfterEdit := DsProblemasAfterEdit;
-  dsProblemas.DataSet.AfterPost := DsProblemasAfterPost;
-  dsProblemas.DataSet.AfterInsert := DsProblemasAfterInsert;
-  dsProblemas.DataSet.AfterCancel := DsProblemasAfterCancel;
-  dsProblemas.DataSet.AfterScroll := DsProblemasAfterScroll;
-
-  dsModulos.DataSet.AfterScroll := DsModulosAfterScroll;
-  dsModulos.DataSet.AfterInsert := DsModulosAfterInsert;
-  dsModulos.DataSet.AfterPost := DsModulosAfterPost;
-  dsModulos.DataSet.AfterCancel := DsModulosAfterCancel;
-  dsModulos.DataSet.AfterEdit := DsModulosAfterEdit;
+  DsProblemasEventos;
+  DsModulosEventos;
 end;
+
+procedure TformPrincipal.FormShow(Sender: TObject);
+begin
+  edtPesqModulo.SetFocus;
+  cardPanelProblemas.ActiveCard := pnlCadastroProblema;
+
+  pnlProblemas.Enabled := True;
+end;
+
 
 procedure TformPrincipal.FormDestroy(Sender: TObject);
 begin
