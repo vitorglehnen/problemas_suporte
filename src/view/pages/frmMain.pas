@@ -127,6 +127,7 @@ type
     edtNomeModulo: TDBEdit;
     btnCancelarModulo: TSpeedButton;
     btnSalvarModulo: TSpeedButton;
+    chkSomenteSolucao: TDBCheckBox;
 
     procedure btnNovoModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -160,6 +161,7 @@ type
     procedure edtPesqModuloChange(Sender: TObject);
     procedure mmDetalhesProblemaDblClick(Sender: TObject);
     procedure mmSolucaoProblemaDblClick(Sender: TObject);
+    procedure chkSomenteSolucaoClick(Sender: TObject);
   private
     { Private declarations }
     FFormImagensProblema: TformImagensProblema;
@@ -393,6 +395,14 @@ begin
   end;
 end;
 
+procedure TformPrincipal.chkSomenteSolucaoClick(Sender: TObject);
+begin
+  if chkSomenteSolucao.Checked then
+    pnlBodyDetalhesProblema.Visible := False
+  else
+    pnlBodyDetalhesProblema.Visible := True;
+end;
+
 procedure TformPrincipal.DsModulosAfterInsert(TDataSet: TDataset);
 begin
   InverteCrudModulo;
@@ -469,6 +479,18 @@ begin
   pnlProblemas.Visible := True;
   dtProblema.Date := dsProblemas.DataSet.FieldByName('datacr').AsDateTime;
 
+  if dsProblemas.DataSet.FieldByName('somentesolu').AsString = 'S' then
+  begin
+    pnlBodyDetalhesProblema.Visible := False;
+    chkSomenteSolucao.Checked;
+  end
+  else
+  begin
+    pnlBodyDetalhesProblema.Visible := True;
+    chkSomenteSolucao.Checked := False;
+  end;
+
+
   while cbModulo.Text <> FControllerModulo.BuscaNomeModulo
     (StrToInt(edtCodModulo.Text)) do
   begin
@@ -497,6 +519,11 @@ begin
     dsProblemas.DataSet.FieldByName('horacr').AsDateTime := Now;
     dsProblemas.DataSet.FieldByName('cod_prob').AsInteger :=
       FControllerProblema.BuscaProximoCodigoProblema + 1;
+
+    if chkSomenteSolucao.Checked then
+      dsProblemas.DataSet.FieldByName('somentesolu').AsString := 'S'
+    else
+      dsProblemas.DataSet.FieldByName('somentesolu').AsString := 'N';
   end;
 end;
 

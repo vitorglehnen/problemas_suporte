@@ -242,6 +242,8 @@ object formPrincipal: TformPrincipal
                   ParentFont = False
                   TabOrder = 0
                   OnClick = rdbtnFiltroPesqProblemaClick
+                  ExplicitLeft = -4
+                  ExplicitTop = 47
                 end
                 object cbFiltroPesqProblema: TComboBox
                   Left = 0
@@ -679,6 +681,19 @@ object formPrincipal: TformPrincipal
                   Enabled = False
                   TabOrder = 0
                 end
+              end
+              object chkSomenteSolucao: TDBCheckBox
+                Left = 28
+                Top = 72
+                Width = 149
+                Height = 17
+                Caption = 'Mostrar somente solu'#231#227'o'
+                DataField = 'somentesolu'
+                DataSource = dsProblemas
+                TabOrder = 1
+                ValueChecked = 'S'
+                ValueUnchecked = 'N'
+                OnClick = chkSomenteSolucaoClick
               end
             end
             object pnlBodySolucaoProblema: TPanel

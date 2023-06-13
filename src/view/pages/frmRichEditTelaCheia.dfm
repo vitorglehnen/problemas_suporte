@@ -2,8 +2,8 @@ object formRichEditTelaCheia: TformRichEditTelaCheia
   Left = 0
   Top = 0
   Caption = 'Visualiza'#231#227'o'
-  ClientHeight = 439
-  ClientWidth = 733
+  ClientHeight = 524
+  ClientWidth = 879
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,16 +17,18 @@ object formRichEditTelaCheia: TformRichEditTelaCheia
   object pnlMain: TPanel
     Left = 0
     Top = 33
-    Width = 733
-    Height = 406
+    Width = 879
+    Height = 491
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 733
+    ExplicitHeight = 406
     object mmPrincipal: TRichEdit
       Left = 0
       Top = 0
-      Width = 733
-      Height = 406
+      Width = 879
+      Height = 491
       Align = alClient
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -37,12 +39,14 @@ object formRichEditTelaCheia: TformRichEditTelaCheia
       ReadOnly = True
       TabOrder = 0
       Zoom = 100
+      ExplicitWidth = 733
+      ExplicitHeight = 406
     end
   end
   object pnlTop: TPanel
     Left = 0
     Top = 0
-    Width = 733
+    Width = 879
     Height = 33
     Align = alTop
     Color = 16708071
@@ -54,5 +58,6 @@ object formRichEditTelaCheia: TformRichEditTelaCheia
     ParentBackground = False
     ParentFont = False
     TabOrder = 1
+    ExplicitWidth = 733
   end
 end

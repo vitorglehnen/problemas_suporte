@@ -27,7 +27,7 @@ begin
   FQuery := FConn.CriarQuery;
   FDataSource := FConn.CriarDataSource;
 
-  FQuery.SQL.Text := 'SELECT p.cod_prob, p.cod_mod, p.titulo, p.chamado, p.detalhes, p.solucao, p.datacr, p.horacr FROM problemas p WHERE p.titulo = :TituloProblema';
+  FQuery.SQL.Text := 'SELECT p.cod_prob, p.cod_mod, p.titulo, p.chamado, p.detalhes, p.solucao, p.datacr, p.horacr, p.somentesolu FROM problemas p WHERE p.titulo = :TituloProblema';
   FQuery.ParamByName('TituloProblema').AsString := aTituloProblema;
   FQuery.Open;
 
