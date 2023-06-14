@@ -469,6 +469,8 @@ begin
   dtProblema.date := Now;
   btnImagensProblema.Caption := 'Imagens (0)';
   btnImagensProblema.Enabled := False;
+  chkSomenteSolucao.Checked := False;
+  pnlBodyDetalhesProblema.Visible := True;
 end;
 
 procedure TformPrincipal.DsProblemasAfterOpen(TDataSet: TDataSet);

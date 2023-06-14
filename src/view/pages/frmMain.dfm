@@ -242,8 +242,6 @@ object formPrincipal: TformPrincipal
                   ParentFont = False
                   TabOrder = 0
                   OnClick = rdbtnFiltroPesqProblemaClick
-                  ExplicitLeft = -4
-                  ExplicitTop = 47
                 end
                 object cbFiltroPesqProblema: TComboBox
                   Left = 0
