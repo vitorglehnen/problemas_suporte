@@ -68,6 +68,16 @@ begin
   begin
     FQuery.SQL.Add('chamado like ''%'' || :chamado || ''%''');
     FQuery.ParamByName('chamado').AsString := aProblema.Chamado;
+  end
+  else if aColuna = 'Detalhes' then
+  begin
+    FQuery.SQL.Add('UPPER(detalhes) like ''%'' || UPPER(:detalhes) || ''%''');
+    FQuery.ParamByName('detalhes').AsString := aProblema.Detalhes;
+  end
+  else if aColuna = 'Solução' then
+  begin
+    FQuery.SQL.Add('UPPER(solucao) like ''%'' || UPPER(:solucao) || ''%''');
+    FQuery.ParamByName('solucao').AsString := aProblema.Solucao;
   end;
 
   FQuery.Open;

@@ -255,7 +255,9 @@ object formPrincipal: TformPrincipal
                   Items.Strings = (
                     'C'#243'digo'
                     'T'#237'tulo'
-                    'Chamado')
+                    'Chamado'
+                    'Detalhes'
+                    'Solu'#231#227'o')
                 end
               end
             end

@@ -10,8 +10,8 @@ type
   private
     FTitulo: String;
     FChamado: String;
-    FDetalhes: TStream;
-    FSolucao: TStream;
+    FDetalhes: String;
+    FSolucao: String;
     FData: TDate;
     FHora: TTime;
     FModulo: String;
@@ -21,8 +21,8 @@ type
     property Titulo: String read FTitulo write FTitulo;
     property Modulo: String read FModulo write FModulo;
     property Chamado: String read FChamado write FChamado;
-    property Detalhes: TStream read FDetalhes write FDetalhes;
-    property Solucao: TStream read FSolucao write FSolucao;
+    property Detalhes: String read FDetalhes write FDetalhes;
+    property Solucao: String read FSolucao write FSolucao;
     property Data: TDate read FData write FData;
     property Hora: TTime read FHora write FHora;
 

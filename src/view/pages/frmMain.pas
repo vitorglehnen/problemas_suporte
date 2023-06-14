@@ -563,6 +563,8 @@ begin
         0: aProblema.Codigo := StrToInt(edtPesqProblema.Text);
         1: aProblema.Titulo := edtPesqProblema.Text;
         2: aProblema.Chamado := edtPesqProblema.Text;
+        3: aProblema.Detalhes := edtPesqProblema.Text;
+        4: aProblema.Solucao := edtPesqProblema.Text;
       end;
 
       aProblema.Modulo := gridModulos.Columns[0].Field.Value;
