@@ -640,16 +640,17 @@ object formPrincipal: TformPrincipal
               object pnlModuloProblema: TPanel
                 Left = 30
                 Top = 20
-                Width = 209
+                Width = 210
                 Height = 88
                 Align = alLeft
                 AutoSize = True
                 BevelOuter = bvNone
                 TabOrder = 0
+                ExplicitTop = 14
                 object lblModuloProblema: TLabel
                   Left = 0
                   Top = 0
-                  Width = 209
+                  Width = 210
                   Height = 15
                   Align = alTop
                   Caption = '*&M'#243'dulo'
@@ -659,10 +660,11 @@ object formPrincipal: TformPrincipal
                   Font.Name = 'Segoe UI'
                   Font.Style = [fsBold]
                   ParentFont = False
-                  ExplicitWidth = 47
+                  ExplicitLeft = 1
+                  ExplicitWidth = 209
                 end
                 object cbModulo: TComboBox
-                  Left = 63
+                  Left = 64
                   Top = 17
                   Width = 137
                   Height = 21
@@ -683,7 +685,7 @@ object formPrincipal: TformPrincipal
                 end
               end
               object chkSomenteSolucao: TDBCheckBox
-                Left = 28
+                Left = 30
                 Top = 72
                 Width = 149
                 Height = 17
@@ -910,6 +912,7 @@ object formPrincipal: TformPrincipal
                   TabOrder = 0
                   Zoom = 100
                   OnDblClick = mmDetalhesProblemaDblClick
+                  ExplicitTop = 21
                 end
               end
             end

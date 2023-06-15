@@ -22,8 +22,6 @@ object formRichEditTelaCheia: TformRichEditTelaCheia
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 733
-    ExplicitHeight = 406
     object mmPrincipal: TRichEdit
       Left = 0
       Top = 0
@@ -37,10 +35,9 @@ object formRichEditTelaCheia: TformRichEditTelaCheia
       Font.Style = []
       ParentFont = False
       ReadOnly = True
+      ScrollBars = ssVertical
       TabOrder = 0
       Zoom = 100
-      ExplicitWidth = 733
-      ExplicitHeight = 406
     end
   end
   object pnlTop: TPanel
@@ -58,6 +55,5 @@ object formRichEditTelaCheia: TformRichEditTelaCheia
     ParentBackground = False
     ParentFont = False
     TabOrder = 1
-    ExplicitWidth = 733
   end
 end

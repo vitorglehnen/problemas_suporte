@@ -16,13 +16,14 @@ uses
   uControllerModulo in 'src\controller\uControllerModulo.pas',
   uDAOGridModulo in 'src\model\DAO\uDAOGridModulo.pas',
   uDAOProblemaAux in 'src\model\DAO\uDAOProblemaAux.pas',
-  frmRichEditTelaCheia in 'src\view\pages\frmRichEditTelaCheia.pas' {formRichEditTelaCheia};
+  frmRichEditTelaCheia in 'src\view\pages\frmRichEditTelaCheia.pas' {formRichEditTelaCheia},
+  frmLogin in 'src\view\pages\frmLogin.pas' {formLogin};
 
 {$R *.res}
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   ReportMemoryLeaksOnShutdown := True;
-  Application.CreateForm(TformPrincipal, formPrincipal);
+  Application.CreateForm(TformLogin, formLogin);
   Application.Run;
 end.
