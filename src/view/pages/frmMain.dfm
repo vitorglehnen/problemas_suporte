@@ -457,6 +457,7 @@ object formPrincipal: TformPrincipal
               Font.Name = 'Tahoma'
               Font.Style = []
               ParentFont = False
+              OnClick = btnSalvarModuloClick
             end
           end
           object pnlBodyPesqModulo: TPanel
@@ -646,7 +647,6 @@ object formPrincipal: TformPrincipal
                 AutoSize = True
                 BevelOuter = bvNone
                 TabOrder = 0
-                ExplicitTop = 14
                 object lblModuloProblema: TLabel
                   Left = 0
                   Top = 0
@@ -660,8 +660,7 @@ object formPrincipal: TformPrincipal
                   Font.Name = 'Segoe UI'
                   Font.Style = [fsBold]
                   ParentFont = False
-                  ExplicitLeft = 1
-                  ExplicitWidth = 209
+                  ExplicitWidth = 47
                 end
                 object cbModulo: TComboBox
                   Left = 64
@@ -748,6 +747,7 @@ object formPrincipal: TformPrincipal
                   Font.Height = -12
                   Font.Name = 'Tahoma'
                   Font.Style = []
+                  MaxLength = 100000
                   ScrollBars = ssVertical
                   TabOrder = 0
                   Zoom = 100
@@ -908,11 +908,11 @@ object formPrincipal: TformPrincipal
                   Font.Height = -12
                   Font.Name = 'Tahoma'
                   Font.Style = []
+                  MaxLength = 100000
                   ScrollBars = ssVertical
                   TabOrder = 0
                   Zoom = 100
                   OnDblClick = mmDetalhesProblemaDblClick
-                  ExplicitTop = 21
                 end
               end
             end

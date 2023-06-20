@@ -11,6 +11,7 @@ object formLogin: TformLogin
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -21,21 +22,20 @@ object formLogin: TformLogin
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitLeft = -8
     object Label1: TLabel
       Left = 216
       Top = 53
       Width = 36
-      Height = 21
+      Height = 13
       Alignment = taRightJustify
       Caption = 'Usu'#225'rio'
       Layout = tlCenter
     end
     object Label2: TLabel
-      Left = 216
+      Left = 222
       Top = 80
-      Width = 36
-      Height = 21
+      Width = 30
+      Height = 13
       Alignment = taRightJustify
       Caption = 'Senha'
       Layout = tlCenter
@@ -54,6 +54,8 @@ object formLogin: TformLogin
       Top = 53
       Width = 121
       Height = 21
+      CharCase = ecUpperCase
+      MaxLength = 20
       TabOrder = 1
     end
     object edtSenha: TEdit
@@ -61,6 +63,9 @@ object formLogin: TformLogin
       Top = 80
       Width = 121
       Height = 21
+      CharCase = ecUpperCase
+      MaxLength = 10
+      PasswordChar = '*'
       TabOrder = 2
     end
     object pnlLogo: TPanel

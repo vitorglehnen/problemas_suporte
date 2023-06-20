@@ -519,8 +519,7 @@ begin
   begin
     dsProblemas.DataSet.FieldByName('datacr').AsDateTime := Now;
     dsProblemas.DataSet.FieldByName('horacr').AsDateTime := Now;
-    dsProblemas.DataSet.FieldByName('cod_prob').AsInteger :=
-      FControllerProblema.BuscaProximoCodigoProblema + 1;
+    dsProblemas.DataSet.FieldByName('cod_prob').AsInteger := 0;
 
     if chkSomenteSolucao.Checked then
       dsProblemas.DataSet.FieldByName('somentesolu').AsString := 'S'

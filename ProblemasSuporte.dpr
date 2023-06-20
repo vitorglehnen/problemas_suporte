@@ -15,9 +15,11 @@ uses
   uDAOImagemProblema in 'src\model\dao\uDAOImagemProblema.pas',
   uControllerModulo in 'src\controller\uControllerModulo.pas',
   uDAOGridModulo in 'src\model\DAO\uDAOGridModulo.pas',
-  uDAOProblemaAux in 'src\model\DAO\uDAOProblemaAux.pas',
   frmRichEditTelaCheia in 'src\view\pages\frmRichEditTelaCheia.pas' {formRichEditTelaCheia},
-  frmLogin in 'src\view\pages\frmLogin.pas' {formLogin};
+  frmLogin in 'src\view\pages\frmLogin.pas' {formLogin},
+  uDAOUsuario in 'src\model\DAO\uDAOUsuario.pas',
+  uControllerUsuario in 'src\controller\uControllerUsuario.pas',
+  uUsuario in 'src\model\models\uUsuario.pas';
 
 {$R *.res}
 begin
