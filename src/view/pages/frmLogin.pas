@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, frmMain,
-  uControllerUsuario, uUsuario;
+  uControllerUsuario, uUsuario, Vcl.Imaging.pngimage;
 
 type
   TformLogin = class(TForm)
@@ -16,6 +16,7 @@ type
     edtUsuario: TEdit;
     edtSenha: TEdit;
     pnlLogo: TPanel;
+    Image1: TImage;
     procedure btnEntrarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
