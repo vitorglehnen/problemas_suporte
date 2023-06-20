@@ -12,9 +12,12 @@ object formLogin: TformLogin
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel1: TPanel
+  object pnlMain: TPanel
     Left = 0
     Top = 0
     Width = 447
@@ -22,27 +25,39 @@ object formLogin: TformLogin
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    object Label1: TLabel
+    object lblUsuario: TLabel
       Left = 216
-      Top = 53
+      Top = 48
       Width = 36
       Height = 13
       Alignment = taRightJustify
       Caption = 'Usu'#225'rio'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       Layout = tlCenter
     end
-    object Label2: TLabel
+    object lblSenha: TLabel
       Left = 222
-      Top = 80
+      Top = 75
       Width = 30
       Height = 13
       Alignment = taRightJustify
       Caption = 'Senha'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       Layout = tlCenter
     end
     object btnEntrar: TButton
       Left = 304
-      Top = 107
+      Top = 100
       Width = 75
       Height = 25
       Caption = 'Entrar'
@@ -51,22 +66,36 @@ object formLogin: TformLogin
     end
     object edtUsuario: TEdit
       Left = 258
-      Top = 53
+      Top = 46
       Width = 121
       Height = 21
       CharCase = ecUpperCase
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
       MaxLength = 20
+      ParentFont = False
       TabOrder = 1
+      OnKeyPress = edtUsuarioKeyPress
     end
     object edtSenha: TEdit
       Left = 258
-      Top = 80
+      Top = 73
       Width = 121
       Height = 21
       CharCase = ecUpperCase
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
       MaxLength = 10
+      ParentFont = False
       PasswordChar = '*'
       TabOrder = 2
+      OnKeyPress = edtSenhaKeyPress
     end
     object pnlLogo: TPanel
       Left = 0

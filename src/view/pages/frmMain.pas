@@ -128,6 +128,7 @@ type
     btnCancelarModulo: TSpeedButton;
     btnSalvarModulo: TSpeedButton;
     chkSomenteSolucao: TDBCheckBox;
+    StatusBar1: TStatusBar;
 
     procedure btnNovoModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -140,7 +141,6 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnSalvarModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
     procedure rdbtnFiltroPesqProblemaClick(Sender: TObject);
@@ -164,6 +164,8 @@ type
     procedure chkSomenteSolucaoClick(Sender: TObject);
   private
     { Private declarations }
+    FUsuario: String;
+
     FFormImagensProblema: TformImagensProblema;
     FFormRichEditTelaCheia : TFormRichEditTelaCheia;
 
@@ -200,6 +202,8 @@ type
   public
     { Public declarations }
     FEdicaoProblema: Boolean;
+
+    constructor Create(AOwner: TComponent; aUsuario: String);
   end;
 
 var
@@ -401,6 +405,24 @@ begin
     pnlBodyDetalhesProblema.Visible := False
   else
     pnlBodyDetalhesProblema.Visible := True;
+end;
+
+constructor TformPrincipal.Create(AOwner: TComponent; aUsuario: String);
+begin
+  inherited Create(AOwner);
+
+  FControllerProblema := TControllerProblema.Create;
+  FControllerModulo := TControllerModulo.Create;
+
+  CarregaGridModulos;
+  CarregaGridProblemas;
+  CarregaDadosProblemas;
+
+  DsProblemasEventos;
+  DsModulosEventos;
+
+  FUsuario := aUsuario;
+  StatusBar1.Panels[0].Text := 'Usuário: ' + FUsuario;
 end;
 
 procedure TformPrincipal.DsModulosAfterInsert(TDataSet: TDataset);
@@ -752,19 +774,6 @@ begin
   dsProblemas.DataSet.Insert;
 end;
 
-procedure TformPrincipal.FormCreate(Sender: TObject);
-begin
-  FControllerProblema := TControllerProblema.Create;
-  FControllerModulo := TControllerModulo.Create;
-
-  CarregaGridModulos;
-  CarregaGridProblemas;
-  CarregaDadosProblemas;
-
-  DsProblemasEventos;
-  DsModulosEventos;
-end;
-
 procedure TformPrincipal.FormShow(Sender: TObject);
 begin
   edtPesqModulo.SetFocus;
@@ -778,6 +787,7 @@ procedure TformPrincipal.FormDestroy(Sender: TObject);
 begin
   FControllerProblema.Free;
   FControllerModulo.Free;
+  Application.Terminate;
 end;
 
 end.

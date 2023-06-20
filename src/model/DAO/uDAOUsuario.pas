@@ -38,4 +38,19 @@ begin
   inherited;
 end;
 
+function TDAOUsuario.RetornaUsuario(aUsuario: TUsuario): TDataSource;
+begin
+  FQuery := FConn.CriarQuery;
+  FDataSource := FConn.CriarDataSource;
+
+  FQuery.SQL.Text := 'SELECT COUNT(*) FROM usuarios u where u.nome = :nome and u.senha = :senha';
+  FQuery.ParamByName('nome').AsString := aUsuario.Nome;
+  FQuery.ParamByName('senha').AsString := aUsuario.Senha;
+  FQuery.Open;
+
+  FDataSource.DataSet := FQuery;
+
+  Result := FDataSource;
+end;
+
 end.

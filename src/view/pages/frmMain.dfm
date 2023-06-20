@@ -18,7 +18,6 @@ object formPrincipal: TformPrincipal
   OldCreateOrder = False
   Position = poScreenCenter
   PrintScale = poPrintToFit
-  OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   OnShow = FormShow
@@ -36,18 +35,20 @@ object formPrincipal: TformPrincipal
       Left = 1
       Top = 1
       Width = 512
-      Height = 757
+      Height = 743
       Align = alLeft
       Caption = 'pnlBodyModulosProblemas'
       TabOrder = 0
+      ExplicitHeight = 757
       object pnlBodyProblemas: TPanel
         Left = 242
         Top = 1
         Width = 269
-        Height = 755
+        Height = 741
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitHeight = 755
         object pnlTopProblemas: TPanel
           Left = 0
           Top = 0
@@ -311,16 +312,17 @@ object formPrincipal: TformPrincipal
           Left = 0
           Top = 257
           Width = 269
-          Height = 498
+          Height = 484
           Align = alClient
           Color = clWhite
           ParentBackground = False
           TabOrder = 1
+          ExplicitHeight = 498
           object gridProblemas: TDBGrid
             Left = 1
             Top = 1
             Width = 267
-            Height = 496
+            Height = 482
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
@@ -349,10 +351,11 @@ object formPrincipal: TformPrincipal
         Left = 1
         Top = 1
         Width = 241
-        Height = 755
+        Height = 741
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitHeight = 755
         object pnlTopModulos: TPanel
           Left = 0
           Top = 0
@@ -522,16 +525,17 @@ object formPrincipal: TformPrincipal
           Left = 0
           Top = 257
           Width = 241
-          Height = 498
+          Height = 484
           Align = alClient
           Color = clWhite
           ParentBackground = False
           TabOrder = 1
+          ExplicitHeight = 498
           object gridModulos: TDBGrid
             Left = 1
             Top = 1
             Width = 239
-            Height = 496
+            Height = 482
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
@@ -563,24 +567,26 @@ object formPrincipal: TformPrincipal
       Left = 513
       Top = 1
       Width = 1035
-      Height = 757
+      Height = 743
       Align = alClient
       ActiveCard = pnlCadastroProblema
       AutoSize = True
       TabOrder = 1
+      ExplicitHeight = 757
       object pnlCadastroProblema: TCard
         Left = 1
         Top = 1
         Width = 1033
-        Height = 755
+        Height = 741
         Caption = 'Painel problema'
         CardIndex = 0
         TabOrder = 0
+        ExplicitHeight = 755
         object pnlEscolhaUmRegistro: TPanel
           Left = 0
           Top = 0
           Width = 1033
-          Height = 755
+          Height = 741
           Align = alClient
           Caption = 'Selecione um registro'
           Color = 16708071
@@ -592,11 +598,12 @@ object formPrincipal: TformPrincipal
           ParentBackground = False
           ParentFont = False
           TabOrder = 0
+          ExplicitHeight = 755
           object pnlProblemas: TPanel
             Left = 1
             Top = 1
             Width = 1031
-            Height = 753
+            Height = 739
             Align = alClient
             Anchors = []
             AutoSize = True
@@ -613,6 +620,7 @@ object formPrincipal: TformPrincipal
             TabOrder = 0
             TabStop = True
             Visible = False
+            ExplicitHeight = 753
             object pnlBodyModuloProblema: TPanel
               Left = 0
               Top = 69
@@ -701,24 +709,26 @@ object formPrincipal: TformPrincipal
               Left = 0
               Top = 354
               Width = 1031
-              Height = 399
+              Height = 385
               Align = alClient
               Anchors = []
               AutoSize = True
               BevelOuter = bvNone
               Padding.Left = 30
               TabOrder = 3
+              ExplicitHeight = 399
               object pnlSolucaoProblema: TPanel
                 Left = 30
                 Top = 0
                 Width = 1001
-                Height = 399
+                Height = 385
                 Align = alClient
                 AutoSize = True
                 BevelOuter = bvNone
                 Padding.Right = 60
                 Padding.Bottom = 50
                 TabOrder = 0
+                ExplicitHeight = 399
                 object lblSolucaoProblema: TLabel
                   Left = 0
                   Top = 0
@@ -738,7 +748,7 @@ object formPrincipal: TformPrincipal
                   Left = 0
                   Top = 15
                   Width = 941
-                  Height = 334
+                  Height = 320
                   Align = alClient
                   DataField = 'solucao'
                   DataSource = dsProblemas
@@ -752,6 +762,7 @@ object formPrincipal: TformPrincipal
                   TabOrder = 0
                   Zoom = 100
                   OnDblClick = mmSolucaoProblemaDblClick
+                  ExplicitHeight = 334
                 end
               end
             end
@@ -919,6 +930,17 @@ object formPrincipal: TformPrincipal
           end
         end
       end
+    end
+    object StatusBar1: TStatusBar
+      Left = 1
+      Top = 744
+      Width = 1547
+      Height = 14
+      Panels = <
+        item
+          Text = 'Usu'#225'rio:'
+          Width = 50
+        end>
     end
   end
   object dsModulos: TDataSource
