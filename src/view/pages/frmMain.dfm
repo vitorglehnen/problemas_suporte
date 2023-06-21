@@ -1,13 +1,12 @@
 object formPrincipal: TformPrincipal
   Left = 0
   Top = 0
-  Align = alClient
-  BorderIcons = [biSystemMenu, biMinimize]
-  BorderStyle = bsSingle
+  AutoSize = True
   Caption = 'Problemas Suporte'
-  ClientHeight = 759
-  ClientWidth = 1549
+  ClientHeight = 749
+  ClientWidth = 1539
   Color = 16640729
+  DefaultMonitor = dmDesktop
   DockSite = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,6 +17,7 @@ object formPrincipal: TformPrincipal
   OldCreateOrder = False
   Position = poScreenCenter
   PrintScale = poPrintToFit
+  WindowState = wsMaximized
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   OnShow = FormShow
@@ -26,42 +26,50 @@ object formPrincipal: TformPrincipal
   object pnlPrincipal: TPanel
     Left = 0
     Top = 0
-    Width = 1549
-    Height = 759
+    Width = 1539
+    Height = 749
     Align = alClient
     AutoSize = True
+    BevelOuter = bvNone
     TabOrder = 0
     object pnlBodyModulosProblemas: TPanel
-      Left = 1
-      Top = 1
+      Left = 0
+      Top = 0
       Width = 512
-      Height = 743
+      Height = 735
       Align = alLeft
+      BevelOuter = bvNone
       Caption = 'pnlBodyModulosProblemas'
       TabOrder = 0
-      ExplicitHeight = 757
+      ExplicitLeft = 1
+      ExplicitTop = 1
+      ExplicitHeight = 743
       object pnlBodyProblemas: TPanel
-        Left = 242
-        Top = 1
-        Width = 269
-        Height = 741
+        Left = 241
+        Top = 0
+        Width = 271
+        Height = 735
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitHeight = 755
+        ExplicitLeft = 242
+        ExplicitTop = 1
+        ExplicitWidth = 269
+        ExplicitHeight = 741
         object pnlTopProblemas: TPanel
           Left = 0
           Top = 0
-          Width = 269
+          Width = 271
           Height = 257
           Align = alTop
           Color = 16708071
           ParentBackground = False
           TabOrder = 0
+          ExplicitWidth = 269
           object lblTituloProblemas: TLabel
             Left = 1
             Top = 1
-            Width = 267
+            Width = 269
             Height = 76
             Align = alClient
             Alignment = taCenter
@@ -96,12 +104,13 @@ object formPrincipal: TformPrincipal
           object pnlBotaoCrudProblema: TPanel
             Left = 1
             Top = 77
-            Width = 267
+            Width = 269
             Height = 27
             Align = alBottom
             TabOrder = 0
+            ExplicitWidth = 267
             object btnExcluirProblema: TSpeedButton
-              Left = 201
+              Left = 203
               Top = 1
               Width = 65
               Height = 25
@@ -118,7 +127,7 @@ object formPrincipal: TformPrincipal
               ExplicitLeft = 200
             end
             object btnCancelarProblema: TSpeedButton
-              Left = 134
+              Left = 136
               Top = 1
               Width = 67
               Height = 25
@@ -175,7 +184,7 @@ object formPrincipal: TformPrincipal
           object pnlBodyPesqProblema: TPanel
             Left = 1
             Top = 104
-            Width = 267
+            Width = 269
             Height = 152
             Align = alBottom
             Padding.Left = 8
@@ -183,18 +192,20 @@ object formPrincipal: TformPrincipal
             Padding.Right = 8
             Padding.Bottom = 8
             TabOrder = 1
+            ExplicitWidth = 267
             object pnlPesqProblema: TPanel
               Left = 9
               Top = 9
-              Width = 249
+              Width = 251
               Height = 134
               Align = alClient
               BevelOuter = bvNone
               TabOrder = 0
+              ExplicitWidth = 249
               object lblPesqProblema: TLabel
                 Left = 0
                 Top = 0
-                Width = 249
+                Width = 251
                 Height = 13
                 Align = alTop
                 Caption = 'Pesquisa'
@@ -209,25 +220,27 @@ object formPrincipal: TformPrincipal
               object edtPesqProblema: TEdit
                 Left = 0
                 Top = 13
-                Width = 249
+                Width = 251
                 Height = 21
                 Align = alTop
                 TabOrder = 0
                 OnChange = edtPesqProblemaChange
+                ExplicitWidth = 249
               end
               object pnlFiltroPesqProblema: TPanel
                 Left = 0
                 Top = 34
-                Width = 249
+                Width = 251
                 Height = 100
                 Align = alClient
                 BevelOuter = bvNone
                 Padding.Top = 10
                 TabOrder = 1
+                ExplicitWidth = 249
                 object rdbtnFiltroPesqProblema: TRadioGroup
                   Left = 0
                   Top = 43
-                  Width = 249
+                  Width = 251
                   Height = 57
                   Align = alBottom
                   Caption = 'Filtro da pesquisa'
@@ -243,6 +256,7 @@ object formPrincipal: TformPrincipal
                   ParentFont = False
                   TabOrder = 0
                   OnClick = rdbtnFiltroPesqProblemaClick
+                  ExplicitWidth = 249
                 end
                 object cbFiltroPesqProblema: TComboBox
                   Left = 0
@@ -311,18 +325,19 @@ object formPrincipal: TformPrincipal
         object pnlGridProblemas: TPanel
           Left = 0
           Top = 257
-          Width = 269
-          Height = 484
+          Width = 271
+          Height = 478
           Align = alClient
           Color = clWhite
           ParentBackground = False
           TabOrder = 1
-          ExplicitHeight = 498
+          ExplicitWidth = 269
+          ExplicitHeight = 484
           object gridProblemas: TDBGrid
             Left = 1
             Top = 1
-            Width = 267
-            Height = 482
+            Width = 269
+            Height = 476
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
@@ -348,14 +363,16 @@ object formPrincipal: TformPrincipal
         end
       end
       object pnlBodyModulos: TPanel
-        Left = 1
-        Top = 1
+        Left = 0
+        Top = 0
         Width = 241
-        Height = 741
+        Height = 735
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitHeight = 755
+        ExplicitLeft = 1
+        ExplicitTop = 1
+        ExplicitHeight = 741
         object pnlTopModulos: TPanel
           Left = 0
           Top = 0
@@ -525,17 +542,17 @@ object formPrincipal: TformPrincipal
           Left = 0
           Top = 257
           Width = 241
-          Height = 484
+          Height = 478
           Align = alClient
           Color = clWhite
           ParentBackground = False
           TabOrder = 1
-          ExplicitHeight = 498
+          ExplicitHeight = 484
           object gridModulos: TDBGrid
             Left = 1
             Top = 1
             Width = 239
-            Height = 482
+            Height = 476
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
@@ -564,29 +581,32 @@ object formPrincipal: TformPrincipal
       end
     end
     object cardPanelProblemas: TCardPanel
-      Left = 513
-      Top = 1
-      Width = 1035
-      Height = 743
+      Left = 512
+      Top = 0
+      Width = 1027
+      Height = 735
       Align = alClient
       ActiveCard = pnlCadastroProblema
       AutoSize = True
+      BevelOuter = bvNone
       TabOrder = 1
-      ExplicitHeight = 757
       object pnlCadastroProblema: TCard
-        Left = 1
-        Top = 1
-        Width = 1033
-        Height = 741
+        Left = 0
+        Top = 0
+        Width = 1035
+        Height = 743
         Caption = 'Painel problema'
         CardIndex = 0
         TabOrder = 0
-        ExplicitHeight = 755
+        ExplicitLeft = 1
+        ExplicitTop = 1
+        ExplicitWidth = 1033
+        ExplicitHeight = 741
         object pnlEscolhaUmRegistro: TPanel
           Left = 0
           Top = 0
-          Width = 1033
-          Height = 741
+          Width = 1035
+          Height = 743
           Align = alClient
           Caption = 'Selecione um registro'
           Color = 16708071
@@ -598,12 +618,13 @@ object formPrincipal: TformPrincipal
           ParentBackground = False
           ParentFont = False
           TabOrder = 0
-          ExplicitHeight = 755
+          ExplicitWidth = 1033
+          ExplicitHeight = 741
           object pnlProblemas: TPanel
             Left = 1
             Top = 1
-            Width = 1031
-            Height = 739
+            Width = 1033
+            Height = 741
             Align = alClient
             Anchors = []
             AutoSize = True
@@ -620,11 +641,12 @@ object formPrincipal: TformPrincipal
             TabOrder = 0
             TabStop = True
             Visible = False
-            ExplicitHeight = 753
+            ExplicitWidth = 1031
+            ExplicitHeight = 739
             object pnlBodyModuloProblema: TPanel
               Left = 0
               Top = 69
-              Width = 1031
+              Width = 1033
               Height = 108
               Align = alTop
               Anchors = []
@@ -632,6 +654,7 @@ object formPrincipal: TformPrincipal
               Padding.Left = 30
               Padding.Top = 20
               TabOrder = 1
+              ExplicitWidth = 1031
               object btnImagensProblema: TSpeedButton
                 Left = 349
                 Top = 34
@@ -708,31 +731,33 @@ object formPrincipal: TformPrincipal
             object pnlBodySolucaoProblema: TPanel
               Left = 0
               Top = 354
-              Width = 1031
-              Height = 385
+              Width = 1033
+              Height = 387
               Align = alClient
               Anchors = []
               AutoSize = True
               BevelOuter = bvNone
               Padding.Left = 30
               TabOrder = 3
-              ExplicitHeight = 399
+              ExplicitWidth = 1031
+              ExplicitHeight = 385
               object pnlSolucaoProblema: TPanel
                 Left = 30
                 Top = 0
-                Width = 1001
-                Height = 385
+                Width = 1003
+                Height = 387
                 Align = alClient
                 AutoSize = True
                 BevelOuter = bvNone
                 Padding.Right = 60
                 Padding.Bottom = 50
                 TabOrder = 0
-                ExplicitHeight = 399
+                ExplicitWidth = 1001
+                ExplicitHeight = 385
                 object lblSolucaoProblema: TLabel
                   Left = 0
                   Top = 0
-                  Width = 941
+                  Width = 943
                   Height = 15
                   Align = alTop
                   Caption = '&Solu'#231#227'o'
@@ -747,8 +772,8 @@ object formPrincipal: TformPrincipal
                 object mmSolucaoProblema: TDBRichEdit
                   Left = 0
                   Top = 15
-                  Width = 941
-                  Height = 320
+                  Width = 943
+                  Height = 322
                   Align = alClient
                   DataField = 'solucao'
                   DataSource = dsProblemas
@@ -762,14 +787,15 @@ object formPrincipal: TformPrincipal
                   TabOrder = 0
                   Zoom = 100
                   OnDblClick = mmSolucaoProblemaDblClick
-                  ExplicitHeight = 334
+                  ExplicitWidth = 941
+                  ExplicitHeight = 320
                 end
               end
             end
             object pnlTopProblema: TPanel
               Left = 0
               Top = 0
-              Width = 1031
+              Width = 1033
               Height = 69
               Align = alTop
               Anchors = []
@@ -779,6 +805,7 @@ object formPrincipal: TformPrincipal
               Padding.Bottom = 20
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 1031
               object lblDataProblema: TLabel
                 Left = 633
                 Top = 11
@@ -873,7 +900,7 @@ object formPrincipal: TformPrincipal
             object pnlBodyDetalhesProblema: TPanel
               Left = 0
               Top = 177
-              Width = 1031
+              Width = 1033
               Height = 177
               Align = alTop
               Anchors = []
@@ -881,20 +908,22 @@ object formPrincipal: TformPrincipal
               BevelOuter = bvNone
               Padding.Left = 30
               TabOrder = 2
+              ExplicitWidth = 1031
               object pnlDetalhesProblema: TPanel
                 Left = 30
                 Top = 0
-                Width = 1001
+                Width = 1003
                 Height = 177
                 Align = alTop
                 BevelOuter = bvNone
                 Padding.Right = 60
                 Padding.Bottom = 20
                 TabOrder = 0
+                ExplicitWidth = 1001
                 object lblDetalhesProblema: TLabel
                   Left = 0
                   Top = 0
-                  Width = 941
+                  Width = 943
                   Height = 15
                   Align = alTop
                   Caption = '&Detalhes do problema'
@@ -909,7 +938,7 @@ object formPrincipal: TformPrincipal
                 object mmDetalhesProblema: TDBRichEdit
                   Left = 0
                   Top = 15
-                  Width = 941
+                  Width = 943
                   Height = 142
                   Align = alClient
                   DataField = 'detalhes'
@@ -924,6 +953,7 @@ object formPrincipal: TformPrincipal
                   TabOrder = 0
                   Zoom = 100
                   OnDblClick = mmDetalhesProblemaDblClick
+                  ExplicitWidth = 941
                 end
               end
             end
@@ -932,15 +962,18 @@ object formPrincipal: TformPrincipal
       end
     end
     object StatusBar1: TStatusBar
-      Left = 1
-      Top = 744
-      Width = 1547
+      Left = 0
+      Top = 735
+      Width = 1539
       Height = 14
       Panels = <
         item
           Text = 'Usu'#225'rio:'
           Width = 50
         end>
+      ExplicitLeft = 1
+      ExplicitTop = 744
+      ExplicitWidth = 1547
     end
   end
   object dsModulos: TDataSource

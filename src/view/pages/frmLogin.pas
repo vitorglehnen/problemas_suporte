@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, frmMain,
-  uControllerUsuario, uUsuario, Vcl.Imaging.pngimage;
+  uControllerUsuario, uUsuario, Vcl.Imaging.pngimage, System.IniFiles;
 
 type
   TformLogin = class(TForm)
@@ -27,6 +27,10 @@ type
     { Private declarations }
     FFormMain: TFormPrincipal;
     FControllerUsuario: TControllerUsuario;
+
+    FIniConexão: TIniFile;
+    FUsuario: String;
+    FSenha: String;
   public
     { Public declarations }
   end;
@@ -88,6 +92,15 @@ end;
 procedure TformLogin.FormCreate(Sender: TObject);
 begin
   FControllerUsuario := TControllerUsuario.Create;
+
+  FIniConexão := TIniFIle.Create(ExtractFilePath(ParamStr(0)) + 'Connect.ini');
+
+  try
+    FUsuario := FIniConexão.ReadString('Login', 'Usuario', '');
+    FSenha := FIniConexão.ReadString('Login', 'Senha', '');
+  finally
+    FIniConexão.Free;
+  end;
 end;
 
 procedure TformLogin.FormDestroy(Sender: TObject);
@@ -98,6 +111,9 @@ end;
 procedure TformLogin.FormShow(Sender: TObject);
 begin
   edtUsuario.SetFocus;
+
+  edtUsuario.Text := FUsuario;
+  edtSenha.Text := FSenha;
 end;
 
 end.
