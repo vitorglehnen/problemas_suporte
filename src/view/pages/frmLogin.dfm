@@ -1,9 +1,11 @@
 object formLogin: TformLogin
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'Login'
-  ClientHeight = 172
-  ClientWidth = 447
+  ClientHeight = 182
+  ClientWidth = 457
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,11 +22,13 @@ object formLogin: TformLogin
   object pnlMain: TPanel
     Left = 0
     Top = 0
-    Width = 447
-    Height = 172
+    Width = 457
+    Height = 182
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 447
+    ExplicitHeight = 172
     object lblUsuario: TLabel
       Left = 216
       Top = 48
@@ -101,7 +105,7 @@ object formLogin: TformLogin
       Left = 0
       Top = 0
       Width = 172
-      Height = 172
+      Height = 182
       Align = alLeft
       Color = 16708071
       Padding.Left = 40
@@ -110,11 +114,12 @@ object formLogin: TformLogin
       Padding.Bottom = 45
       ParentBackground = False
       TabOrder = 3
+      ExplicitHeight = 172
       object Image1: TImage
         Left = 41
         Top = 46
         Width = 90
-        Height = 80
+        Height = 90
         Align = alClient
         Center = True
         Picture.Data = {

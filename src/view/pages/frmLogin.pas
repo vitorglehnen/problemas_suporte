@@ -31,6 +31,8 @@ type
     FIniConexão: TIniFile;
     FUsuario: String;
     FSenha: String;
+
+    procedure InsereLoginConnect;
   public
     { Public declarations }
   end;
@@ -47,6 +49,8 @@ begin
   var aUsuario : TUsuario := TUsuario.Create;
 
   try
+    FUsuario := edtUsuario.Text;
+    FSenha := edtSenha.Text;
     aUsuario.Nome := edtUsuario.Text;
     aUsuario.Senha := edtSenha.Text;
 
@@ -55,6 +59,7 @@ begin
       FFormMain := TformPrincipal.Create(nil, aUsuario.Nome);
 
       try
+        InsereLoginConnect;
         formLogin.Destroy;
         FFormMain.ShowModal;
       finally
@@ -91,15 +96,30 @@ end;
 
 procedure TformLogin.FormCreate(Sender: TObject);
 begin
+  var aUsuario : TUsuario := TUsuario.Create;
   FControllerUsuario := TControllerUsuario.Create;
-
   FIniConexão := TIniFIle.Create(ExtractFilePath(ParamStr(0)) + 'Connect.ini');
 
   try
     FUsuario := FIniConexão.ReadString('Login', 'Usuario', '');
     FSenha := FIniConexão.ReadString('Login', 'Senha', '');
+    aUsuario.Nome := FUsuario;
+    aUsuario.Senha := FSenha;
+
+    if FControllerUsuario.ValidaLogin(aUsuario) = True then
+    begin
+      FFormMain := TformPrincipal.Create(nil, aUsuario.Nome);
+
+      try
+        formLogin.Destroy;
+        FFormMain.ShowModal;
+      finally
+        FFormMain.Free;
+      end;
+    end
   finally
     FIniConexão.Free;
+    aUsuario.Free;
   end;
 end;
 
@@ -114,6 +134,18 @@ begin
 
   edtUsuario.Text := FUsuario;
   edtSenha.Text := FSenha;
+end;
+
+procedure TformLogin.InsereLoginConnect;
+begin
+  FIniConexão := TIniFIle.Create(ExtractFilePath(ParamStr(0)) + 'Connect.ini');
+
+  try
+    FIniConexão.WriteString('Login', 'Usuario', FUsuario);
+    FIniConexão.WriteString('Login', 'Senha', FSenha);
+  finally
+    FIniConexão.Free;
+  end;
 end;
 
 end.

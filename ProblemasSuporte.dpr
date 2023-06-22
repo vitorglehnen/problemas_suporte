@@ -19,7 +19,8 @@ uses
   frmLogin in 'src\view\pages\frmLogin.pas' {formLogin},
   uDAOUsuario in 'src\model\DAO\uDAOUsuario.pas',
   uControllerUsuario in 'src\controller\uControllerUsuario.pas',
-  uUsuario in 'src\model\models\uUsuario.pas';
+  uUsuario in 'src\model\models\uUsuario.pas',
+  uDAOConsultaPadrao in 'src\model\DAO\uDAOConsultaPadrao.pas';
 
 {$R *.res}
 begin

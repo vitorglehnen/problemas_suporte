@@ -129,6 +129,7 @@ type
     btnSalvarModulo: TSpeedButton;
     chkSomenteSolucao: TDBCheckBox;
     StatusBar1: TStatusBar;
+    SpeedButton1: TSpeedButton;
 
     procedure btnNovoModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -141,7 +142,6 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnSalvarModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure FormDestroy(Sender: TObject);
     procedure gridModulosCellClick(Column: TColumn);
     procedure rdbtnFiltroPesqProblemaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -204,6 +204,7 @@ type
     FEdicaoProblema: Boolean;
 
     constructor Create(AOwner: TComponent; aUsuario: String);
+    destructor Destroy; override;
   end;
 
 var
@@ -452,6 +453,15 @@ begin
   dsModulos.DataSet.AfterPost := DsModulosAfterPost;
   dsModulos.DataSet.AfterCancel := DsModulosAfterCancel;
   dsModulos.DataSet.AfterEdit := DsModulosAfterEdit;
+end;
+
+destructor TformPrincipal.Destroy;
+begin
+  FControllerProblema.Free;
+  FControllerModulo.Free;
+  Application.Terminate;
+
+  inherited;
 end;
 
 procedure TformPrincipal.DsModulosAfterCancel(TDataSet: TDataset);
@@ -782,12 +792,5 @@ begin
   pnlProblemas.Enabled := True;
 end;
 
-
-procedure TformPrincipal.FormDestroy(Sender: TObject);
-begin
-  FControllerProblema.Free;
-  FControllerModulo.Free;
-  Application.Terminate;
-end;
 
 end.

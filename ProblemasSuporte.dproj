@@ -133,6 +133,7 @@
         <DCCReference Include="src\model\DAO\uDAOUsuario.pas"/>
         <DCCReference Include="src\controller\uControllerUsuario.pas"/>
         <DCCReference Include="src\model\models\uUsuario.pas"/>
+        <DCCReference Include="src\model\DAO\uDAOConsultaPadrao.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
