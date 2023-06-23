@@ -223,8 +223,6 @@ object formPrincipal: TformPrincipal
                 BevelOuter = bvNone
                 Padding.Top = 10
                 TabOrder = 1
-                ExplicitLeft = -4
-                ExplicitTop = 38
                 object SpeedButton1: TSpeedButton
                   Left = 119
                   Top = 9
@@ -238,6 +236,7 @@ object formPrincipal: TformPrincipal
                   Font.Name = 'Tahoma'
                   Font.Style = [fsBold]
                   ParentFont = False
+                  OnClick = SpeedButton1Click
                 end
                 object rdbtnFiltroPesqProblema: TRadioGroup
                   Left = 0

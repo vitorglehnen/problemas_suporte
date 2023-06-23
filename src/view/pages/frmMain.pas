@@ -58,7 +58,7 @@ uses
   uProblema,
 
   frmImagensProblema,
-  frmRichEditTelaCheia;
+  frmRichEditTelaCheia, uControllerUsuario, uUsuario;
 
 type
   TformPrincipal = class(TForm)
@@ -162,15 +162,18 @@ type
     procedure mmDetalhesProblemaDblClick(Sender: TObject);
     procedure mmSolucaoProblemaDblClick(Sender: TObject);
     procedure chkSomenteSolucaoClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
   private
     { Private declarations }
     FUsuario: String;
+    FCodUsuario: Integer;
 
     FFormImagensProblema: TformImagensProblema;
     FFormRichEditTelaCheia : TFormRichEditTelaCheia;
 
     FControllerModulo: TControllerModulo;
     FControllerProblema: TControllerProblema;
+    FControllerUsuario: TControllerUsuario;
 
     procedure CarregaGridProblemas;
     procedure CarregaGridModulos;
@@ -283,6 +286,11 @@ begin
   finally
     aProblema.Free;
   end;
+end;
+
+procedure TformPrincipal.SpeedButton1Click(Sender: TObject);
+begin
+  FControllerUsuario.AlteraIndiceConsultaPadrao(FCodUsuario, cbFiltroPesqProblema.ItemIndex, 'Principal');
 end;
 
 procedure TformPrincipal.btnImagensProblemaClick(Sender: TObject);
@@ -412,8 +420,11 @@ constructor TformPrincipal.Create(AOwner: TComponent; aUsuario: String);
 begin
   inherited Create(AOwner);
 
+  var aUser : TUsuario := TUsuario.Create;
+
   FControllerProblema := TControllerProblema.Create;
   FControllerModulo := TControllerModulo.Create;
+  FControllerUsuario := TControllerUsuario.Create;
 
   CarregaGridModulos;
   CarregaGridProblemas;
@@ -423,7 +434,14 @@ begin
   DsModulosEventos;
 
   FUsuario := aUsuario;
-  StatusBar1.Panels[0].Text := 'Usuário: ' + FUsuario;
+
+  try
+    aUser.Nome := FUsuario;
+    FCodUsuario := FControllerUsuario.RetornaCodUsuario(aUser);
+  finally
+    aUser.Free;
+  end;
+  StatusBar1.Panels[0].Text := 'Usuário: ' + IntToStr(FCodUsuario) + ' - ' + FUsuario;
 end;
 
 procedure TformPrincipal.DsModulosAfterInsert(TDataSet: TDataset);
@@ -459,6 +477,7 @@ destructor TformPrincipal.Destroy;
 begin
   FControllerProblema.Free;
   FControllerModulo.Free;
+  FControllerUsuario.Free;
   Application.Terminate;
 
   inherited;
@@ -788,6 +807,7 @@ procedure TformPrincipal.FormShow(Sender: TObject);
 begin
   edtPesqModulo.SetFocus;
   cardPanelProblemas.ActiveCard := pnlCadastroProblema;
+  cbFiltroPesqProblema.ItemIndex := FControllerUsuario.RetornaIndiceConsultaPadrao(FCodUsuario, 'Principal');
 
   pnlProblemas.Enabled := True;
 end;

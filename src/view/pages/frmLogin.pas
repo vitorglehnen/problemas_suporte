@@ -29,6 +29,7 @@ type
     FControllerUsuario: TControllerUsuario;
 
     FIniConexão: TIniFile;
+
     FUsuario: String;
     FSenha: String;
 

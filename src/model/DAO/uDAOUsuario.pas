@@ -21,6 +21,7 @@ type
     destructor Destroy; override;
 
     function RetornaUsuario(aUsuario: TUsuario): TDataSource;
+    function RetornaCodUsuario(aUsuario: TUsuario): TDataSource;
   end;
 
 implementation
@@ -36,6 +37,20 @@ destructor TDAOUsuario.Destroy;
 begin
   FConn.Free;
   inherited;
+end;
+
+function TDAOUsuario.RetornaCodUsuario(aUsuario: TUsuario): TDataSource;
+begin
+  FQuery := FConn.CriarQuery;
+  FDataSource := FConn.CriarDataSource;
+
+  FQuery.SQL.Text := 'SELECT cod_usu FROM usuarios WHERE nome = :nome';
+  FQuery.ParamByName('nome').AsString := aUsuario.Nome;
+  FQuery.Open;
+
+  FDataSource.DataSet := FQuery;
+
+  Result := FDataSource;
 end;
 
 function TDAOUsuario.RetornaUsuario(aUsuario: TUsuario): TDataSource;

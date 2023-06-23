@@ -27,8 +27,6 @@ object formLogin: TformLogin
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 447
-    ExplicitHeight = 172
     object lblUsuario: TLabel
       Left = 216
       Top = 48
@@ -114,7 +112,6 @@ object formLogin: TformLogin
       Padding.Bottom = 45
       ParentBackground = False
       TabOrder = 3
-      ExplicitHeight = 172
       object Image1: TImage
         Left = 41
         Top = 46
