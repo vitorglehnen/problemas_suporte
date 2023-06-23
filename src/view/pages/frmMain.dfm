@@ -264,16 +264,14 @@ object formPrincipal: TformPrincipal
                   Width = 113
                   Height = 21
                   Style = csDropDownList
-                  ItemIndex = 1
                   TabOrder = 1
-                  Text = 'T'#237'tulo'
                   Items.Strings = (
                     'C'#243'digo'
                     'T'#237'tulo'
                     'Chamado'
                     'Detalhes'
                     'Solu'#231#227'o'
-                    'Todos')
+                    '')
                 end
               end
             end
