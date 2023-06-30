@@ -99,9 +99,7 @@ begin
       ArqINI.WriteString('Conexão', 'Port', '44680');
 
       ArqINI.WriteString('Imagens', 'CaminhoDaPasta', 'C:\Problemas Suporte\Imagens\');
-
       ArqINI.WriteString('Login', 'Usuario', '');
-      ArqINI.WriteString('Login', 'Senha', '');
     finally
       ArqINI.Free;
     end;

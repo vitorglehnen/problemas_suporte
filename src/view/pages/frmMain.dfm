@@ -1,13 +1,10 @@
 object formPrincipal: TformPrincipal
   Left = 0
   Top = 0
-  AutoSize = True
   Caption = 'Problemas Suporte'
   ClientHeight = 749
   ClientWidth = 1539
   Color = 16640729
-  DefaultMonitor = dmDesktop
-  DockSite = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -15,8 +12,6 @@ object formPrincipal: TformPrincipal
   Font.Style = []
   KeyPreview = True
   OldCreateOrder = False
-  Position = poScreenCenter
-  PrintScale = poPrintToFit
   WindowState = wsMaximized
   OnKeyDown = FormKeyDown
   OnShow = FormShow

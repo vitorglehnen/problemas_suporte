@@ -33,7 +33,6 @@ type
     FUsuario: String;
     FSenha: String;
 
-    procedure InsereLoginConnect;
   public
     { Public declarations }
   end;
@@ -60,8 +59,7 @@ begin
       FFormMain := TformPrincipal.Create(nil, aUsuario.Nome);
 
       try
-        InsereLoginConnect;
-        formLogin.Destroy;
+        //formLogin.Destroy;
         FFormMain.ShowModal;
       finally
         FFormMain.Free;
@@ -103,21 +101,8 @@ begin
 
   try
     FUsuario := FIniConexão.ReadString('Login', 'Usuario', '');
-    FSenha := FIniConexão.ReadString('Login', 'Senha', '');
     aUsuario.Nome := FUsuario;
-    aUsuario.Senha := FSenha;
 
-    if FControllerUsuario.ValidaLogin(aUsuario) = True then
-    begin
-      FFormMain := TformPrincipal.Create(nil, aUsuario.Nome);
-
-      try
-        formLogin.Destroy;
-        FFormMain.ShowModal;
-      finally
-        FFormMain.Free;
-      end;
-    end
   finally
     FIniConexão.Free;
     aUsuario.Free;
@@ -135,18 +120,6 @@ begin
 
   edtUsuario.Text := FUsuario;
   edtSenha.Text := FSenha;
-end;
-
-procedure TformLogin.InsereLoginConnect;
-begin
-  FIniConexão := TIniFIle.Create(ExtractFilePath(ParamStr(0)) + 'Connect.ini');
-
-  try
-    FIniConexão.WriteString('Login', 'Usuario', FUsuario);
-    FIniConexão.WriteString('Login', 'Senha', FSenha);
-  finally
-    FIniConexão.Free;
-  end;
 end;
 
 end.

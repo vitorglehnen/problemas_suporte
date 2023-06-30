@@ -246,8 +246,7 @@ begin
 
     aImagemProblema.Imagem := FNomeImagem;
 
-    aImagemProblema.CodigoProblema :=
-      StrToInt(frmMain.formPrincipal.edtCodProblema.Text);
+    aImagemProblema.CodigoProblema := FCodProblema;
 
     FControllerProblema.InsertImagem(aImagemProblema);
   finally
