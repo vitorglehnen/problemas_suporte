@@ -3,9 +3,21 @@ unit frmLogin;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls, frmMain,
-  uControllerUsuario, uUsuario, Vcl.Imaging.pngimage, System.IniFiles;
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.ExtCtrls,
+  Vcl.StdCtrls,
+  uControllerUsuario,
+  uUsuario,
+  Vcl.Imaging.pngimage,
+  System.IniFiles;
 
 type
   TformLogin = class(TForm)
@@ -25,7 +37,6 @@ type
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
-    FFormMain: TFormPrincipal;
     FControllerUsuario: TControllerUsuario;
 
     FIniConexão: TIniFile;
@@ -56,13 +67,11 @@ begin
 
     if FControllerUsuario.ValidaLogin(aUsuario) = True then
     begin
-      FFormMain := TformPrincipal.Create(nil, aUsuario.Nome);
 
       try
-        //formLogin.Destroy;
-        FFormMain.ShowModal;
+        formLogin.Destroy;
       finally
-        FFormMain.Free;
+
       end;
     end
     else
@@ -116,6 +125,8 @@ end;
 
 procedure TformLogin.FormShow(Sender: TObject);
 begin
+  ShowWindow(Application.Handle, SW_SHOW);
+
   edtUsuario.SetFocus;
 
   edtUsuario.Text := FUsuario;

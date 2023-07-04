@@ -58,7 +58,8 @@ uses
   uProblema,
 
   frmImagensProblema,
-  frmRichEditTelaCheia, uControllerUsuario, uUsuario;
+  frmRichEditTelaCheia, uControllerUsuario, uUsuario, frmLogin,
+  System.IniFiles;
 
 type
   TformPrincipal = class(TForm)
@@ -163,6 +164,7 @@ type
     procedure mmSolucaoProblemaDblClick(Sender: TObject);
     procedure chkSomenteSolucaoClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
     FUsuario: String;
@@ -190,6 +192,7 @@ type
     procedure DsProblemasEventos;
     procedure DsModulosEventos;
 
+    procedure DsProblemasAfterScroll(TDataSet: TDataSet);
     procedure DsProblemasAfterOpen(TDataSet: TDataSet);
     procedure DsProblemasAfterEdit(TDataSet: TDataSet);
     procedure DsProblemasAfterPost(TDataSet: TDataSet);
@@ -202,11 +205,12 @@ type
     procedure DsModulosAfterPost(TDataSet: TDataset);
     procedure DsModulosAfterCancel(TDataSet: TDataset);
     procedure DsModulosAfterEdit(TDataSet: TDataset);
+  private
+    FIniConexão: TIniFile;
   public
     { Public declarations }
     FEdicaoProblema: Boolean;
 
-    constructor Create(AOwner: TComponent; aUsuario: String);
     destructor Destroy; override;
   end;
 
@@ -219,6 +223,34 @@ implementation
 
 uses
   uModulo, uImagemProblema;
+
+procedure TformPrincipal.FormCreate(Sender: TObject);
+begin
+  var aUser : TUsuario := TUsuario.Create;
+
+  FIniConexão := TIniFIle.Create(ExtractFilePath(ParamStr(0)) + 'Connect.ini');
+
+  FControllerProblema := TControllerProblema.Create;
+  FControllerModulo := TControllerModulo.Create;
+  FControllerUsuario := TControllerUsuario.Create;
+
+  CarregaGridModulos;
+  CarregaGridProblemas;
+  CarregaDadosProblemas;
+
+  DsProblemasEventos;
+  DsModulosEventos;
+
+  FUsuario := FIniConexão.ReadString('Login', 'Usuario', '');
+
+  try
+    aUser.Nome := FUsuario;
+    FCodUsuario := FControllerUsuario.RetornaCodUsuario(aUser);
+  finally
+    aUser.Free;
+  end;
+  StatusBar1.Panels[0].Text := 'Usuário: ' + IntToStr(FCodUsuario) + ' - ' + FUsuario;
+end;
 
 procedure TformPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
@@ -348,6 +380,7 @@ var
   aNomeProblema: String;
   cont: Integer;
 begin
+  pnlProblemas.Visible := True;
   cont := 0;
 
   if gridProblemas.DataSource.DataSet.RecordCount > 0 then
@@ -414,34 +447,6 @@ begin
     pnlBodyDetalhesProblema.Visible := False
   else
     pnlBodyDetalhesProblema.Visible := True;
-end;
-
-constructor TformPrincipal.Create(AOwner: TComponent; aUsuario: String);
-begin
-  inherited Create(AOwner);
-
-  var aUser : TUsuario := TUsuario.Create;
-
-  FControllerProblema := TControllerProblema.Create;
-  FControllerModulo := TControllerModulo.Create;
-  FControllerUsuario := TControllerUsuario.Create;
-
-  CarregaGridModulos;
-  CarregaGridProblemas;
-  CarregaDadosProblemas;
-
-  DsProblemasEventos;
-  DsModulosEventos;
-
-  FUsuario := aUsuario;
-
-  try
-    aUser.Nome := FUsuario;
-    FCodUsuario := FControllerUsuario.RetornaCodUsuario(aUser);
-  finally
-    aUser.Free;
-  end;
-  StatusBar1.Panels[0].Text := 'Usuário: ' + IntToStr(FCodUsuario) + ' - ' + FUsuario;
 end;
 
 procedure TformPrincipal.DsModulosAfterInsert(TDataSet: TDataset);
@@ -559,9 +564,19 @@ end;
 
 procedure TformPrincipal.DsProblemasAfterPost(TDataSet: TDataSet);
 begin
+  var aTituloProblema : String := edtTituloProblema.Text;
   InverteCrudProblema;
 
   btnImagensProblema.Enabled := True;
+
+  dsModulos.DataSet.Locate('NOME', cbModulo.Text, []);
+  gridProblemas.DataSource.DataSet.Locate('TITULO', aTituloProblema, []);
+end;
+
+procedure TformPrincipal.DsProblemasAfterScroll(TDataSet: TDataSet);
+begin
+  if dsProblemas.State = dsBrowse then
+    CarregaDadosProblemas;
 end;
 
 procedure TformPrincipal.DsProblemasBeforePost(TDataSet: TDataSet);
@@ -581,6 +596,7 @@ end;
 
 procedure TformPrincipal.DsProblemasEventos;
 begin
+  gridProblemas.DataSource.DataSet.AfterScroll := DsProblemasAfterScroll;
   dsProblemas.DataSet.BeforePost := DsProblemasBeforePost;
   dsProblemas.DataSet.AfterOpen := DsProblemasAfterOpen;
   dsProblemas.DataSet.AfterEdit := DsProblemasAfterEdit;

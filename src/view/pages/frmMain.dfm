@@ -13,6 +13,7 @@ object formPrincipal: TformPrincipal
   KeyPreview = True
   OldCreateOrder = False
   WindowState = wsMaximized
+  OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
@@ -349,7 +350,6 @@ object formPrincipal: TformPrincipal
             TitleFont.Height = -11
             TitleFont.Name = 'Tahoma'
             TitleFont.Style = []
-            OnCellClick = gridProblemasCellClick
             OnDrawColumnCell = gridProblemasDrawColumnCell
           end
         end
