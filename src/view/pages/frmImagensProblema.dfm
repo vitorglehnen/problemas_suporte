@@ -1,6 +1,7 @@
 object formImagensProblema: TformImagensProblema
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu, biMaximize]
   Caption = 'Imagens do problema'
   ClientHeight = 700
   ClientWidth = 1150
