@@ -165,6 +165,8 @@ type
     procedure chkSomenteSolucaoClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure edtTituloProblemaMouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
   private
     { Private declarations }
     FUsuario: String;
@@ -643,6 +645,12 @@ begin
   finally
     aProblema.Free;
   end;
+end;
+
+procedure TformPrincipal.edtTituloProblemaMouseMove(Sender: TObject;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  edtTituloProblema.Hint := edtTituloProblema.Text;
 end;
 
 procedure TformPrincipal.ExcluirProblema;

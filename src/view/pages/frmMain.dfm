@@ -837,7 +837,10 @@ object formPrincipal: TformPrincipal
                 Height = 21
                 DataField = 'titulo'
                 DataSource = dsProblemas
+                ParentShowHint = False
+                ShowHint = True
                 TabOrder = 0
+                OnMouseMove = edtTituloProblemaMouseMove
               end
               object edtChamadoProblema: TDBEdit
                 Left = 519
