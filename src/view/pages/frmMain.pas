@@ -59,7 +59,8 @@ uses
 
   frmImagensProblema,
   frmRichEditTelaCheia, uControllerUsuario, uUsuario, frmLogin,
-  System.IniFiles;
+  System.IniFiles,
+  WPTbar, WPCTRRich, WPRTEDefs, WPCTRMemo, Wpdbrich;
 
 type
   TformPrincipal = class(TForm)
@@ -113,8 +114,6 @@ type
     edtTituloProblema: TDBEdit;
     edtChamadoProblema: TDBEdit;
     edtCodProblema: TDBEdit;
-    mmDetalhesProblema: TDBRichEdit;
-    mmSolucaoProblema: TDBRichEdit;
     btnExcluirProblema: TSpeedButton;
     btnCancelarProblema: TSpeedButton;
     btnSalvarProblema: TSpeedButton;
@@ -131,6 +130,10 @@ type
     chkSomenteSolucao: TDBCheckBox;
     StatusBar1: TStatusBar;
     SpeedButton1: TSpeedButton;
+    WPToolbar1: TWPToolbar;
+    mmDetalhesProblema: TDBWPRichText;
+    mmSolucaoProblema: TDBWPRichText;
+    WPToolbar2: TWPToolbar;
 
     procedure btnNovoModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -583,17 +586,23 @@ end;
 
 procedure TformPrincipal.DsProblemasBeforePost(TDataSet: TDataSet);
 begin
+  var M : TMemoryStream := TMemoryStream.Create;
+
   if dsProblemas.DataSet.State = dsInsert then
   begin
     dsProblemas.DataSet.FieldByName('datacr').AsDateTime := Now;
     dsProblemas.DataSet.FieldByName('horacr').AsDateTime := Now;
     dsProblemas.DataSet.FieldByName('cod_prob').AsInteger := 0;
 
+
+
     if chkSomenteSolucao.Checked then
       dsProblemas.DataSet.FieldByName('somentesolu').AsString := 'S'
     else
       dsProblemas.DataSet.FieldByName('somentesolu').AsString := 'N';
   end;
+
+  mmDetalhesProblema.Lines.SaveToStream(M);
 end;
 
 procedure TformPrincipal.DsProblemasEventos;
