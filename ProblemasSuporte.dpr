@@ -1,5 +1,4 @@
 program ProblemasSuporte;
-
 uses
   Vcl.Forms,
   frmMain in 'src\view\pages\frmMain.pas' {formPrincipal},
@@ -16,11 +15,10 @@ uses
   uControllerModulo in 'src\controller\uControllerModulo.pas',
   uDAOGridModulo in 'src\model\DAO\uDAOGridModulo.pas',
   frmRichEditTelaCheia in 'src\view\pages\frmRichEditTelaCheia.pas' {formRichEditTelaCheia},
-  frmLogin in 'src\view\pages\frmLogin.pas' {formLogin},
   uDAOUsuario in 'src\model\DAO\uDAOUsuario.pas',
-  uControllerUsuario in 'src\controller\uControllerUsuario.pas',
   uUsuario in 'src\model\models\uUsuario.pas',
-  uDAOConsultaPadrao in 'src\model\DAO\uDAOConsultaPadrao.pas';
+  uDAOConsultaPadrao in 'src\model\DAO\uDAOConsultaPadrao.pas',
+  frmPreferencias in 'src\view\pages\frmPreferencias.pas' {FormPreferencias};
 
 {$R *.res}
 begin

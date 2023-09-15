@@ -2,8 +2,8 @@ object formPrincipal: TformPrincipal
   Left = 0
   Top = 0
   Caption = 'Problemas Suporte'
-  ClientHeight = 884
-  ClientWidth = 1928
+  ClientHeight = 730
+  ClientWidth = 1374
   Color = 16640729
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +11,7 @@ object formPrincipal: TformPrincipal
   Font.Name = 'Tahoma'
   Font.Style = []
   KeyPreview = True
+  Menu = menuOpcoes
   WindowState = wsMaximized
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
@@ -19,33 +20,33 @@ object formPrincipal: TformPrincipal
   object pnlPrincipal: TPanel
     Left = 0
     Top = 0
-    Width = 1928
-    Height = 884
+    Width = 1374
+    Height = 730
     Align = alClient
     AutoSize = True
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 1535
-    ExplicitHeight = 748
+    ExplicitWidth = 1370
+    ExplicitHeight = 729
     object pnlBodyModulosProblemas: TPanel
       Left = 0
       Top = 0
       Width = 512
-      Height = 870
+      Height = 716
       Align = alLeft
       BevelOuter = bvNone
       Caption = 'pnlBodyModulosProblemas'
       TabOrder = 0
-      ExplicitHeight = 734
+      ExplicitHeight = 715
       object pnlBodyProblemas: TPanel
         Left = 241
         Top = 0
         Width = 271
-        Height = 870
+        Height = 716
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitHeight = 734
+        ExplicitHeight = 715
         object pnlTopProblemas: TPanel
           Left = 0
           Top = 0
@@ -234,7 +235,6 @@ object formPrincipal: TformPrincipal
                   Font.Name = 'Tahoma'
                   Font.Style = [fsBold]
                   ParentFont = False
-                  OnClick = SpeedButton1Click
                 end
                 object rdbtnFiltroPesqProblema: TRadioGroup
                   Left = 0
@@ -323,17 +323,17 @@ object formPrincipal: TformPrincipal
           Left = 0
           Top = 257
           Width = 271
-          Height = 613
+          Height = 459
           Align = alClient
           Color = clWhite
           ParentBackground = False
           TabOrder = 1
-          ExplicitHeight = 477
+          ExplicitHeight = 458
           object gridProblemas: TDBGrid
             Left = 1
             Top = 1
             Width = 269
-            Height = 611
+            Height = 457
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
@@ -361,11 +361,11 @@ object formPrincipal: TformPrincipal
         Left = 0
         Top = 0
         Width = 241
-        Height = 870
+        Height = 716
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitHeight = 734
+        ExplicitHeight = 715
         object pnlTopModulos: TPanel
           Left = 0
           Top = 0
@@ -419,7 +419,7 @@ object formPrincipal: TformPrincipal
               Font.Style = []
               ParentFont = False
               OnClick = btnExcluirModuloClick
-              ExplicitLeft = 191
+              ExplicitLeft = 188
               ExplicitTop = 0
             end
             object btnNovoModulo: TSpeedButton
@@ -535,17 +535,17 @@ object formPrincipal: TformPrincipal
           Left = 0
           Top = 257
           Width = 241
-          Height = 613
+          Height = 459
           Align = alClient
           Color = clWhite
           ParentBackground = False
           TabOrder = 1
-          ExplicitHeight = 477
+          ExplicitHeight = 458
           object gridModulos: TDBGrid
             Left = 1
             Top = 1
             Width = 239
-            Height = 611
+            Height = 457
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
@@ -568,7 +568,6 @@ object formPrincipal: TformPrincipal
             TitleFont.Style = []
             OnCellClick = gridModulosCellClick
             OnDrawColumnCell = gridModulosDrawColumnCell
-            OnKeyDown = gridModulosKeyDown
           end
         end
       end
@@ -576,30 +575,30 @@ object formPrincipal: TformPrincipal
     object cardPanelProblemas: TCardPanel
       Left = 512
       Top = 0
-      Width = 1416
-      Height = 870
+      Width = 862
+      Height = 716
       Align = alClient
       ActiveCard = pnlCadastroProblema
       AutoSize = True
       BevelOuter = bvNone
       TabOrder = 1
-      ExplicitWidth = 1023
-      ExplicitHeight = 734
+      ExplicitWidth = 858
+      ExplicitHeight = 715
       object pnlCadastroProblema: TCard
         Left = 0
         Top = 0
-        Width = 1416
-        Height = 870
+        Width = 862
+        Height = 716
         Caption = 'Painel problema'
         CardIndex = 0
         TabOrder = 0
-        ExplicitWidth = 1023
-        ExplicitHeight = 734
+        ExplicitWidth = 858
+        ExplicitHeight = 715
         object pnlEscolhaUmRegistro: TPanel
           Left = 0
           Top = 0
-          Width = 1416
-          Height = 870
+          Width = 862
+          Height = 716
           Align = alClient
           Caption = 'Selecione um registro'
           Color = 16708071
@@ -611,13 +610,16 @@ object formPrincipal: TformPrincipal
           ParentBackground = False
           ParentFont = False
           TabOrder = 0
-          ExplicitWidth = 1023
-          ExplicitHeight = 734
+          ExplicitWidth = 858
+          ExplicitHeight = 715
           object pnlProblemas: TPanel
-            Left = 6
-            Top = 33
-            Width = 1025
-            Height = 835
+            Left = 1
+            Top = 1
+            Width = 860
+            Height = 714
+            Align = alClient
+            Anchors = []
+            AutoSize = True
             BevelOuter = bvNone
             Color = 16708071
             Enabled = False
@@ -631,10 +633,12 @@ object formPrincipal: TformPrincipal
             TabOrder = 0
             TabStop = True
             Visible = False
+            ExplicitWidth = 856
+            ExplicitHeight = 713
             object pnlBodyModuloProblema: TPanel
               Left = 0
-              Top = 67
-              Width = 1025
+              Top = 69
+              Width = 860
               Height = 108
               Align = alTop
               Anchors = []
@@ -642,8 +646,7 @@ object formPrincipal: TformPrincipal
               Padding.Left = 30
               Padding.Top = 20
               TabOrder = 1
-              ExplicitTop = 69
-              ExplicitWidth = 1021
+              ExplicitWidth = 856
               object btnImagensProblema: TSpeedButton
                 Left = 349
                 Top = 34
@@ -719,25 +722,34 @@ object formPrincipal: TformPrincipal
             end
             object pnlBodySolucaoProblema: TPanel
               Left = 0
-              Top = 456
-              Width = 1025
-              Height = 375
+              Top = 354
+              Width = 860
+              Height = 360
+              Align = alClient
+              Anchors = []
               AutoSize = True
               BevelOuter = bvNone
               Padding.Left = 30
               TabOrder = 3
+              ExplicitWidth = 856
+              ExplicitHeight = 359
               object pnlSolucaoProblema: TPanel
                 Left = 30
                 Top = 0
-                Width = 995
-                Height = 375
+                Width = 830
+                Height = 360
+                Align = alClient
+                AutoSize = True
                 BevelOuter = bvNone
                 Padding.Right = 60
+                Padding.Bottom = 50
                 TabOrder = 0
+                ExplicitWidth = 826
+                ExplicitHeight = 359
                 object lblSolucaoProblema: TLabel
                   Left = 0
                   Top = 0
-                  Width = 935
+                  Width = 770
                   Height = 15
                   Align = alTop
                   Caption = '&Solu'#231#227'o'
@@ -749,74 +761,42 @@ object formPrincipal: TformPrincipal
                   ParentFont = False
                   ExplicitWidth = 43
                 end
-                object mmSolucaoProblema: TDBWPRichText
+                object mmSolucaoProblema: TDBRichEdit
                   Left = 0
-                  Top = 45
-                  Width = 935
-                  Height = 330
-                  AutoDisplay = True
+                  Top = 21
+                  Width = 750
+                  Height = 280
                   DataField = 'solucao'
                   DataSource = dsProblemas
-                  NoUpdateOnExit = False
-                  NoReloadOnEdit = True
-                  NoResetOnEscape = False
-                  RTFVariables = <>
-                  WPToolBar = WPToolbar2
-                  LayoutMode = wplayNormal
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -12
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  MaxLength = 100000
                   ScrollBars = ssVertical
-                  ProtectedProp = []
-                  InsertPointAttr.TextColor = clRed
-                  InsertPointAttr.UseTextColor = True
-                  HyperlinkTextAttr.Underline = tsTRUE
-                  HyperlinkTextAttr.HotStyleIsActive = True
-                  HyperlinkTextAttr.UnderlineColor = clBlue
-                  HyperlinkTextAttr.UseUnderlineColor = True
-                  HyperlinkTextAttr.HotUnderlineColor = clRed
-                  HyperlinkTextAttr.HotTextColor = clRed
-                  HyperlinkTextAttr.HotUnderline = tsTRUE
-                  HiddenTextAttr.Hidden = True
-                  Align = alClient
                   TabOrder = 0
-                end
-                object WPToolbar2: TWPToolbar
-                  Left = 0
-                  Top = 15
-                  Width = 935
-                  Height = 30
-                  ImageStretch = False
-                  ColorTo = 15790316
-                  UseDockManager = False
-                  ConfigString = '1b1cB4B5B6|C1C2C3C4'
-                  ShowAllElements = wpSelectedElements
-                  Align = alTop
-                  BevelLines = []
-                  AutoEnabling = True
-                  WidthBetweenGroups = 4
-                  MarginBottom = 0
-                  MarginTop = 0
-                  sel_DatabaseIcons = []
-                  FlatButtons = True
-                  ButtonHeight = 22
+                  OnDblClick = mmSolucaoProblemaDblClick
                 end
               end
             end
             object pnlTopProblema: TPanel
               Left = 0
               Top = 0
-              Width = 1025
-              Height = 67
+              Width = 860
+              Height = 69
               Align = alTop
               Anchors = []
               AutoSize = True
-              BevelOuter = bvNone
               Color = 16708071
               Padding.Top = 10
               Padding.Bottom = 20
               ParentBackground = False
               TabOrder = 0
+              ExplicitWidth = 856
               object lblDataProblema: TLabel
                 Left = 633
-                Top = 10
+                Top = 11
                 Width = 29
                 Height = 14
                 Caption = '&Data'
@@ -829,7 +809,7 @@ object formPrincipal: TformPrincipal
               end
               object lblChamadoProblema: TLabel
                 Left = 519
-                Top = 10
+                Top = 11
                 Width = 57
                 Height = 14
                 Caption = '&Chamado'
@@ -842,7 +822,7 @@ object formPrincipal: TformPrincipal
               end
               object lblCodProblema: TLabel
                 Left = 752
-                Top = 10
+                Top = 11
                 Width = 43
                 Height = 14
                 Caption = '&C'#243'digo'
@@ -855,7 +835,7 @@ object formPrincipal: TformPrincipal
               end
               object lblTituloProblema: TLabel
                 Left = 28
-                Top = 10
+                Top = 11
                 Width = 43
                 Height = 14
                 Caption = '*&T'#237'tulo'
@@ -868,7 +848,7 @@ object formPrincipal: TformPrincipal
               end
               object edtTituloProblema: TDBEdit
                 Left = 28
-                Top = 26
+                Top = 27
                 Width = 454
                 Height = 21
                 DataField = 'titulo'
@@ -880,7 +860,7 @@ object formPrincipal: TformPrincipal
               end
               object edtChamadoProblema: TDBEdit
                 Left = 519
-                Top = 26
+                Top = 27
                 Width = 81
                 Height = 21
                 DataField = 'chamado'
@@ -889,7 +869,7 @@ object formPrincipal: TformPrincipal
               end
               object edtCodProblema: TDBEdit
                 Left = 752
-                Top = 26
+                Top = 27
                 Width = 73
                 Height = 21
                 DataField = 'cod_prob'
@@ -899,7 +879,7 @@ object formPrincipal: TformPrincipal
               end
               object dtProblema: TDateTimePicker
                 Left = 632
-                Top = 26
+                Top = 27
                 Width = 97
                 Height = 21
                 Date = 45076.000000000000000000
@@ -911,24 +891,30 @@ object formPrincipal: TformPrincipal
             object pnlBodyDetalhesProblema: TPanel
               Left = 0
               Top = 177
-              Width = 1025
-              Height = 248
+              Width = 860
+              Height = 177
+              Align = alTop
+              Anchors = []
+              AutoSize = True
               BevelOuter = bvNone
               Padding.Left = 30
               TabOrder = 2
+              ExplicitWidth = 856
               object pnlDetalhesProblema: TPanel
                 Left = 30
                 Top = 0
-                Width = 995
-                Height = 249
+                Width = 830
+                Height = 177
+                Align = alClient
                 BevelOuter = bvNone
                 Padding.Right = 60
                 Padding.Bottom = 20
                 TabOrder = 0
+                ExplicitWidth = 826
                 object lblDetalhesProblema: TLabel
                   Left = 0
                   Top = 0
-                  Width = 935
+                  Width = 770
                   Height = 15
                   Align = alTop
                   Caption = '&Detalhes do problema'
@@ -940,57 +926,22 @@ object formPrincipal: TformPrincipal
                   ParentFont = False
                   ExplicitWidth = 122
                 end
-                object WPToolbar1: TWPToolbar
+                object mmDetalhesProblema: TDBRichEdit
                   Left = 0
-                  Top = 15
-                  Width = 935
-                  Height = 30
-                  ImageStretch = False
-                  ColorTo = 15790316
-                  UseDockManager = False
-                  ConfigString = '1b1cB4B5B6|C1C2C3C4'
-                  ShowAllElements = wpSelectedElements
-                  Align = alTop
-                  BevelLines = []
-                  AutoEnabling = True
-                  WidthBetweenGroups = 4
-                  MarginBottom = 0
-                  MarginTop = 0
-                  sel_DatabaseIcons = []
-                  FlatButtons = True
-                  ButtonHeight = 22
-                  ExplicitTop = 9
-                end
-                object mmDetalhesProblema: TDBWPRichText
-                  Left = 0
-                  Top = 45
-                  Width = 935
-                  Height = 204
-                  AutoDisplay = True
+                  Top = 21
+                  Width = 750
+                  Height = 142
                   DataField = 'detalhes'
                   DataSource = dsProblemas
-                  NoUpdateOnExit = False
-                  NoReloadOnEdit = True
-                  NoResetOnEscape = False
-                  RTFVariables = <>
-                  WPToolBar = WPToolbar1
-                  LayoutMode = wplayNormal
+                  Font.Charset = ANSI_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -12
+                  Font.Name = 'Tahoma'
+                  Font.Style = []
+                  MaxLength = 100000
                   ScrollBars = ssVertical
-                  AcceptFiles = True
-                  AcceptFilesOptions = [wpDropCreatesLinkedImage, wpDropCreatesMovableParObject, wpDropCreatesMovablePageObject, wpDropCreatesNoWrapImage]
-                  ProtectedProp = []
-                  InsertPointAttr.TextColor = clRed
-                  InsertPointAttr.UseTextColor = True
-                  HyperlinkTextAttr.Underline = tsTRUE
-                  HyperlinkTextAttr.HotStyleIsActive = True
-                  HyperlinkTextAttr.UnderlineColor = clBlue
-                  HyperlinkTextAttr.UseUnderlineColor = True
-                  HyperlinkTextAttr.HotUnderlineColor = clRed
-                  HyperlinkTextAttr.HotTextColor = clRed
-                  HyperlinkTextAttr.HotUnderline = tsTRUE
-                  HiddenTextAttr.Hidden = True
-                  Align = alTop
-                  TabOrder = 1
+                  TabOrder = 0
+                  OnDblClick = mmDetalhesProblemaDblClick
                 end
               end
             end
@@ -1000,24 +951,35 @@ object formPrincipal: TformPrincipal
     end
     object StatusBar1: TStatusBar
       Left = 0
-      Top = 870
-      Width = 1928
+      Top = 716
+      Width = 1374
       Height = 14
       Panels = <
         item
           Text = 'Usu'#225'rio:'
           Width = 50
         end>
-      ExplicitTop = 734
-      ExplicitWidth = 1535
+      ExplicitTop = 715
+      ExplicitWidth = 1370
     end
   end
   object dsModulos: TDataSource
     Left = 19
-    Top = 210
+    Top = 242
   end
   object dsProblemas: TDataSource
     Left = 451
     Top = 210
+  end
+  object menuOpcoes: TMainMenu
+    Left = 120
+    Top = 241
+    object Configuraes1: TMenuItem
+      Caption = 'Configura'#231#245'es'
+      object Preferncias1: TMenuItem
+        Caption = 'Prefer'#234'ncias'
+        OnClick = Preferncias1Click
+      end
+    end
   end
 end

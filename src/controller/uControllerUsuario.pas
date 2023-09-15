@@ -2,7 +2,11 @@ unit uControllerUsuario;
 
 interface
 
-uses uDAOUsuario, uUsuario, Vcl.Dialogs, uDAOConsultaPadrao;
+uses
+  uDAOUsuario,
+  uUsuario,
+  Vcl.Dialogs,
+  uDAOConsultaPadrao;
 
 type
   TControllerUsuario = Class
@@ -12,7 +16,6 @@ type
   public
     procedure AlteraIndiceConsultaPadrao(aCodUsuario: Integer; aIndice: Integer; aDescricao: String);
 
-    function ValidaLogin(aUsuario: TUsuario): Boolean;
     function RetornaCodUsuario(aUsuario: TUsuario): Integer;
     function RetornaIndiceConsultaPadrao(aCodUsuario: Integer; aDescricao: String): Integer;
 
@@ -45,23 +48,13 @@ end;
 
 function TControllerUsuario.RetornaCodUsuario(aUsuario: TUsuario): Integer;
 begin
-  Result := FDAOUsuario.RetornaCodUsuario(aUsuario).DataSet.FieldByName('cod_usu').AsInteger;
+  Result := FDAOUsuario.RetornaCodUsuario(aUsuario.Nome).DataSet.FieldByName('cod_usu').AsInteger;
 end;
 
 function TControllerUsuario.RetornaIndiceConsultaPadrao(aCodUsuario: Integer;
   aDescricao: String): Integer;
 begin
   Result := FDAOConsPadrao.BuscaConsultaPadrao(aCodUsuario, aDescricao).DataSet.FieldByName('indice').AsInteger;
-end;
-
-function TControllerUsuario.ValidaLogin(aUsuario: TUsuario): Boolean;
-begin
-  var aResultado: Integer := FDAOUsuario.RetornaUsuario(aUsuario).DataSet.FieldByName('COUNT').AsInteger;
-
-  if aResultado > 0 then
-    Result := True
-  else
-    Result := False;
 end;
 
 end.

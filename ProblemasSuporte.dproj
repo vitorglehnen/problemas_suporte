@@ -125,14 +125,13 @@
             <Form>formRichEditTelaCheia</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="src\view\pages\frmLogin.pas">
-            <Form>formLogin</Form>
-            <FormType>dfm</FormType>
-        </DCCReference>
         <DCCReference Include="src\model\DAO\uDAOUsuario.pas"/>
-        <DCCReference Include="src\controller\uControllerUsuario.pas"/>
         <DCCReference Include="src\model\models\uUsuario.pas"/>
         <DCCReference Include="src\model\DAO\uDAOConsultaPadrao.pas"/>
+        <DCCReference Include="src\view\pages\frmPreferencias.pas">
+            <Form>FormPreferencias</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -159,7 +158,12 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="4">
-                <DeployFile LocalName="C:\Problemas Suporte\ProblemasSuporte.exe" Configuration="Debug" Class="ProjectOutput"/>
+                <DeployFile LocalName="C:\Problemas Suporte\ProblemasSuporte.exe" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>ProblemasSuporte.exe</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployClass Name="AdditionalDebugSymbols">
                     <Platform Name="iOSSimulator">
                         <Operation>1</Operation>
