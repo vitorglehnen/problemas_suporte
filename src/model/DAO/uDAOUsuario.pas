@@ -7,7 +7,8 @@ uses
   uConexao,
   uProblema,
   Data.DB,
-  Vcl.Dialogs;
+  Vcl.Dialogs,
+  uInterfaceUsuario;
 
 type
   TDAOUsuario = class
@@ -19,13 +20,28 @@ type
     constructor Create;
     destructor Destroy; override;
 
-    function RetornaUsuario(aUsuario: String): TDataSource;
+    function RetornaUsuario(aUsuario: String): TDataSet;
     function RetornaCodUsuario(aUsuario: String): Integer;
+
+    procedure InsertUsuario(aUsuario: String);
+    procedure AtualizaUsuario(aUsuario: IUsuario);
   end;
 
 implementation
 
 { TDAOProblema }
+
+procedure TDAOUsuario.AtualizaUsuario(aUsuario: IUsuario);
+begin
+  FQuery := FConn.CriarQuery;
+
+  FQuery.SQL.Text := 'UPDATE usuarios SET selecaogeral = :selecaogeral, cor = :cor WHERE nome = :nome';
+  FQuery.ParamByName('nome').AsString := aUsuario.Nome;
+  FQuery.ParamByName('selecaogeral').AsInteger := aUsuario.ConsultaGeral;
+  FQuery.ParamByName('cor').AsString := aUsuario.Cor;
+
+  FQuery.ExecSQL;
+end;
 
 constructor TDAOUsuario.Create;
 begin
@@ -36,6 +52,18 @@ destructor TDAOUsuario.Destroy;
 begin
   FConn.Free;
   inherited;
+end;
+
+procedure TDAOUsuario.InsertUsuario(aUsuario: String);
+begin
+  FQuery := FConn.CriarQuery;
+
+  FQuery.SQL.Text := 'INSERT INTO usuarios (cod_usu, nome, selecaogeral, cor) VALUES (GEN_ID(gen_usuarios_id, 1), :nome, :selecaogeral, :cor)';
+  FQuery.ParamByName('nome').AsString := aUsuario;
+  FQuery.ParamByName('selecaogeral').AsInteger := 0;
+  FQuery.ParamByName('cor').AsString := '$00FEF1E7';
+
+  FQuery.ExecSQL;
 end;
 
 function TDAOUsuario.RetornaCodUsuario(aUsuario: String): Integer;
@@ -52,7 +80,7 @@ begin
   Result := FDataSource.DataSet.FieldByName('cod_usu').AsInteger;
 end;
 
-function TDAOUsuario.RetornaUsuario(aUsuario: String): TDataSource;
+function TDAOUsuario.RetornaUsuario(aUsuario: String): TDataSet;
 begin
   FQuery := FConn.CriarQuery;
   FDataSource := FConn.CriarDataSource;
@@ -63,7 +91,7 @@ begin
 
   FDataSource.DataSet := FQuery;
 
-  Result := FDataSource;
+  Result := FDataSource.DataSet;
 end;
 
 end.

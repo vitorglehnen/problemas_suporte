@@ -22,8 +22,15 @@ object FormPreferencias: TFormPreferencias
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 620
-    ExplicitHeight = 440
+    ExplicitLeft = -8
+    ExplicitTop = -8
+    object Label1: TLabel
+      Left = 424
+      Top = 48
+      Width = 59
+      Height = 15
+      Caption = 'Cor padr'#227'o'
+    end
     object pnlTop: TPanel
       Left = 0
       Top = 0
@@ -51,6 +58,14 @@ object FormPreferencias: TFormPreferencias
         'Geral'
         'Somente do m'#243'dulo')
       TabOrder = 1
+    end
+    object cbCorPadrao: TColorBox
+      Left = 424
+      Top = 64
+      Width = 145
+      Height = 22
+      NoneColorColor = 16708071
+      TabOrder = 2
     end
   end
 end

@@ -23,6 +23,8 @@ type
     FormPreferencias: TPanel;
     pnlTop: TPanel;
     rdgpConsultaPadrao: TRadioGroup;
+    cbCorPadrao: TColorBox;
+    Label1: TLabel;
   private
     FUsuario: TUsuario;
     FDAOUsuario: TDAOUsuario;
@@ -30,6 +32,7 @@ type
     { Private declarations }
   public
     constructor Create(AOwner: TComponent; aUsuario: TUsuario);
+    destructor Destroy; override;
 
     { Public declarations }
   end;
@@ -55,7 +58,19 @@ begin
   if (FUsuario.ConsultaGeral = 0) or (FUsuario.ConsultaGeral = 1) then
     rdgpConsultaPadrao.ItemIndex := FUsuario.ConsultaGeral;
 
+  cbCorPadrao.Selected := StringToColor(FUsuario.Cor);
+
   pnlTop.Caption := FUsuario.Nome;
+end;
+
+destructor TFormPreferencias.Destroy;
+begin
+  FUsuario.SetConsultaGeral(rdgpConsultaPadrao.ItemIndex);
+  FUsuario.SetCor(ColorToString(cbCorPadrao.Selected));
+
+  FDAOUsuario.AtualizaUsuario(FUsuario);
+
+  inherited;
 end;
 
 end.

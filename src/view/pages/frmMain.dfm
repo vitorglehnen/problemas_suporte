@@ -25,6 +25,8 @@ object formPrincipal: TformPrincipal
     Align = alClient
     AutoSize = True
     BevelOuter = bvNone
+    Color = clRed
+    ParentBackground = False
     TabOrder = 0
     ExplicitWidth = 1370
     ExplicitHeight = 729
@@ -36,6 +38,7 @@ object formPrincipal: TformPrincipal
       Align = alLeft
       BevelOuter = bvNone
       Caption = 'pnlBodyModulosProblemas'
+      ParentColor = True
       TabOrder = 0
       ExplicitHeight = 715
       object pnlBodyProblemas: TPanel
@@ -45,6 +48,7 @@ object formPrincipal: TformPrincipal
         Height = 716
         Align = alClient
         BevelOuter = bvNone
+        ParentColor = True
         TabOrder = 0
         ExplicitHeight = 715
         object pnlTopProblemas: TPanel
@@ -53,8 +57,8 @@ object formPrincipal: TformPrincipal
           Width = 271
           Height = 257
           Align = alTop
-          Color = 16708071
           ParentBackground = False
+          ParentColor = True
           TabOrder = 0
           object lblTituloProblemas: TLabel
             Left = 1
@@ -364,6 +368,7 @@ object formPrincipal: TformPrincipal
         Height = 716
         Align = alLeft
         BevelOuter = bvNone
+        ParentColor = True
         TabOrder = 1
         ExplicitHeight = 715
         object pnlTopModulos: TPanel
@@ -372,8 +377,8 @@ object formPrincipal: TformPrincipal
           Width = 241
           Height = 257
           Align = alTop
-          Color = 16708071
           ParentBackground = False
+          ParentColor = True
           TabOrder = 0
           object lblTituloModulo: TLabel
             Left = 1
@@ -392,8 +397,7 @@ object formPrincipal: TformPrincipal
             ParentColor = False
             ParentFont = False
             Layout = tlCenter
-            ExplicitWidth = 62
-            ExplicitHeight = 18
+            ExplicitTop = -4
           end
           object pnlBotaoCrudModulo: TPanel
             Left = 1
@@ -402,8 +406,8 @@ object formPrincipal: TformPrincipal
             Height = 27
             Align = alBottom
             BevelOuter = bvSpace
-            Color = 16708071
             ParentBackground = False
+            ParentColor = True
             TabOrder = 0
             object btnExcluirModulo: TSpeedButton
               Left = 190
@@ -480,12 +484,12 @@ object formPrincipal: TformPrincipal
             Height = 152
             Align = alBottom
             BevelOuter = bvLowered
-            Color = 16708071
             Padding.Left = 8
             Padding.Top = 8
             Padding.Right = 8
             Padding.Bottom = 8
             ParentBackground = False
+            ParentColor = True
             TabOrder = 1
             object pnlPesqModulo: TPanel
               Left = 9
@@ -581,6 +585,7 @@ object formPrincipal: TformPrincipal
       ActiveCard = pnlCadastroProblema
       AutoSize = True
       BevelOuter = bvNone
+      ParentColor = True
       TabOrder = 1
       ExplicitWidth = 858
       ExplicitHeight = 715
@@ -591,6 +596,7 @@ object formPrincipal: TformPrincipal
         Height = 716
         Caption = 'Painel problema'
         CardIndex = 0
+        ParentColor = True
         TabOrder = 0
         ExplicitWidth = 858
         ExplicitHeight = 715
@@ -601,13 +607,13 @@ object formPrincipal: TformPrincipal
           Height = 716
           Align = alClient
           Caption = 'Selecione um registro'
-          Color = 16708071
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -20
           Font.Name = 'Tahoma'
           Font.Style = []
           ParentBackground = False
+          ParentColor = True
           ParentFont = False
           TabOrder = 0
           ExplicitWidth = 858
@@ -621,7 +627,6 @@ object formPrincipal: TformPrincipal
             Anchors = []
             AutoSize = True
             BevelOuter = bvNone
-            Color = 16708071
             Enabled = False
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
@@ -629,6 +634,7 @@ object formPrincipal: TformPrincipal
             Font.Name = 'Tahoma'
             Font.Style = []
             ParentBackground = False
+            ParentColor = True
             ParentFont = False
             TabOrder = 0
             TabStop = True
@@ -788,10 +794,10 @@ object formPrincipal: TformPrincipal
               Align = alTop
               Anchors = []
               AutoSize = True
-              Color = 16708071
               Padding.Top = 10
               Padding.Bottom = 20
               ParentBackground = False
+              ParentColor = True
               TabOrder = 0
               ExplicitWidth = 856
               object lblDataProblema: TLabel
@@ -949,7 +955,7 @@ object formPrincipal: TformPrincipal
         end
       end
     end
-    object StatusBar1: TStatusBar
+    object statusBarBottom: TStatusBar
       Left = 0
       Top = 716
       Width = 1374

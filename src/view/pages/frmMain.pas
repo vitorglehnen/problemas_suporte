@@ -130,7 +130,7 @@ type
     btnCancelarModulo: TSpeedButton;
     btnSalvarModulo: TSpeedButton;
     chkSomenteSolucao: TDBCheckBox;
-    StatusBar1: TStatusBar;
+    statusBarBottom: TStatusBar;
     SpeedButton1: TSpeedButton;
     menuOpcoes: TMainMenu;
     Configuraes1: TMenuItem;
@@ -231,7 +231,7 @@ begin
   DsProblemasEventos;
   DsModulosEventos;
 
-  StatusBar1.Panels[0].Text := 'Usuário: ' + FUsuario.Nome;
+  statusBarBottom.Panels[0].Text := 'Usuário: ' + FUsuario.Nome;
 end;
 
 procedure TformPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
@@ -718,7 +718,7 @@ begin
   begin
     if gdSelected in State then
     begin
-      Canvas.Brush.Color := $00FFF9F4;
+      Canvas.Brush.Color := StringToColor(FUsuario.Cor);
       Canvas.Font.Color := clBlack;
       Canvas.Font.Size := 9;
       Canvas.Font.Style := [fsBold];
@@ -754,7 +754,7 @@ begin
   begin
     if gdSelected in State then
     begin
-      Canvas.Brush.Color := $00FFF9F4;
+      Canvas.Brush.Color := StringToColor(FUsuario.Cor);
       Canvas.Font.Color := clBlack;
       Canvas.Font.Size := 8;
       Canvas.Font.Style := [fsBold];
@@ -832,6 +832,7 @@ begin
   pnlProblemas.Enabled := True;
 
   rdbtnFiltroPesqProblema.ItemIndex := FUsuario.ConsultaGeral;
+  pnlPrincipal.Color := StringToColor(FUsuario.Cor);
 end;
 
 end.

@@ -18,7 +18,8 @@ uses
   uDAOUsuario in 'src\model\DAO\uDAOUsuario.pas',
   uUsuario in 'src\model\models\uUsuario.pas',
   uDAOConsultaPadrao in 'src\model\DAO\uDAOConsultaPadrao.pas',
-  frmPreferencias in 'src\view\pages\frmPreferencias.pas' {FormPreferencias};
+  frmPreferencias in 'src\view\pages\frmPreferencias.pas' {FormPreferencias},
+  uInterfaceUsuario in 'src\model\interfaces\uInterfaceUsuario.pas';
 
 {$R *.res}
 begin
