@@ -133,7 +133,6 @@ type
     pnlDetalhesProblema: TPanel;
     lblDetalhesProblema: TLabel;
     mmDetalhesProblema: TDBRichEdit;
-
     procedure btnNovoModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btnExcluirModuloClick(Sender: TObject);
@@ -168,7 +167,7 @@ type
     procedure Preferncias1Click(Sender: TObject);
     procedure btnSalvaIndiceFiltroProblemaClick(Sender: TObject);
     procedure N1Click(Sender: TObject);
-
+    procedure cbFiltroPesqProblemaChange(Sender: TObject);
   private
     { Private declarations }
     FFormRichEditTelaCheia: TFormRichEditTelaCheia;
@@ -176,7 +175,6 @@ type
     FControllerProblema: TControllerProblema;
     FControllerModulo: TControllerModulo;
     FUsuario: TUsuario;
-
     procedure SelecionaModuloCbProblema;
     procedure CarregaGridProblemas;
     procedure EsticaMemoProblemas;
@@ -188,17 +186,14 @@ type
     procedure ExcluirProblema;
     procedure SalvarProblema;
     procedure NovoProblema;
-
     procedure DsProblemasEventos;
     procedure DsModulosEventos;
-
     procedure DsProblemasAfterCancel(TDataSet: TDataSet);
     procedure DsProblemasAfterScroll(TDataSet: TDataSet);
     procedure DsProblemasAfterInsert(TDataSet: TDataSet);
     procedure DsProblemasBeforePost(TDataSet: TDataSet);
     procedure DsProblemasAfterEdit(TDataSet: TDataSet);
     procedure DsProblemasAfterPost(TDataSet: TDataSet);
-
     procedure DsModulosAfterScroll(TDataSet: TDataSet);
     procedure DsModulosAfterInsert(TDataSet: TDataSet);
     procedure DsModulosAfterCancel(TDataSet: TDataSet);
@@ -209,7 +204,6 @@ type
     FIniConexão: TIniFile;
   public
     { Public declarations }
-
     destructor Destroy; override;
   end;
 
@@ -226,12 +220,10 @@ uses
 procedure TformPrincipal.FormCreate(Sender: TObject);
 begin
   FUsuario := TUsuario.Create;
-   FControllerProblema := TControllerProblema.Create;
+  FControllerProblema := TControllerProblema.Create;
   FControllerModulo := TControllerModulo.Create;
-
   CarregaGridModulos;
   CarregaGridProblemas;
-
   DsProblemasEventos;
   DsModulosEventos;
 end;
@@ -240,22 +232,30 @@ procedure TformPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   // Teclas de atalho para incluir, salvar, cancelar ou recarregar um problema
-  if Key = VK_F2 then if btnNovoProblema.Enabled then NovoProblema;
-  if Key = VK_F3 then if btnSalvarProblema.Enabled then SalvarProblema;
-  if Key = VK_F4 then if btnCancelarProblema.Enabled then dsProblemas.DataSet.Cancel;
-  if Key = VK_F5 then if btnNovoProblema.Enabled then CarregaGridProblemas;
+  if Key = VK_F2 then
+    if btnNovoProblema.Enabled then
+      NovoProblema;
+  if Key = VK_F3 then
+    if btnSalvarProblema.Enabled then
+      SalvarProblema;
+  if Key = VK_F4 then
+    if btnCancelarProblema.Enabled then
+      dsProblemas.DataSet.Cancel;
+  if Key = VK_F5 then
+    if btnNovoProblema.Enabled then
+      CarregaGridProblemas;
 end;
 
 procedure TformPrincipal.PreencheCbxModulos;
 begin
-  var aListaModulos: TStringList;
-  var aCont: Integer := 0;
-
-  // Preenche o comboBox dos módulos com todos os módulos cadastrados
+  var
+    aListaModulos: TStringList;
+  var
+    aCont: Integer := 0;
+    // Preenche o comboBox dos módulos com todos os módulos cadastrados
   try
     aListaModulos := FControllerModulo.BuscaModulos;
     cbModulo.Clear;
-
     while aCont < aListaModulos.Count do
     begin
       cbModulo.items.Add(aListaModulos[aCont]);
@@ -268,9 +268,10 @@ end;
 
 procedure TformPrincipal.Preferncias1Click(Sender: TObject);
 begin
-  var aUsuario : TUsuario := TUsuario.Create();
-  var FFormPreferencias := TFormPreferencias.Create(Self, aUsuario);
-
+  var
+    aUsuario: TUsuario := TUsuario.Create();
+  var
+  FFormPreferencias := TFormPreferencias.Create(Self, aUsuario);
   // Abre a tela de preferências do usuário
   try
     FFormPreferencias.ShowModal;
@@ -281,19 +282,17 @@ end;
 
 procedure TformPrincipal.SalvarProblema;
 begin
-  var aProblema: TProblema := TProblema.Create;
-
-  // Valida se os dados do problemas estão corretos para conseguir salvar
+  var
+    aProblema: TProblema := TProblema.Create;
+    // Valida se os dados do problemas estão corretos para conseguir salvar
   try
     aProblema.Titulo := edtTituloProblema.Text;
     aProblema.Modulo := edtCodModulo.Text;
-
     if not aProblema.ValidaDados then
       Application.MessageBox('Preencha os campos obrigatórios!',
         'Salvar Problema', +MB_ICONEXCLAMATION + MB_OK)
     else
       dsProblemas.DataSet.Post;
-
   finally
     aProblema.Free;
   end;
@@ -302,12 +301,11 @@ end;
 procedure TformPrincipal.SelecionaModuloCbProblema;
 begin
   // Loop para selecionar o nome do módulo no combobox corresponde ao código do módulo
-
   if dsProblemas.DataSet.RecordCount > 0 then
   begin
     cbModulo.ItemIndex := 0;
-
-    while cbModulo.Text <> FControllerModulo.BuscaNomeModulo(StrToInt(edtCodModulo.Text)) do
+    while cbModulo.Text <> FControllerModulo.BuscaNomeModulo
+      (StrToInt(edtCodModulo.Text)) do
     begin
       cbModulo.ItemIndex := cbModulo.ItemIndex + 1;
     end;
@@ -316,11 +314,10 @@ end;
 
 procedure TformPrincipal.btnImagensProblemaClick(Sender: TObject);
 begin
-  var aCaminhoImagem: String;
-
-  // Abre a tela de visualização das imagens do problema
+  var
+    aCaminhoImagem: String;
+    // Abre a tela de visualização das imagens do problema
   FFormImagensProblema := TformImagensProblema.Create(nil, edtCodProblema.Text);
-
   try
     FFormImagensProblema.ShowModal;
   finally
@@ -347,16 +344,17 @@ end;
 
 procedure TformPrincipal.CarregaGridModulos;
 begin
-  var aTabelaModulos: TDataSource := FControllerModulo.BuscaTabelaModulos
-        (edtPesqModulo.Text);
-
+  var
+    aTabelaModulos: TDataSource := FControllerModulo.BuscaTabelaModulos
+      (edtPesqModulo.Text);
   dsModulos.DataSet := aTabelaModulos.DataSet;
   dsModulos.DataSet.First;
 end;
 
 procedure TformPrincipal.CarregaGridProblemas;
 begin
-  var aNomeModulo: String;
+  var
+    aNomeModulo: String;
 
   if Assigned(gridModulos.DataSource) and (dsModulos.DataSet.RecordCount > 0)
   then
@@ -373,14 +371,17 @@ begin
     1:
       begin
         pnlBodyModulos.Visible := True;
-        dsProblemas.DataSet := FControllerProblema.BuscaTabelaProblemasPorModulo(aNomeModulo).DataSet;
+        dsProblemas.DataSet := FControllerProblema.BuscaTabelaProblemasPorModulo
+          (aNomeModulo).DataSet;
       end;
   end;
-  lblTotalDeProblemas.Caption := 'Total: ' + IntToStr(gridProblemas.DataSource.DataSet.RecordCount);
 
-  //Esconde as colunas, mantendo apenas a coluna do TITULO visível
-  var aCont: Integer;
+  lblTotalDeProblemas.Caption := 'Total: ' +
+    IntToStr(gridProblemas.DataSource.DataSet.RecordCount);
 
+  // Esconde as colunas, mantendo apenas a coluna do TITULO visível
+  var
+    aCont: Integer;
   for aCont := 0 to gridProblemas.Columns.Count - 1 do
   begin
     if aCont <> 2 then
@@ -393,10 +394,19 @@ begin
   DsProblemasAfterScroll(dsProblemas.DataSet);
 end;
 
+procedure TformPrincipal.cbFiltroPesqProblemaChange(Sender: TObject);
+begin
+  if cbFiltroPesqProblema.Text = 'Código' then
+    edtPesqProblema.NumbersOnly := True
+  else
+    edtPesqProblema.NumbersOnly := False;
+end;
+
 procedure TformPrincipal.cbModuloChange(Sender: TObject);
 begin
-  var aCodigoModulo: Integer := FControllerModulo.BuscaCodigoModulo(cbModulo.Text);
-
+  var
+    aCodigoModulo: Integer := FControllerModulo.BuscaCodigoModulo
+      (cbModulo.Text);
   if IntToStr(aCodigoModulo) <>
     IntToStr(dsProblemas.DataSet.FieldByName('cod_mod').AsInteger) then
   begin
@@ -444,7 +454,6 @@ begin
   FControllerProblema.Free;
   FControllerModulo.Free;
   FUsuario.Free;
-
   Application.Terminate;
   inherited;
 end;
@@ -489,15 +498,14 @@ begin
   edtTituloProblema.SetFocus;
   InverteCrudProblema;
   PreencheCbxModulos;
-
   dsProblemas.DataSet.FieldByName('cod_usu').AsInteger := FUsuario.Codigo;
   dsProblemas.DataSet.FieldByName('datacr').AsDateTime := Now;
 end;
 
 procedure TformPrincipal.DsProblemasAfterPost(TDataSet: TDataSet);
 begin
-  var aTituloProblema: String := edtTituloProblema.Text;
-
+  var
+    aTituloProblema: String := edtTituloProblema.Text;
   gridProblemas.DataSource.DataSet.Locate('TITULO', aTituloProblema, []);
   dsModulos.DataSet.Locate('NOME', cbModulo.Text, []);
   btnImagensProblema.Enabled := True;
@@ -511,11 +519,6 @@ begin
     dsProblemas.DataSet.FieldByName('datacr').AsDateTime := Now;
     dsProblemas.DataSet.FieldByName('horacr').AsDateTime := Now;
     dsProblemas.DataSet.FieldByName('cod_prob').AsInteger := 0;
-
-//    if chkSomenteSolucao.Checked then
-//      dsProblemas.DataSet.FieldByName('somentesolu').AsString := 'S'
-//    else
-//      dsProblemas.DataSet.FieldByName('somentesolu').AsString := 'N';
   end;
 end;
 
@@ -531,26 +534,26 @@ end;
 
 procedure TformPrincipal.DsProblemasAfterScroll(TDataSet: TDataSet);
 begin
-  var aListaImagens: TStringList;
-
+  var
+    aListaImagens: TStringList;
   if dsProblemas.DataSet.RecordCount > 0 then
   begin
     try
-      aListaImagens := FControllerProblema.BuscaImagens(dsProblemas.DataSet.FieldByName('cod_prob').AsInteger);
-      btnImagensProblema.Caption := 'Imagens (' + IntToStr(aListaImagens.Count) + ')';
+      aListaImagens := FControllerProblema.BuscaImagens
+        (dsProblemas.DataSet.FieldByName('cod_prob').AsInteger);
+      btnImagensProblema.Caption := 'Imagens (' +
+        IntToStr(aListaImagens.Count) + ')';
     finally
       aListaImagens.Free;
     end;
   end
   else
     btnImagensProblema.Caption := 'Imagens (' + IntToStr(0) + ')';
-
   PreencheCbxModulos;
   EsticaMemoProblemas;
-
   dtProblema.date := dsProblemas.DataSet.FieldByName('datacr').AsDateTime;
-
-  if not (dsProblemas.DataSet.State = dsInsert) then SelecionaModuloCbProblema;
+  if not(dsProblemas.DataSet.State = dsInsert) then
+    SelecionaModuloCbProblema;
 end;
 
 procedure TformPrincipal.edtPesqModuloChange(Sender: TObject);
@@ -560,8 +563,10 @@ end;
 
 procedure TformPrincipal.edtPesqProblemaChange(Sender: TObject);
 begin
-  var aProblema := TProblema.Create;
-  var aFiltro: String;
+  var
+  aProblema := TProblema.Create;
+  var
+    aFiltro: String;
 
   try
     case rdbtnFiltroPesqProblema.ItemIndex of
@@ -571,20 +576,37 @@ begin
 
     if Length(edtPesqProblema.Text) > 0 then
     begin
+
       case cbFiltroPesqProblema.ItemIndex of
-        0: aProblema.Codigo := StrToInt(edtPesqProblema.Text);
-        1: aProblema.Titulo := edtPesqProblema.Text;
-        2: aProblema.Chamado := edtPesqProblema.Text;
-        3: aProblema.Detalhes := edtPesqProblema.Text;
-        4: aProblema.Solucao := edtPesqProblema.Text;
+        0:
+          aProblema.Codigo := StrToInt(Copy(edtPesqProblema.Text, 1, 10));
+        1:
+          aProblema.Titulo := edtPesqProblema.Text;
+        2:
+          aProblema.Chamado := edtPesqProblema.Text;
+        3:
+          aProblema.Detalhes := edtPesqProblema.Text;
+        4:
+          aProblema.Solucao := edtPesqProblema.Text;
       end;
 
       aProblema.Modulo := gridModulos.Columns[0].Field.Value;
       FControllerProblema.BuscaTabelaProblemasPorFiltro(aProblema,
         cbFiltroPesqProblema.Text, aFiltro);
+
+      var
+        aCont: Integer;
+      for aCont := 0 to gridProblemas.Columns.Count - 1 do
+      begin
+        if aCont <> 2 then
+          gridProblemas.Columns[aCont].Visible := False;
+      end;
+
+      gridProblemas.Columns[2].Title.Font.Style := [fsBold];
+      TDrawGrid(gridProblemas).ScrollBars := ssVertical;
     end
-    else
-      CarregaGridProblemas;
+  else
+    CarregaGridProblemas;
   finally
     aProblema.Free;
   end;
@@ -602,7 +624,6 @@ begin
   begin
     pnlBodyDetalhesProblema.Visible := False;
     chkSomenteSolucao.Checked;
-
     if mmSolucaoProblema.Height <> 450 then
       mmSolucaoProblema.Height := 450
   end
@@ -610,7 +631,6 @@ begin
   begin
     pnlBodyDetalhesProblema.Visible := True;
     chkSomenteSolucao.Checked := False;
-
     if mmSolucaoProblema.Height <> 280 then
       mmSolucaoProblema.Height := 280
   end;
@@ -624,7 +644,6 @@ begin
     dsProblemas.DataSet.Delete;
     CarregaGridProblemas;
   end;
-
   if gridProblemas.DataSource.DataSet.RecordCount < 1 then
     pnlProblemas.Visible := False;
 end;
@@ -686,7 +705,6 @@ begin
     Title.Font.Style := [fsBold];
     Title.Font.Size := 9;
   end;
-
   // Caso a linha do grid for a selecionada no momento, muda as personalizações de estilo
   with gridModulos do
   begin
@@ -701,7 +719,6 @@ begin
     else
       DefaultDrawColumnCell(Rect, DataCol, Column, State);
   end;
-
   // Faz a alternação de cores no grid
   if State = [] then
   begin
@@ -715,14 +732,12 @@ end;
 procedure TformPrincipal.gridProblemasDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-
   // Personaliza fonte do grid de módulos
   with gridProblemas.Columns[0] do
   begin
     Title.Font.Style := [fsBold];
     Title.Font.Size := 9;
   end;
-
   // Caso a linha do grid for a selecionada no momento, muda as personalizações de estilo
   with gridProblemas do
   begin
@@ -737,7 +752,6 @@ begin
     else
       DefaultDrawColumnCell(Rect, DataCol, Column, State);
   end;
-
   // Faz a alternação de cores no grid
   if State = [] then
   begin
@@ -780,8 +794,8 @@ end;
 
 procedure TformPrincipal.mmSolucaoProblemaDblClick(Sender: TObject);
 begin
-  FFormRichEditTelaCheia := TFormRichEditTelaCheia.Create(nil, mmSolucaoProblema.Text, 'Solução');
-
+  FFormRichEditTelaCheia := TFormRichEditTelaCheia.Create(nil,
+    mmSolucaoProblema.Text, 'Solução');
   try
     FFormRichEditTelaCheia.ShowModal;
   finally
@@ -791,9 +805,11 @@ end;
 
 procedure TformPrincipal.N1Click(Sender: TObject);
 begin
-  var aUsuario : TUsuario := TUsuario.Create;
-  var aFrmPreferencias : TFormPreferencias := TFormPreferencias.Create(Self, aUsuario);
-
+  var
+    aUsuario: TUsuario := TUsuario.Create;
+  var
+    aFrmPreferencias: TFormPreferencias := TFormPreferencias.Create(Self,
+      aUsuario);
   try
     aFrmPreferencias.ShowModal;
   finally
@@ -824,13 +840,10 @@ end;
 procedure TformPrincipal.FormShow(Sender: TObject);
 begin
   edtPesqModulo.SetFocus;
-
   cbFiltroPesqProblema.ItemIndex := FUsuario.GetIndFiltroConsultaProblema;
   rdbtnFiltroPesqProblema.ItemIndex := FUsuario.ConsultaGeral;
   pnlPrincipal.Color := StringToColor(FUsuario.Cor);
-
   statusBarBottom.Panels[0].Text := 'Usuário: ' + FUsuario.Nome;
-
   PreencheCbxModulos;
   SelecionaModuloCbProblema;
 end;

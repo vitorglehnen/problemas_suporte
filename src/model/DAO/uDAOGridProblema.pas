@@ -45,7 +45,7 @@ begin
   FDataSource := FConn.CriarDataSource;
 
   FQuery.SQL.Clear;
-  FQuery.SQL.Add('SELECT titulo FROM problemas WHERE');
+  FQuery.SQL.Add('SELECT * FROM problemas WHERE');
 
   if aFiltro = 'Módulo' then
   begin

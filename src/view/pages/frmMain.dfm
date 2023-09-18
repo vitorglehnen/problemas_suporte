@@ -270,6 +270,7 @@ object formPrincipal: TformPrincipal
                   Height = 21
                   Style = csDropDownList
                   TabOrder = 1
+                  OnChange = cbFiltroPesqProblemaChange
                   Items.Strings = (
                     'C'#243'digo'
                     'T'#237'tulo'
@@ -745,6 +746,7 @@ object formPrincipal: TformPrincipal
                 Top = 21
                 Width = 801
                 Height = 280
+                BevelInner = bvNone
                 DataField = 'solucao'
                 DataSource = dsProblemas
                 Font.Charset = ANSI_CHARSET
@@ -910,6 +912,7 @@ object formPrincipal: TformPrincipal
                 Top = 21
                 Width = 801
                 Height = 142
+                BevelInner = bvNone
                 DataField = 'detalhes'
                 DataSource = dsProblemas
                 Font.Charset = ANSI_CHARSET
