@@ -500,6 +500,7 @@ object formPrincipal: TformPrincipal
               Height = 35
               Align = alTop
               BevelOuter = bvNone
+              ParentColor = True
               TabOrder = 0
               object lblPesqModulo: TLabel
                 Left = 0

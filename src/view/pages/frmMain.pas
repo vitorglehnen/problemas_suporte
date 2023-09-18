@@ -186,14 +186,17 @@ type
     procedure ExcluirProblema;
     procedure SalvarProblema;
     procedure NovoProblema;
+
     procedure DsProblemasEventos;
     procedure DsModulosEventos;
+
     procedure DsProblemasAfterCancel(TDataSet: TDataSet);
     procedure DsProblemasAfterScroll(TDataSet: TDataSet);
     procedure DsProblemasAfterInsert(TDataSet: TDataSet);
     procedure DsProblemasBeforePost(TDataSet: TDataSet);
     procedure DsProblemasAfterEdit(TDataSet: TDataSet);
     procedure DsProblemasAfterPost(TDataSet: TDataSet);
+
     procedure DsModulosAfterScroll(TDataSet: TDataSet);
     procedure DsModulosAfterInsert(TDataSet: TDataSet);
     procedure DsModulosAfterCancel(TDataSet: TDataSet);
@@ -271,7 +274,8 @@ begin
   var
     aUsuario: TUsuario := TUsuario.Create();
   var
-  FFormPreferencias := TFormPreferencias.Create(Self, aUsuario);
+    FFormPreferencias := TFormPreferencias.Create(Self, aUsuario);
+
   // Abre a tela de preferências do usuário
   try
     FFormPreferencias.ShowModal;
@@ -284,10 +288,12 @@ procedure TformPrincipal.SalvarProblema;
 begin
   var
     aProblema: TProblema := TProblema.Create;
-    // Valida se os dados do problemas estão corretos para conseguir salvar
+
+  // Valida se os dados do problemas estão corretos para conseguir salvar
   try
     aProblema.Titulo := edtTituloProblema.Text;
     aProblema.Modulo := edtCodModulo.Text;
+
     if not aProblema.ValidaDados then
       Application.MessageBox('Preencha os campos obrigatórios!',
         'Salvar Problema', +MB_ICONEXCLAMATION + MB_OK)
@@ -316,7 +322,8 @@ procedure TformPrincipal.btnImagensProblemaClick(Sender: TObject);
 begin
   var
     aCaminhoImagem: String;
-    // Abre a tela de visualização das imagens do problema
+
+  // Abre a tela de visualização das imagens do problema
   FFormImagensProblema := TformImagensProblema.Create(nil, edtCodProblema.Text);
   try
     FFormImagensProblema.ShowModal;
@@ -347,6 +354,7 @@ begin
   var
     aTabelaModulos: TDataSource := FControllerModulo.BuscaTabelaModulos
       (edtPesqModulo.Text);
+
   dsModulos.DataSet := aTabelaModulos.DataSet;
   dsModulos.DataSet.First;
 end;
@@ -356,12 +364,16 @@ begin
   var
     aNomeModulo: String;
 
-  if Assigned(gridModulos.DataSource) and (dsModulos.DataSet.RecordCount > 0)
+  { Faz a validação para verificar se o dataset dos módulos não está vazio }
+  if Assigned(dsModulos) and (dsModulos.DataSet.RecordCount > 0)
   then
     aNomeModulo := gridModulos.Columns[0].Field.Value
   else
     aNomeModulo := '';
 
+  { Dependendo do item que está marcado no radioButton dos filtros de pesquisa
+    do problemas, faz um select correspondente, se for GERAL ou SOMENTE do
+    módulo }
   case rdbtnFiltroPesqProblema.ItemIndex of
     0:
       begin
@@ -376,10 +388,10 @@ begin
       end;
   end;
 
-  lblTotalDeProblemas.Caption := 'Total: ' +
-    IntToStr(gridProblemas.DataSource.DataSet.RecordCount);
+  lblTotalDeProblemas.Caption := 'Total: ' + IntToStr(gridProblemas.DataSource.DataSet.RecordCount);
 
-  // Esconde as colunas, mantendo apenas a coluna do TITULO visível
+  { Esconde as colunas no grid de problemas, mantendo apenas a coluna do TITULO
+    visível }
   var
     aCont: Integer;
   for aCont := 0 to gridProblemas.Columns.Count - 1 do
@@ -738,7 +750,10 @@ begin
     Title.Font.Style := [fsBold];
     Title.Font.Size := 9;
   end;
-  // Caso a linha do grid for a selecionada no momento, muda as personalizações de estilo
+
+  { Caso a linha do grid for a selecionada no momento, muda as personalizações
+    de estilo
+  }
   with gridProblemas do
   begin
     if gdSelected in State then
@@ -752,7 +767,8 @@ begin
     else
       DefaultDrawColumnCell(Rect, DataCol, Column, State);
   end;
-  // Faz a alternação de cores no grid
+
+  { Faz a alternação de cores no grid }
   if State = [] then
   begin
     if gridProblemas.DataSource.DataSet.RecNo mod 2 = 1 then
