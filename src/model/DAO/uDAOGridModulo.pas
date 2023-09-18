@@ -2,9 +2,15 @@ unit uDAOGridModulo;
 
 interface
 
-uses uConexao, uModulo, FireDAC.Comp.Client, Vcl.Dialogs,
+uses
+  uConexao,
+  uModulo,
+  FireDAC.Comp.Client,
+  Vcl.Dialogs,
   System.Generics.Collections,
-  Vcl.DBCtrls, DBClient, Data.DB;
+  Vcl.DBCtrls,
+  DBClient,
+  Data.DB;
 
 type
   TDAOGridModulo = Class
@@ -32,6 +38,8 @@ begin
   FQuery.Open();
 
   FDataSource.DataSet := FQuery;
+  FConn.GetConn.Commit;
+
   Result := FDataSource;
 end;
 
@@ -43,7 +51,9 @@ end;
 destructor TDAOGridModulo.Destroy;
 begin
   FConn.Free;
+
   inherited;
 end;
 
 end.
+

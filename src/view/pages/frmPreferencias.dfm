@@ -22,8 +22,8 @@ object FormPreferencias: TFormPreferencias
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = -8
-    ExplicitTop = -8
+    ExplicitWidth = 618
+    ExplicitHeight = 432
     object Label1: TLabel
       Left = 424
       Top = 48
@@ -37,16 +37,16 @@ object FormPreferencias: TFormPreferencias
       Width = 624
       Height = 33
       Align = alTop
-      Color = 16708071
+      Color = clGray
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
+      Font.Color = clWindow
       Font.Height = -12
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 620
+      ExplicitWidth = 618
     end
     object rdgpConsultaPadrao: TRadioGroup
       Left = 8

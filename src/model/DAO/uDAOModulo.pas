@@ -35,6 +35,7 @@ begin
   FQuery.Open;
 
   FDataSource.DataSet := FQuery;
+  FConn.GetConn.Commit;
 
   Result := FDataSource;
 end;
@@ -47,6 +48,7 @@ begin
   FQuery.Open('SELECT nome FROM modulos ORDER BY nome');
 
   FDataSource.DataSet := FQuery;
+  FConn.GetConn.Commit;
 
   Result := FDataSource;
 end;
@@ -61,6 +63,7 @@ begin
   FQuery.Open;
 
   FDataSource.DataSet := FQuery;
+  FConn.GetConn.Commit;
 
   Result := FDataSource;
 end;
@@ -75,15 +78,16 @@ begin
   FQuery := FConn.CriarQuery;
 
   FQuery.SQL.Text := 'DELETE FROM modulos where nome = :nome';
-
   FQuery.ParamByName('nome').AsString := aModulo.Nome;
 
   FQuery.ExecSQL;
+  FConn.GetConn.Commit;
 end;
 
 destructor TDAOModulo.Destroy;
 begin
   FConn.Free;
+
   inherited;
 end;
 

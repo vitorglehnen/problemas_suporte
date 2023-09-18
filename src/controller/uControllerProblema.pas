@@ -28,6 +28,7 @@ type
     function BuscaProximoCodigoImagem: String;
     procedure InsertImagem(aImagem: TImagemProblema);
     procedure DeleteImagem(aImagemProblema: TImagemProblema);
+
     constructor Create;
     destructor Destroy; override;
   end;

@@ -31,9 +31,8 @@ begin
   FQuery := FConn.CriarQuery;
   FDataSource := FConn.CriarDataSource;
 
-  FQuery.SQL.Text := 'SELECT titulo FROM PROBLEMAS ORDER BY TITULO';
+  FQuery.SQL.Text := 'SELECT * FROM PROBLEMAS ORDER BY TITULO';
   FQuery.Open;
-  FQuery.FetchAll;
 
   FDataSource.DataSet := FQuery;
 
@@ -84,24 +83,24 @@ begin
   FQuery.FetchAll;
 
   FDataSource.DataSet := FQuery;
+  FConn.GetConn.Commit;
 
   Result := FDataSource;
 end;
 
-function TDAOGridProblema.BuscaTabelaProblemasPorModulo(aNomeModulo: String)
-  : TDataSource;
+function TDAOGridProblema.BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
 begin
   FQuery := FConn.CriarQuery;
   FDataSource := FConn.CriarDataSource;
 
-  FQuery.SQL.Text := 'SELECT titulo FROM problemas ' +
+  FQuery.SQL.Text := 'SELECT * FROM problemas ' +
   'JOIN modulos ON problemas.cod_mod = modulos.cod_mod ' +
   'WHERE modulos.nome = :NomeModulo';
   FQuery.ParamByName('NomeModulo').AsString := aNomeModulo;
   FQuery.Open;
-  FQuery.FetchAll;
 
   FDataSource.DataSet := FQuery;
+  FConn.GetConn.Commit;
 
   Result := FDataSource;
 end;
@@ -114,6 +113,7 @@ end;
 destructor TDAOGridProblema.Destroy;
 begin
   FConn.Free;
+
   inherited;
 end;
 

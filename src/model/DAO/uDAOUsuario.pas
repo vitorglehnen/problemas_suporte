@@ -41,6 +41,7 @@ begin
   FQuery.ParamByName('cor').AsString := aUsuario.Cor;
 
   FQuery.ExecSQL;
+  FConn.GetConn.Commit;
 end;
 
 constructor TDAOUsuario.Create;
@@ -60,10 +61,11 @@ begin
 
   FQuery.SQL.Text := 'INSERT INTO usuarios (cod_usu, nome, selecaogeral, cor) VALUES (GEN_ID(gen_usuarios_id, 1), :nome, :selecaogeral, :cor)';
   FQuery.ParamByName('nome').AsString := aUsuario;
-  FQuery.ParamByName('selecaogeral').AsInteger := 0;
+  FQuery.ParamByName('selecaogeral').AsInteger := 1;
   FQuery.ParamByName('cor').AsString := '$00FEF1E7';
 
   FQuery.ExecSQL;
+  FConn.GetConn.Commit;
 end;
 
 function TDAOUsuario.RetornaCodUsuario(aUsuario: String): Integer;
@@ -76,6 +78,7 @@ begin
   FQuery.Open;
 
   FDataSource.DataSet := FQuery;
+  FConn.GetConn.Commit;
 
   Result := FDataSource.DataSet.FieldByName('cod_usu').AsInteger;
 end;
@@ -90,6 +93,7 @@ begin
   FQuery.Open;
 
   FDataSource.DataSet := FQuery;
+  FConn.GetConn.Commit;
 
   Result := FDataSource.DataSet;
 end;

@@ -32,6 +32,7 @@ begin
   FQuery.Open;
 
   FDataSource.DataSet := FQuery;
+  FConn.GetConn.Commit;
 
   Result := FDataSource;
 end;

@@ -70,6 +70,8 @@ begin
 
   FDAOUsuario.AtualizaUsuario(FUsuario);
 
+  FDAOUsuario.Free;
+
   inherited;
 end;
 

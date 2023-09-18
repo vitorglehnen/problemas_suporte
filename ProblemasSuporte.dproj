@@ -84,7 +84,7 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Icon_MainIcon>ProblemasSuporte_Icon.ico</Icon_MainIcon>
+        <Icon_MainIcon>src\icons\ico.ico</Icon_MainIcon>
         <BRCC_OutputDir>C:\Problemas Suporte\</BRCC_OutputDir>
         <DCC_ExeOutput>C:\Problemas Suporte\</DCC_ExeOutput>
     </PropertyGroup>
@@ -109,7 +109,6 @@
         <DCCReference Include="src\model\connection\uConexao.pas"/>
         <DCCReference Include="src\model\models\uProblema.pas"/>
         <DCCReference Include="src\model\models\uModulo.pas"/>
-        <DCCReference Include="src\model\DAO\uDAOModulo.pas"/>
         <DCCReference Include="src\model\DAO\uDAOGridProblema.pas"/>
         <DCCReference Include="src\controller\uControllerProblema.pas"/>
         <DCCReference Include="src\model\DAO\uDAOProblema.pas"/>
@@ -133,6 +132,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\model\interfaces\uInterfaceUsuario.pas"/>
+        <DCCReference Include="src\model\DAO\uDAOModulo.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

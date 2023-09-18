@@ -37,6 +37,8 @@ begin
   FQuery.Open;
 
   FDataSource.DataSet := FQuery;
+  FConn.GetConn.Commit;
+
   Result := FDataSource;
 end;
 
@@ -49,6 +51,8 @@ begin
   FQuery.Open;
 
   FDataSource.DataSet := FQuery;
+  FConn.GetConn.Commit;
+
   Result := FDataSource.DataSet.Fields[0].Value;
 end;
 
@@ -67,6 +71,7 @@ begin
   FQuery.ParamByName('imagem').AsString := aImagemProblema.Imagem;
 
   FQuery.ExecSQL;
+  FConn.GetConn.Commit;
 end;
 
 destructor TDAOImagemProblema.Destroy;
@@ -87,6 +92,7 @@ begin
   FQuery.ParamByName('imagem').AsString := aImagemProblema.Imagem;
 
   FQuery.ExecSQL;
+  FConn.GetConn.Commit;
 end;
 
 end.

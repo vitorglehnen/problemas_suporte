@@ -5,7 +5,6 @@ uses
   uConexao in 'src\model\connection\uConexao.pas',
   uProblema in 'src\model\models\uProblema.pas',
   uModulo in 'src\model\models\uModulo.pas',
-  uDAOModulo in 'src\model\DAO\uDAOModulo.pas',
   uDAOGridProblema in 'src\model\DAO\uDAOGridProblema.pas',
   uControllerProblema in 'src\controller\uControllerProblema.pas',
   uDAOProblema in 'src\model\DAO\uDAOProblema.pas',
@@ -19,7 +18,8 @@ uses
   uUsuario in 'src\model\models\uUsuario.pas',
   uDAOConsultaPadrao in 'src\model\DAO\uDAOConsultaPadrao.pas',
   frmPreferencias in 'src\view\pages\frmPreferencias.pas' {FormPreferencias},
-  uInterfaceUsuario in 'src\model\interfaces\uInterfaceUsuario.pas';
+  uInterfaceUsuario in 'src\model\interfaces\uInterfaceUsuario.pas',
+  uDAOModulo in 'src\model\DAO\uDAOModulo.pas';
 
 {$R *.res}
 begin
