@@ -2,7 +2,7 @@ object formPrincipal: TformPrincipal
   Left = 0
   Top = 0
   Caption = 'Problemas Suporte'
-  ClientHeight = 730
+  ClientHeight = 729
   ClientWidth = 1374
   Color = 16640729
   Font.Charset = DEFAULT_CHARSET
@@ -12,45 +12,48 @@ object formPrincipal: TformPrincipal
   Font.Style = []
   KeyPreview = True
   Menu = menuOpcoes
+  OldCreateOrder = True
   WindowState = wsMaximized
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnShow = FormShow
+  PixelsPerInch = 96
   TextHeight = 13
   object pnlPrincipal: TPanel
     Left = 0
     Top = 0
     Width = 1374
-    Height = 730
+    Height = 729
     Align = alClient
     AutoSize = True
     BevelOuter = bvNone
-    Color = clRed
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 1368
-    ExplicitHeight = 721
     object pnlBodyModulosProblemas: TPanel
       Left = 0
       Top = 0
       Width = 512
-      Height = 716
+      Height = 715
       Align = alLeft
       BevelOuter = bvNone
       Caption = 'pnlBodyModulosProblemas'
       ParentColor = True
       TabOrder = 0
-      ExplicitHeight = 707
       object pnlBodyProblemas: TPanel
         Left = 241
         Top = 0
         Width = 271
-        Height = 716
+        Height = 715
         Align = alClient
         BevelOuter = bvNone
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
         ParentColor = True
+        ParentFont = False
         TabOrder = 0
-        ExplicitHeight = 707
         object pnlTopProblemas: TPanel
           Left = 0
           Top = 0
@@ -68,17 +71,15 @@ object formPrincipal: TformPrincipal
             Align = alClient
             Alignment = taCenter
             Caption = 'Problemas'
-            Color = 16708071
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -15
+            Font.Color = clWindowText
+            Font.Height = -11
             Font.Name = 'Tahoma'
             Font.Style = [fsBold]
-            ParentColor = False
             ParentFont = False
             Layout = tlCenter
-            ExplicitWidth = 79
-            ExplicitHeight = 18
+            ExplicitWidth = 60
+            ExplicitHeight = 13
           end
           object lblTotalDeProblemas: TLabel
             Left = 5
@@ -86,13 +87,11 @@ object formPrincipal: TformPrincipal
             Width = 35
             Height = 13
             Caption = 'Total: '
-            Color = clMedGray
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
             Font.Name = 'Tahoma'
             Font.Style = [fsBold]
-            ParentColor = False
             ParentFont = False
           end
           object pnlBotaoCrudProblema: TPanel
@@ -184,6 +183,7 @@ object formPrincipal: TformPrincipal
             Padding.Top = 8
             Padding.Right = 8
             Padding.Bottom = 8
+            ParentColor = True
             TabOrder = 1
             object pnlPesqProblema: TPanel
               Left = 9
@@ -192,6 +192,7 @@ object formPrincipal: TformPrincipal
               Height = 134
               Align = alClient
               BevelOuter = bvNone
+              ParentColor = True
               TabOrder = 0
               object lblPesqProblema: TLabel
                 Left = 0
@@ -225,6 +226,7 @@ object formPrincipal: TformPrincipal
                 Align = alClient
                 BevelOuter = bvNone
                 Padding.Top = 10
+                ParentColor = True
                 TabOrder = 1
                 object btnSalvaIndiceFiltroProblema: TSpeedButton
                   Left = 119
@@ -249,7 +251,7 @@ object formPrincipal: TformPrincipal
                   Align = alBottom
                   Caption = 'Filtro da pesquisa'
                   Font.Charset = DEFAULT_CHARSET
-                  Font.Color = clWhite
+                  Font.Color = clBlack
                   Font.Height = -11
                   Font.Name = 'Tahoma'
                   Font.Style = []
@@ -328,17 +330,16 @@ object formPrincipal: TformPrincipal
           Left = 0
           Top = 257
           Width = 271
-          Height = 459
+          Height = 458
           Align = alClient
           Color = clWhite
           ParentBackground = False
           TabOrder = 1
-          ExplicitHeight = 450
           object gridProblemas: TDBGrid
             Left = 1
             Top = 1
             Width = 269
-            Height = 457
+            Height = 456
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
@@ -367,12 +368,11 @@ object formPrincipal: TformPrincipal
         Left = 0
         Top = 0
         Width = 241
-        Height = 716
+        Height = 715
         Align = alLeft
         BevelOuter = bvNone
         ParentColor = True
         TabOrder = 1
-        ExplicitHeight = 707
         object pnlTopModulos: TPanel
           Left = 0
           Top = 0
@@ -390,17 +390,15 @@ object formPrincipal: TformPrincipal
             Align = alClient
             Alignment = taCenter
             Caption = 'M'#243'dulos'
-            Color = 16708071
             Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -15
+            Font.Color = clWindowText
+            Font.Height = -11
             Font.Name = 'Tahoma'
             Font.Style = [fsBold]
-            ParentColor = False
             ParentFont = False
             Layout = tlCenter
-            ExplicitWidth = 62
-            ExplicitHeight = 18
+            ExplicitWidth = 47
+            ExplicitHeight = 13
           end
           object pnlBotaoCrudModulo: TPanel
             Left = 1
@@ -542,17 +540,16 @@ object formPrincipal: TformPrincipal
           Left = 0
           Top = 257
           Width = 241
-          Height = 459
+          Height = 458
           Align = alClient
-          Color = clWhite
           ParentBackground = False
+          ParentColor = True
           TabOrder = 1
-          ExplicitHeight = 450
           object gridModulos: TDBGrid
             Left = 1
             Top = 1
             Width = 239
-            Height = 457
+            Height = 456
             Align = alClient
             BorderStyle = bsNone
             Color = clWhite
@@ -583,31 +580,27 @@ object formPrincipal: TformPrincipal
       Left = 512
       Top = 0
       Width = 862
-      Height = 716
+      Height = 715
       Align = alClient
       ActiveCard = pnlCadastroProblema
       AutoSize = True
       BevelOuter = bvNone
       ParentColor = True
       TabOrder = 1
-      ExplicitWidth = 856
-      ExplicitHeight = 707
       object pnlCadastroProblema: TCard
         Left = 0
         Top = 0
         Width = 862
-        Height = 716
+        Height = 715
         Caption = 'Painel problema'
         CardIndex = 0
         ParentColor = True
         TabOrder = 0
-        ExplicitWidth = 856
-        ExplicitHeight = 707
         object pnlProblemas: TPanel
           Left = 0
           Top = 0
           Width = 862
-          Height = 716
+          Height = 715
           Align = alClient
           Anchors = []
           AutoSize = True
@@ -622,8 +615,6 @@ object formPrincipal: TformPrincipal
           ParentFont = False
           TabOrder = 0
           TabStop = True
-          ExplicitWidth = 856
-          ExplicitHeight = 707
           object pnlBodyModuloProblema: TPanel
             Left = 0
             Top = 69
@@ -634,8 +625,8 @@ object formPrincipal: TformPrincipal
             BevelOuter = bvNone
             Padding.Left = 30
             Padding.Top = 20
+            ParentColor = True
             TabOrder = 1
-            ExplicitWidth = 856
             object btnImagensProblema: TSpeedButton
               Left = 349
               Top = 34
@@ -658,6 +649,7 @@ object formPrincipal: TformPrincipal
               Align = alLeft
               AutoSize = True
               BevelOuter = bvNone
+              ParentColor = True
               TabOrder = 0
               object lblModuloProblema: TLabel
                 Left = 0
@@ -713,28 +705,26 @@ object formPrincipal: TformPrincipal
             Left = 0
             Top = 354
             Width = 862
-            Height = 362
+            Height = 361
             Align = alClient
             Anchors = []
             AutoSize = True
             BevelOuter = bvNone
             Padding.Left = 30
+            ParentColor = True
             TabOrder = 3
-            ExplicitWidth = 856
-            ExplicitHeight = 353
             object pnlSolucaoProblema: TPanel
               Left = 30
               Top = 0
               Width = 832
-              Height = 362
+              Height = 361
               Align = alClient
               AutoSize = True
               BevelOuter = bvNone
               Padding.Right = 60
               Padding.Bottom = 50
+              ParentColor = True
               TabOrder = 0
-              ExplicitWidth = 826
-              ExplicitHeight = 353
               object lblSolucaoProblema: TLabel
                 Left = 0
                 Top = 0
@@ -765,6 +755,7 @@ object formPrincipal: TformPrincipal
                 MaxLength = 100000
                 ScrollBars = ssVertical
                 TabOrder = 0
+                Zoom = 100
                 OnDblClick = mmSolucaoProblemaDblClick
               end
             end
@@ -782,7 +773,6 @@ object formPrincipal: TformPrincipal
             ParentBackground = False
             ParentColor = True
             TabOrder = 0
-            ExplicitWidth = 856
             object lblDataProblema: TLabel
               Left = 633
               Top = 11
@@ -887,8 +877,8 @@ object formPrincipal: TformPrincipal
             AutoSize = True
             BevelOuter = bvNone
             Padding.Left = 30
+            ParentColor = True
             TabOrder = 2
-            ExplicitWidth = 856
             object pnlDetalhesProblema: TPanel
               Left = 30
               Top = 0
@@ -898,8 +888,8 @@ object formPrincipal: TformPrincipal
               BevelOuter = bvNone
               Padding.Right = 60
               Padding.Bottom = 20
+              ParentColor = True
               TabOrder = 0
-              ExplicitWidth = 826
               object lblDetalhesProblema: TLabel
                 Left = 0
                 Top = 0
@@ -930,6 +920,7 @@ object formPrincipal: TformPrincipal
                 MaxLength = 100000
                 ScrollBars = ssVertical
                 TabOrder = 0
+                Zoom = 100
                 OnDblClick = mmDetalhesProblemaDblClick
               end
             end
@@ -939,7 +930,7 @@ object formPrincipal: TformPrincipal
     end
     object statusBarBottom: TStatusBar
       Left = 0
-      Top = 716
+      Top = 715
       Width = 1374
       Height = 14
       Panels = <
@@ -947,21 +938,18 @@ object formPrincipal: TformPrincipal
           Text = 'Usu'#225'rio:'
           Width = 50
         end>
-      ExplicitTop = 707
-      ExplicitWidth = 1368
     end
   end
   object dsModulos: TDataSource
-    Left = 19
-    Top = 242
+    Left = 11
+    Top = 258
   end
   object dsProblemas: TDataSource
-    Left = 451
-    Top = 210
+    Left = 243
+    Top = 258
   end
   object menuOpcoes: TMainMenu
-    Left = 120
-    Top = 241
+    Top = 1
     object N1: TMenuItem
       Caption = 'Prefer'#234'ncias'
       OnClick = N1Click
