@@ -133,6 +133,7 @@ type
     pnlDetalhesProblema: TPanel;
     lblDetalhesProblema: TLabel;
     mmDetalhesProblema: TDBRichEdit;
+
     procedure btnNovoModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btnExcluirModuloClick(Sender: TObject);
@@ -167,39 +168,42 @@ type
     procedure Preferncias1Click(Sender: TObject);
     procedure btnSalvaIndiceFiltroProblemaClick(Sender: TObject);
     procedure N1Click(Sender: TObject);
+
   private
     { Private declarations }
-    FUsuario: TUsuario;
-    FFormImagensProblema: TformImagensProblema;
     FFormRichEditTelaCheia: TFormRichEditTelaCheia;
-    FControllerModulo: TControllerModulo;
+    FFormImagensProblema: TformImagensProblema;
     FControllerProblema: TControllerProblema;
+    FControllerModulo: TControllerModulo;
+    FUsuario: TUsuario;
 
+    procedure SelecionaModuloCbProblema;
     procedure CarregaGridProblemas;
+    procedure EsticaMemoProblemas;
+    procedure InverteCrudProblema;
     procedure CarregaGridModulos;
     procedure PreencheCbxModulos;
-    procedure InverteCrudProblema;
     procedure InverteCrudModulo;
-    procedure SalvarProblema;
-    procedure NovoProblema;
     procedure CancelarProblema;
     procedure ExcluirProblema;
-    procedure SelecionaModuloCbProblema;
+    procedure SalvarProblema;
+    procedure NovoProblema;
 
     procedure DsProblemasEventos;
     procedure DsModulosEventos;
 
+    procedure DsProblemasAfterCancel(TDataSet: TDataSet);
     procedure DsProblemasAfterScroll(TDataSet: TDataSet);
+    procedure DsProblemasAfterInsert(TDataSet: TDataSet);
+    procedure DsProblemasBeforePost(TDataSet: TDataSet);
     procedure DsProblemasAfterEdit(TDataSet: TDataSet);
     procedure DsProblemasAfterPost(TDataSet: TDataSet);
-    procedure DsProblemasAfterInsert(TDataSet: TDataSet);
-    procedure DsProblemasAfterCancel(TDataSet: TDataSet);
-    procedure DsProblemasBeforePost(TDataSet: TDataSet);
 
     procedure DsModulosAfterScroll(TDataSet: TDataSet);
     procedure DsModulosAfterInsert(TDataSet: TDataSet);
-    procedure DsModulosAfterPost(TDataSet: TDataSet);
     procedure DsModulosAfterCancel(TDataSet: TDataSet);
+    procedure DsModulosAfterDelete(TDataSet: TDataSet);
+    procedure DsModulosAfterPost(TDataSet: TDataSet);
     procedure DsModulosAfterEdit(TDataSet: TDataSet);
   private
     FIniConexão: TIniFile;
@@ -222,34 +226,24 @@ uses
 procedure TformPrincipal.FormCreate(Sender: TObject);
 begin
   FUsuario := TUsuario.Create;
-
-  FControllerProblema := TControllerProblema.Create;
+   FControllerProblema := TControllerProblema.Create;
   FControllerModulo := TControllerModulo.Create;
 
   CarregaGridModulos;
   CarregaGridProblemas;
 
-  DsModulosEventos;
   DsProblemasEventos;
-
-  statusBarBottom.Panels[0].Text := 'Usuário: ' + FUsuario.Nome;
+  DsModulosEventos;
 end;
 
 procedure TformPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  if Key = VK_F2 then
-    if btnNovoProblema.Enabled then
-      NovoProblema;
-  if Key = VK_F3 then
-    if btnSalvarProblema.Enabled then
-      SalvarProblema;
-  if Key = VK_F4 then
-    if btnCancelarProblema.Enabled then
-      dsProblemas.DataSet.Cancel;
-  if Key = VK_F5 then
-    if btnNovoProblema.Enabled then
-      CarregaGridProblemas;
+  // Teclas de atalho para incluir, salvar, cancelar ou recarregar um problema
+  if Key = VK_F2 then if btnNovoProblema.Enabled then NovoProblema;
+  if Key = VK_F3 then if btnSalvarProblema.Enabled then SalvarProblema;
+  if Key = VK_F4 then if btnCancelarProblema.Enabled then dsProblemas.DataSet.Cancel;
+  if Key = VK_F5 then if btnNovoProblema.Enabled then CarregaGridProblemas;
 end;
 
 procedure TformPrincipal.PreencheCbxModulos;
@@ -257,6 +251,7 @@ begin
   var aListaModulos: TStringList;
   var aCont: Integer := 0;
 
+  // Preenche o comboBox dos módulos com todos os módulos cadastrados
   try
     aListaModulos := FControllerModulo.BuscaModulos;
     cbModulo.Clear;
@@ -276,6 +271,7 @@ begin
   var aUsuario : TUsuario := TUsuario.Create();
   var FFormPreferencias := TFormPreferencias.Create(Self, aUsuario);
 
+  // Abre a tela de preferências do usuário
   try
     FFormPreferencias.ShowModal;
   finally
@@ -283,28 +279,21 @@ begin
   end;
 end;
 
-procedure TformPrincipal.rdbtnFiltroPesqProblemaClick(Sender: TObject);
-begin
-  CarregaGridProblemas;
-end;
-
 procedure TformPrincipal.SalvarProblema;
 begin
-  var
-    aProblema: TProblema := TProblema.Create;
+  var aProblema: TProblema := TProblema.Create;
+
+  // Valida se os dados do problemas estão corretos para conseguir salvar
   try
     aProblema.Titulo := edtTituloProblema.Text;
     aProblema.Modulo := edtCodModulo.Text;
+
     if not aProblema.ValidaDados then
-    begin
       Application.MessageBox('Preencha os campos obrigatórios!',
-        'Salvar Problema', +MB_ICONEXCLAMATION + MB_OK);
-      exit;
-    end
+        'Salvar Problema', +MB_ICONEXCLAMATION + MB_OK)
     else
-    begin
       dsProblemas.DataSet.Post;
-    end;
+
   finally
     aProblema.Free;
   end;
@@ -312,9 +301,12 @@ end;
 
 procedure TformPrincipal.SelecionaModuloCbProblema;
 begin
+  // Loop para selecionar o nome do módulo no combobox corresponde ao código do módulo
+
   if dsProblemas.DataSet.RecordCount > 0 then
   begin
     cbModulo.ItemIndex := 0;
+
     while cbModulo.Text <> FControllerModulo.BuscaNomeModulo(StrToInt(edtCodModulo.Text)) do
     begin
       cbModulo.ItemIndex := cbModulo.ItemIndex + 1;
@@ -324,11 +316,9 @@ end;
 
 procedure TformPrincipal.btnImagensProblemaClick(Sender: TObject);
 begin
-  var
-    aCaminhoImagem: String;
-  var
-    aContador: Integer := 0;
+  var aCaminhoImagem: String;
 
+  // Abre a tela de visualização das imagens do problema
   FFormImagensProblema := TformImagensProblema.Create(nil, edtCodProblema.Text);
 
   try
@@ -338,29 +328,11 @@ begin
   end;
 end;
 
-procedure TformPrincipal.btnAtualizarGridProblemasClick(Sender: TObject);
-begin
-  CarregaGridProblemas;
-end;
-
-procedure TformPrincipal.btnCancelarModuloClick(Sender: TObject);
-begin
-  dsModulos.DataSet.Cancel;
-end;
-
-procedure TformPrincipal.btnCancelarProblemaClick(Sender: TObject);
-begin
-  CancelarProblema;
-end;
-
 procedure TformPrincipal.btnExcluirModuloClick(Sender: TObject);
 begin
   if Application.MessageBox('Deseja excluir este registro?', 'Excluir módulo',
     +MB_ICONQUESTION + MB_YESNO) = MrYes then
-  begin
     dsModulos.DataSet.Delete;
-    CarregaGridModulos;
-  end;
 end;
 
 procedure TformPrincipal.btnExcluirProblemaClick(Sender: TObject);
@@ -375,9 +347,8 @@ end;
 
 procedure TformPrincipal.CarregaGridModulos;
 begin
-  var
-    aTabelaModulos: TDataSource := FControllerModulo.BuscaTabelaModulos
-      (edtPesqModulo.Text);
+  var aTabelaModulos: TDataSource := FControllerModulo.BuscaTabelaModulos
+        (edtPesqModulo.Text);
 
   dsModulos.DataSet := aTabelaModulos.DataSet;
   dsModulos.DataSet.First;
@@ -409,6 +380,7 @@ begin
 
   //Esconde as colunas, mantendo apenas a coluna do TITULO visível
   var aCont: Integer;
+
   for aCont := 0 to gridProblemas.Columns.Count - 1 do
   begin
     if aCont <> 2 then
@@ -435,20 +407,7 @@ end;
 
 procedure TformPrincipal.chkSomenteSolucaoClick(Sender: TObject);
 begin
-  if chkSomenteSolucao.Checked then
-  begin
-    pnlBodyDetalhesProblema.Visible := False;
-
-    if mmSolucaoProblema.Height <> 560 then
-      mmSolucaoProblema.Height := 560
-  end
-  else
-  begin
-    pnlBodyDetalhesProblema.Visible := True;
-
-    if mmSolucaoProblema.Height <> 280 then
-      mmSolucaoProblema.Height := 280
-  end;
+  EsticaMemoProblemas;
 end;
 
 procedure TformPrincipal.DsModulosAfterInsert(TDataSet: TDataSet);
@@ -459,8 +418,8 @@ end;
 
 procedure TformPrincipal.DsModulosAfterPost(TDataSet: TDataSet);
 begin
-  pnlGridModulos.Enabled := True;
   pnlGridProblemas.Enabled := True;
+  pnlGridModulos.Enabled := True;
   InverteCrudModulo;
 end;
 
@@ -474,9 +433,10 @@ procedure TformPrincipal.DsModulosEventos;
 begin
   dsModulos.DataSet.AfterScroll := DsModulosAfterScroll;
   dsModulos.DataSet.AfterInsert := DsModulosAfterInsert;
-  dsModulos.DataSet.AfterPost := DsModulosAfterPost;
   dsModulos.DataSet.AfterCancel := DsModulosAfterCancel;
+  dsModulos.DataSet.AfterDelete := DsModulosAfterDelete;
   dsModulos.DataSet.AfterEdit := DsModulosAfterEdit;
+  dsModulos.DataSet.AfterPost := DsModulosAfterPost;
 end;
 
 destructor TformPrincipal.Destroy;
@@ -491,22 +451,27 @@ end;
 
 procedure TformPrincipal.DsModulosAfterCancel(TDataSet: TDataSet);
 begin
-  pnlGridModulos.Enabled := True;
   pnlGridProblemas.Enabled := True;
+  pnlGridModulos.Enabled := True;
   InverteCrudModulo;
+end;
+
+procedure TformPrincipal.DsModulosAfterDelete(TDataSet: TDataSet);
+begin
+  CarregaGridModulos;
 end;
 
 procedure TformPrincipal.DsModulosAfterEdit(TDataSet: TDataSet);
 begin
-  pnlGridModulos.Enabled := False;
   pnlGridProblemas.Enabled := False;
+  pnlGridModulos.Enabled := False;
   InverteCrudModulo;
 end;
 
 procedure TformPrincipal.DsProblemasAfterCancel(TDataSet: TDataSet);
 begin
-  InverteCrudProblema;
   btnImagensProblema.Enabled := True;
+  InverteCrudProblema;
 end;
 
 procedure TformPrincipal.DsProblemasAfterEdit(TDataSet: TDataSet);
@@ -516,14 +481,14 @@ end;
 
 procedure TformPrincipal.DsProblemasAfterInsert(TDataSet: TDataSet);
 begin
-  InverteCrudProblema;
-  pnlProblemas.Visible := True;
-  edtTituloProblema.SetFocus;
-  PreencheCbxModulos;
   btnImagensProblema.Caption := 'Imagens (0)';
+  pnlBodyDetalhesProblema.Visible := True;
   btnImagensProblema.Enabled := False;
   chkSomenteSolucao.Checked := False;
-  pnlBodyDetalhesProblema.Visible := True;
+  pnlProblemas.Visible := True;
+  edtTituloProblema.SetFocus;
+  InverteCrudProblema;
+  PreencheCbxModulos;
 
   dsProblemas.DataSet.FieldByName('cod_usu').AsInteger := FUsuario.Codigo;
   dsProblemas.DataSet.FieldByName('datacr').AsDateTime := Now;
@@ -533,10 +498,10 @@ procedure TformPrincipal.DsProblemasAfterPost(TDataSet: TDataSet);
 begin
   var aTituloProblema: String := edtTituloProblema.Text;
 
-  InverteCrudProblema;
-  btnImagensProblema.Enabled := True;
-  dsModulos.DataSet.Locate('NOME', cbModulo.Text, []);
   gridProblemas.DataSource.DataSet.Locate('TITULO', aTituloProblema, []);
+  dsModulos.DataSet.Locate('NOME', cbModulo.Text, []);
+  btnImagensProblema.Enabled := True;
+  InverteCrudProblema;
 end;
 
 procedure TformPrincipal.DsProblemasBeforePost(TDataSet: TDataSet);
@@ -547,21 +512,21 @@ begin
     dsProblemas.DataSet.FieldByName('horacr').AsDateTime := Now;
     dsProblemas.DataSet.FieldByName('cod_prob').AsInteger := 0;
 
-    if chkSomenteSolucao.Checked then
-      dsProblemas.DataSet.FieldByName('somentesolu').AsString := 'S'
-    else
-      dsProblemas.DataSet.FieldByName('somentesolu').AsString := 'N';
+//    if chkSomenteSolucao.Checked then
+//      dsProblemas.DataSet.FieldByName('somentesolu').AsString := 'S'
+//    else
+//      dsProblemas.DataSet.FieldByName('somentesolu').AsString := 'N';
   end;
 end;
 
 procedure TformPrincipal.DsProblemasEventos;
 begin
   dsProblemas.DataSet.AfterScroll := DsProblemasAfterScroll;
+  dsProblemas.DataSet.AfterInsert := DsProblemasAfterInsert;
+  dsProblemas.DataSet.AfterCancel := DsProblemasAfterCancel;
   dsProblemas.DataSet.BeforePost := DsProblemasBeforePost;
   dsProblemas.DataSet.AfterEdit := DsProblemasAfterEdit;
   dsProblemas.DataSet.AfterPost := DsProblemasAfterPost;
-  dsProblemas.DataSet.AfterInsert := DsProblemasAfterInsert;
-  dsProblemas.DataSet.AfterCancel := DsProblemasAfterCancel;
 end;
 
 procedure TformPrincipal.DsProblemasAfterScroll(TDataSet: TDataSet);
@@ -578,33 +543,14 @@ begin
     end;
   end
   else
-  begin
     btnImagensProblema.Caption := 'Imagens (' + IntToStr(0) + ')';
-  end;
 
   PreencheCbxModulos;
+  EsticaMemoProblemas;
 
   dtProblema.date := dsProblemas.DataSet.FieldByName('datacr').AsDateTime;
 
-  if dsProblemas.DataSet.FieldByName('somentesolu').AsString = 'S' then
-  begin
-    pnlBodyDetalhesProblema.Visible := False;
-    chkSomenteSolucao.Checked;
-
-    if mmSolucaoProblema.Height <> 560 then
-      mmSolucaoProblema.Height := 560
-  end
-  else
-  begin
-    pnlBodyDetalhesProblema.Visible := True;
-    chkSomenteSolucao.Checked := False;
-
-    if mmSolucaoProblema.Height <> 280 then
-      mmSolucaoProblema.Height := 280
-  end;
-
-  if not (dsProblemas.DataSet.State = dsInsert) then
-    SelecionaModuloCbProblema;
+  if not (dsProblemas.DataSet.State = dsInsert) then SelecionaModuloCbProblema;
 end;
 
 procedure TformPrincipal.edtPesqModuloChange(Sender: TObject);
@@ -648,6 +594,26 @@ procedure TformPrincipal.edtTituloProblemaMouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Integer);
 begin
   edtTituloProblema.Hint := edtTituloProblema.Text;
+end;
+
+procedure TformPrincipal.EsticaMemoProblemas;
+begin
+  if dsProblemas.DataSet.FieldByName('somentesolu').AsString = 'S' then
+  begin
+    pnlBodyDetalhesProblema.Visible := False;
+    chkSomenteSolucao.Checked;
+
+    if mmSolucaoProblema.Height <> 450 then
+      mmSolucaoProblema.Height := 450
+  end
+  else
+  begin
+    pnlBodyDetalhesProblema.Visible := True;
+    chkSomenteSolucao.Checked := False;
+
+    if mmSolucaoProblema.Height <> 280 then
+      mmSolucaoProblema.Height := 280
+  end;
 end;
 
 procedure TformPrincipal.ExcluirProblema;
@@ -694,6 +660,11 @@ procedure TformPrincipal.btnSalvarModuloMouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   CarregaGridModulos;
+end;
+
+procedure TformPrincipal.rdbtnFiltroPesqProblemaClick(Sender: TObject);
+begin
+  CarregaGridProblemas;
 end;
 
 procedure TformPrincipal.btnSalvarProblemaClick(Sender: TObject);
@@ -779,21 +750,21 @@ end;
 
 procedure TformPrincipal.InverteCrudModulo;
 begin
-  btnNovoModulo.Enabled := not btnNovoModulo.Enabled;
-  btnSalvarModulo.Enabled := not btnSalvarModulo.Enabled;
-  btnExcluirModulo.Enabled := not btnExcluirModulo.Enabled;
   btnCancelarModulo.Enabled := not btnCancelarModulo.Enabled;
+  btnExcluirModulo.Enabled := not btnExcluirModulo.Enabled;
+  btnSalvarModulo.Enabled := not btnSalvarModulo.Enabled;
+  btnNovoModulo.Enabled := not btnNovoModulo.Enabled;
 end;
 
 procedure TformPrincipal.InverteCrudProblema;
 begin
-  btnNovoProblema.Enabled := not btnNovoProblema.Enabled;
-  btnSalvarProblema.Enabled := not btnSalvarProblema.Enabled;
-  btnExcluirProblema.Enabled := not btnExcluirProblema.Enabled;
   btnCancelarProblema.Enabled := not btnCancelarProblema.Enabled;
-  pnlBodyModulos.Enabled := not pnlBodyModulos.Enabled;
-  pnlGridProblemas.Enabled := not pnlGridProblemas.Enabled;
   pnlBodyPesqProblema.Enabled := not pnlBodyPesqProblema.Enabled;
+  btnExcluirProblema.Enabled := not btnExcluirProblema.Enabled;
+  btnSalvarProblema.Enabled := not btnSalvarProblema.Enabled;
+  pnlGridProblemas.Enabled := not pnlGridProblemas.Enabled;
+  btnNovoProblema.Enabled := not btnNovoProblema.Enabled;
+  pnlBodyModulos.Enabled := not pnlBodyModulos.Enabled;
 end;
 
 procedure TformPrincipal.mmDetalhesProblemaDblClick(Sender: TObject);
@@ -809,8 +780,8 @@ end;
 
 procedure TformPrincipal.mmSolucaoProblemaDblClick(Sender: TObject);
 begin
-  FFormRichEditTelaCheia := TFormRichEditTelaCheia.Create(nil,
-    mmSolucaoProblema.Text, 'Solução');
+  FFormRichEditTelaCheia := TFormRichEditTelaCheia.Create(nil, mmSolucaoProblema.Text, 'Solução');
+
   try
     FFormRichEditTelaCheia.ShowModal;
   finally
@@ -835,13 +806,30 @@ begin
   dsProblemas.DataSet.Insert;
 end;
 
+procedure TformPrincipal.btnAtualizarGridProblemasClick(Sender: TObject);
+begin
+  CarregaGridProblemas;
+end;
+
+procedure TformPrincipal.btnCancelarModuloClick(Sender: TObject);
+begin
+  dsModulos.DataSet.Cancel;
+end;
+
+procedure TformPrincipal.btnCancelarProblemaClick(Sender: TObject);
+begin
+  CancelarProblema;
+end;
+
 procedure TformPrincipal.FormShow(Sender: TObject);
 begin
   edtPesqModulo.SetFocus;
 
+  cbFiltroPesqProblema.ItemIndex := FUsuario.GetIndFiltroConsultaProblema;
   rdbtnFiltroPesqProblema.ItemIndex := FUsuario.ConsultaGeral;
   pnlPrincipal.Color := StringToColor(FUsuario.Cor);
-  cbFiltroPesqProblema.ItemIndex := FUsuario.GetIndFiltroConsultaProblema;
+
+  statusBarBottom.Panels[0].Text := 'Usuário: ' + FUsuario.Nome;
 
   PreencheCbxModulos;
   SelecionaModuloCbProblema;
