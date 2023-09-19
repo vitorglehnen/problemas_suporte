@@ -1,6 +1,7 @@
 object FormPreferencias: TFormPreferencias
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Prefer'#234'ncias'
   ClientHeight = 441
