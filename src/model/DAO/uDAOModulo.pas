@@ -2,9 +2,15 @@ unit uDAOModulo;
 
 interface
 
-uses uConexao, uModulo, FireDAC.Comp.Client, Vcl.Dialogs,
-  System.Generics.Collections,
-  Vcl.DBCtrls, DBClient, Data.DB;
+uses
+    uConexao,
+    uModulo,
+    FireDAC.Comp.Client,
+    Vcl.Dialogs,
+    System.Generics.Collections,
+    Vcl.DBCtrls,
+    DBClient,
+    Data.DB;
 
 type
   TDAOModulo = Class
@@ -24,6 +30,23 @@ type
 implementation
 
 { TDAOModulo }
+
+constructor TDAOModulo.Create;
+begin
+  { Método construtor da classe }
+
+  FConn := TConexao.Create;
+end;
+
+destructor TDAOModulo.Destroy;
+begin
+  { Método destrutor da classe }
+
+  FConn.Free;
+
+  inherited;
+end;
+
 function TDAOModulo.BuscaCodigoModulo(aNomeModulo: String): TDataSource;
 begin
   FQuery := FConn.CriarQuery;
@@ -68,11 +91,6 @@ begin
   Result := FDataSource;
 end;
 
-constructor TDAOModulo.Create;
-begin
-  FConn := TConexao.Create;
-end;
-
 procedure TDAOModulo.DeleteModulo(aModulo: TModulo);
 begin
   FQuery := FConn.CriarQuery;
@@ -82,13 +100,6 @@ begin
 
   FQuery.ExecSQL;
   FConn.GetConn.Commit;
-end;
-
-destructor TDAOModulo.Destroy;
-begin
-  FConn.Free;
-
-  inherited;
 end;
 
 end.

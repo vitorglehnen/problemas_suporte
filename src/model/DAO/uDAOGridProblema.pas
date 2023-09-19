@@ -26,6 +26,22 @@ uses
 
 { TDAOProblemas }
 
+constructor TDAOGridProblema.Create;
+begin
+  { Método construtor da classe }
+
+  FConn := TConexao.Create;
+end;
+
+destructor TDAOGridProblema.Destroy;
+begin
+  { Método destrutor da classe }
+
+  FConn.Free;
+
+  inherited;
+end;
+
 function TDAOGridProblema.BuscaTabelaProblemas: TDataSource;
 begin
   FQuery := FConn.CriarQuery;
@@ -103,18 +119,6 @@ begin
   FConn.GetConn.Commit;
 
   Result := FDataSource;
-end;
-
-constructor TDAOGridProblema.Create;
-begin
-  FConn := TConexao.Create;
-end;
-
-destructor TDAOGridProblema.Destroy;
-begin
-  FConn.Free;
-
-  inherited;
 end;
 
 end.

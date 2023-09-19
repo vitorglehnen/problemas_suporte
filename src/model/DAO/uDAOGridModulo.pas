@@ -28,6 +28,22 @@ implementation
 
 { TDAOModulo }
 
+constructor TDAOGridModulo.Create;
+begin
+  { Método construtor da classe }
+
+  FConn := TConexao.Create;
+end;
+
+destructor TDAOGridModulo.Destroy;
+begin
+  { Método destrutor da classe }
+
+  FConn.Free;
+
+  inherited;
+end;
+
 function TDAOGridModulo.BuscaTabelaModulos(aNomeModulo: String): TDataSource;
 begin
   FQuery := FConn.CriarQuery;
@@ -41,18 +57,6 @@ begin
   FConn.GetConn.Commit;
 
   Result := FDataSource;
-end;
-
-constructor TDAOGridModulo.Create;
-begin
-  FConn := TConexao.Create;
-end;
-
-destructor TDAOGridModulo.Destroy;
-begin
-  FConn.Free;
-
-  inherited;
 end;
 
 end.

@@ -35,6 +35,8 @@ implementation
 
 function TProblema.ValidaDados: Boolean;
 begin
+  { Valida os dados inseridos }
+
   Result := (length(Titulo) > 0) and
             (length(Modulo) > 0);
 end;

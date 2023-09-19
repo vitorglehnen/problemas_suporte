@@ -31,6 +31,22 @@ implementation
 
 { TDAOProblema }
 
+constructor TDAOUsuario.Create;
+begin
+  { Método construtor da classe }
+
+  FConn := TConexao.Create;
+end;
+
+destructor TDAOUsuario.Destroy;
+begin
+  { Método destrutor da classe }
+
+  FConn.Free;
+
+  inherited;
+end;
+
 procedure TDAOUsuario.AtualizaUsuario(aUsuario: IUsuario);
 begin
   FQuery := FConn.CriarQuery;
@@ -42,17 +58,6 @@ begin
 
   FQuery.ExecSQL;
   FConn.GetConn.Commit;
-end;
-
-constructor TDAOUsuario.Create;
-begin
-  FConn := TConexao.Create;
-end;
-
-destructor TDAOUsuario.Destroy;
-begin
-  FConn.Free;
-  inherited;
 end;
 
 procedure TDAOUsuario.InsertUsuario(aUsuario: String);

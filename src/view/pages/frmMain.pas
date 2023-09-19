@@ -133,6 +133,8 @@ type
     pnlDetalhesProblema: TPanel;
     lblDetalhesProblema: TLabel;
     mmDetalhesProblema: TDBRichEdit;
+    lblNomeModulo: TLabel;
+    
     procedure btnNovoModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btnExcluirModuloClick(Sender: TObject);
@@ -176,6 +178,7 @@ type
     FControllerModulo: TControllerModulo;
     FUsuario: TUsuario;
     procedure SelecionaModuloCbProblema;
+    procedure PersonalizaGridProblemas;
     procedure CarregaGridProblemas;
     procedure EsticaMemoProblemas;
     procedure InverteCrudProblema;
@@ -222,19 +225,51 @@ uses
 
 procedure TformPrincipal.FormCreate(Sender: TObject);
 begin
-  FUsuario := TUsuario.Create;
+  { Método construtor da classe }
+
   FControllerProblema := TControllerProblema.Create;
   FControllerModulo := TControllerModulo.Create;
+  FUsuario := TUsuario.Create;
   CarregaGridModulos;
   CarregaGridProblemas;
   DsProblemasEventos;
   DsModulosEventos;
 end;
 
+procedure TformPrincipal.FormShow(Sender: TObject);
+begin
+  { Mudança nos comportamentos dos componentes ao abrir o sistema }
+    
+  cbFiltroPesqProblema.ItemIndex := FUsuario.GetIndFiltroConsultaProblema;
+  statusBarBottom.Panels[0].Text := 'Usuário: ' + FUsuario.Nome;
+  rdbtnFiltroPesqProblema.ItemIndex := FUsuario.ConsultaGeral;
+  pnlPrincipal.Color := StringToColor(FUsuario.Cor);
+  PreencheCbxModulos;
+  SelecionaModuloCbProblema;
+
+   if cbFiltroPesqProblema.Text = 'Código' then
+    edtPesqProblema.NumbersOnly := True
+  else
+    edtPesqProblema.NumbersOnly := False;
+end;
+
+destructor TformPrincipal.Destroy;
+begin
+  { Método destrutor da classe }
+
+  FControllerProblema.Free;
+  FControllerModulo.Free;
+  FUsuario.Free;
+  Application.Terminate;
+  
+  inherited;
+end;
+
 procedure TformPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-  // Teclas de atalho para incluir, salvar, cancelar ou recarregar um problema
+  { Teclas de atalho para incluir, salvar, cancelar ou recarregar um problema }
+  
   if Key = VK_F2 then
     if btnNovoProblema.Enabled then
       NovoProblema;
@@ -249,13 +284,33 @@ begin
       CarregaGridProblemas;
 end;
 
+procedure TformPrincipal.PersonalizaGridProblemas;
+begin
+  {   Esconde as colunas no grid de problemas, mantendo apenas a coluna do 
+    TITULO visível }
+
+  var
+    aCont: Integer;
+    
+  for aCont := 0 to gridProblemas.Columns.Count - 1 do
+  begin
+    if aCont <> 2 then
+      gridProblemas.Columns[aCont].Visible := False;
+  end;
+
+  gridProblemas.Columns[2].Title.Font.Style := [fsBold];
+  TDrawGrid(gridProblemas).ScrollBars := ssVertical;
+end;
+
 procedure TformPrincipal.PreencheCbxModulos;
 begin
+  { Preenche o comboBox dos módulos com todos os módulos cadastrados }
+
   var
     aListaModulos: TStringList;
   var
     aCont: Integer := 0;
-    // Preenche o comboBox dos módulos com todos os módulos cadastrados
+
   try
     aListaModulos := FControllerModulo.BuscaModulos;
     cbModulo.Clear;
@@ -271,12 +326,13 @@ end;
 
 procedure TformPrincipal.Preferncias1Click(Sender: TObject);
 begin
+  { Abre a tela de preferências do usuário }
+
   var
     aUsuario: TUsuario := TUsuario.Create();
   var
     FFormPreferencias := TFormPreferencias.Create(Self, aUsuario);
 
-  // Abre a tela de preferências do usuário
   try
     FFormPreferencias.ShowModal;
   finally
@@ -286,10 +342,11 @@ end;
 
 procedure TformPrincipal.SalvarProblema;
 begin
+  { Valida se os dados do problemas estão corretos para conseguir salvar }
+  
   var
     aProblema: TProblema := TProblema.Create;
-
-  // Valida se os dados do problemas estão corretos para conseguir salvar
+    
   try
     aProblema.Titulo := edtTituloProblema.Text;
     aProblema.Modulo := edtCodModulo.Text;
@@ -306,7 +363,9 @@ end;
 
 procedure TformPrincipal.SelecionaModuloCbProblema;
 begin
-  // Loop para selecionar o nome do módulo no combobox corresponde ao código do módulo
+  {   Loop para selecionar o nome do módulo no combobox corresponde ao 
+    código do módulo }
+  
   if dsProblemas.DataSet.RecordCount > 0 then
   begin
     cbModulo.ItemIndex := 0;
@@ -320,10 +379,11 @@ end;
 
 procedure TformPrincipal.btnImagensProblemaClick(Sender: TObject);
 begin
+  { Abre a tela de visualização das imagens do problema }
+
   var
     aCaminhoImagem: String;
 
-  // Abre a tela de visualização das imagens do problema
   FFormImagensProblema := TformImagensProblema.Create(nil, edtCodProblema.Text);
   try
     FFormImagensProblema.ShowModal;
@@ -334,9 +394,10 @@ end;
 
 procedure TformPrincipal.btnExcluirModuloClick(Sender: TObject);
 begin
-  if Application.MessageBox('Deseja excluir este registro?', 'Excluir módulo',
+  if dsModulos.DataSet.RecordCount > 0 then
+    if Application.MessageBox('Deseja excluir este registro?', 'Excluir módulo',
     +MB_ICONQUESTION + MB_YESNO) = MrYes then
-    dsModulos.DataSet.Delete;
+      dsModulos.DataSet.Delete;
 end;
 
 procedure TformPrincipal.btnExcluirProblemaClick(Sender: TObject);
@@ -371,7 +432,7 @@ begin
   else
     aNomeModulo := '';
 
-  { Dependendo do item que está marcado no radioButton dos filtros de pesquisa
+  {   Dependendo do item que está marcado no radioButton dos filtros de pesquisa
     do problemas, faz um select correspondente, se for GERAL ou SOMENTE do
     módulo }
   case rdbtnFiltroPesqProblema.ItemIndex of
@@ -390,35 +451,31 @@ begin
 
   lblTotalDeProblemas.Caption := 'Total: ' + IntToStr(gridProblemas.DataSource.DataSet.RecordCount);
 
-  { Esconde as colunas no grid de problemas, mantendo apenas a coluna do TITULO
-    visível }
-  var
-    aCont: Integer;
-  for aCont := 0 to gridProblemas.Columns.Count - 1 do
-  begin
-    if aCont <> 2 then
-      gridProblemas.Columns[aCont].Visible := False;
-  end;
-
-  gridProblemas.Columns[2].Title.Font.Style := [fsBold];
-  TDrawGrid(gridProblemas).ScrollBars := ssVertical;
-
+  PersonalizaGridProblemas;
   DsProblemasAfterScroll(dsProblemas.DataSet);
 end;
 
 procedure TformPrincipal.cbFiltroPesqProblemaChange(Sender: TObject);
 begin
   if cbFiltroPesqProblema.Text = 'Código' then
-    edtPesqProblema.NumbersOnly := True
+  begin
+    edtPesqProblema.NumbersOnly := True;
+    edtPesqProblema.Text := '';
+  end
   else
     edtPesqProblema.NumbersOnly := False;
 end;
 
 procedure TformPrincipal.cbModuloChange(Sender: TObject);
 begin
+  {   Verifica se ao trocar o item selecionado no comboBox do módulo dos
+    problemas, se no campo do código do módulo, o código é correspondete ao
+    módulo selecionado, se não for, busca o código correto }
+
   var
     aCodigoModulo: Integer := FControllerModulo.BuscaCodigoModulo
       (cbModulo.Text);
+
   if IntToStr(aCodigoModulo) <>
     IntToStr(dsProblemas.DataSet.FieldByName('cod_mod').AsInteger) then
   begin
@@ -429,6 +486,11 @@ end;
 
 procedure TformPrincipal.chkSomenteSolucaoClick(Sender: TObject);
 begin
+  if chkSomenteSolucao.Checked then
+      dsProblemas.DataSet.FieldByName('somentesolu').AsString := 'S'
+    else
+      dsProblemas.DataSet.FieldByName('somentesolu').AsString := 'N';
+
   EsticaMemoProblemas;
 end;
 
@@ -459,15 +521,6 @@ begin
   dsModulos.DataSet.AfterDelete := DsModulosAfterDelete;
   dsModulos.DataSet.AfterEdit := DsModulosAfterEdit;
   dsModulos.DataSet.AfterPost := DsModulosAfterPost;
-end;
-
-destructor TformPrincipal.Destroy;
-begin
-  FControllerProblema.Free;
-  FControllerModulo.Free;
-  FUsuario.Free;
-  Application.Terminate;
-  inherited;
 end;
 
 procedure TformPrincipal.DsModulosAfterCancel(TDataSet: TDataSet);
@@ -506,22 +559,26 @@ begin
   pnlBodyDetalhesProblema.Visible := True;
   btnImagensProblema.Enabled := False;
   chkSomenteSolucao.Checked := False;
-  pnlProblemas.Visible := True;
   edtTituloProblema.SetFocus;
   InverteCrudProblema;
   PreencheCbxModulos;
+  
   dsProblemas.DataSet.FieldByName('cod_usu').AsInteger := FUsuario.Codigo;
   dsProblemas.DataSet.FieldByName('datacr').AsDateTime := Now;
 end;
 
 procedure TformPrincipal.DsProblemasAfterPost(TDataSet: TDataSet);
 begin
-  var
-    aTituloProblema: String := edtTituloProblema.Text;
-  gridProblemas.DataSource.DataSet.Locate('TITULO', aTituloProblema, []);
-  dsModulos.DataSet.Locate('NOME', cbModulo.Text, []);
+  {   Após inserir o problema no banco de dados, seleciona ele nos grids para
+    aparecer na tela do usuário }  
+
   btnImagensProblema.Enabled := True;
   InverteCrudProblema;
+
+  var aTitulo : String := dsProblemas.DataSet.FieldByName('titulo').AsString;
+
+  dsModulos.DataSet.Locate('NOME', cbModulo.Text, [loCaseInsensitive, loPartialKey]);
+  dsProblemas.DataSet.Locate('TITULO', aTitulo, [loCaseInsensitive, loPartialKey]);
 end;
 
 procedure TformPrincipal.DsProblemasBeforePost(TDataSet: TDataSet);
@@ -546,13 +603,18 @@ end;
 
 procedure TformPrincipal.DsProblemasAfterScroll(TDataSet: TDataSet);
 begin
+  {   Aqui é implementado a lógica após mudar de registro no grid de problemas, 
+    atualizando as informações na tela referente sobre o registro selecionado }
+
   var
     aListaImagens: TStringList;
+    
   if dsProblemas.DataSet.RecordCount > 0 then
   begin
     try
       aListaImagens := FControllerProblema.BuscaImagens
         (dsProblemas.DataSet.FieldByName('cod_prob').AsInteger);
+
       btnImagensProblema.Caption := 'Imagens (' +
         IntToStr(aListaImagens.Count) + ')';
     finally
@@ -560,37 +622,44 @@ begin
     end;
   end
   else
+  begin
     btnImagensProblema.Caption := 'Imagens (' + IntToStr(0) + ')';
+
+    if not (dsProblemas.State = dsInsert) then
+      pnlProblemas.Enabled := False;
+  end;
+
+  dtProblema.date := dsProblemas.DataSet.FieldByName('datacr').AsDateTime;  
   PreencheCbxModulos;
   EsticaMemoProblemas;
-  dtProblema.date := dsProblemas.DataSet.FieldByName('datacr').AsDateTime;
+  
   if not(dsProblemas.DataSet.State = dsInsert) then
     SelecionaModuloCbProblema;
 end;
 
-procedure TformPrincipal.edtPesqModuloChange(Sender: TObject);
-begin
-  CarregaGridModulos;
-end;
-
 procedure TformPrincipal.edtPesqProblemaChange(Sender: TObject);
 begin
+  {   Implementa a lógica de pesquisa dos problemas, caso o tamanho de letras
+    no edit de pesquisa seja > 0, faz a busca no banco de dados referente ao 
+    filtro que está selecionado no comboBox, caso contrário, faz a pesquisa 
+    geral dos problemas }
+
   var
-  aProblema := TProblema.Create;
+    aProblema := TProblema.Create;
   var
     aFiltro: String;
-
+    
   try
     case rdbtnFiltroPesqProblema.ItemIndex of
       0: aFiltro := 'Geral';
       1: aFiltro := 'Módulo';
     end;
 
-    if Length(edtPesqProblema.Text) > 0 then
+    if (Length(edtPesqProblema.Text) > 0) and (dsProblemas.DataSet.RecordCount > 0) then
     begin
 
       case cbFiltroPesqProblema.ItemIndex of
-        0:
+        0: // Pega apenas os 10 primeiros dígitos por conta de ser um integer
           aProblema.Codigo := StrToInt(Copy(edtPesqProblema.Text, 1, 10));
         1:
           aProblema.Titulo := edtPesqProblema.Text;
@@ -603,19 +672,11 @@ begin
       end;
 
       aProblema.Modulo := gridModulos.Columns[0].Field.Value;
+      
       FControllerProblema.BuscaTabelaProblemasPorFiltro(aProblema,
         cbFiltroPesqProblema.Text, aFiltro);
 
-      var
-        aCont: Integer;
-      for aCont := 0 to gridProblemas.Columns.Count - 1 do
-      begin
-        if aCont <> 2 then
-          gridProblemas.Columns[aCont].Visible := False;
-      end;
-
-      gridProblemas.Columns[2].Title.Font.Style := [fsBold];
-      TDrawGrid(gridProblemas).ScrollBars := ssVertical;
+      PersonalizaGridProblemas;
     end
   else
     CarregaGridProblemas;
@@ -627,22 +688,25 @@ end;
 procedure TformPrincipal.edtTituloProblemaMouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Integer);
 begin
+  //Ao passar por cima do edit do título, mostra todo o conteúdo
   edtTituloProblema.Hint := edtTituloProblema.Text;
 end;
 
 procedure TformPrincipal.EsticaMemoProblemas;
 begin
+  { Implementa a lógica de aumentar o memos dos problemas caso o problemas
+    esteja com o checkBox de Mostrar Somente a Solução marcado, caso contrário,
+    mantém no tamanho padrão }
+
   if dsProblemas.DataSet.FieldByName('somentesolu').AsString = 'S' then
   begin
     pnlBodyDetalhesProblema.Visible := False;
-    chkSomenteSolucao.Checked;
     if mmSolucaoProblema.Height <> 450 then
       mmSolucaoProblema.Height := 450
   end
   else
   begin
     pnlBodyDetalhesProblema.Visible := True;
-    chkSomenteSolucao.Checked := False;
     if mmSolucaoProblema.Height <> 280 then
       mmSolucaoProblema.Height := 280
   end;
@@ -650,14 +714,168 @@ end;
 
 procedure TformPrincipal.ExcluirProblema;
 begin
-  if Application.MessageBox('Deseja excluir este registro?', 'Excluir problema',
+  if dsModulos.DataSet.RecordCount > 0 then
+    if Application.MessageBox('Deseja excluir este registro?', 'Excluir problema',
     +MB_ICONQUESTION + MB_YESNO) = MrYes then
+    begin
+      dsProblemas.DataSet.Delete;
+    end;
+end;
+
+procedure TformPrincipal.gridModulosDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  { Personaliza fonte do grid de módulos }
+  with gridModulos.Columns[0] do
   begin
-    dsProblemas.DataSet.Delete;
-    CarregaGridProblemas;
+    Title.Font.Style := [fsBold];
+    Title.Font.Size := 9;
   end;
-  if gridProblemas.DataSource.DataSet.RecordCount < 1 then
-    pnlProblemas.Visible := False;
+  
+  {   Caso a linha do grid for a selecionada no momento, muda as personalizações 
+    de estilo }
+  with gridModulos do
+  begin
+    if gdSelected in State then
+    begin
+      Canvas.Brush.Color := StringToColor(FUsuario.Cor);
+      Canvas.Font.Color := clBlack;
+      Canvas.Font.Size := 9;
+      Canvas.Font.Style := [fsBold];
+      DefaultDrawColumnCell(Rect, DataCol, Column, State);
+    end
+    else
+      DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  end;
+  
+  { Faz a alternação de cores no grid }
+  if State = [] then
+  begin
+    if gridModulos.DataSource.DataSet.RecNo mod 2 = 1 then
+      gridModulos.Canvas.Brush.Color := clWhite
+    else
+      gridModulos.Canvas.Brush.Color := clBtnFace;
+  end;
+end;
+
+procedure TformPrincipal.gridProblemasDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+
+  { Personaliza a fonte do grid de módulos }
+  with gridProblemas.Columns[0] do
+  begin
+    Title.Font.Style := [fsBold];
+    Title.Font.Size := 9;
+  end;
+
+  { Caso a linha do grid for a selecionada no momento, muda as personalizações
+    de estilo }
+  with gridProblemas do
+  begin
+    if gdSelected in State then
+    begin
+      Canvas.Brush.Color := StringToColor(FUsuario.Cor);
+      Canvas.Font.Color := clBlack;
+      Canvas.Font.Size := 8;
+      Canvas.Font.Style := [fsBold];
+      DefaultDrawColumnCell(Rect, DataCol, Column, State);
+    end
+    else
+      DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  end;
+
+  { Faz a alternação de cores no grid }
+  if State = [] then
+  begin
+    if gridProblemas.DataSource.DataSet.RecNo mod 2 = 1 then
+      gridProblemas.Canvas.Brush.Color := clWhite
+    else
+      gridProblemas.Canvas.Brush.Color := clBtnFace;
+  end;
+end;
+
+procedure TformPrincipal.InverteCrudModulo;
+begin
+  btnCancelarModulo.Enabled := not btnCancelarModulo.Enabled;
+  btnExcluirModulo.Enabled := not btnExcluirModulo.Enabled;
+  btnSalvarModulo.Enabled := not btnSalvarModulo.Enabled;
+  btnNovoModulo.Enabled := not btnNovoModulo.Enabled;
+end;
+
+procedure TformPrincipal.InverteCrudProblema;
+begin
+  btnCancelarProblema.Enabled := not btnCancelarProblema.Enabled;
+  pnlBodyPesqProblema.Enabled := not pnlBodyPesqProblema.Enabled;
+  btnExcluirProblema.Enabled := not btnExcluirProblema.Enabled;
+  btnSalvarProblema.Enabled := not btnSalvarProblema.Enabled;
+  pnlGridProblemas.Enabled := not pnlGridProblemas.Enabled;
+  btnNovoProblema.Enabled := not btnNovoProblema.Enabled;
+  pnlBodyModulos.Enabled := not pnlBodyModulos.Enabled;
+end;
+
+procedure TformPrincipal.mmDetalhesProblemaDblClick(Sender: TObject);
+begin
+  { Abre o memo em escala maior para visualização }
+
+  FFormRichEditTelaCheia := TFormRichEditTelaCheia.Create(nil,
+    mmDetalhesProblema.Text, 'Detalhes');
+  try
+    FFormRichEditTelaCheia.ShowModal;
+  finally
+    FFormRichEditTelaCheia.Free;
+  end;
+end;
+
+procedure TformPrincipal.mmSolucaoProblemaDblClick(Sender: TObject);
+begin
+  { Abre o memo em escala maior para visualização }
+
+  FFormRichEditTelaCheia := TFormRichEditTelaCheia.Create(nil,
+    mmSolucaoProblema.Text, 'Solução');
+  try
+    FFormRichEditTelaCheia.ShowModal;
+  finally
+    FFormRichEditTelaCheia.Free;
+  end;
+end;
+
+procedure TformPrincipal.N1Click(Sender: TObject);
+begin
+  { Abre a tela de preferência do usuário } 
+  
+  var
+    aUsuario: TUsuario := TUsuario.Create;
+  var
+    aFrmPreferencias: TFormPreferencias := TFormPreferencias.Create(Self,
+      aUsuario);
+
+  try
+    aFrmPreferencias.ShowModal;
+  finally
+    aFrmPreferencias.Free;
+  end;
+end;
+
+procedure TformPrincipal.NovoProblema;
+begin
+  pnlProblemas.Enabled := True;
+  dsProblemas.DataSet.Insert;
+end;
+
+procedure TformPrincipal.btnAtualizarGridProblemasClick(Sender: TObject);
+begin
+  CarregaGridProblemas;
+end;
+
+procedure TformPrincipal.btnCancelarModuloClick(Sender: TObject);
+begin
+  dsModulos.DataSet.Cancel;
+end;
+
+procedure TformPrincipal.btnCancelarProblemaClick(Sender: TObject);
+begin
+  CancelarProblema;
 end;
 
 procedure TformPrincipal.btnNovoModuloClick(Sender: TObject);
@@ -708,160 +926,9 @@ begin
   CarregaGridProblemas;
 end;
 
-procedure TformPrincipal.gridModulosDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+procedure TformPrincipal.edtPesqModuloChange(Sender: TObject);
 begin
-  // Personaliza fonte do grid de módulos
-  with gridModulos.Columns[0] do
-  begin
-    Title.Font.Style := [fsBold];
-    Title.Font.Size := 9;
-  end;
-  // Caso a linha do grid for a selecionada no momento, muda as personalizações de estilo
-  with gridModulos do
-  begin
-    if gdSelected in State then
-    begin
-      Canvas.Brush.Color := StringToColor(FUsuario.Cor);
-      Canvas.Font.Color := clBlack;
-      Canvas.Font.Size := 9;
-      Canvas.Font.Style := [fsBold];
-      DefaultDrawColumnCell(Rect, DataCol, Column, State);
-    end
-    else
-      DefaultDrawColumnCell(Rect, DataCol, Column, State);
-  end;
-  // Faz a alternação de cores no grid
-  if State = [] then
-  begin
-    if gridModulos.DataSource.DataSet.RecNo mod 2 = 1 then
-      gridModulos.Canvas.Brush.Color := clWhite
-    else
-      gridModulos.Canvas.Brush.Color := clBtnFace;
-  end;
-end;
-
-procedure TformPrincipal.gridProblemasDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-begin
-  // Personaliza fonte do grid de módulos
-  with gridProblemas.Columns[0] do
-  begin
-    Title.Font.Style := [fsBold];
-    Title.Font.Size := 9;
-  end;
-
-  { Caso a linha do grid for a selecionada no momento, muda as personalizações
-    de estilo
-  }
-  with gridProblemas do
-  begin
-    if gdSelected in State then
-    begin
-      Canvas.Brush.Color := StringToColor(FUsuario.Cor);
-      Canvas.Font.Color := clBlack;
-      Canvas.Font.Size := 8;
-      Canvas.Font.Style := [fsBold];
-      DefaultDrawColumnCell(Rect, DataCol, Column, State);
-    end
-    else
-      DefaultDrawColumnCell(Rect, DataCol, Column, State);
-  end;
-
-  { Faz a alternação de cores no grid }
-  if State = [] then
-  begin
-    if gridProblemas.DataSource.DataSet.RecNo mod 2 = 1 then
-      gridProblemas.Canvas.Brush.Color := clWhite
-    else
-      gridProblemas.Canvas.Brush.Color := clBtnFace;
-  end;
-end;
-
-procedure TformPrincipal.InverteCrudModulo;
-begin
-  btnCancelarModulo.Enabled := not btnCancelarModulo.Enabled;
-  btnExcluirModulo.Enabled := not btnExcluirModulo.Enabled;
-  btnSalvarModulo.Enabled := not btnSalvarModulo.Enabled;
-  btnNovoModulo.Enabled := not btnNovoModulo.Enabled;
-end;
-
-procedure TformPrincipal.InverteCrudProblema;
-begin
-  btnCancelarProblema.Enabled := not btnCancelarProblema.Enabled;
-  pnlBodyPesqProblema.Enabled := not pnlBodyPesqProblema.Enabled;
-  btnExcluirProblema.Enabled := not btnExcluirProblema.Enabled;
-  btnSalvarProblema.Enabled := not btnSalvarProblema.Enabled;
-  pnlGridProblemas.Enabled := not pnlGridProblemas.Enabled;
-  btnNovoProblema.Enabled := not btnNovoProblema.Enabled;
-  pnlBodyModulos.Enabled := not pnlBodyModulos.Enabled;
-end;
-
-procedure TformPrincipal.mmDetalhesProblemaDblClick(Sender: TObject);
-begin
-  FFormRichEditTelaCheia := TFormRichEditTelaCheia.Create(nil,
-    mmDetalhesProblema.Text, 'Detalhes');
-  try
-    FFormRichEditTelaCheia.ShowModal;
-  finally
-    FFormRichEditTelaCheia.Free;
-  end;
-end;
-
-procedure TformPrincipal.mmSolucaoProblemaDblClick(Sender: TObject);
-begin
-  FFormRichEditTelaCheia := TFormRichEditTelaCheia.Create(nil,
-    mmSolucaoProblema.Text, 'Solução');
-  try
-    FFormRichEditTelaCheia.ShowModal;
-  finally
-    FFormRichEditTelaCheia.Free;
-  end;
-end;
-
-procedure TformPrincipal.N1Click(Sender: TObject);
-begin
-  var
-    aUsuario: TUsuario := TUsuario.Create;
-  var
-    aFrmPreferencias: TFormPreferencias := TFormPreferencias.Create(Self,
-      aUsuario);
-  try
-    aFrmPreferencias.ShowModal;
-  finally
-    aFrmPreferencias.Free;
-  end;
-end;
-
-procedure TformPrincipal.NovoProblema;
-begin
-  dsProblemas.DataSet.Insert;
-end;
-
-procedure TformPrincipal.btnAtualizarGridProblemasClick(Sender: TObject);
-begin
-  CarregaGridProblemas;
-end;
-
-procedure TformPrincipal.btnCancelarModuloClick(Sender: TObject);
-begin
-  dsModulos.DataSet.Cancel;
-end;
-
-procedure TformPrincipal.btnCancelarProblemaClick(Sender: TObject);
-begin
-  CancelarProblema;
-end;
-
-procedure TformPrincipal.FormShow(Sender: TObject);
-begin
-  edtPesqModulo.SetFocus;
-  cbFiltroPesqProblema.ItemIndex := FUsuario.GetIndFiltroConsultaProblema;
-  rdbtnFiltroPesqProblema.ItemIndex := FUsuario.ConsultaGeral;
-  pnlPrincipal.Color := StringToColor(FUsuario.Cor);
-  statusBarBottom.Panels[0].Text := 'Usuário: ' + FUsuario.Nome;
-  PreencheCbxModulos;
-  SelecionaModuloCbProblema;
+  CarregaGridModulos;
 end;
 
 end.

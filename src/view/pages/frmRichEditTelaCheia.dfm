@@ -10,9 +10,7 @@ object formRichEditTelaCheia: TformRichEditTelaCheia
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = False
   Position = poScreenCenter
-  PixelsPerInch = 96
   TextHeight = 13
   object pnlMain: TPanel
     Left = 0
@@ -22,6 +20,8 @@ object formRichEditTelaCheia: TformRichEditTelaCheia
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
+    ExplicitWidth = 875
+    ExplicitHeight = 490
     object mmPrincipal: TRichEdit
       Left = 0
       Top = 0
@@ -37,7 +37,8 @@ object formRichEditTelaCheia: TformRichEditTelaCheia
       ReadOnly = True
       ScrollBars = ssVertical
       TabOrder = 0
-      Zoom = 100
+      ExplicitWidth = 875
+      ExplicitHeight = 490
     end
   end
   object pnlTop: TPanel
@@ -55,5 +56,6 @@ object formRichEditTelaCheia: TformRichEditTelaCheia
     ParentBackground = False
     ParentFont = False
     TabOrder = 1
+    ExplicitWidth = 875
   end
 end

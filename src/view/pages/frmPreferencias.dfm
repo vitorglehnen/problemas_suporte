@@ -22,9 +22,9 @@ object FormPreferencias: TFormPreferencias
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 618
-    ExplicitHeight = 432
-    object Label1: TLabel
+    ExplicitWidth = 620
+    ExplicitHeight = 440
+    object lblCorPadrao: TLabel
       Left = 424
       Top = 48
       Width = 59
@@ -46,7 +46,7 @@ object FormPreferencias: TFormPreferencias
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 618
+      ExplicitWidth = 620
     end
     object rdgpConsultaPadrao: TRadioGroup
       Left = 8
@@ -66,6 +66,21 @@ object FormPreferencias: TFormPreferencias
       Height = 22
       NoneColorColor = 16708071
       TabOrder = 2
+    end
+    object btnSalvar: TButton
+      Left = 464
+      Top = 384
+      Width = 105
+      Height = 25
+      Caption = 'Salvar altera'#231#245'es'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGreen
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+      OnClick = btnSalvarClick
     end
   end
 end

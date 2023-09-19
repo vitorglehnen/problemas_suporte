@@ -24,7 +24,9 @@ type
     pnlTop: TPanel;
     rdgpConsultaPadrao: TRadioGroup;
     cbCorPadrao: TColorBox;
-    Label1: TLabel;
+    lblCorPadrao: TLabel;
+    btnSalvar: TButton;
+    procedure btnSalvarClick(Sender: TObject);
   private
     FUsuario: TUsuario;
     FDAOUsuario: TDAOUsuario;
@@ -47,13 +49,26 @@ implementation
 
 { TFormPreferencias }
 
+procedure TFormPreferencias.btnSalvarClick(Sender: TObject);
+begin
+  { Salva as preferências alteradas }
+
+  FUsuario.SetConsultaGeral(rdgpConsultaPadrao.ItemIndex);
+  FUsuario.SetCor(ColorToString(cbCorPadrao.Selected));
+
+  FDAOUsuario.AtualizaUsuario(FUsuario);
+
+  Close;
+end;
+
 constructor TFormPreferencias.Create(AOwner: TComponent; aUsuario: TUsuario);
 begin
+  { Método construtor da classe }
+
   inherited Create(AOwner);
 
-  FUsuario := aUsuario;
-
   FDAOUsuario := TDAOUsuario.Create;
+  FUsuario := aUsuario;
 
   if (FUsuario.ConsultaGeral = 0) or (FUsuario.ConsultaGeral = 1) then
     rdgpConsultaPadrao.ItemIndex := FUsuario.ConsultaGeral;
@@ -65,10 +80,7 @@ end;
 
 destructor TFormPreferencias.Destroy;
 begin
-  FUsuario.SetConsultaGeral(rdgpConsultaPadrao.ItemIndex);
-  FUsuario.SetCor(ColorToString(cbCorPadrao.Selected));
-
-  FDAOUsuario.AtualizaUsuario(FUsuario);
+  { Método destrutor da classe }
 
   FDAOUsuario.Free;
 

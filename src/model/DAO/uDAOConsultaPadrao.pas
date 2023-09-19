@@ -29,6 +29,21 @@ implementation
 
 { TDAOProblema }
 
+constructor TDAOConsPadrao.Create;
+begin
+  { Método construtor da classe }
+
+  FConn := TConexao.Create;
+end;
+
+destructor TDAOConsPadrao.Destroy;
+begin
+  { Método destrutor da classe }
+
+  FConn.Free;
+
+  inherited;
+end;
 
 function TDAOConsPadrao.BuscaConsultaPadrao(aUsuario: Integer; aDescricao: String): Integer;
 begin
@@ -45,18 +60,6 @@ begin
   FConn.GetConn.Commit;
 
   Result := FDataSource.DataSet.FieldByName('indice').AsInteger;
-end;
-
-constructor TDAOConsPadrao.Create;
-begin
-  FConn := TConexao.Create;
-end;
-
-destructor TDAOConsPadrao.Destroy;
-begin
-  FConn.Free;
-
-  inherited;
 end;
 
 procedure TDAOConsPadrao.InsertConsultaPadrao(aUsuario: Integer; aDescricao: String);

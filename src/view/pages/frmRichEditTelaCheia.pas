@@ -3,8 +3,18 @@ unit frmRichEditTelaCheia;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.ExtCtrls;
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.StdCtrls,
+  Vcl.ComCtrls,
+  Vcl.ExtCtrls;
 
 type
   TformRichEditTelaCheia = class(TForm)
@@ -29,6 +39,8 @@ implementation
 
 constructor TformRichEditTelaCheia.Create(AOwner: TComponent; aTexto: String; aNomeRichEdit: String);
 begin
+  { Método construtor da classe }
+
   inherited Create(AOwner);
 
   mmPrincipal.Text := aTexto;

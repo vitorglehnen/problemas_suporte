@@ -3,7 +3,10 @@ unit uDAOImagemProblema;
 interface
 
 uses
-  FireDAC.Comp.Client, uConexao, Data.DB, uImagemProblema;
+  FireDAC.Comp.Client,
+  uConexao,
+  Data.DB,
+  uImagemProblema;
 
 type
   TDAOImagemProblema = class
@@ -26,6 +29,22 @@ uses
   Vcl.Dialogs;
 
 { TDAOImagemProblema }
+
+constructor TDAOImagemProblema.Create;
+begin
+  { Método construtor da classe }
+
+  FConn := TConexao.Create;
+end;
+
+destructor TDAOImagemProblema.Destroy;
+begin
+  { Método destrutor da classe }
+
+  FConn.Free;
+
+  inherited;
+end;
 
 function TDAOImagemProblema.BuscaImagens(aCodigoProblema: Integer): TDataSource;
 begin
@@ -56,11 +75,6 @@ begin
   Result := FDataSource.DataSet.Fields[0].Value;
 end;
 
-constructor TDAOImagemProblema.Create;
-begin
-  FConn := TConexao.Create;
-end;
-
 procedure TDAOImagemProblema.DeleteImagem(aImagemProblema: TImagemProblema);
 begin
   FQuery := FConn.CriarQuery;
@@ -72,12 +86,6 @@ begin
 
   FQuery.ExecSQL;
   FConn.GetConn.Commit;
-end;
-
-destructor TDAOImagemProblema.Destroy;
-begin
-  FConn.Free;
-  inherited;
 end;
 
 procedure TDAOImagemProblema.InsertImagem(aImagemProblema: TImagemProblema);

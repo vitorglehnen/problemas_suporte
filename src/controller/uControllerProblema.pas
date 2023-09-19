@@ -7,7 +7,6 @@ uses
   Data.DB,
   uProblema,
   uDAOGridProblema,
-  uDAOProblema,
   uImagemProblema,
   uDAOImagemProblema,
   System.Classes;
@@ -15,13 +14,11 @@ uses
 type
   TControllerProblema = class
   private
-    FDAOProblema: TDaoProblema;
     FDAOGridProblema: TDAOGridProblema;
     FDAOImagemProblema: TDAOImagemProblema;
     FListaImagens: TStringList;
   public
     function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
-    function CarregaDadosProblema(aTituloProblema: String): TDataSource;
     function BuscaTabelaProblemas : TDataSource;
     function BuscaImagens(aCodigoProblema: Integer): TStringList;
     function BuscaTabelaProblemasPorFiltro(aProblema: TProblema; aColuna: String; aFiltro: String): TDataSource;
@@ -36,6 +33,25 @@ type
 implementation
 
 { TControllerProblemas }
+
+constructor TControllerProblema.Create;
+begin
+  { Método construtor da classe }
+
+  FDAOGridProblema := TDAOGridProblema.Create;
+  FDAOImagemProblema := TDAOImagemProblema.Create;
+end;
+
+destructor TControllerProblema.Destroy;
+begin
+  { Método destrutor da classe }
+
+  FListaImagens.Free;
+  FDAOGridProblema.Free;
+  FDAOImagemProblema.Free;
+
+  inherited;
+end;
 
 function TControllerProblema.BuscaImagens(
   aCodigoProblema: Integer): TStringList;
@@ -73,31 +89,9 @@ begin
   Result := FDAOGridProblema.BuscaTabelaProblemasPorModulo(aNomeModulo);
 end;
 
-function TControllerProblema.CarregaDadosProblema(
-  aTituloProblema: String): TDataSource;
-begin
-  Result:= FDAOProblema.CarregaDadosProblema(aTituloProblema);
-end;
-
-constructor TControllerProblema.Create;
-begin
-  FDAOProblema := TDAOProblema.Create;
-  FDAOGridProblema := TDAOGridProblema.Create;
-  FDAOImagemProblema := TDAOImagemProblema.Create;
-end;
-
 procedure TControllerProblema.DeleteImagem(aImagemProblema: TImagemProblema);
 begin
   FDAOImagemProblema.DeleteImagem(aImagemProblema);
-end;
-
-destructor TControllerProblema.Destroy;
-begin
-  FListaImagens.Free;
-  FDAOProblema.Free;
-  FDAOGridProblema.Free;
-  FDAOImagemProblema.Free;
-  inherited;
 end;
 
 procedure TControllerProblema.InsertImagem(aImagem: TImagemProblema);

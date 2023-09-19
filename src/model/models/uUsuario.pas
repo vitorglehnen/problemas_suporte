@@ -57,6 +57,8 @@ uses
 { TUsuario }
 constructor TUsuario.Create;
 begin
+  { Método construtor da classe }
+
   var aUsuario : TDataSet;
 
   FDAOUsuario := TDAOUsuario.Create;
@@ -75,8 +77,23 @@ begin
   FIndFiltroConsultaProblema := FDAOConsultaPadrao.BuscaConsultaPadrao(FCodigo, 'CONSPROBLEMA');
 end;
 
+destructor TUsuario.Destroy;
+begin
+  { Método destrutor da classe }
+
+  FIniConexao.Free;
+  FDAOUsuario.Free;
+  FDAOConsultaPadrao.Free;
+
+  inherited;
+end;
+
 procedure TUsuario.CriaUsuario;
 begin
+  {   Cria o usuário no banco de dados caso não tenha nenhum com o mesmo nome
+    criado ainda, caso estiver vazio a tag do usuário no connect.ini, encerra
+    o programa }
+
   if FNome <> '' then
   begin
     if FDAOUsuario.RetornaUsuario(Self.Nome).IsEmpty then
@@ -95,15 +112,6 @@ begin
     MessageDlg('Você precisa definir um usuário no connect.ini para acessar o programa!', mtWarning, [mbOk], 0);
     Halt;
   end;
-end;
-
-destructor TUsuario.Destroy;
-begin
-  FIniConexao.Free;
-  FDAOUsuario.Free;
-  FDAOConsultaPadrao.Free;
-
-  inherited;
 end;
 
 function TUsuario.GetCodigo: Integer;

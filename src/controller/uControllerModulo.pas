@@ -26,6 +26,24 @@ uses
   Vcl.Dialogs;
 
 { TControllerModulo }
+
+constructor TControllerModulo.Create;
+begin
+  { Método construtor da classe }
+
+  FDAOModulo := TDAOModulo.Create;
+  FDAOGridModulo := TDAOGridModulo.Create;
+end;
+
+destructor TControllerModulo.Destroy;
+begin
+  { Método destrutor da classe }
+
+  FDAOModulo.Free;
+  FDAOGridModulo.Free;
+  inherited;
+end;
+
 function TControllerModulo.BuscaCodigoModulo(aNomeModulo: String): Integer;
 begin
   var aCodigoModulo : Integer := FDAOModulo.BuscaCodigoModulo(aNomeModulo)
@@ -60,12 +78,6 @@ begin
   Result := FDAOGridModulo.BuscaTabelaModulos(aNomeModulo);
 end;
 
-constructor TControllerModulo.Create;
-begin
-  FDAOModulo := TDAOModulo.Create;
-  FDAOGridModulo := TDAOGridModulo.Create;
-end;
-
 procedure TControllerModulo.DeleteModulo(aModulo: TModulo);
 begin
   try
@@ -74,13 +86,6 @@ begin
     MessageDlg('Não é possível excluir um módulo com problemas vinculados!',
       mtInformation, [mbOK], 0);
   end;
-end;
-
-destructor TControllerModulo.Destroy;
-begin
-  FDAOModulo.Free;
-  FDAOGridModulo.Free;
-  inherited;
 end;
 
 end.
