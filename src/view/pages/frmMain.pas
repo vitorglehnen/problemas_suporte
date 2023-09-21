@@ -251,6 +251,11 @@ begin
     edtPesqProblema.NumbersOnly := True
   else
     edtPesqProblema.NumbersOnly := False;
+
+   if dsProblemas.DataSet.RecordCount > 0 then
+    pnlProblemas.Enabled := True
+   else
+    pnlProblemas.Enabled := false;
 end;
 
 destructor TformPrincipal.Destroy;

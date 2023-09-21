@@ -12,10 +12,12 @@ object formPrincipal: TformPrincipal
   Font.Style = []
   KeyPreview = True
   Menu = menuOpcoes
+  OldCreateOrder = True
   WindowState = wsMaximized
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnShow = FormShow
+  PixelsPerInch = 96
   TextHeight = 13
   object pnlPrincipal: TPanel
     Left = 0
@@ -769,6 +771,7 @@ object formPrincipal: TformPrincipal
                 MaxLength = 100000
                 ScrollBars = ssVertical
                 TabOrder = 0
+                Zoom = 100
                 OnDblClick = mmSolucaoProblemaDblClick
               end
             end
@@ -934,6 +937,7 @@ object formPrincipal: TformPrincipal
                 MaxLength = 100000
                 ScrollBars = ssVertical
                 TabOrder = 0
+                Zoom = 100
                 OnDblClick = mmDetalhesProblemaDblClick
               end
             end
