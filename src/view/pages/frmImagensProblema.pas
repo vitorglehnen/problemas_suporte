@@ -23,7 +23,7 @@ uses
   ShellApi,
   System.IniFiles,
   uImagemProblema,
-  uControllerProblema;
+  uControllerProblema, uUsuario;
 
 type
   TformImagensProblema = class(TForm)
@@ -59,12 +59,14 @@ type
     FCaminhoImagem: String;
     FNomeImagem: String;
     FControllerProblema: TControllerProblema;
+    FUsuario: TUsuario;
+
     procedure ConfigParamsImagem;
     procedure InserirImagem;
   public
     { Public declarations }
     procedure AtualizaPosicaoImagens;
-    constructor Create(AOwner: TComponent; aCodProblema: String);
+    constructor Create(AOwner: TComponent; aCodProblema: String; aUsuario: TUsuario);
   end;
 
 var
@@ -76,13 +78,13 @@ implementation
 
 uses frmMain;
 
-constructor TformImagensProblema.Create(AOwner: TComponent;
-  aCodProblema: String);
+constructor TformImagensProblema.Create(AOwner: TComponent; aCodProblema: String; aUsuario: TUsuario);
 begin
   { Método construtor da classe }
 
   inherited Create(AOwner);
 
+  FUsuario := aUsuario;
   FCodProblema := StrToInt(aCodProblema);
   FPosicaoListaImagem := 0;
   FControllerProblema := TControllerProblema.Create;
@@ -111,8 +113,17 @@ begin
   begin
     lblNmroImagem.Caption := IntToStr(FPosicaoListaImagem + 1) + '/' +
       IntToStr(FListaImagens.Count);
-    imgProblema.Picture.LoadFromFile(FCaminhoImagem + FListaImagens
-      [FPosicaoListaImagem]);
+
+    try
+      imgProblema.Picture.LoadFromFile(FCaminhoImagem + FListaImagens
+        [FPosicaoListaImagem]);
+    except
+      imgProblema.Picture := nil;
+
+      pnlPrincipal.Caption := 'Imagem não encontrada! ' + FCaminhoImagem + FListaImagens
+        [FPosicaoListaImagem];
+    end;
+
     btnRemoverImagem.Enabled := True;
     btnRemoverImagem.Enabled := False;
 
@@ -207,6 +218,8 @@ end;
 
 procedure TformImagensProblema.FormShow(Sender: TObject);
 begin
+  pnlTopImagem.Color := StringToColor(FUsuario.Cor);
+
   AtualizaPosicaoImagens;
 end;
 
@@ -232,7 +245,13 @@ begin
     try
       aImagem.Imagem := FListaImagens[FPosicaoListaImagem];
       aImagem.CodigoProblema := FCodProblema;
-      DeleteFile(FCaminhoImagem + FListaImagens[FPosicaoListaImagem]);
+
+      try
+        DeleteFile(FCaminhoImagem + FListaImagens[FPosicaoListaImagem]);
+      except
+
+      end;
+
       FControllerProblema.DeleteImagem(aImagem);
       FListaImagens.Delete(FPosicaoListaImagem);
       if FPosicaoListaImagem <> 0 then dec(FPosicaoListaImagem);

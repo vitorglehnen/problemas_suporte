@@ -11,10 +11,12 @@ object formImagensProblema: TformImagensProblema
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
+  OldCreateOrder = True
   Position = poScreenCenter
   OnDestroy = FormDestroy
   OnKeyPress = FormKeyPress
   OnShow = FormShow
+  PixelsPerInch = 96
   TextHeight = 13
   object pnlPrincipal: TPanel
     Left = 0
@@ -31,8 +33,6 @@ object formImagensProblema: TformImagensProblema
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 1146
-    ExplicitHeight = 699
     object imgProblema: TImage
       Left = 81
       Top = 98
@@ -55,6 +55,12 @@ object formImagensProblema: TformImagensProblema
       Height = 602
       Align = alRight
       Caption = '------->'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
       OnClick = btnProxImagemClick
       ExplicitLeft = 1075
       ExplicitTop = 103
@@ -67,6 +73,12 @@ object formImagensProblema: TformImagensProblema
       Align = alLeft
       Caption = '<-------'
       Enabled = False
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
       OnClick = btnAntImagemClick
       ExplicitLeft = 1
       ExplicitTop = 103
@@ -98,7 +110,6 @@ object formImagensProblema: TformImagensProblema
       ParentShowHint = False
       ShowHint = False
       TabOrder = 0
-      ExplicitWidth = 1146
       object btnRemoverImagem: TSpeedButton
         Left = 213
         Top = 6
@@ -207,7 +218,6 @@ object formImagensProblema: TformImagensProblema
       ParentShowHint = False
       ShowHint = False
       TabOrder = 1
-      ExplicitWidth = 1146
       object lblNmroImagem: TLabel
         Left = 1
         Top = 1
@@ -216,14 +226,16 @@ object formImagensProblema: TformImagensProblema
         Align = alClient
         Alignment = taCenter
         Caption = '1/5'
+        Color = clBtnFace
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Tahoma'
-        Font.Style = []
+        Font.Style = [fsBold]
+        ParentColor = False
         ParentFont = False
         Layout = tlCenter
-        ExplicitWidth = 24
+        ExplicitWidth = 29
         ExplicitHeight = 19
       end
     end

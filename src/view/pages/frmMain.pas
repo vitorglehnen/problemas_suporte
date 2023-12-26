@@ -60,7 +60,8 @@ uses
   uUsuario,
   System.IniFiles,
   Vcl.ActnMenus,
-  Vcl.Menus;
+  Vcl.Menus,
+  System.Threading;
 
 type
   TformPrincipal = class(TForm)
@@ -134,6 +135,7 @@ type
     lblDetalhesProblema: TLabel;
     mmDetalhesProblema: TDBRichEdit;
     lblNomeModulo: TLabel;
+    Image1: TImage;
     
     procedure btnNovoModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -177,6 +179,7 @@ type
     FControllerProblema: TControllerProblema;
     FControllerModulo: TControllerModulo;
     FUsuario: TUsuario;
+    procedure CarregaPersonalizacaoUsuario;
     procedure SelecionaModuloCbProblema;
     procedure PersonalizaGridProblemas;
     procedure CarregaGridProblemas;
@@ -239,23 +242,13 @@ end;
 procedure TformPrincipal.FormShow(Sender: TObject);
 begin
   { Mudança nos comportamentos dos componentes ao abrir o sistema }
-    
-  cbFiltroPesqProblema.ItemIndex := FUsuario.GetIndFiltroConsultaProblema;
-  statusBarBottom.Panels[0].Text := 'Usuário: ' + FUsuario.Nome;
-  rdbtnFiltroPesqProblema.ItemIndex := FUsuario.ConsultaGeral;
-  pnlPrincipal.Color := StringToColor(FUsuario.Cor);
+
+  CarregaPersonalizacaoUsuario;
   PreencheCbxModulos;
   SelecionaModuloCbProblema;
 
-   if cbFiltroPesqProblema.Text = 'Código' then
-    edtPesqProblema.NumbersOnly := True
-  else
-    edtPesqProblema.NumbersOnly := False;
-
-   if dsProblemas.DataSet.RecordCount > 0 then
-    pnlProblemas.Enabled := True
-   else
-    pnlProblemas.Enabled := false;
+   if cbFiltroPesqProblema.Text = 'Código' then edtPesqProblema.NumbersOnly := True else edtPesqProblema.NumbersOnly := False;
+   if dsProblemas.DataSet.RecordCount > 0 then pnlProblemas.Enabled := True else pnlProblemas.Enabled := false;
 end;
 
 destructor TformPrincipal.Destroy;
@@ -389,7 +382,7 @@ begin
   var
     aCaminhoImagem: String;
 
-  FFormImagensProblema := TformImagensProblema.Create(nil, edtCodProblema.Text);
+  FFormImagensProblema := TformImagensProblema.Create(nil, edtCodProblema.Text, FUsuario);
   try
     FFormImagensProblema.ShowModal;
   finally
@@ -458,6 +451,17 @@ begin
 
   PersonalizaGridProblemas;
   DsProblemasAfterScroll(dsProblemas.DataSet);
+end;
+
+procedure TformPrincipal.CarregaPersonalizacaoUsuario;
+begin
+  FUsuario := TUsuario.Create;
+
+  cbFiltroPesqProblema.ItemIndex := FUsuario.GetIndFiltroConsultaProblema;
+  statusBarBottom.Panels[0].Text := 'Usuário: ' + FUsuario.Nome;
+  statusBarBottom.Panels[1].Text := 'Endereço IP: ' + FUsuario.EnderecoIp;
+  rdbtnFiltroPesqProblema.ItemIndex := FUsuario.ConsultaGeral;
+  pnlPrincipal.Color := StringToColor(FUsuario.Cor);
 end;
 
 procedure TformPrincipal.cbFiltroPesqProblemaChange(Sender: TObject);
@@ -640,6 +644,11 @@ begin
   
   if not(dsProblemas.DataSet.State = dsInsert) then
     SelecionaModuloCbProblema;
+
+  if dsProblemas.DataSet.RecordCount > 0 then
+    pnlProblemas.Enabled := True
+   else
+    pnlProblemas.Enabled := false;
 end;
 
 procedure TformPrincipal.edtPesqProblemaChange(Sender: TObject);
@@ -847,7 +856,7 @@ end;
 
 procedure TformPrincipal.N1Click(Sender: TObject);
 begin
-  { Abre a tela de preferência do usuário } 
+  { Abre a tela de preferência do usuário }
   
   var
     aUsuario: TUsuario := TUsuario.Create;
@@ -859,6 +868,7 @@ begin
     aFrmPreferencias.ShowModal;
   finally
     aFrmPreferencias.Free;
+    CarregaPersonalizacaoUsuario;
   end;
 end;
 

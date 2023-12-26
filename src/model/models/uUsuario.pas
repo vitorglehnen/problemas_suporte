@@ -10,7 +10,10 @@ uses
   FireDAC.Comp.Client,
   Data.DB,
   uInterfaceUsuario,
-  uDAOConsultaPadrao;
+  uDAOConsultaPadrao,
+  IdBaseComponent,
+  IdComponent,
+  IdIPWatch;
 
 type
   TUsuario = class(TInterfacedObject, IUsuario)
@@ -24,8 +27,11 @@ type
     FDAOUsuario: TDAOUsuario;
     FDAOConsultaPadrao: TDAOConsPadrao;
     FIniConexao: TIniFile;
+    FEnderecoIp: String;
 
     procedure CriaUsuario;
+    function GetEnderecoIp: String;
+    procedure SetEnderecoIp(const Value: String);
   public
     function GetCodigo: Integer;
     function GetNome: String;
@@ -44,6 +50,7 @@ type
     property ConsultaGeral: Integer read GetConsultaGeral write SetConsultaGeral;
     property Cor: String read GetCor write SetCor;
     property IndFiltroConsultaProblema: Integer read FIndFiltroConsultaProblema write FIndFiltroConsultaProblema;
+    property EnderecoIp: String read GetEnderecoIp write SetEnderecoIp;
 
     constructor Create;
     destructor Destroy; override;
@@ -54,15 +61,16 @@ implementation
 uses
   System.SysUtils;
 
-{ TUsuario }
 constructor TUsuario.Create;
 begin
   { Método construtor da classe }
 
   var aUsuario : TDataSet;
+  var FObjectIP : TIdIPWatch;
 
   FDAOUsuario := TDAOUsuario.Create;
   FDAOConsultaPadrao := TDAOConsPadrao.Create;
+  FObjectIP := TIdIPWatch.Create(nil);
 
   FIniConexao := TIniFile.Create(ExtractFilePath(ParamStr(0)) + 'Connect.ini');
 
@@ -71,9 +79,10 @@ begin
 
   aUsuario := FDAOUsuario.RetornaUsuario(FNome);
 
+  FCor := aUsuario.FieldByName('cor').AsString;
   FCodigo := aUsuario.FieldByName('cod_usu').AsInteger;
   FConsultaGeral := aUsuario.FieldByName('selecaogeral').AsInteger;
-  FCor := aUsuario.FieldByName('cor').AsString;
+  FEnderecoIp := FObjectIP.LocalIP;
   FIndFiltroConsultaProblema := FDAOConsultaPadrao.BuscaConsultaPadrao(FCodigo, 'CONSPROBLEMA');
 end;
 
@@ -129,6 +138,11 @@ begin
   Result := FCor;
 end;
 
+function TUsuario.GetEnderecoIp: String;
+begin
+  Result := FEnderecoIp;
+end;
+
 function TUsuario.GetIndFiltroConsultaProblema: Integer;
 begin
   Result := FIndFiltroConsultaProblema;
@@ -152,6 +166,11 @@ end;
 procedure TUsuario.SetCor(const Value: String);
 begin
   FCor := Value;
+end;
+
+procedure TUsuario.SetEnderecoIp(const Value: String);
+begin
+  FEnderecoIp := Value;
 end;
 
 procedure TUsuario.SetIndFiltroConsultaProblema(const Value: Integer);
