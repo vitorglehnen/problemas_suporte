@@ -39,7 +39,6 @@ type
     Panel1: TPanel;
     lblNmroImagem: TLabel;
     btnSelecionarImagem: TSpeedButton;
-    procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure FormDestroy(Sender: TObject);
     procedure btnAntImagemClick(Sender: TObject);
     procedure InverteCrudImagem;
@@ -51,6 +50,7 @@ type
     procedure btnCancelarImagemClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnSalvarImagemClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
     FCodProblema: Integer;
@@ -61,6 +61,7 @@ type
     FControllerProblema: TControllerProblema;
     FUsuario: TUsuario;
 
+
     procedure ConfigParamsImagem;
     procedure InserirImagem;
   public
@@ -68,6 +69,9 @@ type
     procedure AtualizaPosicaoImagens;
     constructor Create(AOwner: TComponent; aCodProblema: String; aUsuario: TUsuario);
   end;
+
+const
+  NOME_ARQ_INI = 'Connect.ini';
 
 var
   formImagensProblema: TformImagensProblema;
@@ -106,6 +110,8 @@ end;
 
 procedure TformImagensProblema.AtualizaPosicaoImagens;
 begin
+  pnlPrincipal.Caption := '';
+
   { Caso a lista de imagens for > 0, atualiza a informação na tela a posição
     da imagem, 1/4; 2/4.... }
 
@@ -206,7 +212,7 @@ begin
   { Busca o caminho das imagens do sistema }
 
   var
-    aArqINI: TIniFile := TIniFile.Create('C:\Problemas Suporte\Connect.ini');
+    aArqINI: TIniFile := TIniFile.Create(ExtractFilePath(Application.ExeName) + NOME_ARQ_INI);
 
   try
     FCaminhoImagem := aArqINI.ReadString('Imagens', 'CaminhoDaPasta',
@@ -263,15 +269,24 @@ begin
   AtualizaPosicaoImagens;
 end;
 
-procedure TformImagensProblema.FormKeyPress(Sender: TObject; var Key: Char);
+procedure TformImagensProblema.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
 begin
-  { Ao clicar CTRL + V, verifica se o conteúdo que está no clipboard é um
+    { Ao clicar CTRL + V, verifica se o conteúdo que está no clipboard é um
     BitMap, caso for, coloca a imagem na tela }
 
-  if Key = ^V then
+  if (ssCtrl in Shift) and (Key = Ord('V')) then
     if btnSalvarImagem.Enabled then
       if Clipboard.HasFormat(cf_bitmap) then
         imgProblema.Picture.Assign(Clipboard);
+
+  if Key = VK_LEFT then
+    if btnAntImagem.Enabled then
+      btnAntImagemClick(self);
+
+  if Key = VK_RIGHT then
+    if btnProxImagem.Enabled then
+      btnProxImagemClick(self);
 end;
 
 procedure TformImagensProblema.imgProblemaDblClick(Sender: TObject);
@@ -280,7 +295,8 @@ begin
     aImagem: String := FCaminhoImagem + FListaImagens[FPosicaoListaImagem];
 
     // Após dois cliques na imagem, ela abre na tela pelo windows
-  ShellExecute(Handle, 'open', PWideChar(aImagem), nil, nil, SW_SHOWNORMAL);
+  if imgProblema.Picture.Graphic <> nil then
+    ShellExecute(Handle, 'open', PWideChar(aImagem), nil, nil, SW_SHOWNORMAL);
 end;
 
 procedure TformImagensProblema.InserirImagem;

@@ -11,12 +11,10 @@ object formImagensProblema: TformImagensProblema
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = True
   Position = poScreenCenter
   OnDestroy = FormDestroy
-  OnKeyPress = FormKeyPress
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
-  PixelsPerInch = 96
   TextHeight = 13
   object pnlPrincipal: TPanel
     Left = 0
@@ -33,6 +31,8 @@ object formImagensProblema: TformImagensProblema
     Font.Style = []
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 1144
+    ExplicitHeight = 691
     object imgProblema: TImage
       Left = 81
       Top = 98
@@ -110,6 +110,7 @@ object formImagensProblema: TformImagensProblema
       ParentShowHint = False
       ShowHint = False
       TabOrder = 0
+      ExplicitWidth = 1144
       object btnRemoverImagem: TSpeedButton
         Left = 213
         Top = 6
@@ -218,6 +219,7 @@ object formImagensProblema: TformImagensProblema
       ParentShowHint = False
       ShowHint = False
       TabOrder = 1
+      ExplicitWidth = 1144
       object lblNmroImagem: TLabel
         Left = 1
         Top = 1
