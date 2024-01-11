@@ -651,6 +651,7 @@ object formPrincipal: TformPrincipal
             BevelOuter = bvNone
             Padding.Left = 30
             Padding.Top = 20
+            Padding.Right = 60
             ParentColor = True
             TabOrder = 1
             ExplicitWidth = 852
@@ -669,10 +670,11 @@ object formPrincipal: TformPrincipal
               OnClick = btnImagensProblemaClick
             end
             object Image1: TImage
-              Left = 660
-              Top = 21
+              Left = 1140
+              Top = 20
               Width = 169
-              Height = 102
+              Height = 88
+              Align = alRight
               Picture.Data = {
                 0954506E67496D61676589504E470D0A1A0A0000000D4948445200000D4C0000
                 06060806000000C110001C000000097048597300002E2300002E230178A53F76
@@ -5153,6 +5155,9 @@ object formPrincipal: TformPrincipal
                 3DCCC3FDE83A6A32F4E922BA0600000000000000000000008EE37F2D81053DC3
                 D438470000000049454E44AE426082}
               Proportional = True
+              ExplicitLeft = 660
+              ExplicitTop = 21
+              ExplicitHeight = 102
             end
             object pnlModuloProblema: TPanel
               Left = 30
@@ -5259,9 +5264,10 @@ object formPrincipal: TformPrincipal
               end
               object mmSolucaoProblema: TDBRichEdit
                 Left = 0
-                Top = 21
-                Width = 801
-                Height = 280
+                Top = 15
+                Width = 1279
+                Height = 299
+                Align = alClient
                 BevelInner = bvNone
                 DataField = 'solucao'
                 DataSource = dsProblemas
@@ -5274,6 +5280,9 @@ object formPrincipal: TformPrincipal
                 ScrollBars = ssVertical
                 TabOrder = 0
                 OnDblClick = mmSolucaoProblemaDblClick
+                ExplicitTop = 21
+                ExplicitWidth = 801
+                ExplicitHeight = 280
               end
             end
           end
@@ -5427,9 +5436,10 @@ object formPrincipal: TformPrincipal
               end
               object mmDetalhesProblema: TDBRichEdit
                 Left = 0
-                Top = 21
-                Width = 795
+                Top = 15
+                Width = 1279
                 Height = 142
+                Align = alClient
                 BevelInner = bvNone
                 DataField = 'detalhes'
                 DataSource = dsProblemas
@@ -5442,6 +5452,8 @@ object formPrincipal: TformPrincipal
                 ScrollBars = ssVertical
                 TabOrder = 0
                 OnDblClick = mmDetalhesProblemaDblClick
+                ExplicitTop = 21
+                ExplicitWidth = 795
               end
             end
           end

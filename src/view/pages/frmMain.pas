@@ -447,7 +447,9 @@ begin
       end;
   end;
 
+  gridProblemas.DataSource.DataSet.Last;
   lblTotalDeProblemas.Caption := 'Total: ' + IntToStr(gridProblemas.DataSource.DataSet.RecordCount);
+  gridProblemas.DataSource.DataSet.First;
 
   PersonalizaGridProblemas;
   DsProblemasAfterScroll(dsProblemas.DataSet);
