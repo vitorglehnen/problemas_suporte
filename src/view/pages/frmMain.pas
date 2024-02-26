@@ -136,6 +136,7 @@ type
     mmDetalhesProblema: TDBRichEdit;
     lblNomeModulo: TLabel;
     Image1: TImage;
+    Consultar: TButton;
     
     procedure btnNovoModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -161,7 +162,6 @@ type
     procedure btnAtualizarGridProblemasClick(Sender: TObject);
     procedure btnSalvarModuloClick(Sender: TObject);
     procedure btnCancelarModuloClick(Sender: TObject);
-    procedure edtPesqModuloChange(Sender: TObject);
     procedure mmDetalhesProblemaDblClick(Sender: TObject);
     procedure mmSolucaoProblemaDblClick(Sender: TObject);
     procedure chkSomenteSolucaoClick(Sender: TObject);
@@ -172,6 +172,7 @@ type
     procedure btnSalvaIndiceFiltroProblemaClick(Sender: TObject);
     procedure N1Click(Sender: TObject);
     procedure cbFiltroPesqProblemaChange(Sender: TObject);
+    procedure ConsultarClick(Sender: TObject);
   private
     { Private declarations }
     FFormRichEditTelaCheia: TFormRichEditTelaCheia;
@@ -500,6 +501,11 @@ begin
       dsProblemas.DataSet.FieldByName('somentesolu').AsString := 'N';
 
   EsticaMemoProblemas;
+end;
+
+procedure TformPrincipal.ConsultarClick(Sender: TObject);
+begin
+  CarregaGridModulos;
 end;
 
 procedure TformPrincipal.DsModulosAfterInsert(TDataSet: TDataSet);
@@ -889,11 +895,6 @@ end;
 procedure TformPrincipal.gridModulosCellClick(Column: TColumn);
 begin
   CarregaGridProblemas;
-end;
-
-procedure TformPrincipal.edtPesqModuloChange(Sender: TObject);
-begin
-  CarregaGridModulos;
 end;
 
 end.

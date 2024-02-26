@@ -49,7 +49,7 @@ begin
   FQuery := FConn.CriarQuery;
   FDataSource := FConn.CriarDataSource;
 
-  FQuery.SQL.Text := 'SELECT nome FROM modulos WHERE UPPER(nome) like UPPER(:nome) || ''%'' ORDER BY nome';
+  FQuery.SQL.Text := 'SELECT nome FROM modulos WHERE UPPER(nome) like ''%'' || UPPER(:nome) || ''%'' ORDER BY nome';
   FQuery.ParamByName('nome').AsString := aNomeModulo;
   FQuery.Open();
 
