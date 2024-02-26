@@ -197,13 +197,11 @@ type
     procedure DsModulosEventos;
 
     procedure DsProblemasAfterCancel(TDataSet: TDataSet);
-    procedure DsProblemasAfterScroll(TDataSet: TDataSet);
     procedure DsProblemasAfterInsert(TDataSet: TDataSet);
     procedure DsProblemasBeforePost(TDataSet: TDataSet);
     procedure DsProblemasAfterEdit(TDataSet: TDataSet);
     procedure DsProblemasAfterPost(TDataSet: TDataSet);
 
-    procedure DsModulosAfterScroll(TDataSet: TDataSet);
     procedure DsModulosAfterInsert(TDataSet: TDataSet);
     procedure DsModulosAfterCancel(TDataSet: TDataSet);
     procedure DsModulosAfterDelete(TDataSet: TDataSet);
@@ -452,7 +450,6 @@ begin
   gridProblemas.DataSource.DataSet.First;
 
   PersonalizaGridProblemas;
-  DsProblemasAfterScroll(dsProblemas.DataSet);
 end;
 
 procedure TformPrincipal.CarregaPersonalizacaoUsuario;
@@ -518,15 +515,8 @@ begin
   InverteCrudModulo;
 end;
 
-procedure TformPrincipal.DsModulosAfterScroll(TDataSet: TDataSet);
-begin
-  if dsModulos.State = dsBrowse then
-    CarregaGridProblemas;
-end;
-
 procedure TformPrincipal.DsModulosEventos;
 begin
-  dsModulos.DataSet.AfterScroll := DsModulosAfterScroll;
   dsModulos.DataSet.AfterInsert := DsModulosAfterInsert;
   dsModulos.DataSet.AfterCancel := DsModulosAfterCancel;
   dsModulos.DataSet.AfterDelete := DsModulosAfterDelete;
@@ -604,53 +594,11 @@ end;
 
 procedure TformPrincipal.DsProblemasEventos;
 begin
-  dsProblemas.DataSet.AfterScroll := DsProblemasAfterScroll;
   dsProblemas.DataSet.AfterInsert := DsProblemasAfterInsert;
   dsProblemas.DataSet.AfterCancel := DsProblemasAfterCancel;
   dsProblemas.DataSet.BeforePost := DsProblemasBeforePost;
   dsProblemas.DataSet.AfterEdit := DsProblemasAfterEdit;
   dsProblemas.DataSet.AfterPost := DsProblemasAfterPost;
-end;
-
-procedure TformPrincipal.DsProblemasAfterScroll(TDataSet: TDataSet);
-begin
-  {   Aqui é implementado a lógica após mudar de registro no grid de problemas, 
-    atualizando as informações na tela referente sobre o registro selecionado }
-
-  var
-    aListaImagens: TStringList;
-    
-  if dsProblemas.DataSet.RecordCount > 0 then
-  begin
-    try
-      aListaImagens := FControllerProblema.BuscaImagens
-        (dsProblemas.DataSet.FieldByName('cod_prob').AsInteger);
-
-      btnImagensProblema.Caption := 'Imagens (' +
-        IntToStr(aListaImagens.Count) + ')';
-    finally
-      aListaImagens.Free;
-    end;
-  end
-  else
-  begin
-    btnImagensProblema.Caption := 'Imagens (' + IntToStr(0) + ')';
-
-    if not (dsProblemas.State = dsInsert) then
-      pnlProblemas.Enabled := False;
-  end;
-
-  dtProblema.date := dsProblemas.DataSet.FieldByName('datacr').AsDateTime;  
-  PreencheCbxModulos;
-  EsticaMemoProblemas;
-  
-  if not(dsProblemas.DataSet.State = dsInsert) then
-    SelecionaModuloCbProblema;
-
-  if dsProblemas.DataSet.RecordCount > 0 then
-    pnlProblemas.Enabled := True
-   else
-    pnlProblemas.Enabled := false;
 end;
 
 procedure TformPrincipal.edtPesqProblemaChange(Sender: TObject);

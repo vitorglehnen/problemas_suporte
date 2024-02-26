@@ -27,8 +27,8 @@ object formPrincipal: TformPrincipal
     BevelOuter = bvNone
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 1364
-    ExplicitHeight = 726
+    ExplicitWidth = 1877
+    ExplicitHeight = 731
     object pnlBodyModulosProblemas: TPanel
       Left = 0
       Top = 0
@@ -39,7 +39,7 @@ object formPrincipal: TformPrincipal
       Caption = 'pnlBodyModulosProblemas'
       ParentColor = True
       TabOrder = 0
-      ExplicitHeight = 712
+      ExplicitHeight = 717
       object pnlBodyProblemas: TPanel
         Left = 241
         Top = 0
@@ -55,7 +55,7 @@ object formPrincipal: TformPrincipal
         ParentColor = True
         ParentFont = False
         TabOrder = 0
-        ExplicitHeight = 712
+        ExplicitHeight = 717
         object pnlTopProblemas: TPanel
           Left = 0
           Top = 0
@@ -337,7 +337,7 @@ object formPrincipal: TformPrincipal
           Color = clWhite
           ParentBackground = False
           TabOrder = 1
-          ExplicitHeight = 455
+          ExplicitHeight = 460
           object gridProblemas: TDBGrid
             Left = 1
             Top = 1
@@ -376,7 +376,7 @@ object formPrincipal: TformPrincipal
         BevelOuter = bvNone
         ParentColor = True
         TabOrder = 1
-        ExplicitHeight = 712
+        ExplicitHeight = 717
         object pnlTopModulos: TPanel
           Left = 0
           Top = 0
@@ -563,7 +563,7 @@ object formPrincipal: TformPrincipal
           ParentBackground = False
           ParentColor = True
           TabOrder = 1
-          ExplicitHeight = 455
+          ExplicitHeight = 460
           object gridModulos: TDBGrid
             Left = 1
             Top = 1
@@ -606,8 +606,8 @@ object formPrincipal: TformPrincipal
       BevelOuter = bvNone
       ParentColor = True
       TabOrder = 1
-      ExplicitWidth = 852
-      ExplicitHeight = 712
+      ExplicitWidth = 1365
+      ExplicitHeight = 717
       object pnlCadastroProblema: TCard
         Left = 0
         Top = 0
@@ -617,8 +617,8 @@ object formPrincipal: TformPrincipal
         CardIndex = 0
         ParentColor = True
         TabOrder = 0
-        ExplicitWidth = 852
-        ExplicitHeight = 712
+        ExplicitWidth = 1365
+        ExplicitHeight = 717
         object pnlProblemas: TPanel
           Left = 0
           Top = 0
@@ -639,8 +639,8 @@ object formPrincipal: TformPrincipal
           ParentFont = False
           TabOrder = 0
           TabStop = True
-          ExplicitWidth = 852
-          ExplicitHeight = 712
+          ExplicitWidth = 1365
+          ExplicitHeight = 717
           object pnlBodyModuloProblema: TPanel
             Left = 0
             Top = 69
@@ -654,7 +654,7 @@ object formPrincipal: TformPrincipal
             Padding.Right = 60
             ParentColor = True
             TabOrder = 1
-            ExplicitWidth = 852
+            ExplicitWidth = 1365
             object btnImagensProblema: TSpeedButton
               Left = 349
               Top = 34
@@ -5231,8 +5231,8 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             ParentColor = True
             TabOrder = 3
-            ExplicitWidth = 852
-            ExplicitHeight = 358
+            ExplicitWidth = 1365
+            ExplicitHeight = 363
             object pnlSolucaoProblema: TPanel
               Left = 30
               Top = 0
@@ -5245,8 +5245,8 @@ object formPrincipal: TformPrincipal
               Padding.Bottom = 50
               ParentColor = True
               TabOrder = 0
-              ExplicitWidth = 822
-              ExplicitHeight = 358
+              ExplicitWidth = 1335
+              ExplicitHeight = 363
               object lblSolucaoProblema: TLabel
                 Left = 0
                 Top = 0
@@ -5280,9 +5280,8 @@ object formPrincipal: TformPrincipal
                 ScrollBars = ssVertical
                 TabOrder = 0
                 OnDblClick = mmSolucaoProblemaDblClick
-                ExplicitTop = 21
-                ExplicitWidth = 801
-                ExplicitHeight = 280
+                ExplicitWidth = 1275
+                ExplicitHeight = 298
               end
             end
           end
@@ -5299,7 +5298,7 @@ object formPrincipal: TformPrincipal
             ParentBackground = False
             ParentColor = True
             TabOrder = 0
-            ExplicitWidth = 852
+            ExplicitWidth = 1365
             object lblDataProblema: TLabel
               Left = 633
               Top = 11
@@ -5406,7 +5405,7 @@ object formPrincipal: TformPrincipal
             Padding.Left = 30
             ParentColor = True
             TabOrder = 2
-            ExplicitWidth = 852
+            ExplicitWidth = 1365
             object pnlDetalhesProblema: TPanel
               Left = 30
               Top = 0
@@ -5418,7 +5417,7 @@ object formPrincipal: TformPrincipal
               Padding.Bottom = 20
               ParentColor = True
               TabOrder = 0
-              ExplicitWidth = 822
+              ExplicitWidth = 1335
               object lblDetalhesProblema: TLabel
                 Left = 0
                 Top = 0
@@ -5452,8 +5451,7 @@ object formPrincipal: TformPrincipal
                 ScrollBars = ssVertical
                 TabOrder = 0
                 OnDblClick = mmDetalhesProblemaDblClick
-                ExplicitTop = 21
-                ExplicitWidth = 795
+                ExplicitWidth = 1275
               end
             end
           end
@@ -5474,8 +5472,8 @@ object formPrincipal: TformPrincipal
           Text = 'IP:'
           Width = 50
         end>
-      ExplicitTop = 712
-      ExplicitWidth = 1364
+      ExplicitTop = 717
+      ExplicitWidth = 1877
     end
   end
   object dsModulos: TDataSource
