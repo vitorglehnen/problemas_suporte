@@ -136,7 +136,8 @@ type
     mmDetalhesProblema: TDBRichEdit;
     lblNomeModulo: TLabel;
     Image1: TImage;
-    Consultar: TButton;
+    Button1: TButton;
+    btnConsultarModulos: TButton;
     
     procedure btnNovoModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -153,7 +154,6 @@ type
     procedure btnExcluirProblemaClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure btnImagensProblemaClick(Sender: TObject);
-    procedure edtPesqProblemaChange(Sender: TObject);
     procedure btnNovoProblemaClick(Sender: TObject);
     procedure btnSalvarProblemaClick(Sender: TObject);
     procedure btnCancelarProblemaClick(Sender: TObject);
@@ -173,6 +173,7 @@ type
     procedure N1Click(Sender: TObject);
     procedure cbFiltroPesqProblemaChange(Sender: TObject);
     procedure ConsultarClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
     FFormRichEditTelaCheia: TFormRichEditTelaCheia;
@@ -607,54 +608,6 @@ begin
   dsProblemas.DataSet.AfterPost := DsProblemasAfterPost;
 end;
 
-procedure TformPrincipal.edtPesqProblemaChange(Sender: TObject);
-begin
-  {   Implementa a lógica de pesquisa dos problemas, caso o tamanho de letras
-    no edit de pesquisa seja > 0, faz a busca no banco de dados referente ao 
-    filtro que está selecionado no comboBox, caso contrário, faz a pesquisa 
-    geral dos problemas }
-
-  var
-    aProblema := TProblema.Create;
-  var
-    aFiltro: String;
-    
-  try
-    case rdbtnFiltroPesqProblema.ItemIndex of
-      0: aFiltro := 'Geral';
-      1: aFiltro := 'Módulo';
-    end;
-
-    if (Length(edtPesqProblema.Text) > 0) and (dsProblemas.DataSet.RecordCount > 0) then
-    begin
-
-      case cbFiltroPesqProblema.ItemIndex of
-        0: // Pega apenas os 10 primeiros dígitos por conta de ser um integer
-          aProblema.Codigo := StrToInt(Copy(edtPesqProblema.Text, 1, 10));
-        1:
-          aProblema.Titulo := edtPesqProblema.Text;
-        2:
-          aProblema.Chamado := edtPesqProblema.Text;
-        3:
-          aProblema.Detalhes := edtPesqProblema.Text;
-        4:
-          aProblema.Solucao := edtPesqProblema.Text;
-      end;
-
-      aProblema.Modulo := gridModulos.Columns[0].Field.Value;
-      
-      FControllerProblema.BuscaTabelaProblemasPorFiltro(aProblema,
-        cbFiltroPesqProblema.Text, aFiltro);
-
-      PersonalizaGridProblemas;
-    end
-  else
-    CarregaGridProblemas;
-  finally
-    aProblema.Free;
-  end;
-end;
-
 procedure TformPrincipal.edtTituloProblemaMouseMove(Sender: TObject;
   Shift: TShiftState; X, Y: Integer);
 begin
@@ -890,6 +843,54 @@ end;
 procedure TformPrincipal.btnSalvarProblemaClick(Sender: TObject);
 begin
   SalvarProblema;
+end;
+
+procedure TformPrincipal.Button1Click(Sender: TObject);
+begin
+  {   Implementa a lógica de pesquisa dos problemas, caso o tamanho de letras
+    no edit de pesquisa seja > 0, faz a busca no banco de dados referente ao
+    filtro que está selecionado no comboBox, caso contrário, faz a pesquisa
+    geral dos problemas }
+
+  var
+    aProblema := TProblema.Create;
+  var
+    aFiltro: String;
+
+  try
+    case rdbtnFiltroPesqProblema.ItemIndex of
+      0: aFiltro := 'Geral';
+      1: aFiltro := 'Módulo';
+    end;
+
+    if (Length(edtPesqProblema.Text) > 0) and (dsProblemas.DataSet.RecordCount > 0) then
+    begin
+
+      case cbFiltroPesqProblema.ItemIndex of
+        0: // Pega apenas os 10 primeiros dígitos por conta de ser um integer
+          aProblema.Codigo := StrToInt(Copy(edtPesqProblema.Text, 1, 10));
+        1:
+          aProblema.Titulo := edtPesqProblema.Text;
+        2:
+          aProblema.Chamado := edtPesqProblema.Text;
+        3:
+          aProblema.Detalhes := edtPesqProblema.Text;
+        4:
+          aProblema.Solucao := edtPesqProblema.Text;
+      end;
+
+      aProblema.Modulo := gridModulos.Columns[0].Field.Value;
+
+      FControllerProblema.BuscaTabelaProblemasPorFiltro(aProblema,
+        cbFiltroPesqProblema.Text, aFiltro);
+
+      PersonalizaGridProblemas;
+    end
+  else
+    CarregaGridProblemas;
+  finally
+    aProblema.Free;
+  end;
 end;
 
 procedure TformPrincipal.gridModulosCellClick(Column: TColumn);

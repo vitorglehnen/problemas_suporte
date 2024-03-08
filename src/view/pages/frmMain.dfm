@@ -218,7 +218,6 @@ object formPrincipal: TformPrincipal
                 Height = 21
                 Align = alTop
                 TabOrder = 0
-                OnChange = edtPesqProblemaChange
               end
               object pnlFiltroPesqProblema: TPanel
                 Left = 0
@@ -279,6 +278,15 @@ object formPrincipal: TformPrincipal
                     'Chamado'
                     'Detalhes'
                     'Solu'#231#227'o')
+                end
+                object Button1: TButton
+                  Left = 176
+                  Top = 10
+                  Width = 75
+                  Height = 21
+                  Caption = 'Consultar'
+                  TabOrder = 2
+                  OnClick = Button1Click
                 end
               end
             end
@@ -498,7 +506,7 @@ object formPrincipal: TformPrincipal
             TabOrder = 1
             object lblNomeModulo: TLabel
               Left = 9
-              Top = 59
+              Top = 108
               Width = 27
               Height = 13
               Caption = 'Nome'
@@ -540,17 +548,25 @@ object formPrincipal: TformPrincipal
                 Height = 21
                 Align = alTop
                 TabOrder = 0
-                OnChange = edtPesqModuloChange
               end
             end
             object edtNomeModulo: TDBEdit
               Left = 9
-              Top = 72
+              Top = 121
               Width = 221
               Height = 21
               DataField = 'nome'
               DataSource = dsModulos
               TabOrder = 1
+            end
+            object btnConsultarModulos: TButton
+              Left = 155
+              Top = 52
+              Width = 75
+              Height = 21
+              Caption = 'Consultar'
+              TabOrder = 2
+              OnClick = Button1Click
             end
           end
         end
