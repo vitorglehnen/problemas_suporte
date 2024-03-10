@@ -174,6 +174,8 @@ type
     procedure cbFiltroPesqProblemaChange(Sender: TObject);
     procedure ConsultarClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure btnConsultarModulosClick(Sender: TObject);
+    procedure edtPesqModuloKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     FFormRichEditTelaCheia: TFormRichEditTelaCheia;
@@ -198,6 +200,7 @@ type
     procedure DsProblemasEventos;
     procedure DsModulosEventos;
 
+    procedure DsProblemasAfterScroll(TDataSet: TDataSet);
     procedure DsProblemasAfterCancel(TDataSet: TDataSet);
     procedure DsProblemasAfterInsert(TDataSet: TDataSet);
     procedure DsProblemasBeforePost(TDataSet: TDataSet);
@@ -589,6 +592,42 @@ begin
   dsProblemas.DataSet.Locate('TITULO', aTitulo, [loCaseInsensitive, loPartialKey]);
 end;
 
+procedure TformPrincipal.DsProblemasAfterScroll(TDataSet: TDataSet);
+begin
+  {   Aqui é implementado a lógica após mudar de registro no grid de problemas,
+    atualizando as informações na tela referente sobre o registro selecionado }
+
+  var
+    aListaImagens: TStringList;
+
+  if dsProblemas.DataSet.RecordCount > 0 then
+  begin
+    try
+      aListaImagens := FControllerProblema.BuscaImagens
+        (dsProblemas.DataSet.FieldByName('cod_prob').AsInteger);
+
+      btnImagensProblema.Caption := 'Imagens (' +
+        IntToStr(aListaImagens.Count) + ')';
+    finally
+      aListaImagens.Free;
+    end;
+  end
+  else
+  begin
+    btnImagensProblema.Caption := 'Imagens (' + IntToStr(0) + ')';
+
+    if not (dsProblemas.State = dsInsert) then
+      pnlProblemas.Enabled := False;
+  end;
+
+  dtProblema.date := dsProblemas.DataSet.FieldByName('datacr').AsDateTime;
+  PreencheCbxModulos;
+  EsticaMemoProblemas;
+
+  if not(dsProblemas.DataSet.State = dsInsert) then
+    SelecionaModuloCbProblema;
+end;
+
 procedure TformPrincipal.DsProblemasBeforePost(TDataSet: TDataSet);
 begin
   if dsProblemas.DataSet.State = dsInsert then
@@ -601,11 +640,18 @@ end;
 
 procedure TformPrincipal.DsProblemasEventos;
 begin
+  dsProblemas.DataSet.AfterScroll := DsProblemasAfterScroll;
   dsProblemas.DataSet.AfterInsert := DsProblemasAfterInsert;
   dsProblemas.DataSet.AfterCancel := DsProblemasAfterCancel;
   dsProblemas.DataSet.BeforePost := DsProblemasBeforePost;
   dsProblemas.DataSet.AfterEdit := DsProblemasAfterEdit;
   dsProblemas.DataSet.AfterPost := DsProblemasAfterPost;
+end;
+
+procedure TformPrincipal.edtPesqModuloKeyPress(Sender: TObject; var Key: Char);
+begin
+  if key=#13 then
+    Selectnext(ActiveControl, True, True);
 end;
 
 procedure TformPrincipal.edtTituloProblemaMouseMove(Sender: TObject;
@@ -670,7 +716,7 @@ begin
     else
       DefaultDrawColumnCell(Rect, DataCol, Column, State);
   end;
-  
+
   { Faz a alternação de cores no grid }
   if State = [] then
   begin
@@ -800,6 +846,11 @@ end;
 procedure TformPrincipal.btnCancelarProblemaClick(Sender: TObject);
 begin
   CancelarProblema;
+end;
+
+procedure TformPrincipal.btnConsultarModulosClick(Sender: TObject);
+begin
+  CarregaGridModulos;
 end;
 
 procedure TformPrincipal.btnNovoModuloClick(Sender: TObject);
