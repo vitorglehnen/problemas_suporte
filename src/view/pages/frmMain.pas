@@ -138,6 +138,8 @@ type
     Image1: TImage;
     Button1: TButton;
     btnConsultarModulos: TButton;
+    edtCriadoPor: TDBEdit;
+    lblCriadoPor: TLabel;
     
     procedure btnNovoModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -452,7 +454,7 @@ begin
 
   gridProblemas.DataSource.DataSet.Last;
   lblTotalDeProblemas.Caption := 'Total: ' + IntToStr(gridProblemas.DataSource.DataSet.RecordCount);
-  gridProblemas.DataSource.DataSet.First;
+  //gridProblemas.DataSource.DataSet.First;
 
   PersonalizaGridProblemas;
 end;
@@ -466,6 +468,7 @@ begin
   statusBarBottom.Panels[1].Text := 'Endereço IP: ' + FUsuario.EnderecoIp;
   rdbtnFiltroPesqProblema.ItemIndex := FUsuario.ConsultaGeral;
   pnlPrincipal.Color := StringToColor(FUsuario.Cor);
+  edtCriadoPor.Color := StringToColor(FUsuario.Cor);
 end;
 
 procedure TformPrincipal.cbFiltroPesqProblemaChange(Sender: TObject);
@@ -590,6 +593,7 @@ begin
 
   dsModulos.DataSet.Locate('NOME', cbModulo.Text, [loCaseInsensitive, loPartialKey]);
   dsProblemas.DataSet.Locate('TITULO', aTitulo, [loCaseInsensitive, loPartialKey]);
+  edtCriadoPor.Text := FUsuario.Nome;
 end;
 
 procedure TformPrincipal.DsProblemasAfterScroll(TDataSet: TDataSet);

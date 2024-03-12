@@ -47,7 +47,10 @@ begin
   FQuery := FConn.CriarQuery;
   FDataSource := FConn.CriarDataSource;
 
-  FQuery.SQL.Text := 'SELECT * FROM PROBLEMAS ORDER BY TITULO';
+  FQuery.SQL.Text := 'SELECT p.*, u.nome as nome_usuario ' +
+                      'FROM PROBLEMAS p ' +
+                      'LEFT JOIN USUARIOS u ON u.cod_usu = p.cod_usu ' +
+                      'ORDER BY TITULO';
   FQuery.Open;
 
   FDataSource.DataSet := FQuery;
@@ -61,7 +64,10 @@ begin
   FDataSource := FConn.CriarDataSource;
 
   FQuery.SQL.Clear;
-  FQuery.SQL.Add('SELECT * FROM problemas WHERE');
+  FQuery.SQL.Add('SELECT p.*, u.nome as nome_usuario' +
+                  'FROM problemas p ' +
+                  'LEFT JOIN USUARIOS u ON u.cod_usu = p.cod_usu ' +
+                  'WHERE');
 
   if aFiltro = 'Módulo' then
   begin
@@ -109,9 +115,11 @@ begin
   FQuery := FConn.CriarQuery;
   FDataSource := FConn.CriarDataSource;
 
-  FQuery.SQL.Text := 'SELECT * FROM problemas ' +
-  'JOIN modulos ON problemas.cod_mod = modulos.cod_mod ' +
-  'WHERE modulos.nome = :NomeModulo';
+  FQuery.SQL.Text := 'SELECT problemas.*, u.nome as nome_usuario ' +
+                      'FROM problemas ' +
+                      'JOIN modulos ON problemas.cod_mod = modulos.cod_mod ' +
+                      'LEFT JOIN usuarios u ON problemas.cod_usu = u.cod_usu ' +
+                      'WHERE modulos.nome = :NomeModulo';
   FQuery.ParamByName('NomeModulo').AsString := aNomeModulo;
   FQuery.Open;
 
