@@ -31,7 +31,7 @@ object formRichEditTelaCheia: TformRichEditTelaCheia
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
-      Font.Name = 'Tahoma'
+      Font.Name = 'Calibri'
       Font.Style = []
       ParentFont = False
       ReadOnly = True

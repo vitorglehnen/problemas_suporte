@@ -29,8 +29,14 @@ object FormPreferencias: TFormPreferencias
       Left = 424
       Top = 48
       Width = 59
-      Height = 15
+      Height = 14
       Caption = 'Cor padr'#227'o'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Calibri'
+      Font.Style = []
+      ParentFont = False
     end
     object pnlTop: TPanel
       Left = 0
@@ -55,9 +61,15 @@ object FormPreferencias: TFormPreferencias
       Width = 169
       Height = 81
       Caption = 'Filtro padr'#227'o consulta'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Calibri'
+      Font.Style = []
       Items.Strings = (
         'Geral'
         'Somente do m'#243'dulo')
+      ParentFont = False
       TabOrder = 1
     end
     object cbCorPadrao: TColorBox
@@ -66,6 +78,12 @@ object FormPreferencias: TFormPreferencias
       Width = 145
       Height = 22
       NoneColorColor = 16708071
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Calibri'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 2
     end
     object btnSalvar: TButton
@@ -77,7 +95,7 @@ object FormPreferencias: TFormPreferencias
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clGreen
       Font.Height = -12
-      Font.Name = 'Segoe UI'
+      Font.Name = 'Calibri'
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 3
