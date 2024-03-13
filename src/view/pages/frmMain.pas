@@ -5,7 +5,6 @@ interface
 uses
   Winapi.Windows,
   Winapi.Messages,
-  System.SysUtils,
   System.Variants,
   System.Classes,
   System.Actions,
@@ -61,7 +60,9 @@ uses
   System.IniFiles,
   Vcl.ActnMenus,
   Vcl.Menus,
-  System.Threading;
+  System.Threading,
+  ShellAPI,
+  SysUtils;
 
 type
   TformPrincipal = class(TForm)
@@ -178,6 +179,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure btnConsultarModulosClick(Sender: TObject);
     procedure edtPesqModuloKeyPress(Sender: TObject; var Key: Char);
+    procedure Image1DblClick(Sender: TObject);
   private
     { Private declarations }
     FFormRichEditTelaCheia: TFormRichEditTelaCheia;
@@ -454,7 +456,7 @@ begin
 
   gridProblemas.DataSource.DataSet.Last;
   lblTotalDeProblemas.Caption := 'Total: ' + IntToStr(gridProblemas.DataSource.DataSet.RecordCount);
-  //gridProblemas.DataSource.DataSet.First;
+  gridProblemas.DataSource.DataSet.First;
 
   PersonalizaGridProblemas;
 end;
@@ -768,6 +770,11 @@ begin
   end;
 end;
 
+procedure TformPrincipal.Image1DblClick(Sender: TObject);
+begin
+  ShellExecute(0, 'open', 'https://wiki.officesystem.com.br/Página_principal', nil, nil, SW_SHOWNORMAL);
+end;
+
 procedure TformPrincipal.InverteCrudModulo;
 begin
   btnCancelarModulo.Enabled := not btnCancelarModulo.Enabled;
@@ -799,6 +806,7 @@ begin
     FFormRichEditTelaCheia.Free;
   end;
 end;
+
 
 procedure TformPrincipal.mmSolucaoProblemaDblClick(Sender: TObject);
 begin

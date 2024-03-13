@@ -5172,6 +5172,7 @@ object formPrincipal: TformPrincipal
                 3DCCC3FDE83A6A32F4E922BA0600000000000000000000008EE37F2D81053DC3
                 D438470000000049454E44AE426082}
               Proportional = True
+              OnDblClick = Image1DblClick
               ExplicitLeft = 660
               ExplicitTop = 21
               ExplicitHeight = 102
@@ -5199,7 +5200,6 @@ object formPrincipal: TformPrincipal
               BevelOuter = bvNone
               ParentColor = True
               TabOrder = 0
-              ExplicitTop = 14
               object lblModuloProblema: TLabel
                 Left = 0
                 Top = 0
@@ -5213,7 +5213,7 @@ object formPrincipal: TformPrincipal
                 Font.Name = 'Segoe UI'
                 Font.Style = [fsBold]
                 ParentFont = False
-                ExplicitTop = -1
+                ExplicitWidth = 47
               end
               object cbModulo: TComboBox
                 Left = 64
@@ -5323,8 +5323,8 @@ object formPrincipal: TformPrincipal
                 ScrollBars = ssVertical
                 TabOrder = 0
                 OnDblClick = mmSolucaoProblemaDblClick
-                ExplicitWidth = 1275
-                ExplicitHeight = 298
+                ExplicitLeft = -80
+                ExplicitTop = 6
               end
             end
           end
@@ -5341,6 +5341,7 @@ object formPrincipal: TformPrincipal
             ParentBackground = False
             ParentColor = True
             TabOrder = 0
+            ExplicitWidth = 1365
             object lblDataProblema: TLabel
               Left = 633
               Top = 11
