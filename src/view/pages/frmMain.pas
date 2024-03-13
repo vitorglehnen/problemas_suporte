@@ -125,11 +125,9 @@ type
     pnlTopProblema: TPanel;
     lblDataProblema: TLabel;
     lblChamadoProblema: TLabel;
-    lblCodProblema: TLabel;
     lblTituloProblema: TLabel;
     edtTituloProblema: TDBEdit;
     edtChamadoProblema: TDBEdit;
-    edtCodProblema: TDBEdit;
     dtProblema: TDateTimePicker;
     pnlBodyDetalhesProblema: TPanel;
     pnlDetalhesProblema: TPanel;
@@ -180,6 +178,7 @@ type
     procedure btnConsultarModulosClick(Sender: TObject);
     procedure edtPesqModuloKeyPress(Sender: TObject; var Key: Char);
     procedure Image1DblClick(Sender: TObject);
+    procedure edtPesqProblemaKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
     FFormRichEditTelaCheia: TFormRichEditTelaCheia;
@@ -389,7 +388,7 @@ begin
   var
     aCaminhoImagem: String;
 
-  FFormImagensProblema := TformImagensProblema.Create(nil, edtCodProblema.Text, FUsuario);
+  FFormImagensProblema := TformImagensProblema.Create(nil, dsProblemas.DataSet.FieldByName('cod_prob').AsString, FUsuario);
   try
     FFormImagensProblema.ShowModal;
   finally
@@ -658,6 +657,13 @@ procedure TformPrincipal.edtPesqModuloKeyPress(Sender: TObject; var Key: Char);
 begin
   if key=#13 then
     Selectnext(ActiveControl, True, True);
+end;
+
+procedure TformPrincipal.edtPesqProblemaKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+    if key=#13 then
+      Selectnext(ActiveControl, True, True);
 end;
 
 procedure TformPrincipal.edtTituloProblemaMouseMove(Sender: TObject;

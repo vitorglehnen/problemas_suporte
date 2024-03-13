@@ -75,24 +75,24 @@ object formPrincipal: TformPrincipal
             Caption = 'Problemas'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
+            Font.Height = -12
+            Font.Name = 'Calibri'
             Font.Style = [fsBold]
             ParentFont = False
             Layout = tlCenter
-            ExplicitWidth = 60
-            ExplicitHeight = 13
+            ExplicitWidth = 52
+            ExplicitHeight = 14
           end
           object lblTotalDeProblemas: TLabel
             Left = 5
             Top = 1
-            Width = 35
+            Width = 27
             Height = 13
             Caption = 'Total: '
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
             Font.Height = -11
-            Font.Name = 'Tahoma'
+            Font.Name = 'Calibri'
             Font.Style = [fsBold]
             ParentFont = False
           end
@@ -113,7 +113,7 @@ object formPrincipal: TformPrincipal
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clMaroon
               Font.Height = -11
-              Font.Name = 'Tahoma'
+              Font.Name = 'Calibri'
               Font.Style = []
               ParentFont = False
               Spacing = 2
@@ -131,7 +131,7 @@ object formPrincipal: TformPrincipal
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clMaroon
               Font.Height = -11
-              Font.Name = 'Tahoma'
+              Font.Name = 'Calibri'
               Font.Style = []
               ParentFont = False
               Spacing = 2
@@ -149,7 +149,7 @@ object formPrincipal: TformPrincipal
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
               Font.Height = -11
-              Font.Name = 'Tahoma'
+              Font.Name = 'Calibri'
               Font.Style = []
               ParentFont = False
               Spacing = 2
@@ -166,7 +166,7 @@ object formPrincipal: TformPrincipal
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
               Font.Height = -11
-              Font.Name = 'Tahoma'
+              Font.Name = 'Calibri'
               Font.Style = []
               ParentFont = False
               Spacing = 2
@@ -206,10 +206,10 @@ object formPrincipal: TformPrincipal
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Height = -11
-                Font.Name = 'Tahoma'
+                Font.Name = 'Calibri'
                 Font.Style = []
                 ParentFont = False
-                ExplicitWidth = 42
+                ExplicitWidth = 43
               end
               object edtPesqProblema: TEdit
                 Left = 0
@@ -217,7 +217,14 @@ object formPrincipal: TformPrincipal
                 Width = 251
                 Height = 21
                 Align = alTop
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Calibri'
+                Font.Style = []
+                ParentFont = False
                 TabOrder = 0
+                OnKeyPress = edtPesqProblemaKeyPress
               end
               object pnlFiltroPesqProblema: TPanel
                 Left = 0
@@ -254,7 +261,7 @@ object formPrincipal: TformPrincipal
                   Font.Charset = DEFAULT_CHARSET
                   Font.Color = clBlack
                   Font.Height = -11
-                  Font.Name = 'Tahoma'
+                  Font.Name = 'Calibri'
                   Font.Style = []
                   ItemIndex = 1
                   Items.Strings = (
@@ -270,6 +277,12 @@ object formPrincipal: TformPrincipal
                   Width = 113
                   Height = 21
                   Style = csDropDownList
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Calibri'
+                  Font.Style = []
+                  ParentFont = False
                   TabOrder = 2
                   OnChange = cbFiltroPesqProblemaChange
                   Items.Strings = (
@@ -285,6 +298,12 @@ object formPrincipal: TformPrincipal
                   Width = 75
                   Height = 21
                   Caption = 'Consultar'
+                  Font.Charset = DEFAULT_CHARSET
+                  Font.Color = clWindowText
+                  Font.Height = -11
+                  Font.Name = 'Calibri'
+                  Font.Style = []
+                  ParentFont = False
                   TabOrder = 0
                   OnClick = Button1Click
                 end
@@ -360,7 +379,7 @@ object formPrincipal: TformPrincipal
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -13
-            Font.Name = 'Tahoma'
+            Font.Name = 'Calibri'
             Font.Style = []
             Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
@@ -404,13 +423,13 @@ object formPrincipal: TformPrincipal
             Caption = 'M'#243'dulos'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Tahoma'
+            Font.Height = -12
+            Font.Name = 'Calibri'
             Font.Style = [fsBold]
             ParentFont = False
             Layout = tlCenter
-            ExplicitWidth = 47
-            ExplicitHeight = 13
+            ExplicitWidth = 42
+            ExplicitHeight = 14
           end
           object pnlBotaoCrudModulo: TPanel
             Left = 1
@@ -432,7 +451,7 @@ object formPrincipal: TformPrincipal
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clMaroon
               Font.Height = -11
-              Font.Name = 'Tahoma'
+              Font.Name = 'Calibri'
               Font.Style = []
               ParentFont = False
               OnClick = btnExcluirModuloClick
@@ -449,7 +468,7 @@ object formPrincipal: TformPrincipal
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
               Font.Height = -11
-              Font.Name = 'Tahoma'
+              Font.Name = 'Calibri'
               Font.Style = []
               ParentFont = False
               OnClick = btnNovoModuloClick
@@ -467,7 +486,7 @@ object formPrincipal: TformPrincipal
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clMaroon
               Font.Height = -11
-              Font.Name = 'Tahoma'
+              Font.Name = 'Calibri'
               Font.Style = []
               ParentFont = False
               OnClick = btnCancelarModuloClick
@@ -484,7 +503,7 @@ object formPrincipal: TformPrincipal
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clGreen
               Font.Height = -11
-              Font.Name = 'Tahoma'
+              Font.Name = 'Calibri'
               Font.Style = []
               ParentFont = False
               OnClick = btnSalvarModuloClick
@@ -506,14 +525,14 @@ object formPrincipal: TformPrincipal
             TabOrder = 1
             object lblNomeModulo: TLabel
               Left = 9
-              Top = 108
-              Width = 27
+              Top = 106
+              Width = 28
               Height = 13
               Caption = 'Nome'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Height = -11
-              Font.Name = 'Tahoma'
+              Font.Name = 'Calibri'
               Font.Style = []
               ParentFont = False
             end
@@ -536,10 +555,10 @@ object formPrincipal: TformPrincipal
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Height = -11
-                Font.Name = 'Tahoma'
+                Font.Name = 'Calibri'
                 Font.Style = []
                 ParentFont = False
-                ExplicitWidth = 42
+                ExplicitWidth = 43
               end
               object edtPesqModulo: TEdit
                 Left = 0
@@ -547,6 +566,12 @@ object formPrincipal: TformPrincipal
                 Width = 221
                 Height = 21
                 Align = alTop
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Calibri'
+                Font.Style = []
+                ParentFont = False
                 TabOrder = 0
                 OnKeyPress = edtPesqModuloKeyPress
               end
@@ -558,6 +583,12 @@ object formPrincipal: TformPrincipal
               Height = 21
               DataField = 'nome'
               DataSource = dsModulos
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Calibri'
+              Font.Style = []
+              ParentFont = False
               TabOrder = 2
             end
             object btnConsultarModulos: TButton
@@ -566,6 +597,12 @@ object formPrincipal: TformPrincipal
               Width = 75
               Height = 21
               Caption = 'Consultar'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Calibri'
+              Font.Style = []
+              ParentFont = False
               TabOrder = 1
               OnClick = btnConsultarModulosClick
             end
@@ -595,7 +632,7 @@ object formPrincipal: TformPrincipal
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -13
-            Font.Name = 'Tahoma'
+            Font.Name = 'Calibri'
             Font.Style = []
             Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgTitleClick, dgTitleHotTrack]
             ParentFont = False
@@ -680,8 +717,8 @@ object formPrincipal: TformPrincipal
               Caption = 'Imagens (0)'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
-              Font.Height = -11
-              Font.Name = 'Tahoma'
+              Font.Height = -12
+              Font.Name = 'Calibri'
               Font.Style = [fsBold]
               ParentFont = False
               OnClick = btnImagensProblemaClick
@@ -5180,13 +5217,13 @@ object formPrincipal: TformPrincipal
             object lblCriadoPor: TLabel
               Left = 264
               Top = 20
-              Width = 58
+              Width = 48
               Height = 13
               Caption = '&Criado por'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Height = -11
-              Font.Name = 'Tahoma'
+              Font.Name = 'Calibri'
               Font.Style = [fsBold]
               ParentFont = False
             end
@@ -5204,16 +5241,16 @@ object formPrincipal: TformPrincipal
                 Left = 0
                 Top = 0
                 Width = 210
-                Height = 15
+                Height = 14
                 Align = alTop
                 Caption = '*&M'#243'dulo'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Height = -12
-                Font.Name = 'Segoe UI'
+                Font.Name = 'Calibri'
                 Font.Style = [fsBold]
                 ParentFont = False
-                ExplicitWidth = 47
+                ExplicitWidth = 43
               end
               object cbModulo: TComboBox
                 Left = 64
@@ -5222,6 +5259,12 @@ object formPrincipal: TformPrincipal
                 Height = 21
                 Style = csDropDownList
                 Color = clWhite
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Calibri'
+                Font.Style = []
+                ParentFont = False
                 TabOrder = 1
                 OnChange = cbModuloChange
               end
@@ -5233,6 +5276,12 @@ object formPrincipal: TformPrincipal
                 DataField = 'cod_mod'
                 DataSource = dsProblemas
                 Enabled = False
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Calibri'
+                Font.Style = []
+                ParentFont = False
                 TabOrder = 0
               end
             end
@@ -5244,6 +5293,12 @@ object formPrincipal: TformPrincipal
               Caption = 'Mostrar somente solu'#231#227'o'
               DataField = 'somentesolu'
               DataSource = dsProblemas
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Calibri'
+              Font.Style = []
+              ParentFont = False
               TabOrder = 1
               ValueChecked = 'S'
               ValueUnchecked = 'N'
@@ -5258,6 +5313,12 @@ object formPrincipal: TformPrincipal
               BorderStyle = bsNone
               DataField = 'nome_usuario'
               DataSource = dsProblemas
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Calibri'
+              Font.Style = []
+              ParentFont = False
               ReadOnly = True
               TabOrder = 2
             end
@@ -5294,22 +5355,22 @@ object formPrincipal: TformPrincipal
                 Left = 0
                 Top = 0
                 Width = 1279
-                Height = 15
+                Height = 14
                 Align = alTop
                 Caption = '&Solu'#231#227'o'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Height = -12
-                Font.Name = 'Segoe UI'
+                Font.Name = 'Calibri'
                 Font.Style = [fsBold]
                 ParentFont = False
-                ExplicitWidth = 43
+                ExplicitWidth = 38
               end
               object mmSolucaoProblema: TDBRichEdit
                 Left = 0
-                Top = 15
+                Top = 14
                 Width = 1279
-                Height = 299
+                Height = 300
                 Align = alClient
                 BevelInner = bvNone
                 DataField = 'solucao'
@@ -5317,14 +5378,15 @@ object formPrincipal: TformPrincipal
                 Font.Charset = ANSI_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -12
-                Font.Name = 'Tahoma'
+                Font.Name = 'Calibri'
                 Font.Style = []
                 MaxLength = 100000
                 ScrollBars = ssVertical
                 TabOrder = 0
                 OnDblClick = mmSolucaoProblemaDblClick
-                ExplicitLeft = -80
-                ExplicitTop = 6
+                ExplicitTop = 15
+                ExplicitWidth = 1275
+                ExplicitHeight = 298
               end
             end
           end
@@ -5341,56 +5403,42 @@ object formPrincipal: TformPrincipal
             ParentBackground = False
             ParentColor = True
             TabOrder = 0
-            ExplicitWidth = 1365
             object lblDataProblema: TLabel
               Left = 633
               Top = 11
-              Width = 29
+              Width = 24
               Height = 14
               Caption = '&Data'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Height = -12
-              Font.Name = 'Tahoma'
+              Font.Name = 'Calibri'
               Font.Style = [fsBold]
               ParentFont = False
             end
             object lblChamadoProblema: TLabel
               Left = 519
               Top = 11
-              Width = 57
+              Width = 46
               Height = 14
               Caption = '&Chamado'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Height = -12
-              Font.Name = 'Tahoma'
-              Font.Style = [fsBold]
-              ParentFont = False
-            end
-            object lblCodProblema: TLabel
-              Left = 752
-              Top = 11
-              Width = 43
-              Height = 14
-              Caption = '&C'#243'digo'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clBlack
-              Font.Height = -12
-              Font.Name = 'Tahoma'
+              Font.Name = 'Calibri'
               Font.Style = [fsBold]
               ParentFont = False
             end
             object lblTituloProblema: TLabel
               Left = 28
               Top = 11
-              Width = 43
+              Width = 34
               Height = 14
               Caption = '*&T'#237'tulo'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Height = -12
-              Font.Name = 'Tahoma'
+              Font.Name = 'Calibri'
               Font.Style = [fsBold]
               ParentFont = False
             end
@@ -5401,6 +5449,12 @@ object formPrincipal: TformPrincipal
               Height = 21
               DataField = 'titulo'
               DataSource = dsProblemas
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Calibri'
+              Font.Style = []
+              ParentFont = False
               ParentShowHint = False
               ShowHint = True
               TabOrder = 0
@@ -5413,17 +5467,13 @@ object formPrincipal: TformPrincipal
               Height = 21
               DataField = 'chamado'
               DataSource = dsProblemas
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Calibri'
+              Font.Style = []
+              ParentFont = False
               TabOrder = 1
-            end
-            object edtCodProblema: TDBEdit
-              Left = 752
-              Top = 27
-              Width = 73
-              Height = 21
-              DataField = 'cod_prob'
-              DataSource = dsProblemas
-              Enabled = False
-              TabOrder = 2
             end
             object dtProblema: TDateTimePicker
               Left = 632
@@ -5433,7 +5483,13 @@ object formPrincipal: TformPrincipal
               Date = 45076.000000000000000000
               Time = 0.848554212963790600
               Enabled = False
-              TabOrder = 3
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Calibri'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 2
             end
           end
           object pnlBodyDetalhesProblema: TPanel
@@ -5465,22 +5521,22 @@ object formPrincipal: TformPrincipal
                 Left = 0
                 Top = 0
                 Width = 1279
-                Height = 15
+                Height = 14
                 Align = alTop
                 Caption = '&Detalhes do problema'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clBlack
                 Font.Height = -12
-                Font.Name = 'Segoe UI'
+                Font.Name = 'Calibri'
                 Font.Style = [fsBold]
                 ParentFont = False
-                ExplicitWidth = 122
+                ExplicitWidth = 109
               end
               object mmDetalhesProblema: TDBRichEdit
                 Left = 0
-                Top = 15
+                Top = 14
                 Width = 1279
-                Height = 142
+                Height = 143
                 Align = alClient
                 BevelInner = bvNone
                 DataField = 'detalhes'
@@ -5488,13 +5544,15 @@ object formPrincipal: TformPrincipal
                 Font.Charset = ANSI_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -12
-                Font.Name = 'Tahoma'
+                Font.Name = 'Calibri'
                 Font.Style = []
                 MaxLength = 100000
                 ScrollBars = ssVertical
                 TabOrder = 0
                 OnDblClick = mmDetalhesProblemaDblClick
+                ExplicitTop = 15
                 ExplicitWidth = 1275
+                ExplicitHeight = 142
               end
             end
           end
