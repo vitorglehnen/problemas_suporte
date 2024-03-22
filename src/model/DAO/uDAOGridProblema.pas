@@ -3,7 +3,10 @@ unit uDAOGridProblema;
 interface
 
 uses
-  FireDAC.Comp.Client, uConexao, Data.DB, uProblema;
+  FireDAC.Comp.Client,
+  uConexao,
+  Data.DB,
+  uProblema;
 
 type
   TDAOGridProblema = class
@@ -64,10 +67,10 @@ begin
   FDataSource := FConn.CriarDataSource;
 
   FQuery.SQL.Clear;
-  FQuery.SQL.Add('SELECT p.*, u.nome as nome_usuario' +
+  FQuery.SQL.Add('SELECT p.*, u.nome as nome_usuario ' +
                   'FROM problemas p ' +
                   'LEFT JOIN USUARIOS u ON u.cod_usu = p.cod_usu ' +
-                  'WHERE');
+                  'WHERE ');
 
   if aFiltro = 'Módulo' then
   begin
@@ -101,9 +104,6 @@ begin
     FQuery.ParamByName('solucao').AsString := aProblema.Solucao;
   end;
 
-  FQuery.Open;
-  FQuery.FetchAll;
-
   FDataSource.DataSet := FQuery;
   FConn.GetConn.Commit;
 
@@ -115,10 +115,10 @@ begin
   FQuery := FConn.CriarQuery;
   FDataSource := FConn.CriarDataSource;
 
-  FQuery.SQL.Text := 'SELECT problemas.*, u.nome as nome_usuario ' +
-                      'FROM problemas ' +
-                      'JOIN modulos ON problemas.cod_mod = modulos.cod_mod ' +
-                      'LEFT JOIN usuarios u ON problemas.cod_usu = u.cod_usu ' +
+  FQuery.SQL.Text := 'SELECT p.*, u.nome as nome_usuario ' +
+                      'FROM problemas p ' +
+                      'JOIN modulos ON p.cod_mod = modulos.cod_mod ' +
+                      'LEFT JOIN usuarios u ON p.cod_usu = u.cod_usu ' +
                       'WHERE modulos.nome = :NomeModulo';
   FQuery.ParamByName('NomeModulo').AsString := aNomeModulo;
   FQuery.Open;

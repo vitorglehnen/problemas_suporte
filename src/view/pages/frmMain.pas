@@ -139,7 +139,7 @@ type
     btnConsultarModulos: TButton;
     edtCriadoPor: TDBEdit;
     lblCriadoPor: TLabel;
-    
+
     procedure btnNovoModuloMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure btnExcluirModuloClick(Sender: TObject);
@@ -186,6 +186,7 @@ type
     FControllerProblema: TControllerProblema;
     FControllerModulo: TControllerModulo;
     FUsuario: TUsuario;
+
     procedure CarregaPersonalizacaoUsuario;
     procedure SelecionaModuloCbProblema;
     procedure PersonalizaGridProblemas;
@@ -265,7 +266,7 @@ begin
   FControllerModulo.Free;
   FUsuario.Free;
   Application.Terminate;
-  
+
   inherited;
 end;
 
@@ -273,7 +274,7 @@ procedure TformPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   { Teclas de atalho para incluir, salvar, cancelar ou recarregar um problema }
-  
+
   if Key = VK_F2 then
     if btnNovoProblema.Enabled then
       NovoProblema;
@@ -290,12 +291,12 @@ end;
 
 procedure TformPrincipal.PersonalizaGridProblemas;
 begin
-  {   Esconde as colunas no grid de problemas, mantendo apenas a coluna do 
+  {   Esconde as colunas no grid de problemas, mantendo apenas a coluna do
     TITULO visível }
 
   var
     aCont: Integer;
-    
+
   for aCont := 0 to gridProblemas.Columns.Count - 1 do
   begin
     if aCont <> 2 then
@@ -307,24 +308,18 @@ begin
 end;
 
 procedure TformPrincipal.PreencheCbxModulos;
+var
+    listaModulos: TStringList;
+    modulo: string;
 begin
   { Preenche o comboBox dos módulos com todos os módulos cadastrados }
 
-  var
-    aListaModulos: TStringList;
-  var
-    aCont: Integer := 0;
-
+  listaModulos := TStringList.Create;
   try
-    aListaModulos := FControllerModulo.BuscaModulos;
-    cbModulo.Clear;
-    while aCont < aListaModulos.Count do
-    begin
-      cbModulo.items.Add(aListaModulos[aCont]);
-      inc(aCont);
-    end;
+    listaModulos.Assign(FControllerModulo.BuscaModulos);
+    cbModulo.Items.Assign(listaModulos);
   finally
-    aListaModulos.Free;
+    listaModulos.Free;
   end;
 end;
 
@@ -333,7 +328,7 @@ begin
   { Abre a tela de preferências do usuário }
 
   var
-    aUsuario: TUsuario := TUsuario.Create();
+    aUsuario := TUsuario.Create();
   var
     FFormPreferencias := TFormPreferencias.Create(Self, aUsuario);
 
@@ -347,10 +342,10 @@ end;
 procedure TformPrincipal.SalvarProblema;
 begin
   { Valida se os dados do problemas estão corretos para conseguir salvar }
-  
+
   var
     aProblema: TProblema := TProblema.Create;
-    
+
   try
     aProblema.Titulo := edtTituloProblema.Text;
     aProblema.Modulo := edtCodModulo.Text;
@@ -367,9 +362,9 @@ end;
 
 procedure TformPrincipal.SelecionaModuloCbProblema;
 begin
-  {   Loop para selecionar o nome do módulo no combobox corresponde ao 
+  {   Loop para selecionar o nome do módulo no combobox corresponde ao
     código do módulo }
-  
+
   if dsProblemas.DataSet.RecordCount > 0 then
   begin
     cbModulo.ItemIndex := 0;
@@ -452,10 +447,6 @@ begin
           (aNomeModulo).DataSet;
       end;
   end;
-
-  gridProblemas.DataSource.DataSet.Last;
-  lblTotalDeProblemas.Caption := 'Total: ' + IntToStr(gridProblemas.DataSource.DataSet.RecordCount);
-  gridProblemas.DataSource.DataSet.First;
 
   PersonalizaGridProblemas;
 end;
@@ -577,7 +568,7 @@ begin
   edtTituloProblema.SetFocus;
   InverteCrudProblema;
   PreencheCbxModulos;
-  
+
   dsProblemas.DataSet.FieldByName('cod_usu').AsInteger := FUsuario.Codigo;
   dsProblemas.DataSet.FieldByName('datacr').AsDateTime := Now;
 end;
@@ -585,7 +576,7 @@ end;
 procedure TformPrincipal.DsProblemasAfterPost(TDataSet: TDataSet);
 begin
   {   Após inserir o problema no banco de dados, seleciona ele nos grids para
-    aparecer na tela do usuário }  
+    aparecer na tela do usuário }
 
   btnImagensProblema.Enabled := True;
   InverteCrudProblema;
@@ -712,8 +703,8 @@ begin
     Title.Font.Style := [fsBold];
     Title.Font.Size := 9;
   end;
-  
-  {   Caso a linha do grid for a selecionada no momento, muda as personalizações 
+
+  {   Caso a linha do grid for a selecionada no momento, muda as personalizações
     de estilo }
   with gridModulos do
   begin
@@ -830,7 +821,7 @@ end;
 procedure TformPrincipal.N1Click(Sender: TObject);
 begin
   { Abre a tela de preferência do usuário }
-  
+
   var
     aUsuario: TUsuario := TUsuario.Create;
   var
@@ -885,7 +876,16 @@ end;
 
 procedure TformPrincipal.btnNovoProblemaClick(Sender: TObject);
 begin
+  var codModulo : integer := StrToInt(edtCodModulo.Text);
+
   NovoProblema;
+
+  edtCodModulo.Text := IntToStr(codModulo);
+  cbModulo.ItemIndex := 0;
+  while cbModulo.Text <> dsModulos.DataSet.Fields[0].Value do
+  begin
+    cbModulo.ItemIndex := cbModulo.ItemIndex + 1;
+  end;
 end;
 
 procedure TformPrincipal.btnSalvaIndiceFiltroProblemaClick(Sender: TObject);
@@ -955,8 +955,8 @@ begin
 
       PersonalizaGridProblemas;
     end
-  else
-    CarregaGridProblemas;
+    else
+      CarregaGridProblemas;
   finally
     aProblema.Free;
   end;

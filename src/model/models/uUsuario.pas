@@ -84,6 +84,7 @@ begin
   FConsultaGeral := aUsuario.FieldByName('selecaogeral').AsInteger;
   FEnderecoIp := FObjectIP.LocalIP;
   FIndFiltroConsultaProblema := FDAOConsultaPadrao.BuscaConsultaPadrao(FCodigo, 'CONSPROBLEMA');
+  FDAOUsuario.AtualizaIpUsuario(FNome);
 end;
 
 destructor TUsuario.Destroy;

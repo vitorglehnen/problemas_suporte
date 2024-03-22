@@ -8,7 +8,10 @@ uses
   uProblema,
   Data.DB,
   Vcl.Dialogs,
-  uInterfaceUsuario;
+  uInterfaceUsuario,
+  IdBaseComponent,
+  IdComponent,
+  IdIPWatch;
 
 type
   TDAOUsuario = class
@@ -25,6 +28,7 @@ type
 
     procedure InsertUsuario(aUsuario: String);
     procedure AtualizaUsuario(aUsuario: IUsuario);
+    procedure AtualizaIpUsuario(aUsuario: String);
   end;
 
 implementation
@@ -45,6 +49,22 @@ begin
   FConn.Free;
 
   inherited;
+end;
+
+procedure TDAOUsuario.AtualizaIpUsuario(aUsuario: String);
+begin
+  var FObjectIP : TIdIPWatch;
+
+  FObjectIP := TIdIPWatch.Create(nil);
+
+  FQuery := FConn.CriarQuery;
+
+  FQuery.SQL.Text := 'UPDATE usuarios SET ip = :ip WHERE nome = :nome';
+  FQuery.ParamByName('ip').AsString := FObjectIP.LocalIP;
+  FQuery.ParamByName('nome').AsString := aUsuario;
+
+  FQuery.ExecSQL;
+  FConn.GetConn.Commit;
 end;
 
 procedure TDAOUsuario.AtualizaUsuario(aUsuario: IUsuario);
