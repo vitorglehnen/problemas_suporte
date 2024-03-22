@@ -5,9 +5,7 @@
 </head>
 <body>
 
-<!-- Cabeçalho -->
-<h1>Problemas Suporte</h1>
-
+![image](https://github.com/vitorglehnen/problemas_suporte/blob/main/dist/wallpaper.png?raw=true)
 <!-- Descrição do Projeto -->
 <p>Projeto pessoal desenvolvido para trazer facilidade e organização no atendimento ao cliente, permitindo gravar PROBLEMAS diários ou informações e dados diversos.</p>
 
