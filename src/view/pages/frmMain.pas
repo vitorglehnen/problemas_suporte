@@ -69,7 +69,6 @@ type
     gridModulos: TDBGrid;
     lblTituloProblemas: TLabel;
     lblTituloModulo: TLabel;
-    lblTotalDeProblemas: TLabel;
     pnlPrincipal: TPanel;
     pnlBodyModulosProblemas: TPanel;
     pnlCadastroProblema: TCard;
@@ -177,7 +176,6 @@ type
     procedure Button1Click(Sender: TObject);
     procedure btnConsultarModulosClick(Sender: TObject);
     procedure edtPesqModuloKeyPress(Sender: TObject; var Key: Char);
-    procedure Image1DblClick(Sender: TObject);
     procedure edtPesqProblemaKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
@@ -396,7 +394,12 @@ begin
   if dsModulos.DataSet.RecordCount > 0 then
     if Application.MessageBox('Deseja excluir este registro?', 'Excluir módulo',
     +MB_ICONQUESTION + MB_YESNO) = MrYes then
-      dsModulos.DataSet.Delete;
+      try
+        dsModulos.DataSet.Delete;
+      except
+        on E: EDatabaseError do
+          MessageDlg('Não é permitido excluir módulos que possuem PROBLEMAS relacionados!', mtError, [mbOK], 0);
+      end;
 end;
 
 procedure TformPrincipal.btnExcluirProblemaClick(Sender: TObject);
@@ -767,11 +770,6 @@ begin
   end;
 end;
 
-procedure TformPrincipal.Image1DblClick(Sender: TObject);
-begin
-  ShellExecute(0, 'open', 'https://wiki.officesystem.com.br/Página_principal', nil, nil, SW_SHOWNORMAL);
-end;
-
 procedure TformPrincipal.InverteCrudModulo;
 begin
   btnCancelarModulo.Enabled := not btnCancelarModulo.Enabled;
@@ -876,11 +874,8 @@ end;
 
 procedure TformPrincipal.btnNovoProblemaClick(Sender: TObject);
 begin
-  var codModulo : integer := StrToInt(edtCodModulo.Text);
-
   NovoProblema;
 
-  edtCodModulo.Text := IntToStr(codModulo);
   cbModulo.ItemIndex := 0;
   while cbModulo.Text <> dsModulos.DataSet.Fields[0].Value do
   begin

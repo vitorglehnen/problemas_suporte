@@ -20,8 +20,8 @@ object formRichEditTelaCheia: TformRichEditTelaCheia
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    ExplicitWidth = 875
-    ExplicitHeight = 490
+    ExplicitWidth = 873
+    ExplicitHeight = 482
     object mmPrincipal: TRichEdit
       Left = 0
       Top = 0
@@ -37,8 +37,8 @@ object formRichEditTelaCheia: TformRichEditTelaCheia
       ReadOnly = True
       ScrollBars = ssVertical
       TabOrder = 0
-      ExplicitWidth = 875
-      ExplicitHeight = 490
+      ExplicitWidth = 873
+      ExplicitHeight = 482
     end
   end
   object pnlTop: TPanel
@@ -47,7 +47,7 @@ object formRichEditTelaCheia: TformRichEditTelaCheia
     Width = 879
     Height = 33
     Align = alTop
-    Color = 16708071
+    Color = clGray
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -56,6 +56,6 @@ object formRichEditTelaCheia: TformRichEditTelaCheia
     ParentBackground = False
     ParentFont = False
     TabOrder = 1
-    ExplicitWidth = 875
+    ExplicitWidth = 873
   end
 end

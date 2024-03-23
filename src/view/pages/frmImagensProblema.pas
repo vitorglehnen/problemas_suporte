@@ -36,7 +36,7 @@ type
     btnAddImagem: TSpeedButton;
     btnSalvarImagem: TSpeedButton;
     btnCancelarImagem: TSpeedButton;
-    Panel1: TPanel;
+    pnlContagem: TPanel;
     lblNmroImagem: TLabel;
     btnSelecionarImagem: TSpeedButton;
     procedure FormDestroy(Sender: TObject);
@@ -61,13 +61,15 @@ type
     FControllerProblema: TControllerProblema;
     FUsuario: TUsuario;
 
-
     procedure ConfigParamsImagem;
     procedure InserirImagem;
+    procedure CarregaPersonalizacaoUsuario;
   public
     { Public declarations }
+
     procedure AtualizaPosicaoImagens;
-    constructor Create(AOwner: TComponent; aCodProblema: String; aUsuario: TUsuario);
+    constructor Create(AOwner: TComponent; aCodProblema: String;
+      aUsuario: TUsuario);
   end;
 
 const
@@ -82,7 +84,8 @@ implementation
 
 uses frmMain;
 
-constructor TformImagensProblema.Create(AOwner: TComponent; aCodProblema: String; aUsuario: TUsuario);
+constructor TformImagensProblema.Create(AOwner: TComponent;
+  aCodProblema: String; aUsuario: TUsuario);
 begin
   { Método construtor da classe }
 
@@ -126,14 +129,14 @@ begin
     except
       imgProblema.Picture := nil;
 
-      pnlPrincipal.Caption := 'Imagem não encontrada! ' + FCaminhoImagem + FListaImagens
-        [FPosicaoListaImagem];
+      pnlPrincipal.Caption := 'Imagem não encontrada! ' + FCaminhoImagem +
+        FListaImagens[FPosicaoListaImagem];
     end;
 
     btnRemoverImagem.Enabled := True;
     btnRemoverImagem.Enabled := False;
 
-    if not (btnAddImagem.Enabled) then
+    if not(btnAddImagem.Enabled) then
       btnRemoverImagem.Enabled := False
     else
       btnRemoverImagem.Enabled := True
@@ -166,9 +169,9 @@ begin
   { Lógica que implementa salvar as imagens selecionando pelo diretório }
 
   var
-    aSaveDialog := TSaveDialog.Create(nil);
+  aSaveDialog := TSaveDialog.Create(nil);
   var
-    aBitMap := TBitMap.Create;
+  aBitMap := TBitMap.Create;
   var
     aPng: TPngImage;
   var
@@ -207,12 +210,19 @@ begin
   end;
 end;
 
+procedure TformImagensProblema.CarregaPersonalizacaoUsuario;
+begin
+  pnlTopImagem.Color := StringToColor(FUsuario.GetCor);
+  pnlContagem.Color := StringToColor(FUsuario.GetCor);
+end;
+
 procedure TformImagensProblema.ConfigParamsImagem;
 begin
   { Busca o caminho das imagens do sistema }
 
   var
-    aArqINI: TIniFile := TIniFile.Create(ExtractFilePath(Application.ExeName) + NOME_ARQ_INI);
+    aArqINI: TIniFile := TIniFile.Create(ExtractFilePath(Application.ExeName) +
+      NOME_ARQ_INI);
 
   try
     FCaminhoImagem := aArqINI.ReadString('Imagens', 'CaminhoDaPasta',
@@ -224,8 +234,7 @@ end;
 
 procedure TformImagensProblema.FormShow(Sender: TObject);
 begin
-  pnlTopImagem.Color := StringToColor(FUsuario.Cor);
-
+  CarregaPersonalizacaoUsuario;
   AtualizaPosicaoImagens;
 end;
 
@@ -260,7 +269,8 @@ begin
 
       FControllerProblema.DeleteImagem(aImagem);
       FListaImagens.Delete(FPosicaoListaImagem);
-      if FPosicaoListaImagem <> 0 then dec(FPosicaoListaImagem);
+      if FPosicaoListaImagem <> 0 then
+        dec(FPosicaoListaImagem);
     finally
       aImagem.Free;
       FControllerProblema.Free;
@@ -272,7 +282,7 @@ end;
 procedure TformImagensProblema.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-    { Ao clicar CTRL + V, verifica se o conteúdo que está no clipboard é um
+  { Ao clicar CTRL + V, verifica se o conteúdo que está no clipboard é um
     BitMap, caso for, coloca a imagem na tela }
 
   if (ssCtrl in Shift) and (Key = Ord('V')) then
@@ -306,12 +316,12 @@ begin
 
   if imgProblema.Picture.Graphic = nil then
   begin
-    MessageDlg('Insira uma imagem antes de salvar!',mtInformation,[mbOk],0);
+    MessageDlg('Insira uma imagem antes de salvar!', mtInformation, [mbOk], 0);
   end
   else
   begin
     var
-    aImagemPNG: TPngImage := TPngImage.Create;
+      aImagemPNG: TPngImage := TPngImage.Create;
 
     var
       aImagemProblema: TImagemProblema := TImagemProblema.Create;
@@ -346,9 +356,9 @@ procedure TformImagensProblema.btnAddImagemClick(Sender: TObject);
 begin
   InverteCrudImagem;
 
-  btnProxImagem.Enabled := false;
-  btnAntImagem.Enabled := false;
-  btnRemoverImagem.Enabled := false;
+  btnProxImagem.Enabled := False;
+  btnAntImagem.Enabled := False;
+  btnRemoverImagem.Enabled := False;
   imgProblema.Picture := nil;
   pnlPrincipal.Caption := 'Cole aqui sua imagem ou clique em procurar';
 end;

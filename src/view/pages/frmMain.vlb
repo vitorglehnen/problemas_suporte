@@ -43,9 +43,6 @@ Coordinates=798,280,135,58
 [pnlTopModulos]
 Coordinates=232,416,102,58
 
-[lblTotalDeProblemas]
-Coordinates=796,348,134,58
-
 [pnlBodyProblemas]
 Coordinates=10,212,122,58
 
@@ -83,7 +80,7 @@ Coordinates=390,212,104,58
 Coordinates=605,416,134,58
 
 []
-Coordinates=888,1,145,58
+Coordinates=796,348,134,58
 Visible=True
 
 [dsModulos]

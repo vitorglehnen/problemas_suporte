@@ -29,10 +29,11 @@ object formImagensProblema: TformImagensProblema
     Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
+    ParentBackground = False
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 1146
-    ExplicitHeight = 699
+    ExplicitWidth = 1144
+    ExplicitHeight = 691
     object imgProblema: TImage
       Left = 81
       Top = 98
@@ -91,7 +92,6 @@ object formImagensProblema: TformImagensProblema
       ParentCustomHint = False
       Align = alTop
       BiDiMode = bdLeftToRight
-      Color = 16708071
       Ctl3D = True
       DoubleBuffered = False
       Font.Charset = DEFAULT_CHARSET
@@ -104,13 +104,14 @@ object formImagensProblema: TformImagensProblema
       Padding.Bottom = 5
       ParentBiDiMode = False
       ParentBackground = False
+      ParentColor = True
       ParentCtl3D = False
       ParentDoubleBuffered = False
       ParentFont = False
       ParentShowHint = False
       ShowHint = False
       TabOrder = 0
-      ExplicitWidth = 1146
+      ExplicitWidth = 1144
       object btnRemoverImagem: TSpeedButton
         Left = 213
         Top = 6
@@ -196,14 +197,13 @@ object formImagensProblema: TformImagensProblema
         ExplicitLeft = 288
       end
     end
-    object Panel1: TPanel
+    object pnlContagem: TPanel
       Left = 0
       Top = 57
       Width = 1150
       Height = 41
       Align = alTop
       BiDiMode = bdLeftToRight
-      Color = 16775668
       Ctl3D = True
       DoubleBuffered = False
       Font.Charset = DEFAULT_CHARSET
@@ -213,13 +213,14 @@ object formImagensProblema: TformImagensProblema
       Font.Style = []
       ParentBiDiMode = False
       ParentBackground = False
+      ParentColor = True
       ParentCtl3D = False
       ParentDoubleBuffered = False
       ParentFont = False
       ParentShowHint = False
       ShowHint = False
       TabOrder = 1
-      ExplicitWidth = 1146
+      ExplicitWidth = 1144
       object lblNmroImagem: TLabel
         Left = 1
         Top = 1
