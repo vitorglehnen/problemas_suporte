@@ -28,7 +28,7 @@
 <h2 id="utilizacao">Utilização</h2>
 <p>Agora com toda a instalação do sistema finalizada, vamos para a parte de utilização. Para abrir o programa, basta executarmos o <b>ProblemasSuporte.exe que vamos se deparar com a seguinte tela.</p>
 
-![image](https://github.com/vitorglehnen/problemas_suporte/assets/107063776/649dabcd-8e52-4277-a944-cc199cd32893)
+![image](https://github.com/vitorglehnen/public_imgs/blob/main/Print%201.png?raw=true)
 
 Aqui podemos verificar toda a tela principal do sistema, onde poderá ser cadastrado os MÓDULOS, que podemos definir como se fosse um tópico do PROBLEMA que vai ser cadastrado, desta forma conseguimos ter uma organização boa entre os problemas.
 
@@ -36,7 +36,7 @@ Para cadastrar um MÓDULO novo é bem simples, basta clicarmos no botão de NOVO
 
 Depois de ter um MÓDULO cadastrado no sistema, podemos fazer a inserção de um PROBLEMA, é o mesmo processo, basta clicarmos em novo e preenchermos as informações.
 
-![image](https://github.com/vitorglehnen/problemas_suporte/assets/107063776/1c7589a2-03e0-4bf1-b4d8-5a9f499c63ee)
+![image](https://github.com/vitorglehnen/public_imgs/blob/main/Print%202.png?raw=true)
 
 Um detalhe para a marquinha de MOSTRAR SOMENTE SOLUÇÃO, com este check box, podemos definir um campo único para escrita das informações, eliminando a separação entre DETALHES DO PROBLEMA e SOLUÇÃO.
 
@@ -48,7 +48,7 @@ Um detalhe para a marquinha de MOSTRAR SOMENTE SOLUÇÃO, com este check box, po
   <br>
 Dentro de cada PROBLEMA cadastrado, também podemos cadastrar imagens vinculadas a esse registro.
   
-![image](https://github.com/vitorglehnen/problemas_suporte/assets/107063776/fd55df27-b05c-4a48-8173-3344ebd1b9a7)
+![image](https://github.com/vitorglehnen/public_imgs/blob/main/Print%203.png?raw=true)
   
 Estas imagens são salvas no diretório em que foi definido anteriormente no CONNECT.INI, então quando você der dois cliques na tela em cima de uma imagem, ela abrirá no windows
 para facilitar a visualização.
@@ -62,7 +62,7 @@ para facilitar a visualização.
   Aqui nesta parte também podemos fazer a pesquisa dos nossos PROBLEMAS registrados, caso queira salvar um filtro para que na próxima vez que abrir o sistema ele aparecer fixo pra você,
   basta clicar no botão ao lado que ele salva a informação no usuário no banco de dados.
   
-  ![image](https://github.com/vitorglehnen/problemas_suporte/assets/107063776/b9074884-fa45-4483-a237-bf0221428e08)
+  ![image](https://github.com/vitorglehnen/public_imgs/blob/main/Print%204.png?raw=true)
 
 <br>
 <br>
@@ -72,7 +72,7 @@ para facilitar a visualização.
 <br>
   Na parte de cima do sistema, temos a parte de PREFERÊNCIAS do usuário, onde podemos definir parametrizações pessoais.
 
-  ![image](https://github.com/vitorglehnen/problemas_suporte/assets/107063776/76445474-ea8c-4ae4-a915-a4cbe3ac79a1)
+  ![image](https://github.com/vitorglehnen/public_imgs/blob/main/Print%205.png?raw=true)
 
 <br>
 <br>
