@@ -133,8 +133,8 @@ type
     lblDetalhesProblema: TLabel;
     mmDetalhesProblema: TDBRichEdit;
     lblNomeModulo: TLabel;
-    Image1: TImage;
-    Button1: TButton;
+    imgLogo: TImage;
+    btnConsultarProblema: TButton;
     btnConsultarModulos: TButton;
     edtCriadoPor: TDBEdit;
     lblCriadoPor: TLabel;
@@ -173,7 +173,7 @@ type
     procedure N1Click(Sender: TObject);
     procedure cbFiltroPesqProblemaChange(Sender: TObject);
     procedure ConsultarClick(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure btnConsultarProblemaClick(Sender: TObject);
     procedure btnConsultarModulosClick(Sender: TObject);
     procedure edtPesqModuloKeyPress(Sender: TObject; var Key: Char);
     procedure edtPesqProblemaKeyPress(Sender: TObject; var Key: Char);
@@ -297,11 +297,12 @@ begin
 
   for aCont := 0 to gridProblemas.Columns.Count - 1 do
   begin
-    if aCont <> 2 then
-      gridProblemas.Columns[aCont].Visible := False;
+    if gridProblemas.Fields[aCont].FieldName <> 'TITULO' then
+      gridProblemas.Columns[aCont].Visible := False
+    else
+      gridProblemas.Columns[aCont].Title.Font.Style := [fsBold];
   end;
 
-  gridProblemas.Columns[2].Title.Font.Style := [fsBold];
   TDrawGrid(gridProblemas).ScrollBars := ssVertical;
 end;
 
@@ -909,7 +910,7 @@ begin
   SalvarProblema;
 end;
 
-procedure TformPrincipal.Button1Click(Sender: TObject);
+procedure TformPrincipal.btnConsultarProblemaClick(Sender: TObject);
 begin
   {   Implementa a lógica de pesquisa dos problemas, caso o tamanho de letras
     no edit de pesquisa seja > 0, faz a busca no banco de dados referente ao
