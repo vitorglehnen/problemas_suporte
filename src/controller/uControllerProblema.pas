@@ -9,7 +9,7 @@ uses
   uDAOGridProblema,
   uImagemProblema,
   uDAOImagemProblema,
-  System.Classes;
+  System.Classes, uUsuario;
 
 type
   TControllerProblema = class
@@ -23,6 +23,8 @@ type
     function BuscaImagens(aCodigoProblema: Integer): TStringList;
     function BuscaTabelaProblemasPorFiltro(aProblema: TProblema; aColuna: String; aFiltro: String): TDataSource;
     function BuscaProximoCodigoImagem: String;
+    function BuscaQtdeTotalProblemas: Integer;
+    function BuscaQtdeTotalProblemasPorUsuario(aUsuario: TUsuario): Integer;
     procedure InsertImagem(aImagem: TImagemProblema);
     procedure DeleteImagem(aImagemProblema: TImagemProblema);
 
@@ -71,6 +73,17 @@ end;
 function TControllerProblema.BuscaProximoCodigoImagem: String;
 begin
   Result := FDAOImagemProblema.BuscaProximoCodigo;
+end;
+
+function TControllerProblema.BuscaQtdeTotalProblemas: Integer;
+begin
+  Result := FDAOGridProblema.BuscaQtdeTotalProblemas.DataSet.Fields[0].AsInteger;
+end;
+
+function TControllerProblema.BuscaQtdeTotalProblemasPorUsuario(
+  aUsuario: TUsuario): Integer;
+begin
+  Result := FDAOGridProblema.BuscaQtdeTotalProblemasPorUsuario(aUsuario).DataSet.Fields[0].AsInteger;
 end;
 
 function TControllerProblema.BuscaTabelaProblemas: TDataSource;

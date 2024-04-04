@@ -6,7 +6,8 @@ uses
   FireDAC.Comp.Client,
   uConexao,
   Data.DB,
-  uProblema;
+  uProblema,
+  uUsuario;
 
 type
   TDAOGridProblema = class
@@ -18,6 +19,8 @@ type
     function BuscaTabelaProblemasPorModulo(aNomeModulo: String): TDataSource;
     function BuscaTabelaProblemas : TDataSource;
     function BuscaTabelaProblemasPorFiltro(aProblema: TProblema; aColuna: String; aFiltro: String): TDataSource;
+    function BuscaQtdeTotalProblemas: TDataSource;
+    function BuscaQtdeTotalProblemasPorUsuario(aUsuario: TUsuario): TDataSource;
     constructor Create;
     destructor Destroy; override;
   end;
@@ -104,6 +107,8 @@ begin
     FQuery.ParamByName('solucao').AsString := aProblema.Solucao;
   end;
 
+  FQuery.Open;
+
   FDataSource.DataSet := FQuery;
   FConn.GetConn.Commit;
 
@@ -128,5 +133,36 @@ begin
 
   Result := FDataSource;
 end;
+
+function TDAOGridProblema.BuscaQtdeTotalProblemas: TDataSource;
+begin
+  FQuery := FConn.CriarQuery;
+  FDataSource := FConn.CriarDataSource;
+
+  FQuery.SQL.Text := 'SELECT count(*) as qtde_problemas ' +
+                      'FROM problemas p ';
+  FQuery.Open;
+
+  FDataSource.DataSet := FQuery;
+
+  Result := FDataSource;
+end;
+
+function TDAOGridProblema.BuscaQtdeTotalProblemasPorUsuario(aUsuario: TUsuario): TDataSource;
+begin
+  FQuery := FConn.CriarQuery;
+  FDataSource := FConn.CriarDataSource;
+
+  FQuery.SQL.Text := 'SELECT count(*) as qtde_problemas ' +
+                      'FROM problemas p ' +
+                      'WHERE p.cod_usu = :cod_usu';
+  FQuery.ParamByName('cod_usu').AsInteger := aUsuario.GetCodigo;
+  FQuery.Open;
+
+  FDataSource.DataSet := FQuery;
+
+  Result := FDataSource;
+end;
+
 
 end.

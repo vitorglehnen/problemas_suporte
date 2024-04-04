@@ -26,7 +26,7 @@ object FormPreferencias: TFormPreferencias
     ExplicitWidth = 620
     ExplicitHeight = 440
     object lblCorPadrao: TLabel
-      Left = 424
+      Left = 471
       Top = 48
       Width = 59
       Height = 14
@@ -37,6 +37,33 @@ object FormPreferencias: TFormPreferencias
       Font.Name = 'Calibri'
       Font.Style = []
       ParentFont = False
+    end
+    object lblEstatisticas: TLabel
+      Left = 8
+      Top = 236
+      Width = 75
+      Height = 21
+      Caption = 'Estat'#237'sticas'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -16
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lblQtdeProblemas: TLabel
+      Left = 8
+      Top = 288
+      Width = 125
+      Height = 15
+      Caption = 'Problemas cadastrados:'
+    end
+    object lblQtdeModulos: TLabel
+      Left = 8
+      Top = 309
+      Width = 116
+      Height = 15
+      Caption = 'M'#243'dulos cadastrados:'
     end
     object pnlTop: TPanel
       Left = 0
@@ -73,7 +100,7 @@ object FormPreferencias: TFormPreferencias
       TabOrder = 1
     end
     object cbCorPadrao: TColorBox
-      Left = 424
+      Left = 471
       Top = 64
       Width = 145
       Height = 22
@@ -87,8 +114,8 @@ object FormPreferencias: TFormPreferencias
       TabOrder = 2
     end
     object btnSalvar: TButton
-      Left = 464
-      Top = 384
+      Left = 479
+      Top = 376
       Width = 105
       Height = 25
       Caption = 'Salvar altera'#231#245'es'
@@ -100,6 +127,28 @@ object FormPreferencias: TFormPreferencias
       ParentFont = False
       TabOrder = 3
       OnClick = btnSalvarClick
+    end
+    object pnlLineDesign: TPanel
+      Left = 0
+      Top = 263
+      Width = 624
+      Height = 2
+      TabOrder = 4
+    end
+    object chkFiltrarPorUsuario: TCheckBox
+      Left = 104
+      Top = 240
+      Width = 145
+      Height = 17
+      Caption = 'Filtrar por usu'#225'rio'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -9
+      Font.Name = 'Segoe UI'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 5
+      OnClick = chkFiltrarPorUsuarioClick
     end
   end
 end

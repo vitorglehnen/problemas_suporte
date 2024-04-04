@@ -16,7 +16,12 @@ uses
   uUsuario,
   Vcl.StdCtrls,
   Data.DB,
-  uDAOUsuario;
+  uDAOUsuario,
+  Vcl.Grids,
+  Vcl.Outline,
+  Vcl.Samples.DirOutln,
+  Vcl.Mask,
+  uControllerProblema, uControllerModulo;
 
 type
   TFormPreferencias = class(TForm)
@@ -26,15 +31,26 @@ type
     cbCorPadrao: TColorBox;
     lblCorPadrao: TLabel;
     btnSalvar: TButton;
+    lblEstatisticas: TLabel;
+    pnlLineDesign: TPanel;
+    lblQtdeProblemas: TLabel;
+    lblQtdeModulos: TLabel;
+    chkFiltrarPorUsuario: TCheckBox;
     procedure btnSalvarClick(Sender: TObject);
+    procedure chkFiltrarPorUsuarioClick(Sender: TObject);
   private
     FUsuario: TUsuario;
     FDAOUsuario: TDAOUsuario;
+    FControllerProblema: TControllerProblema;
+    FControllerModulo: TControllerModulo;
 
     { Private declarations }
   public
     constructor Create(AOwner: TComponent; aUsuario: TUsuario);
     destructor Destroy; override;
+
+    procedure CarregaEstatisticas;
+    procedure CarregaEstatisticasPorUsuario;
 
     { Public declarations }
   end;
@@ -49,6 +65,27 @@ implementation
 
 { TFormPreferencias }
 
+constructor TFormPreferencias.Create(AOwner: TComponent; aUsuario: TUsuario);
+begin
+  { Método construtor da classe }
+
+  inherited Create(AOwner);
+
+  FDAOUsuario := TDAOUsuario.Create;
+  FUsuario := aUsuario;
+  FControllerProblema := TControllerProblema.Create;
+  FControllerModulo := TControllerModulo.Create;
+
+  CarregaEstatisticas();
+
+  if (FUsuario.ConsultaGeral = 0) or (FUsuario.ConsultaGeral = 1) then
+    rdgpConsultaPadrao.ItemIndex := FUsuario.ConsultaGeral;
+
+  cbCorPadrao.Selected := StringToColor(FUsuario.Cor);
+
+  pnlTop.Caption := FUsuario.Nome;
+end;
+
 procedure TFormPreferencias.btnSalvarClick(Sender: TObject);
 begin
   { Salva as preferências alteradas }
@@ -61,21 +98,36 @@ begin
   Close;
 end;
 
-constructor TFormPreferencias.Create(AOwner: TComponent; aUsuario: TUsuario);
+procedure TFormPreferencias.CarregaEstatisticas;
+var
+  aQtdeTotalProblemas : integer;
+  aQtdeTotalModulos : integer;
 begin
-  { Método construtor da classe }
+  aQtdeTotalProblemas := FControllerProblema.BuscaQtdeTotalProblemas;
+  aQtdeTotalModulos := FControllerModulo.BuscaQtdeTotalModulos;
 
-  inherited Create(AOwner);
+  lblQtdeProblemas.Caption := 'Problemas cadastrados: ' + IntToStr(aQtdeTotalProblemas);
+  lblQtdeModulos.Caption := 'Módulos cadastrados: ' + IntToStr(aQtdeTotalModulos);
+end;
 
-  FDAOUsuario := TDAOUsuario.Create;
-  FUsuario := aUsuario;
+procedure TFormPreferencias.CarregaEstatisticasPorUsuario;
+var
+  aQtdeTotalProblemas : integer;
+  aQtdeTotalModulos : integer;
+begin
+  aQtdeTotalProblemas := FControllerProblema.BuscaQtdeTotalProblemasPorUsuario(FUsuario);
+  aQtdeTotalModulos := FControllerModulo.BuscaQtdeTotalModulosPorUsuario(FUsuario);
 
-  if (FUsuario.ConsultaGeral = 0) or (FUsuario.ConsultaGeral = 1) then
-    rdgpConsultaPadrao.ItemIndex := FUsuario.ConsultaGeral;
+  lblQtdeProblemas.Caption := 'Problemas cadastrados: ' + IntToStr(aQtdeTotalProblemas);
+  lblQtdeModulos.Caption := 'Módulos cadastrados: ' + IntToStr(aQtdeTotalModulos);
+end;
 
-  cbCorPadrao.Selected := StringToColor(FUsuario.Cor);
-
-  pnlTop.Caption := FUsuario.Nome;
+procedure TFormPreferencias.chkFiltrarPorUsuarioClick(Sender: TObject);
+begin
+  if chkFiltrarPorUsuario.Checked then
+    CarregaEstatisticasPorUsuario
+  else
+    CarregaEstatisticas;
 end;
 
 destructor TFormPreferencias.Destroy;

@@ -297,7 +297,7 @@ begin
 
   for aCont := 0 to gridProblemas.Columns.Count - 1 do
   begin
-    if gridProblemas.Fields[aCont].FieldName <> 'TITULO' then
+    if aCont <> 2 then
       gridProblemas.Columns[aCont].Visible := False
     else
       gridProblemas.Columns[aCont].Title.Font.Style := [fsBold];

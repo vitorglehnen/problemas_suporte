@@ -10,7 +10,7 @@ uses
     System.Generics.Collections,
     Vcl.DBCtrls,
     DBClient,
-    Data.DB;
+    Data.DB, uUsuario;
 
 type
   TDAOModulo = Class
@@ -22,6 +22,9 @@ type
     function BuscaModulos: TDataSource;
     function BuscaNomeModulo(aCodigoModulo: Integer): TDataSource;
     function BuscaCodigoModulo(aNomeModulo: String): TDataSource;
+    function BuscaQtdeTotalModulos: TDataSource;
+    function BuscaQtdeTotalModulosPorUsuario(aUsuario: TUsuario): TDataSource;
+
     procedure DeleteModulo(aModulo: TModulo);
     constructor Create;
     destructor Destroy; override;
@@ -90,6 +93,37 @@ begin
 
   Result := FDataSource;
 end;
+
+function TDAOModulo.BuscaQtdeTotalModulos: TDataSource;
+begin
+  FQuery := FConn.CriarQuery;
+  FDataSource := FConn.CriarDataSource;
+
+  FQuery.SQL.Text := 'SELECT count(*) as modulos ' +
+                      'FROM modulos m ';
+  FQuery.Open;
+
+  FDataSource.DataSet := FQuery;
+
+  Result := FDataSource;
+end;
+
+function TDAOModulo.BuscaQtdeTotalModulosPorUsuario(aUsuario: TUsuario): TDataSource;
+begin
+  FQuery := FConn.CriarQuery;
+  FDataSource := FConn.CriarDataSource;
+
+  FQuery.SQL.Text := 'SELECT count(*) as qtde_modulos ' +
+                      'FROM modulos m ' +
+                      'WHERE m.cod_usu = :cod_usu';
+  FQuery.ParamByName('cod_usu').AsInteger := aUsuario.GetCodigo;
+  FQuery.Open;
+
+  FDataSource.DataSet := FQuery;
+
+  Result := FDataSource;
+end;
+
 
 procedure TDAOModulo.DeleteModulo(aModulo: TModulo);
 begin

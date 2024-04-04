@@ -3,7 +3,7 @@ unit uControllerModulo;
 interface
 
 uses uDAOModulo, System.Generics.Collections, uModulo, Datasnap.DBClient,
-  Data.DB, System.Classes, uDAOGridModulo;
+  Data.DB, System.Classes, uDAOGridModulo, uUsuario;
 
 type
   TControllerModulo = class
@@ -15,6 +15,8 @@ type
     function BuscaModulos: TStringList;
     function BuscaNomeModulo(aCodigoModulo: Integer): String;
     function BuscaCodigoModulo(aNomeModulo: String): Integer;
+    function BuscaQtdeTotalModulos: Integer;
+    function BuscaQtdeTotalModulosPorUsuario(aUsuario: TUsuario): Integer;
     procedure DeleteModulo(aModulo: TModulo);
     constructor Create;
     destructor Destroy; override;
@@ -71,6 +73,17 @@ end;
 function TControllerModulo.BuscaNomeModulo(aCodigoModulo: Integer): String;
 begin
   Result := FDAOModulo.BuscaNomeModulo(aCodigoModulo).DataSet.FieldByName('nome').Value;
+end;
+
+function TControllerModulo.BuscaQtdeTotalModulos: Integer;
+begin
+  Result := FDAOModulo.BuscaQtdeTotalModulos.DataSet.Fields[0].AsInteger;
+end;
+
+function TControllerModulo.BuscaQtdeTotalModulosPorUsuario(
+  aUsuario: TUsuario): Integer;
+begin
+  Result := FDAOModulo.BuscaQtdeTotalModulosPorUsuario(aUsuario).DataSet.Fields[0].AsInteger;
 end;
 
 function TControllerModulo.BuscaTabelaModulos(aNomeModulo: String): TDataSource;

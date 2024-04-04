@@ -2842,6 +2842,7 @@ object formPrincipal: TformPrincipal
               Top = 40
               Width = 97
               Height = 21
+              TabStop = False
               BevelInner = bvNone
               BorderStyle = bsNone
               DataField = 'nome_usuario'
