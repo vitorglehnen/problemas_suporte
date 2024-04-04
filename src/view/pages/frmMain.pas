@@ -353,7 +353,9 @@ begin
       Application.MessageBox('Preencha os campos obrigatórios!',
         'Salvar Problema', +MB_ICONEXCLAMATION + MB_OK)
     else
+    begin
       dsProblemas.DataSet.Post;
+    end;
   finally
     aProblema.Free;
   end;
@@ -882,6 +884,13 @@ begin
   begin
     cbModulo.ItemIndex := cbModulo.ItemIndex + 1;
   end;
+
+  var
+    aCodigoModulo: Integer := FControllerModulo.BuscaCodigoModulo
+      (cbModulo.Text);
+
+  dsProblemas.DataSet.Edit;
+  edtCodModulo.Text := IntToStr(aCodigoModulo);
 end;
 
 procedure TformPrincipal.btnSalvaIndiceFiltroProblemaClick(Sender: TObject);
