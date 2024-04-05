@@ -18,7 +18,9 @@ uses
   uDAOConsultaPadrao in 'src\model\DAO\uDAOConsultaPadrao.pas',
   frmPreferencias in 'src\view\pages\frmPreferencias.pas' {FormPreferencias},
   uInterfaceUsuario in 'src\model\interfaces\uInterfaceUsuario.pas',
-  uDAOModulo in 'src\model\DAO\uDAOModulo.pas';
+  uDAOModulo in 'src\model\DAO\uDAOModulo.pas',
+  uDAOUtils in 'src\model\DAO\uDAOUtils.pas',
+  uControllerUtils in 'src\controller\uControllerUtils.pas';
 
 {$R *.res}
 begin

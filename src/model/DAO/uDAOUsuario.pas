@@ -87,7 +87,7 @@ begin
   FQuery.SQL.Text := 'INSERT INTO usuarios (cod_usu, nome, selecaogeral, cor) VALUES (GEN_ID(gen_usuarios_id, 1), :nome, :selecaogeral, :cor)';
   FQuery.ParamByName('nome').AsString := aUsuario;
   FQuery.ParamByName('selecaogeral').AsInteger := 1;
-  FQuery.ParamByName('cor').AsString := '$00FEF1E7';
+  FQuery.ParamByName('cor').AsString := 'clHighlightText';
 
   FQuery.ExecSQL;
   FConn.GetConn.Commit;

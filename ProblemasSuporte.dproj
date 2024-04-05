@@ -132,6 +132,8 @@
         </DCCReference>
         <DCCReference Include="src\model\interfaces\uInterfaceUsuario.pas"/>
         <DCCReference Include="src\model\DAO\uDAOModulo.pas"/>
+        <DCCReference Include="src\model\DAO\uDAOUtils.pas"/>
+        <DCCReference Include="src\controller\uControllerUtils.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

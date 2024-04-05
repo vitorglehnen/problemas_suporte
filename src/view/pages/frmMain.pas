@@ -62,7 +62,7 @@ uses
   Vcl.Menus,
   System.Threading,
   ShellAPI,
-  SysUtils;
+  SysUtils, uControllerUtils;
 
 type
   TformPrincipal = class(TForm)
@@ -183,6 +183,7 @@ type
     FFormImagensProblema: TformImagensProblema;
     FControllerProblema: TControllerProblema;
     FControllerModulo: TControllerModulo;
+    FControllerUtils: TControllerUtils;
     FUsuario: TUsuario;
 
     procedure CarregaPersonalizacaoUsuario;
@@ -235,6 +236,7 @@ procedure TformPrincipal.FormCreate(Sender: TObject);
 begin
   { Método construtor da classe }
 
+  FControllerUtils := TControllerUtils.Create;
   FControllerProblema := TControllerProblema.Create;
   FControllerModulo := TControllerModulo.Create;
   FUsuario := TUsuario.Create;
@@ -262,6 +264,7 @@ begin
 
   FControllerProblema.Free;
   FControllerModulo.Free;
+  FControllerUtils.Free;
   FUsuario.Free;
   Application.Terminate;
 
@@ -636,7 +639,7 @@ begin
   begin
     dsProblemas.DataSet.FieldByName('datacr').AsDateTime := Now;
     dsProblemas.DataSet.FieldByName('horacr').AsDateTime := Now;
-    dsProblemas.DataSet.FieldByName('cod_prob').AsInteger := 0;
+    dsProblemas.DataSet.FieldByName('cod_prob').AsInteger := FControllerUtils.RetornaGeneratorProblema + 1;
   end;
 end;
 
@@ -841,6 +844,19 @@ procedure TformPrincipal.NovoProblema;
 begin
   pnlProblemas.Enabled := True;
   dsProblemas.DataSet.Insert;
+
+  cbModulo.ItemIndex := 0;
+  while cbModulo.Text <> dsModulos.DataSet.Fields[0].Value do
+  begin
+    cbModulo.ItemIndex := cbModulo.ItemIndex + 1;
+  end;
+
+  var
+    aCodigoModulo: Integer := FControllerModulo.BuscaCodigoModulo
+      (cbModulo.Text);
+
+  dsProblemas.DataSet.Edit;
+  edtCodModulo.Text := IntToStr(aCodigoModulo);
 end;
 
 procedure TformPrincipal.btnAtualizarGridProblemasClick(Sender: TObject);
@@ -878,19 +894,6 @@ end;
 procedure TformPrincipal.btnNovoProblemaClick(Sender: TObject);
 begin
   NovoProblema;
-
-  cbModulo.ItemIndex := 0;
-  while cbModulo.Text <> dsModulos.DataSet.Fields[0].Value do
-  begin
-    cbModulo.ItemIndex := cbModulo.ItemIndex + 1;
-  end;
-
-  var
-    aCodigoModulo: Integer := FControllerModulo.BuscaCodigoModulo
-      (cbModulo.Text);
-
-  dsProblemas.DataSet.Edit;
-  edtCodModulo.Text := IntToStr(aCodigoModulo);
 end;
 
 procedure TformPrincipal.btnSalvaIndiceFiltroProblemaClick(Sender: TObject);
