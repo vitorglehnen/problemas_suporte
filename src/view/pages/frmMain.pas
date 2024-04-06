@@ -742,16 +742,15 @@ end;
 procedure TformPrincipal.gridProblemasDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-
-  { Personaliza a fonte do grid de módulos }
+  {$REGION 'Personaliza a fonte do grid de módulos'}
   with gridProblemas.Columns[0] do
   begin
     Title.Font.Style := [fsBold];
     Title.Font.Size := 9;
   end;
+  {$ENDREGION}
 
-  { Caso a linha do grid for a selecionada no momento, muda as personalizações
-    de estilo }
+  {$REGION 'Caso a linha do grid for a selecionada no momento, muda as personalizações de estilo'}
   with gridProblemas do
   begin
     if gdSelected in State then
@@ -765,8 +764,9 @@ begin
     else
       DefaultDrawColumnCell(Rect, DataCol, Column, State);
   end;
+  {$ENDREGION}
 
-  { Faz a alternação de cores no grid }
+  {$REGION 'Faz a alternação de cores no grid '}
   if State = [] then
   begin
     if gridProblemas.DataSource.DataSet.RecNo mod 2 = 1 then
@@ -774,6 +774,7 @@ begin
     else
       gridProblemas.Canvas.Brush.Color := clBtnFace;
   end;
+  {$ENDREGION}
 end;
 
 procedure TformPrincipal.InverteCrudModulo;
